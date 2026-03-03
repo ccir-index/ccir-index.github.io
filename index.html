@@ -793,7 +793,32 @@
     </section>
 
 
-    <!-- ── How it works ── -->
+    <    <!-- Market Tier Ladder -->
+    <section id="market-tiers" class="on-white">
+      <div class="wrap">
+        <h2>H100 SXM &mdash; Market Tier Ladder</h2>
+        <p>CRI-H100 measures the secondary spot marketplace &mdash; the marginal clearing price for on-demand H100 compute. The CRI-R companion series tracks posted rate cards from mid-market platforms and hyperscalers. The spread between tiers quantifies the <strong>reliability premium</strong>: what the market charges for managed infrastructure, guaranteed capacity, and enterprise SLAs. Data as of <strong>March 3, 2026</strong>. Updated weekly.</p>
+        <div class="tier-ladder">
+          <div class="tier-row tier-pending"><div class="tier-meta"><div class="tier-label">Secondary spot market</div><div class="tier-source">Vast.ai &middot; CRI-H100</div></div><div class="tier-bar-wrap"><span class="tier-price tier-price-pending">Publishes March 5, 2026</span></div></div>
+          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market spot</div><div class="tier-source">RunPod &middot; Spot</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:17.9%"></div><span class="tier-price">.75 / GPU-hr</span></div></div>
+          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market community</div><div class="tier-source">RunPod &middot; Community</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:27.4%"></div><span class="tier-price">.69 / GPU-hr</span></div></div>
+          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market managed</div><div class="tier-source">RunPod &middot; Secure</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:27.4%"></div><span class="tier-price">.69 / GPU-hr</span></div></div>
+          <div class="tier-divider"><span>Enterprise on-demand</span></div>
+          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">AWS &middot; p5.48xlarge</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:70.2%"></div><span class="tier-price">.88 / GPU-hr</span></div></div>
+          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">Azure &middot; NC40ads H100 v5</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:71.2%"></div><span class="tier-price">.98 / GPU-hr</span></div></div>
+          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">GCP &middot; H100 80GB</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:100%"></div><span class="tier-price">.80 / GPU-hr</span></div></div>
+        </div>
+        <div class="spread-callout">
+          <div class="spread-item"><div class="spread-label">Spot-to-enterprise spread</div><div class="spread-value">3.9&ndash;5.6&times;</div><div class="spread-desc">RunPod managed to hyperscaler on-demand &mdash; the reliability premium for enterprise GPU compute</div></div>
+          <div class="spread-item"><div class="spread-label">CRI-R coverage</div><div class="spread-value">4 platforms &middot; 18 rates</div><div class="spread-desc">Azure, AWS, GCP, RunPod &mdash; H100, A100, H200, V100 across tiers</div></div>
+          <div class="spread-item"><div class="spread-label">Data repository</div><div class="spread-value"><a href="https://github.com/ccir-index/cri-h100/tree/main/data/reference-rates" target="_blank" rel="noopener">data/reference-rates/ &rarr;</a></div><div class="spread-desc">Open CSV &mdash; all 18 rate cards with SHA-256 provenance, updated weekly</div></div>
+        </div>
+        <p style="font-size:0.81rem;color:var(--text-dim);margin-top:4px;">CRI-R rate cards are posted prices, not market-clearing prices, and are published as contextual reference data only. They are not inputs to the CRI-H100 calculation. Governance note: adding any rate card source as an official benchmark input requires a Material Methodology Change under Governance Framework &sect;5.2.</p>
+      </div>
+    </section>
+
+
+    !-- ── How it works ── -->
     <section id="how-it-works">
       <div class="wrap">
         <h2>How It Works</h2>
@@ -1203,7 +1228,7 @@
     <section id="contact" class="on-white">
       <div class="wrap">
         <h2>Contact</h2>
-        <p><a href="mailto:research@ccir.io">research@ccir.io</a></p>
+        <p><a href="/cdn-cgi/l/email-protection#2e5c4b5d4b4f5c4d466e4d4d475c004741"><span class="__cf_email__" data-cfemail="ee9c8b9d8b8f9c8d86ae8d8d879cc08781">[email&#160;protected]</span></a></p>
         <p style="font-size:0.87rem; color: var(--text-dim);">
           Licensing inquiries, pre-transaction audit coordination, methodology questions,
           and complaints should be directed to this address. CCIR commits to acknowledging
@@ -1223,13 +1248,4 @@
         © 2026 Compute Credit Index Research LLC &nbsp;·&nbsp;
         <a href="https://github.com/ccir-index" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp;
         <a href="https://github.com/ccir-index/ccir-methodology/blob/main/GOVERNANCE-v1_0.md" target="_blank" rel="noopener">Governance</a> &nbsp;·&nbsp;
-        <a href="mailto:research@ccir.io">research@ccir.io</a>
-      </div>
-      <div class="footer-right">
-        Methodology: CC BY 4.0 &nbsp;·&nbsp; Code: MIT
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+        <a href="/cdn-cgi/l/email-protection#53213620363221303b1330303a217d3a3c"><span cl
