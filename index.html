@@ -658,7 +658,7 @@
     .tier-meta{padding-right:16px;}
     .tier-label{font-size:0.78rem;font-weight:500;color:var(--text-hi);}
     .tier-source{font-family:var(--mono);font-size:0.65rem;color:var(--text-dim);margin-top:2px;}
-    .tier-bar-wrap{display:flex;align-items:center;gap:12px;min-height:24px;}
+    .tier-bar-wrap{display:flex;align-items:center;gap:12px;min-height:24px;overflow:hidden;}
     .tier-bar{height:14px;background:var(--accent);border-radius:3px;opacity:0.5;flex-shrink:0;}
     .tier-bar.tier-bar-enterprise{opacity:0.8;}
     .tier-price{font-family:var(--mono);font-size:0.81rem;font-weight:500;color:var(--text-hi);white-space:nowrap;}
@@ -800,13 +800,13 @@
         <p>CRI-H100 measures the secondary spot marketplace &mdash; the marginal clearing price for on-demand H100 compute. The CRI-R companion series tracks posted rate cards from mid-market platforms and hyperscalers. The spread between tiers quantifies the <strong>reliability premium</strong>: what the market charges for managed infrastructure, guaranteed capacity, and enterprise SLAs. Data as of <strong>March 3, 2026</strong>. Updated weekly.</p>
         <div class="tier-ladder">
           <div class="tier-row tier-pending"><div class="tier-meta"><div class="tier-label">Secondary spot market</div><div class="tier-source">Vast.ai &middot; CRI-H100</div></div><div class="tier-bar-wrap"><span class="tier-price tier-price-pending">Publishes March 5, 2026</span></div></div>
-          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market spot</div><div class="tier-source">RunPod &middot; Spot</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:17.9%"></div><span class="tier-price">.75 / GPU-hr</span></div></div>
-          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market community</div><div class="tier-source">RunPod &middot; Community</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:27.4%"></div><span class="tier-price">.69 / GPU-hr</span></div></div>
-          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market managed</div><div class="tier-source">RunPod &middot; Secure</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:27.4%"></div><span class="tier-price">.69 / GPU-hr</span></div></div>
+          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market spot</div><div class="tier-source">RunPod &middot; Spot</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:14.6%"></div><span class="tier-price">&#36;1.75 / GPU-hr</span></div></div>
+          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market community</div><div class="tier-source">RunPod &middot; Community</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:22.4%"></div><span class="tier-price">&#36;2.69 / GPU-hr</span></div></div>
+          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market managed</div><div class="tier-source">RunPod &middot; Secure</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:22.4%"></div><span class="tier-price">&#36;2.69 / GPU-hr</span></div></div>
           <div class="tier-divider"><span>Enterprise on-demand</span></div>
-          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">AWS &middot; p5.48xlarge</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:70.2%"></div><span class="tier-price">.88 / GPU-hr</span></div></div>
-          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">Azure &middot; NC40ads H100 v5</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:71.2%"></div><span class="tier-price">.98 / GPU-hr</span></div></div>
-          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">GCP &middot; H100 80GB</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:100%"></div><span class="tier-price">.80 / GPU-hr</span></div></div>
+          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">AWS &middot; p5.48xlarge</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:57.5%"></div><span class="tier-price">&#36;6.88 / GPU-hr</span></div></div>
+          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">Azure &middot; NC40ads H100 v5</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:58.4%"></div><span class="tier-price">&#36;6.98 / GPU-hr</span></div></div>
+          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">GCP &middot; H100 80GB</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:82%"></div><span class="tier-price">&#36;9.80 / GPU-hr</span></div></div>
         </div>
         <div class="spread-callout">
           <div class="spread-item"><div class="spread-label">Spot-to-enterprise spread</div><div class="spread-value">3.9&ndash;5.6&times;</div><div class="spread-desc">RunPod managed to hyperscaler on-demand &mdash; the reliability premium for enterprise GPU compute</div></div>
