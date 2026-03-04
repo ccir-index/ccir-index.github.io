@@ -648,30 +648,6 @@
       border-radius: 3px;
       color: var(--text);
     }
-
-    /* --- Market Tier Ladder --- */
-    .tier-ladder{margin:24px 0 8px;border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm);}
-    .tier-row{display:grid;grid-template-columns:210px 1fr;align-items:center;padding:11px 20px;border-bottom:1px solid var(--border);background:var(--bg-white);}
-    .tier-row:last-child{border-bottom:none;}
-    .tier-row.tier-pending{background:var(--surface-2);}
-    .tier-row.tier-enterprise{background:var(--accent-lo);}
-    .tier-meta{padding-right:16px;}
-    .tier-label{font-size:0.78rem;font-weight:500;color:var(--text-hi);}
-    .tier-source{font-family:var(--mono);font-size:0.65rem;color:var(--text-dim);margin-top:2px;}
-    .tier-bar-wrap{display:flex;align-items:center;gap:12px;min-height:24px;overflow:hidden;}
-    .tier-bar{height:14px;background:var(--accent);border-radius:3px;opacity:0.5;flex-shrink:0;}
-    .tier-bar.tier-bar-enterprise{opacity:0.8;}
-    .tier-price{font-family:var(--mono);font-size:0.81rem;font-weight:500;color:var(--text-hi);white-space:nowrap;}
-    .tier-price.tier-price-pending{font-family:var(--sans);font-size:0.75rem;font-weight:400;color:var(--amber);}
-    .tier-divider{display:flex;align-items:center;gap:12px;padding:7px 20px;background:var(--surface-2);border-bottom:1px solid var(--border);}
-    .tier-divider span{font-family:var(--mono);font-size:0.63rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);}
-    .tier-divider::after{content:"";flex:1;height:1px;background:var(--accent-mid);}
-    .spread-callout{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 8px;}
-    .spread-item{padding:16px 18px;border:1px solid var(--border);border-radius:6px;background:var(--surface);box-shadow:var(--shadow-sm);}
-    .spread-label{font-family:var(--mono);font-size:0.63rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;}
-    .spread-value{font-family:var(--mono);font-size:1.05rem;font-weight:500;color:var(--text-hi);margin-bottom:4px;}
-    .spread-value a{color:var(--accent);font-size:0.75rem;}
-    .spread-desc{font-size:0.76rem;color:var(--text-dim);line-height:1.5;}
   </style>
 </head>
 <body>
@@ -702,8 +678,8 @@
 
       <nav>
         <a href="#index">Index</a>
-        <a href="#market-tiers">Market Tiers</a>
         <a href="#how-it-works">How It Works</a>
+        <a href="#two-curve">Two-Curve Framework</a>
         <a href="#governance">Governance</a>
         <a href="#documents">Documents</a>
         <a href="#publication-format">Publication Format</a>
@@ -793,32 +769,7 @@
     </section>
 
 
-    <    <!-- Market Tier Ladder -->
-    <section id="market-tiers" class="on-white">
-      <div class="wrap">
-        <h2>H100 SXM &mdash; Market Tier Ladder</h2>
-        <p>CRI-H100 measures the secondary spot marketplace &mdash; the marginal clearing price for on-demand H100 compute. The CRI-R companion series tracks posted rate cards from mid-market platforms and hyperscalers. The spread between tiers quantifies the <strong>reliability premium</strong>: what the market charges for managed infrastructure, guaranteed capacity, and enterprise SLAs. Data as of <strong>March 3, 2026</strong>. Updated weekly.</p>
-        <div class="tier-ladder">
-          <div class="tier-row tier-pending"><div class="tier-meta"><div class="tier-label">Secondary spot market</div><div class="tier-source">Vast.ai &middot; CRI-H100</div></div><div class="tier-bar-wrap"><span class="tier-price tier-price-pending">Publishes March 5, 2026</span></div></div>
-          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market spot</div><div class="tier-source">RunPod &middot; Spot</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:14.6%"></div><span class="tier-price">&#36;1.75 / GPU-hr</span></div></div>
-          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market community</div><div class="tier-source">RunPod &middot; Community</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:22.4%"></div><span class="tier-price">&#36;2.69 / GPU-hr</span></div></div>
-          <div class="tier-row"><div class="tier-meta"><div class="tier-label">Mid-market managed</div><div class="tier-source">RunPod &middot; Secure</div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:22.4%"></div><span class="tier-price">&#36;2.69 / GPU-hr</span></div></div>
-          <div class="tier-divider"><span>Enterprise on-demand</span></div>
-          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">AWS &middot; p5.48xlarge</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:57.5%"></div><span class="tier-price">&#36;6.88 / GPU-hr</span></div></div>
-          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">Azure &middot; NC40ads H100 v5</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:58.4%"></div><span class="tier-price">&#36;6.98 / GPU-hr</span></div></div>
-          <div class="tier-row tier-enterprise"><div class="tier-meta"><div class="tier-label">Cloud on-demand</div><div class="tier-source">GCP &middot; H100 80GB</div></div><div class="tier-bar-wrap"><div class="tier-bar tier-bar-enterprise" style="width:82%"></div><span class="tier-price">&#36;9.80 / GPU-hr</span></div></div>
-        </div>
-        <div class="spread-callout">
-          <div class="spread-item"><div class="spread-label">Spot-to-enterprise spread</div><div class="spread-value">3.9&ndash;5.6&times;</div><div class="spread-desc">RunPod managed to hyperscaler on-demand &mdash; the reliability premium for enterprise GPU compute</div></div>
-          <div class="spread-item"><div class="spread-label">CRI-R coverage</div><div class="spread-value">4 platforms &middot; 18 rates</div><div class="spread-desc">Azure, AWS, GCP, RunPod &mdash; H100, A100, H200, V100 across tiers</div></div>
-          <div class="spread-item"><div class="spread-label">Data repository</div><div class="spread-value"><a href="https://github.com/ccir-index/cri-h100/tree/main/data/reference-rates" target="_blank" rel="noopener">data/reference-rates/ &rarr;</a></div><div class="spread-desc">Open CSV &mdash; all 18 rate cards with SHA-256 provenance, updated weekly</div></div>
-        </div>
-        <p style="font-size:0.81rem;color:var(--text-dim);margin-top:4px;">CRI-R rate cards are posted prices, not market-clearing prices, and are published as contextual reference data only. They are not inputs to the CRI-H100 calculation. Governance note: adding any rate card source as an official benchmark input requires a Material Methodology Change under Governance Framework &sect;5.2.</p>
-      </div>
-    </section>
-
-
-    !-- ── How it works ── -->
+    <!-- ── How it works ── -->
     <section id="how-it-works">
       <div class="wrap">
         <h2>How It Works</h2>
@@ -868,6 +819,68 @@
             <tr><td>Reproducibility</td><td>Fully open-source. Any party can independently reproduce any published value.</td></tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+
+    <!-- ── Two-Curve Framework ── -->
+    <section id="two-curve" class="on-white">
+      <div class="wrap">
+        <h2>Two Questions, Two Curves</h2>
+        <p>
+          Most collateral analysis treats depreciation as a single variable. For GPU-backed
+          lending, that is analytically incorrect — and the error is not symmetric.
+        </p>
+
+        <div class="two-curve-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:32px 0;">
+          <div style="background:var(--accent-lo); border:1px solid var(--accent-mid); border-radius:8px; padding:24px;">
+            <div style="font-family:var(--mono); font-size:0.78rem; color:var(--accent); font-weight:500; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.06em;">Revenue Question</div>
+            <div style="font-size:1.05rem; font-weight:600; color:var(--text-hi); margin-bottom:10px;">Can the borrower service the debt?</div>
+            <div style="font-size:0.88rem; color:var(--text); line-height:1.6;">
+              Rental rate depreciation <strong>δ<sub>r</sub></strong> — how the market price of renting a GPU
+              per hour declines over time. Drives DSCR. Measured by CRI-H100.
+            </div>
+          </div>
+          <div style="background:var(--green-lo); border:1px solid var(--green-mid); border-radius:8px; padding:24px;">
+            <div style="font-family:var(--mono); font-size:0.78rem; color:var(--green); font-weight:500; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.06em;">Liquidation Question</div>
+            <div style="font-size:1.05rem; font-weight:600; color:var(--text-hi); margin-bottom:10px;">What do we recover if they cannot?</div>
+            <div style="font-size:0.88rem; color:var(--text); line-height:1.6;">
+              Hardware resale depreciation <strong>δ<sub>v</sub></strong> — how the secondary market price
+              of physical GPU hardware declines over time. Drives LGD.
+            </div>
+          </div>
+        </div>
+
+        <p>
+          For most collateral — aircraft, commercial real estate, railcars — these two questions
+          are correlated. A 737 that earns less in lease revenue also sells for less at auction,
+          because the same demand dynamics drive both. A single depreciation number is a workable
+          proxy when the curves move together.
+        </p>
+        <p style="margin-top:14px;">
+          <strong>GPU collateral breaks this correlation structurally.</strong> Rental rates are governed
+          by workload economics: architectural efficiency advantages of each new GPU generation,
+          supply expansion as new capacity enters the marketplace, shifting demand between training
+          and inference workloads. Hardware resale values are governed by hardware economics:
+          component harvesting value, secondary market liquidity, geographic demand distribution,
+          bulk disposal discounts in foreclosure. These are partially independent processes. An
+          architecture transition can compress rental rates while secondary market buyers absorb
+          prior-generation inventory at stable prices — or collapse resale values while production
+          workloads continue sustaining rental income.
+        </p>
+        <p style="margin-top:14px;">
+          The rental-resale spread <strong>S = δ<sub>r</sub> − δ<sub>v</sub></strong> tells you which
+          risk is dominant. When S&nbsp;&gt;&nbsp;0, rental rates have fallen faster than resale values —
+          revenue risk is the concern. When S&nbsp;&lt;&nbsp;0, resale values are deteriorating faster —
+          liquidation risk is present even if the borrower appears current on debt service.
+          A single depreciation number cannot distinguish these conditions. The two-curve
+          framework can.
+        </p>
+        <p style="margin-top:14px; font-size:0.88rem; color:var(--text-dim);">
+          CRI-H100 (live) provides the rental rate curve — the Stage 1 revenue-side input.
+          CRI-S (planned, Q3–Q4 2026) will publish the rental-resale spread as a formal index,
+          completing the two-curve monitoring framework for credit documents.
+        </p>
       </div>
     </section>
 
@@ -1228,7 +1241,7 @@
     <section id="contact" class="on-white">
       <div class="wrap">
         <h2>Contact</h2>
-        <p><a href="/cdn-cgi/l/email-protection#2e5c4b5d4b4f5c4d466e4d4d475c004741"><span class="__cf_email__" data-cfemail="ee9c8b9d8b8f9c8d86ae8d8d879cc08781">[email&#160;protected]</span></a></p>
+        <p><a href="mailto:research@ccir.io">research@ccir.io</a></p>
         <p style="font-size:0.87rem; color: var(--text-dim);">
           Licensing inquiries, pre-transaction audit coordination, methodology questions,
           and complaints should be directed to this address. CCIR commits to acknowledging
@@ -1248,4 +1261,13 @@
         © 2026 Compute Credit Index Research LLC &nbsp;·&nbsp;
         <a href="https://github.com/ccir-index" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp;
         <a href="https://github.com/ccir-index/ccir-methodology/blob/main/GOVERNANCE-v1_0.md" target="_blank" rel="noopener">Governance</a> &nbsp;·&nbsp;
-        <a href="/cdn-cgi/l/email-protection#53213620363221303b1330303a217d3a3c"><span cl
+        <a href="mailto:research@ccir.io">research@ccir.io</a>
+      </div>
+      <div class="footer-right">
+        Methodology: CC BY 4.0 &nbsp;·&nbsp; Code: MIT
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
