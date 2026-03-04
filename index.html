@@ -565,6 +565,117 @@
       line-height: 1.4;
     }
 
+    /* ── Two-curve framework ── */
+    .curve-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    @media (max-width: 560px) { .curve-grid { grid-template-columns: 1fr; } }
+
+    .curve-card {
+      padding: 22px 22px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .curve-card.primary   { border-top: 3px solid var(--accent); background: var(--accent-lo); border-color: var(--accent-mid); }
+    .curve-card.secondary { border-top: 3px solid var(--green);  background: var(--green-lo);  border-color: var(--green-mid); }
+
+    .curve-label {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .curve-card.secondary .curve-label { color: var(--green); }
+
+    .curve-name {
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: var(--text-hi);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .curve-desc { font-size: 0.82rem; color: var(--text); line-height: 1.6; }
+
+    .curve-connector {
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin: 4px 0 16px;
+    }
+
+    /* ── Companion series ── */
+    .companion-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 560px) { .companion-grid { grid-template-columns: 1fr; } }
+
+    .companion-card {
+      padding: 22px 22px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .companion-ticker {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-hi);
+      margin-bottom: 2px;
+    }
+
+    .companion-status {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+      background: var(--amber-lo);
+      color: var(--amber);
+      border: 1px solid var(--amber-mid);
+    }
+
+    .companion-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-hi);
+      margin-bottom: 6px;
+    }
+
+    .companion-desc { font-size: 0.82rem; color: var(--text); line-height: 1.6; margin-bottom: 0; }
+
+    .companion-eta {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      margin-top: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
     /* ── Index family ── */
     .index-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 16px; }
 
@@ -679,7 +790,8 @@
       <nav>
         <a href="#index">Index</a>
         <a href="#how-it-works">How It Works</a>
-        <a href="#two-curve">Two-Curve Framework</a>
+        <a href="#two-curve">Analytical Framework</a>
+        <a href="#companion-series">Companion Series</a>
         <a href="#governance">Governance</a>
         <a href="#documents">Documents</a>
         <a href="#publication-format">Publication Format</a>
@@ -823,63 +935,105 @@
     </section>
 
 
-    <!-- ── Two-Curve Framework ── -->
+    <!-- ── Two-Curve Analytical Framework ── -->
     <section id="two-curve" class="on-white">
       <div class="wrap">
-        <h2>Two Questions, Two Curves</h2>
+        <h2>Analytical Framework</h2>
+
         <p>
-          Most collateral analysis treats depreciation as a single variable. For GPU-backed
-          lending, that is analytically incorrect — and the error is not symmetric.
+          GPU collateral analysis requires tracking two distinct depreciation processes
+          that move independently and respond to different market forces.
+          CCIR's two-curve framework separates these explicitly — a distinction
+          that is absent in most existing GPU lending underwriting.
         </p>
 
-        <div class="two-curve-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:32px 0;">
-          <div style="background:var(--accent-lo); border:1px solid var(--accent-mid); border-radius:8px; padding:24px;">
-            <div style="font-family:var(--mono); font-size:0.78rem; color:var(--accent); font-weight:500; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.06em;">Revenue Question</div>
-            <div style="font-size:1.05rem; font-weight:600; color:var(--text-hi); margin-bottom:10px;">Can the borrower service the debt?</div>
-            <div style="font-size:0.88rem; color:var(--text); line-height:1.6;">
-              Rental rate depreciation <strong>δ<sub>r</sub></strong> — how the market price of renting a GPU
-              per hour declines over time. Drives DSCR. Measured by CRI-H100.
+        <div class="curve-grid">
+          <div class="curve-card primary">
+            <div class="curve-label">Curve 1 — Rental Rate</div>
+            <div class="curve-name">Rental Rate Depreciation</div>
+            <div class="curve-desc">
+              The decline in the prevailing market rental rate for a GPU model over time,
+              driven by new supply entering the market and improving price-per-performance
+              of newer generations. CRI-H100 directly measures this curve for the H100 SXM.
+              Rental rate depreciation affects cash flow projections in GPU lending facilities.
             </div>
           </div>
-          <div style="background:var(--green-lo); border:1px solid var(--green-mid); border-radius:8px; padding:24px;">
-            <div style="font-family:var(--mono); font-size:0.78rem; color:var(--green); font-weight:500; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.06em;">Liquidation Question</div>
-            <div style="font-size:1.05rem; font-weight:600; color:var(--text-hi); margin-bottom:10px;">What do we recover if they cannot?</div>
-            <div style="font-size:0.88rem; color:var(--text); line-height:1.6;">
-              Hardware resale depreciation <strong>δ<sub>v</sub></strong> — how the secondary market price
-              of physical GPU hardware declines over time. Drives LGD.
+          <div class="curve-card secondary">
+            <div class="curve-label">Curve 2 — Resale / Liquidation</div>
+            <div class="curve-name">Hardware Resale Depreciation</div>
+            <div class="curve-desc">
+              The decline in secondary-market liquidation value of the physical hardware.
+              Driven by secondary market supply and demand, the physical asset's own depreciation,
+              and generational transitions. This curve sets the collateral floor in a default
+              scenario — distinct from, and not predictable from, the rental rate alone.
             </div>
           </div>
         </div>
 
+        <div class="curve-connector">↕ The spread between the two curves is a measure of collateral risk not captured by either curve alone</div>
+
+        <p style="font-size:0.88rem;">
+          Lenders who model only rental rate depreciation implicitly assume the liquidation
+          floor moves in proportion to rental rates — an assumption that breaks down when
+          secondary hardware market dynamics diverge from rental market conditions.
+          The two-curve framework makes this assumption explicit and testable.
+          CRI-S, the planned companion index, will directly measure the spread between these curves.
+        </p>
+
+        <p style="font-size:0.87rem;">
+          Full treatment in the working paper:
+          <em>A Two-Stage Framework for GPU Collateral Analytics</em>
+          (CCIR Working Paper 2026-01, SSRN — forthcoming).
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ── Companion Series ── -->
+    <section id="companion-series">
+      <div class="wrap">
+        <h2>Companion Series</h2>
+
         <p>
-          For most collateral — aircraft, commercial real estate, railcars — these two questions
-          are correlated. A 737 that earns less in lease revenue also sells for less at auction,
-          because the same demand dynamics drive both. A single depreciation number is a workable
-          proxy when the curves move together.
+          CRI-H100 is the foundational rate series from which companion indices are derived.
+          The companion series extend the framework to capture spread dynamics and
+          cross-generational depreciation — the outputs needed for full two-curve collateral modeling.
         </p>
-        <p style="margin-top:14px;">
-          <strong>GPU collateral breaks this correlation structurally.</strong> Rental rates are governed
-          by workload economics: architectural efficiency advantages of each new GPU generation,
-          supply expansion as new capacity enters the marketplace, shifting demand between training
-          and inference workloads. Hardware resale values are governed by hardware economics:
-          component harvesting value, secondary market liquidity, geographic demand distribution,
-          bulk disposal discounts in foreclosure. These are partially independent processes. An
-          architecture transition can compress rental rates while secondary market buyers absorb
-          prior-generation inventory at stable prices — or collapse resale values while production
-          workloads continue sustaining rental income.
-        </p>
-        <p style="margin-top:14px;">
-          The rental-resale spread <strong>S = δ<sub>r</sub> − δ<sub>v</sub></strong> tells you which
-          risk is dominant. When S&nbsp;&gt;&nbsp;0, rental rates have fallen faster than resale values —
-          revenue risk is the concern. When S&nbsp;&lt;&nbsp;0, resale values are deteriorating faster —
-          liquidation risk is present even if the borrower appears current on debt service.
-          A single depreciation number cannot distinguish these conditions. The two-curve
-          framework can.
-        </p>
-        <p style="margin-top:14px; font-size:0.88rem; color:var(--text-dim);">
-          CRI-H100 (live) provides the rental rate curve — the Stage 1 revenue-side input.
-          CRI-S (planned, Q3–Q4 2026) will publish the rental-resale spread as a formal index,
-          completing the two-curve monitoring framework for credit documents.
+
+        <div class="companion-grid">
+          <div class="companion-card">
+            <div class="companion-ticker">CRI-S</div>
+            <div class="companion-status">Planned</div>
+            <div class="companion-title">Rental-Resale Spread Index</div>
+            <div class="companion-desc">
+              Measures the spread between rental rate depreciation (Curve 1, tracked by CRI-H100)
+              and hardware resale depreciation (Curve 2, derived from secondary market data).
+              A widening spread signals that the liquidation floor is eroding faster than rental rates —
+              a leading indicator of collateral deterioration not visible in either curve alone.
+              Designed for covenant trigger calibration and stressed LTV modeling in GPU-backed facilities.
+            </div>
+            <div class="companion-eta">Target: Q3–Q4 2026 &nbsp;·&nbsp; Requires 6 months of CRI-H100 data</div>
+          </div>
+
+          <div class="companion-card">
+            <div class="companion-ticker">CRI-D</div>
+            <div class="companion-status">Planned</div>
+            <div class="companion-title">Cross-Generational Depreciation Curves</div>
+            <div class="companion-desc">
+              Empirical depreciation curves derived from CRI time series across GPU generations
+              (A100 → H100 → H200 and beyond). Enables forward extrapolation of rental rate
+              and resale trajectories using observed generational transition patterns.
+              Analogous to the age-value curves used in aviation EETC structuring —
+              a standardized reference for modeling useful life and residual value
+              without proprietary assumptions.
+            </div>
+            <div class="companion-eta">Target: Q1–Q2 2027 &nbsp;·&nbsp; Requires 12–18 months of CRI-H100 data</div>
+          </div>
+        </div>
+
+        <p style="font-size:0.87rem; color: var(--text-dim);">
+          The full index family, including regional variants and performance-adjusted series, is detailed in the
+          <a href="#index-family">Index Family</a> section below.
         </p>
       </div>
     </section>
