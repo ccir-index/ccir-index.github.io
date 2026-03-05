@@ -1013,20 +1013,6 @@
           </div>
 
         </div>
-
-        <div class="status-card live">
-          <div class="status-label live">
-            <span class="dot live"></span>
-            Live
-          </div>
-          <div class="index-value">$X.XXXX</div>
-          <div class="index-meta">per GPU-hour &middot; week ending YYYY-MM-DD &middot; N observations &middot; v1.1.0</div>
-          <div class="status-desc">
-            Trailing 7-day median $/GPU-hour, H100 SXM, US marketplace. Published weekly on Thursdays.&nbsp;
-            <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-h100-index.csv">Full series &rarr;</a>
-          </div>
-        </div>
-        -->
       </div>
     </section>
 
@@ -1297,13 +1283,14 @@
 
           <!-- Tier 3 -->
           <div class="tier-group-header t3"><span>Tier 3 &mdash; Secondary Spot Marketplace</span></div>
-          <div class="tier-row tier-pending">
+          <div class="tier-row">
             <div class="tier-meta">
               <div class="tier-label">Secondary spot &nbsp;<span class="tier-cri-marker">◎ CRI-H100</span></div>
               <div class="tier-source">Vast.ai</div>
             </div>
             <div class="tier-bar-wrap">
-              <span class="tier-price tier-price-pending">Publishes March 5, 2026</span>
+              <div class="tier-bar tb-t3" style="width:13.5%"></div>
+              <span class="tier-price">&#36;1.6021 / GPU-hr</span>
             </div>
           </div>
 
@@ -1493,7 +1480,7 @@
         <p style="max-width:820px;">
           CRI-H100 is published weekly as an append-only CSV at
           <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-h100-index.csv" target="_blank" rel="noopener">outputs/cri-h100-index.csv</a>.
-          Each row is one weekly publication. Values below are illustrative.
+          Each row is one weekly publication.
           First publication: <strong>March 5, 2026</strong>.
         </p>
 
@@ -1527,58 +1514,49 @@
               <tr class="group-sep"><td colspan="3">Index value</td></tr>
               <tr class="highlight-row">
                 <td>cri_h100</td>
-                <td>1.8440</td>
+                <td>1.6021</td>
                 <td>Trailing 7-day median $/GPU-hour — the published index value, rounded to 4 decimal places</td>
               </tr>
-              <tr>
-                <td>ci_95_lower</td>
-                <td>1.8210</td>
-                <td>Lower bound of 95% nonparametric bootstrap confidence interval</td>
-              </tr>
-              <tr>
-                <td>ci_95_upper</td>
-                <td>1.8680</td>
-                <td>Upper bound of 95% bootstrap confidence interval</td>
-              </tr>
+
 
               <tr class="group-sep"><td colspan="3">Observation counts</td></tr>
               <tr>
                 <td>valid_days</td>
-                <td>6</td>
+                <td>2</td>
                 <td>Collection days with ≥ 10 qualifying observations contributing to the weekly pool</td>
               </tr>
               <tr>
                 <td>total_observations</td>
-                <td>74</td>
+                <td>28</td>
                 <td>Total pooled observations after all quality filters and outlier removal</td>
               </tr>
 
               <tr class="group-sep"><td colspan="3">Dispersion</td></tr>
               <tr>
                 <td>obs_min</td>
-                <td>1.3200</td>
+                <td>1.5370</td>
                 <td>Minimum observation in pool ($/GPU-hour)</td>
               </tr>
               <tr>
                 <td>obs_max</td>
-                <td>2.4800</td>
+                <td>2.2689</td>
                 <td>Maximum observation in pool ($/GPU-hour)</td>
               </tr>
               <tr>
                 <td>obs_mean</td>
-                <td>1.8611</td>
+                <td>1.8094</td>
                 <td>Arithmetic mean of pool — published for reference; median is the index value</td>
               </tr>
               <tr>
                 <td>obs_stdev</td>
-                <td>0.2140</td>
+                <td>0.2833</td>
                 <td>Standard deviation of pool — measures price dispersion in the calculation window</td>
               </tr>
 
               <tr class="group-sep"><td colspan="3">Governance</td></tr>
               <tr>
                 <td>low_confidence</td>
-                <td>false</td>
+                <td>true</td>
                 <td>true if any day had &lt;10 observations or valid_days &lt;3 — published with disclosure, not suppressed</td>
               </tr>
               <tr>
@@ -1586,11 +1564,7 @@
                 <td>v1.1.0</td>
                 <td>Methodology version under which this value was calculated — for contractual version pinning</td>
               </tr>
-              <tr>
-                <td>sha256_raw</td>
-                <td>a3f2b1c9…</td>
-                <td>SHA-256 hash of underlying raw data files — tamper-evident audit trail linking every published value to its source data</td>
-              </tr>
+
             </tbody>
           </table>
         </div>
