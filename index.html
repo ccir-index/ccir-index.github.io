@@ -507,21 +507,28 @@
       width: 22%;
     }
 
-    .pub-table td:nth-child(2) {
+    .pub-table td:nth-child(2),
+    .pub-table td:nth-child(3),
+    .pub-table td:nth-child(4) {
       font-family: var(--mono);
       font-size: 0.77rem;
       color: var(--accent);
       white-space: nowrap;
-      width: 13%;
+      width: 10%;
+      text-align: right;
     }
 
-    .pub-table td:nth-child(3) { font-size: 0.82rem; color: var(--text-dim); }
+    .pub-table td:nth-child(5) { font-size: 0.82rem; color: var(--text-dim); }
 
     .pub-table tr.highlight-row { background: var(--accent-lo); }
     .pub-table tr.highlight-row td { border-bottom: none; }
     .pub-table tr.highlight-row td:first-child { color: var(--text-hi); font-weight: 500; }
-    .pub-table tr.highlight-row td:nth-child(2) { color: var(--text-hi); font-size: 0.9rem; font-weight: 500; }
-    .pub-table tr.highlight-row td:nth-child(3) { color: var(--text); }
+    .pub-table tr.highlight-row td:nth-child(2),
+    .pub-table tr.highlight-row td:nth-child(3),
+    .pub-table tr.highlight-row td:nth-child(4) { color: var(--text-hi); font-size: 0.9rem; font-weight: 500; }
+    .pub-table tr.highlight-row td:nth-child(5) { color: var(--text); }
+
+    .pub-table tr.group-sep td:not(:first-child) { color: transparent; border-bottom: 1px solid var(--border); }
 
     .pub-table tr.group-sep td {
       background: var(--surface-2);
@@ -1003,94 +1010,112 @@
             <thead>
               <tr>
                 <th>Field</th>
-                <th>Example value</th>
+                <th>CRI-H200</th>
+                <th>CRI-H100</th>
+                <th>CRI-L40S</th>
                 <th>Description</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="group-sep"><td colspan="3">Dates</td></tr>
+              <tr class="group-sep"><td colspan="5">Dates</td></tr>
               <tr>
                 <td>publication_date</td>
+                <td>2026-03-05</td>
+                <td>2026-03-05</td>
                 <td>2026-03-05</td>
                 <td>Thursday publication date (YYYY-MM-DD)</td>
               </tr>
               <tr>
                 <td>window_start</td>
                 <td>2026-02-27</td>
+                <td>2026-02-27</td>
+                <td>2026-02-27</td>
                 <td>First day of trailing 7-day calculation window</td>
               </tr>
               <tr>
                 <td>window_end</td>
                 <td>2026-03-04</td>
+                <td>2026-03-04</td>
+                <td>2026-03-04</td>
                 <td>Last day of calculation window — Wednesday preceding publication</td>
               </tr>
 
-              <tr class="group-sep"><td colspan="3">Index value</td></tr>
+              <tr class="group-sep"><td colspan="5">Index value</td></tr>
               <tr class="highlight-row">
                 <td>index_value</td>
+                <td>2.3237</td>
                 <td>1.7350</td>
-                <td>Trailing 7-day median $/GPU-hour — the published index value, rounded to 4 decimal places (e.g. CRI-H100: $1.7350, CRI-H200: $2.3237, CRI-L40S: $0.9370)</td>
-              </tr>
-              <tr>
-                <td>ci_95_lower</td>
-                <td>1.8210</td>
-                <td>Lower bound of 95% nonparametric bootstrap confidence interval</td>
-              </tr>
-              <tr>
-                <td>ci_95_upper</td>
-                <td>1.8680</td>
-                <td>Upper bound of 95% bootstrap confidence interval</td>
+                <td>0.9370</td>
+                <td>Trailing 7-day median $/GPU-hour — the published index value, rounded to 4 decimal places</td>
               </tr>
 
-              <tr class="group-sep"><td colspan="3">Observation counts</td></tr>
+              <tr class="group-sep"><td colspan="5">Observation counts</td></tr>
               <tr>
                 <td>valid_days</td>
+                <td>4</td>
+                <td>4</td>
                 <td>6</td>
-                <td>Collection days with ≥ 10 qualifying observations contributing to the weekly pool</td>
+                <td>Collection days with ≥ 8 qualifying observations contributing to the weekly pool</td>
               </tr>
               <tr>
                 <td>total_observations</td>
-                <td>74</td>
+                <td>38</td>
+                <td>44</td>
+                <td>83</td>
                 <td>Total pooled observations after all quality filters and outlier removal</td>
               </tr>
 
-              <tr class="group-sep"><td colspan="3">Dispersion</td></tr>
+              <tr class="group-sep"><td colspan="5">Dispersion</td></tr>
               <tr>
                 <td>obs_min</td>
-                <td>1.3200</td>
+                <td>1.8854</td>
+                <td>1.4447</td>
+                <td>0.4668</td>
                 <td>Minimum observation in pool ($/GPU-hour)</td>
               </tr>
               <tr>
                 <td>obs_max</td>
-                <td>2.4800</td>
+                <td>2.3333</td>
+                <td>2.2689</td>
+                <td>1.2074</td>
                 <td>Maximum observation in pool ($/GPU-hour)</td>
               </tr>
               <tr>
                 <td>obs_mean</td>
-                <td>1.8611</td>
+                <td>2.2213</td>
+                <td>1.8080</td>
+                <td>0.8866</td>
                 <td>Arithmetic mean of pool — published for reference; median is the index value</td>
               </tr>
               <tr>
                 <td>obs_stdev</td>
-                <td>0.2140</td>
+                <td>0.1443</td>
+                <td>0.2734</td>
+                <td>0.2878</td>
                 <td>Standard deviation of pool — measures price dispersion in the calculation window</td>
               </tr>
 
-              <tr class="group-sep"><td colspan="3">Governance</td></tr>
+              <tr class="group-sep"><td colspan="5">Governance</td></tr>
               <tr>
                 <td>low_confidence</td>
+                <td>false</td>
+                <td>false</td>
                 <td>false</td>
                 <td>true if any day had &lt;8 observations or valid_days &lt;3 — published with disclosure, not suppressed</td>
               </tr>
               <tr>
                 <td>methodology_version</td>
                 <td>v1.1.1</td>
+                <td>v1.1.1</td>
+                <td>v1.1.1</td>
                 <td>Methodology version under which this value was calculated — for contractual version pinning</td>
               </tr>
               <tr>
-                <td>sha256_raw</td>
-                <td>a3f2b1c9…</td>
-                <td>SHA-256 hash of underlying raw data files — tamper-evident audit trail linking every published value to its source data</td>
+                <td>index_name</td>
+                <td>CRI-H200</td>
+                <td>CRI-H100</td>
+                <td>CRI-L40S</td>
+                <td>Index identifier — used to distinguish series in the shared repository</td>
               </tr>
             </tbody>
           </table>
