@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CCIR — Compute Credit Index Research</title>
-  <meta name="description" content="CCIR publishes independent, reproducible GPU rental rate indices — CRI-H200, CRI-H100, and CRI-L40S — used in credit agreements, collateral valuation, and structured finance." />
+  <meta name="description" content="CCIR publishes the independent, reproducible benchmark for GPU rental rates used in credit agreements, collateral valuation, and structured finance." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
@@ -471,7 +471,7 @@
       border-collapse: collapse;
       font-size: 0.83rem;
       background: var(--bg-white);
-      min-width: 680px;
+      min-width: 860px;
     }
 
     .pub-table thead tr { background: var(--surface-2); border-bottom: 2px solid var(--border-hi); }
@@ -528,8 +528,6 @@
     .pub-table tr.highlight-row td:nth-child(4) { color: var(--text-hi); font-size: 0.9rem; font-weight: 500; }
     .pub-table tr.highlight-row td:nth-child(5) { color: var(--text); }
 
-    .pub-table tr.group-sep td:not(:first-child) { color: transparent; border-bottom: 1px solid var(--border); }
-
     .pub-table tr.group-sep td {
       background: var(--surface-2);
       padding: 6px 20px;
@@ -570,6 +568,117 @@
       color: var(--text-dim);
       margin-top: 3px;
       line-height: 1.4;
+    }
+
+    /* ── Two-curve framework ── */
+    .curve-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    @media (max-width: 560px) { .curve-grid { grid-template-columns: 1fr; } }
+
+    .curve-card {
+      padding: 22px 22px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .curve-card.primary   { border-top: 3px solid var(--accent); background: var(--accent-lo); border-color: var(--accent-mid); }
+    .curve-card.secondary { border-top: 3px solid var(--green);  background: var(--green-lo);  border-color: var(--green-mid); }
+
+    .curve-label {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .curve-card.secondary .curve-label { color: var(--green); }
+
+    .curve-name {
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: var(--text-hi);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .curve-desc { font-size: 0.82rem; color: var(--text); line-height: 1.6; }
+
+    .curve-connector {
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin: 4px 0 16px;
+    }
+
+    /* ── Companion series ── */
+    .companion-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 560px) { .companion-grid { grid-template-columns: 1fr; } }
+
+    .companion-card {
+      padding: 22px 22px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .companion-ticker {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-hi);
+      margin-bottom: 2px;
+    }
+
+    .companion-status {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+      background: var(--amber-lo);
+      color: var(--amber);
+      border: 1px solid var(--amber-mid);
+    }
+
+    .companion-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-hi);
+      margin-bottom: 6px;
+    }
+
+    .companion-desc { font-size: 0.82rem; color: var(--text); line-height: 1.6; margin-bottom: 0; }
+
+    .companion-eta {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      margin-top: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
     }
 
     /* ── Index family ── */
@@ -622,6 +731,157 @@
     .badge.live    { background: var(--green-lo); color: var(--green); border: 1px solid var(--green-mid); }
     .badge.planned { background: var(--amber-lo); color: var(--amber); border: 1px solid var(--amber-mid); }
     .badge.roadmap { background: var(--surface-2); color: var(--text-dim); border: 1px solid var(--border); }
+
+    /* ── Market Tier Ladder ── */
+    .tier-ladder {
+      margin: 24px 0 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tier-group-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tier-group-header.t1 { background: var(--accent-lo); }
+    .tier-group-header.t2 { background: var(--green-lo); }
+    .tier-group-header.t3 { background: var(--surface-2); }
+
+    .tier-group-header span {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .tier-group-header.t1 span { color: var(--accent); }
+    .tier-group-header.t2 span { color: var(--green); }
+    .tier-group-header.t3 span { color: var(--text-dim); }
+
+    .tier-group-header::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+    }
+
+    .tier-group-header.t1::after { background: var(--accent-mid); }
+    .tier-group-header.t2::after { background: var(--green-mid); }
+    .tier-group-header.t3::after { background: var(--border-hi); }
+
+    .tier-row {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      align-items: center;
+      padding: 11px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-white);
+    }
+
+    .tier-row:last-child { border-bottom: none; }
+    .tier-row.tier-pending { background: var(--surface-2); }
+    .tier-row.tier-t1 { background: #fafcff; }
+    .tier-row.tier-t2 { background: #fafff9; }
+
+    .tier-meta { padding-right: 16px; }
+
+    .tier-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-hi);
+    }
+
+    .tier-source {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .tier-bar-wrap { display: flex; align-items: center; gap: 12px; min-height: 24px; }
+
+    .tier-bar {
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .tier-bar.tb-t1 { background: var(--accent); opacity: 0.75; }
+    .tier-bar.tb-t2 { background: var(--green);  opacity: 0.65; }
+    .tier-bar.tb-t3 { background: var(--green);  opacity: 0.45; }
+
+    .tier-price {
+      font-family: var(--mono);
+      font-size: 0.81rem;
+      font-weight: 500;
+      color: var(--text-hi);
+      white-space: nowrap;
+    }
+
+    .tier-price.tier-price-pending {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--amber);
+    }
+
+    /* spread summary */
+    .spread-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px 0 8px;
+    }
+
+    @media (max-width: 620px) { .spread-grid { grid-template-columns: 1fr 1fr; } }
+
+    .spread-item {
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .spread-label {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .spread-value {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-hi);
+      margin-bottom: 4px;
+    }
+
+    .spread-value a { color: var(--accent); font-size: 0.75rem; }
+    .spread-desc { font-size: 0.76rem; color: var(--text-dim); line-height: 1.5; }
+
+    .tier-cri-marker {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      background: var(--green-lo);
+      border: 1px solid var(--green-mid);
+      border-radius: 3px;
+      padding: 2px 7px;
+      display: inline-block;
+    }
 
     /* ── Footer ── */
     footer {
@@ -686,6 +946,9 @@
       <nav>
         <a href="#index">Index</a>
         <a href="#how-it-works">How It Works</a>
+        <a href="#two-curve">Analytical Framework</a>
+        <a href="#companion-series">Rate Context</a>
+        <a href="#market-tiers">Market Tiers</a>
         <a href="#governance">Governance</a>
         <a href="#documents">Documents</a>
         <a href="#publication-format">Publication Format</a>
@@ -743,8 +1006,22 @@
           First publication: <strong>March 5, 2026</strong>.
         </p>
 
-        <!-- CRI-H100 -->
+        <!-- CRI-H200 -->
         <div class="status-card live" style="margin-top:24px;">
+          <div class="status-label live">
+            <span class="dot live"></span>
+            CRI-H200 &nbsp;<span style="font-weight:300;font-size:0.85em;color:var(--text-dim)">NVIDIA H200 &middot; US</span>
+          </div>
+          <div class="index-value">$2.3237</div>
+          <div class="index-meta">per GPU-hour &middot; week ending 2026-03-04 &middot; 38 observations &middot; v1.1.1</div>
+          <div class="status-desc">
+            Trailing 7-day median $/GPU-hour, H200, US marketplace. Next-generation training-tier reference rate. Published weekly on Thursdays.&nbsp;
+            <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-h200-index.csv">Full series &rarr;</a>
+          </div>
+        </div>
+
+        <!-- CRI-H100 -->
+        <div class="status-card live" style="margin-top:16px;">
           <div class="status-label live">
             <span class="dot live"></span>
             CRI-H100 &nbsp;<span style="font-weight:300;font-size:0.85em;color:var(--text-dim)">NVIDIA H100 SXM &middot; US</span>
@@ -757,20 +1034,6 @@
           </div>
         </div>
 
-        <!-- CRI-H200 -->
-        <div class="status-card live" style="margin-top:16px;">
-          <div class="status-label live">
-            <span class="dot live"></span>
-            CRI-H200 &nbsp;<span style="font-weight:300;font-size:0.85em;color:var(--text-dim)">NVIDIA H200 &middot; US</span>
-          </div>
-          <div class="index-value">$2.3237</div>
-          <div class="index-meta">per GPU-hour &middot; week ending 2026-03-04 &middot; 38 observations &middot; v1.1.1</div>
-          <div class="status-desc">
-            Trailing 7-day median $/GPU-hour, H200, US marketplace. Next-generation training-tier reference rate.&nbsp;
-            <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-h200-index.csv">Full series &rarr;</a>
-          </div>
-        </div>
-
         <!-- CRI-L40S -->
         <div class="status-card live" style="margin-top:16px;">
           <div class="status-label live">
@@ -780,7 +1043,7 @@
           <div class="index-value">$0.9370</div>
           <div class="index-meta">per GPU-hour &middot; week ending 2026-03-04 &middot; 83 observations &middot; v1.1.1</div>
           <div class="status-desc">
-            Trailing 7-day median $/GPU-hour, L40S, US marketplace. Inference-tier reference rate.&nbsp;
+            Trailing 7-day median $/GPU-hour, L40S, US marketplace. Inference-tier reference rate. Published weekly on Thursdays.&nbsp;
             <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-l40s-index.csv">Full series &rarr;</a>
           </div>
         </div>
@@ -794,7 +1057,7 @@
       <div class="wrap">
         <h2>How It Works</h2>
         <p>
-          Each CRI index is calculated by a deterministic, rules-based pipeline with no
+          CRI-H100 is calculated by a deterministic, rules-based pipeline with no
           discretionary inputs. Any party can reproduce any published value from
           the same public data source using the published methodology.
         </p>
@@ -810,7 +1073,7 @@
             <div class="step-num">Step 2</div>
             <div class="step-icon">⚙</div>
             <div class="step-title">Filter</div>
-            <div class="step-desc">Apply quality filters: model-specific GPU, US geography, reliability ≥ 0.90, active within 7 days, unrented</div>
+            <div class="step-desc">Apply quality filters: H100 SXM, US geography, reliability ≥ 0.90, active within 7 days, unrented</div>
           </div>
           <div class="step">
             <div class="step-num">Step 3</div>
@@ -829,16 +1092,289 @@
         <table class="data-table">
           <tbody>
             <tr><td>Data source</td><td>Vast.ai public API — no authentication required</td></tr>
-            <tr><td>Target GPU</td><td>Model-specific per index (H200, H100 SXM, L40S)</td></tr>
+            <tr><td>Target GPU</td><td>NVIDIA H100 SXM</td></tr>
             <tr><td>Geography</td><td>United States</td></tr>
             <tr><td>Quality filters</td><td>Reliability ≥ 0.90, active within 7 days, unrented, ≥ 1 GPU</td></tr>
             <tr><td>Outlier removal</td><td>Trimmed mean ± 2.5σ</td></tr>
             <tr><td>Calculation</td><td>Trailing 7-day median $/GPU-hour</td></tr>
             <tr><td>Publication</td><td>Weekly — Thursdays by 5:00 PM Central</td></tr>
-            <tr><td>Low Confidence flag</td><td>Applied when daily observations &lt; 8 or valid days &lt; 3. Published with disclosure — not suppressed.</td></tr>
+            <tr><td>Low Confidence flag</td><td>Applied when daily observations &lt; 10 or valid days &lt; 3. Published with disclosure — not suppressed.</td></tr>
             <tr><td>Reproducibility</td><td>Fully open-source. Any party can independently reproduce any published value.</td></tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+
+    <!-- ── Two-Curve Analytical Framework ── -->
+    <section id="two-curve" class="on-white">
+      <div class="wrap">
+        <h2>Analytical Framework</h2>
+
+        <p>
+          GPU collateral analysis requires tracking two distinct depreciation processes
+          that move independently and respond to different market forces.
+          CCIR's two-curve framework separates these explicitly — a distinction
+          that is absent in most existing GPU lending underwriting.
+        </p>
+
+        <div class="curve-grid">
+          <div class="curve-card primary">
+            <div class="curve-label">Curve 1 — Rental Rate</div>
+            <div class="curve-name">Rental Rate Depreciation</div>
+            <div class="curve-desc">
+              The decline in the prevailing market rental rate for a GPU model over time,
+              driven by new supply entering the market and improving price-per-performance
+              of newer generations. CRI-H100 directly measures this curve for the H100 SXM.
+              Rental rate depreciation affects cash flow projections in GPU lending facilities.
+            </div>
+          </div>
+          <div class="curve-card secondary">
+            <div class="curve-label">Curve 2 — Resale / Liquidation</div>
+            <div class="curve-name">Hardware Resale Depreciation</div>
+            <div class="curve-desc">
+              The decline in secondary-market liquidation value of the physical hardware.
+              Driven by secondary market supply and demand, the physical asset's own depreciation,
+              and generational transitions. This curve sets the collateral floor in a default
+              scenario — distinct from, and not predictable from, the rental rate alone.
+            </div>
+          </div>
+        </div>
+
+        <div class="curve-connector">↕ The spread between the two curves is a measure of collateral risk not captured by either curve alone</div>
+
+        <p style="font-size:0.88rem;">
+          Lenders who model only rental rate depreciation implicitly assume the liquidation
+          floor moves in proportion to rental rates — an assumption that breaks down when
+          secondary hardware market dynamics diverge from rental market conditions.
+          The two-curve framework makes this assumption explicit and testable.
+          CRI-S, the planned companion index, will directly measure the spread between these curves.
+        </p>
+
+        <p style="font-size:0.87rem;">
+          Full treatment in the working paper:
+          <em>A Two-Stage Framework for GPU Collateral Analytics</em>
+          (CCIR Working Paper 2026-01, SSRN — forthcoming).
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ── Reference Rate Context ── -->
+    <section id="companion-series">
+      <div class="wrap">
+        <h2>Reference Rate Context</h2>
+
+        <p>
+          CRI-H100 measures Tier 3 on-demand spot pricing on the Vast.ai secondary marketplace.
+          CCIR also collects posted rate cards from hyperscalers and mid-market platforms —
+          published alongside CRI-H100 as contextual data. The spread between these
+          posted rates and CRI-H100 is the <strong>reliability premium</strong>:
+          what the market charges for enterprise-grade GPU access over marginal spot supply.
+        </p>
+
+        <div class="companion-grid">
+          <div class="companion-card">
+            <div class="companion-ticker">Azure</div>
+            <div class="companion-status" style="background:var(--green-lo);color:var(--green);border-color:var(--green-mid);">Collected</div>
+            <div class="companion-title">Microsoft Azure Rate Cards</div>
+            <div class="companion-desc">
+              On-demand and spot pricing for NC40ads_H100_v5 (1× H100 SXM) via the Azure Retail Prices API.
+              No authentication required. Fully reproducible by any third party from
+              <code>prices.azure.com</code>. Published for H100, A100, and V100 across US East.
+            </div>
+            <div class="companion-eta">Source: prices.azure.com &nbsp;·&nbsp; Auth: none required</div>
+          </div>
+
+          <div class="companion-card">
+            <div class="companion-ticker">AWS</div>
+            <div class="companion-status" style="background:var(--green-lo);color:var(--green);border-color:var(--green-mid);">Collected</div>
+            <div class="companion-title">AWS EC2 On-Demand Rate Cards</div>
+            <div class="companion-desc">
+              On-demand pricing for p5.48xlarge (8× H100 SXM) and p4d.24xlarge (8× A100)
+              via the AWS bulk pricing JSON endpoint. No authentication required.
+              Normalized to per-GPU-hour for direct comparison with CRI-H100.
+            </div>
+            <div class="companion-eta">Source: pricing.us-east-1.amazonaws.com &nbsp;·&nbsp; Auth: none required</div>
+          </div>
+
+          <div class="companion-card">
+            <div class="companion-ticker">GCP</div>
+            <div class="companion-status">Collected</div>
+            <div class="companion-title">Google Cloud Rate Cards</div>
+            <div class="companion-desc">
+              On-demand and preemptible pricing for H100 and A100 GPU SKUs in us-central1
+              via the Cloud Billing API. Requires a free, freely requestable API key.
+              Substantially reproducible; key requirement disclosed in methodology documentation.
+            </div>
+            <div class="companion-eta">Source: cloudbilling.googleapis.com &nbsp;·&nbsp; Auth: free API key</div>
+          </div>
+
+          <div class="companion-card">
+            <div class="companion-ticker">RunPod</div>
+            <div class="companion-status">Collected</div>
+            <div class="companion-title">RunPod Mid-Market Rate Cards</div>
+            <div class="companion-desc">
+              Secure, community, and spot pricing for H100 SXM, A100, and H200 GPU types
+              via the RunPod GraphQL API. Aggregate posted rates — not individual listings.
+              Represents the mid-market reserved-capacity tier above Vast.ai spot.
+              Requires a free API key.
+            </div>
+            <div class="companion-eta">Source: api.runpod.io/graphql &nbsp;·&nbsp; Auth: free API key</div>
+          </div>
+        </div>
+
+        <p style="font-size:0.85rem; color: var(--text-dim);">
+          These rate cards are companion reference data, not inputs to the CRI-H100 calculation.
+          Raw data published at
+          <a href="https://github.com/ccir-index/cri-h100/tree/main/data/reference-rates" target="_blank" rel="noopener">data/reference-rates/</a>
+          with SHA-256 provenance. Azure and AWS sources are independently reproducible without credentials.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ── Market Tier Ladder ── -->
+    <section id="market-tiers" class="on-white">
+      <div class="wrap">
+        <h2>GPU Compute &mdash; Market Tier Ladder</h2>
+
+        <p>
+          CRI-H100 measures the secondary spot marketplace — the marginal clearing price for
+          on-demand H100 compute. The CRI-R companion series tracks posted rate cards from
+          mid-market platforms and hyperscalers. The spread between tiers quantifies the
+          <strong>reliability premium</strong>: what the market charges for managed infrastructure,
+          guaranteed capacity, and enterprise SLAs.
+          Data as of <strong>March 5, 2026</strong>. Updated weekly.
+        </p>
+
+        <div class="tier-ladder">
+
+          <!-- Tier 1 -->
+          <div class="tier-group-header t1"><span>Tier 1 &mdash; Hyperscaler / Enterprise On-Demand</span></div>
+          <div class="tier-row tier-t1">
+            <div class="tier-meta">
+              <div class="tier-label">Cloud on-demand</div>
+              <div class="tier-source">GCP &middot; H100 80GB</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t1" style="width:82%"></div>
+              <span class="tier-price">&#36;9.80 / GPU-hr</span>
+            </div>
+          </div>
+          <div class="tier-row tier-t1">
+            <div class="tier-meta">
+              <div class="tier-label">Cloud on-demand</div>
+              <div class="tier-source">Azure &middot; NC40ads H100 v5</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t1" style="width:58.4%"></div>
+              <span class="tier-price">&#36;6.98 / GPU-hr</span>
+            </div>
+          </div>
+          <div class="tier-row tier-t1">
+            <div class="tier-meta">
+              <div class="tier-label">Cloud on-demand</div>
+              <div class="tier-source">AWS &middot; p5.48xlarge</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t1" style="width:57.5%"></div>
+              <span class="tier-price">&#36;6.88 / GPU-hr</span>
+            </div>
+          </div>
+
+          <!-- Tier 2 -->
+          <div class="tier-group-header t2"><span>Tier 2 &mdash; Mid-Market Reserved</span></div>
+          <div class="tier-row tier-t2">
+            <div class="tier-meta">
+              <div class="tier-label">Mid-market managed</div>
+              <div class="tier-source">RunPod &middot; Secure</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t2" style="width:22.4%"></div>
+              <span class="tier-price">&#36;2.69 / GPU-hr</span>
+            </div>
+          </div>
+          <div class="tier-row tier-t2">
+            <div class="tier-meta">
+              <div class="tier-label">Mid-market community</div>
+              <div class="tier-source">RunPod &middot; Community</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t2" style="width:22.4%"></div>
+              <span class="tier-price">&#36;2.69 / GPU-hr</span>
+            </div>
+          </div>
+          <div class="tier-row tier-t2">
+            <div class="tier-meta">
+              <div class="tier-label">Mid-market spot</div>
+              <div class="tier-source">RunPod &middot; Spot</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t2" style="width:14.6%"></div>
+              <span class="tier-price">&#36;1.75 / GPU-hr</span>
+            </div>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="tier-group-header t3"><span>Tier 3 &mdash; Secondary Spot Marketplace</span></div>
+          <div class="tier-row">
+            <div class="tier-meta">
+              <div class="tier-label">H200 spot &nbsp;<span class="tier-cri-marker">◎ CRI-H200</span></div>
+              <div class="tier-source">Vast.ai</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t3" style="width:19.4%"></div>
+              <span class="tier-price">&#36;2.3237 / GPU-hr</span>
+            </div>
+          </div>
+          <div class="tier-row">
+            <div class="tier-meta">
+              <div class="tier-label">H100 SXM spot &nbsp;<span class="tier-cri-marker">◎ CRI-H100</span></div>
+              <div class="tier-source">Vast.ai</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t3" style="width:14.5%"></div>
+              <span class="tier-price">&#36;1.7350 / GPU-hr</span>
+            </div>
+          </div>
+          <div class="tier-row">
+            <div class="tier-meta">
+              <div class="tier-label">L40S spot &nbsp;<span class="tier-cri-marker">◎ CRI-L40S</span></div>
+              <div class="tier-source">Vast.ai</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t3" style="width:7.8%"></div>
+              <span class="tier-price">&#36;0.9370 / GPU-hr</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="spread-grid">
+          <div class="spread-item">
+            <div class="spread-label">Spot-to-enterprise spread</div>
+            <div class="spread-value">3.9&ndash;5.6&times;</div>
+            <div class="spread-desc">RunPod managed to hyperscaler on-demand &mdash; the reliability premium for enterprise GPU compute</div>
+          </div>
+          <div class="spread-item">
+            <div class="spread-label">CRI-R coverage</div>
+            <div class="spread-value">4 platforms &middot; 18 rates</div>
+            <div class="spread-desc">Azure, AWS, GCP, RunPod &mdash; H100, A100, H200, V100 across tiers</div>
+          </div>
+          <div class="spread-item">
+            <div class="spread-label">Data repository</div>
+            <div class="spread-value"><a href="https://github.com/ccir-index/cri-h100/tree/main/data/reference-rates" target="_blank" rel="noopener">data/reference-rates/ &rarr;</a></div>
+            <div class="spread-desc">Open CSV &mdash; all 18 rate cards with SHA-256 provenance, updated weekly</div>
+          </div>
+        </div>
+
+        <p style="font-size:0.81rem; color:var(--text-dim); margin-top:4px;">
+          CRI-R rate cards are posted prices, not market-clearing prices, and are published as
+          contextual reference data only. They are not inputs to the CRI-H100 calculation.
+          Governance note: adding any rate card source as an official benchmark input requires
+          a Material Methodology Change under Governance Framework &sect;5.2.
+        </p>
       </div>
     </section>
 
@@ -1000,8 +1536,7 @@
           Each CRI index is published weekly as an append-only CSV in the
           <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/" target="_blank" rel="noopener">outputs/</a> directory
           (e.g. <code>cri-h100-index.csv</code>, <code>cri-h200-index.csv</code>, <code>cri-l40s-index.csv</code>).
-          All indices share an identical CSV schema. Each row is one weekly publication.
-          Example values below reflect the March 5, 2026 inaugural publication.
+          All indices share an identical CSV schema. Values below reflect the March 5, 2026 inaugural publication.
           First publication: <strong>March 5, 2026</strong>.
         </p>
 
@@ -1136,8 +1671,8 @@
       <div class="wrap">
         <h2>Designed For</h2>
         <p>
-          The CRI index family is designed for structured credit market participants who require
-          independent, auditable reference rates for GPU-backed exposure.
+          CRI-H100 is designed for structured credit market participants who require
+          an independent, auditable reference rate for GPU-backed exposure.
         </p>
 
         <div class="audience-grid">
@@ -1186,16 +1721,16 @@
           </thead>
           <tbody>
             <tr>
-              <td>CRI-H100</td>
-              <td>Training</td>
-              <td><span class="badge live">Live</span></td>
-              <td>Weekly median H100 SXM rental rate, US marketplace. First publication March 2026.</td>
-            </tr>
-            <tr>
               <td>CRI-H200</td>
               <td>Training (next-gen)</td>
               <td><span class="badge live">Live</span></td>
               <td>Weekly median H200 rental rate, US marketplace. Next-generation training-tier reference rate. First publication March 2026.</td>
+            </tr>
+            <tr>
+              <td>CRI-H100</td>
+              <td>Training</td>
+              <td><span class="badge live">Live</span></td>
+              <td>Weekly median H100 SXM rental rate, US marketplace. Current-generation training-tier reference rate. First publication March 2026.</td>
             </tr>
             <tr>
               <td>CRI-L40S</td>
@@ -1207,7 +1742,7 @@
               <td>CRI-R</td>
               <td>Reference rates</td>
               <td><span class="badge live">Live</span></td>
-              <td>Companion series tracking posted rate cards from hyperscalers and mid-market platforms (Azure, AWS, GCP, RunPod). Provides Tier 1 and Tier 2 context for spot market indices. Updated weekly.</td>
+              <td>Companion series tracking posted rate cards from hyperscalers and mid-market platforms (Azure, AWS, GCP, RunPod). Tier 1 and Tier 2 context for spot indices. Updated weekly.</td>
             </tr>
             <tr>
               <td>CRI-S</td>
@@ -1243,7 +1778,7 @@
     <section id="contact" class="on-white">
       <div class="wrap">
         <h2>Contact</h2>
-        <p><a href="mailto:research@ccir.io">research@ccir.io</a></p>
+        <p><a href="/cdn-cgi/l/email-protection#eb998e988e8a998883ab88888299c58284"><span class="__cf_email__" data-cfemail="f18394829490839299b192929883df989e">[email&#160;protected]</span></a></p>
         <p style="font-size:0.87rem; color: var(--text-dim);">
           Licensing inquiries, pre-transaction audit coordination, methodology questions,
           and complaints should be directed to this address. CCIR commits to acknowledging
@@ -1263,13 +1798,4 @@
         © 2026 Compute Credit Index Research LLC &nbsp;·&nbsp;
         <a href="https://github.com/ccir-index" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp;
         <a href="https://github.com/ccir-index/ccir-methodology/blob/main/GOVERNANCE-v1_0.md" target="_blank" rel="noopener">Governance</a> &nbsp;·&nbsp;
-        <a href="mailto:research@ccir.io">research@ccir.io</a>
-      </div>
-      <div class="footer-right">
-        Methodology: CC BY 4.0 &nbsp;·&nbsp; Code: MIT
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+        <a href="/cdn-cgi/l/email-protection#c1b3a4b2a4a0b3a2a981a2a2a8b3efa8ae"><span cl
