@@ -1125,7 +1125,8 @@
             <div class="curve-desc">
               The decline in the prevailing market rental rate for a GPU model over time,
               driven by new supply entering the market and improving price-per-performance
-              of newer generations. CRI-H100 directly measures this curve for the H100 SXM.
+              of newer generations. CRI-H200, CRI-H100, and CRI-L40S measure this curve
+              across training and inference tiers simultaneously.
               Rental rate depreciation affects cash flow projections in GPU lending facilities.
             </div>
           </div>
@@ -1148,12 +1149,15 @@
           floor moves in proportion to rental rates — an assumption that breaks down when
           secondary hardware market dynamics diverge from rental market conditions.
           The two-curve framework makes this assumption explicit and testable.
-          CRI-S, the planned companion index, will directly measure the spread between these curves.
+          The three live CRI indices — H200 ($2.3237), H100 ($1.7350), and L40S ($0.9370) —
+          capture the current cross-tier rental rate structure, providing the empirical
+          foundation for tracking cascade dynamics as hardware generations evolve.
+          CRI-S, the planned companion index, will directly measure the spread between the rental and resale curves.
         </p>
 
         <p style="font-size:0.87rem;">
           Full treatment in the working paper:
-          <em>A Two-Stage Framework for GPU Collateral Analytics</em>
+          <em>The Compute Yield Waterfall Framework: Valuing GPU Compute Assets Across Deployment Tiers</em>
           (CCIR Working Paper 2026-01, SSRN — forthcoming).
         </p>
       </div>
