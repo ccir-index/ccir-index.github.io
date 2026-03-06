@@ -745,7 +745,7 @@
           <div class="index-value">$1.7350</div>
           <div class="index-meta">per GPU-hour &middot; week ending 2026-03-04 &middot; 44 observations &middot; v1.1.1</div>
           <div class="status-desc">
-            Trailing 7-day median $/GPU-hour, H100 SXM, US marketplace. Published weekly on Thursdays.&nbsp;
+            Trailing 7-day median $/GPU-hour, H100 SXM, US marketplace. Current-generation training-tier reference rate. Published weekly on Thursdays.&nbsp;
             <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-h100-index.csv">Full series &rarr;</a>
           </div>
         </div>
@@ -787,7 +787,7 @@
       <div class="wrap">
         <h2>How It Works</h2>
         <p>
-          CRI-H100 is calculated by a deterministic, rules-based pipeline with no
+          Each CRI index is calculated by a deterministic, rules-based pipeline with no
           discretionary inputs. Any party can reproduce any published value from
           the same public data source using the published methodology.
         </p>
@@ -803,7 +803,7 @@
             <div class="step-num">Step 2</div>
             <div class="step-icon">⚙</div>
             <div class="step-title">Filter</div>
-            <div class="step-desc">Apply quality filters: H100 SXM, US geography, reliability ≥ 0.90, active within 7 days, unrented</div>
+            <div class="step-desc">Apply quality filters: model-specific GPU, US geography, reliability ≥ 0.90, active within 7 days, unrented</div>
           </div>
           <div class="step">
             <div class="step-num">Step 3</div>
@@ -822,13 +822,13 @@
         <table class="data-table">
           <tbody>
             <tr><td>Data source</td><td>Vast.ai public API — no authentication required</td></tr>
-            <tr><td>Target GPU</td><td>NVIDIA H100 SXM</td></tr>
+            <tr><td>Target GPU</td><td>Model-specific per index (H200, H100 SXM, L40S)</td></tr>
             <tr><td>Geography</td><td>United States</td></tr>
             <tr><td>Quality filters</td><td>Reliability ≥ 0.90, active within 7 days, unrented, ≥ 1 GPU</td></tr>
             <tr><td>Outlier removal</td><td>Trimmed mean ± 2.5σ</td></tr>
             <tr><td>Calculation</td><td>Trailing 7-day median $/GPU-hour</td></tr>
             <tr><td>Publication</td><td>Weekly — Thursdays by 5:00 PM Central</td></tr>
-            <tr><td>Low Confidence flag</td><td>Applied when daily observations &lt; 10 or valid days &lt; 3. Published with disclosure — not suppressed.</td></tr>
+            <tr><td>Low Confidence flag</td><td>Applied when daily observations &lt; 8 or valid days &lt; 3. Published with disclosure — not suppressed.</td></tr>
             <tr><td>Reproducibility</td><td>Fully open-source. Any party can independently reproduce any published value.</td></tr>
           </tbody>
         </table>
@@ -990,9 +990,11 @@
         <h2>Publication Format</h2>
 
         <p style="max-width:820px;">
-          CRI-H100 is published weekly as an append-only CSV at
-          <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-h100-index.csv" target="_blank" rel="noopener">outputs/cri-h100-index.csv</a>.
-          Each row is one weekly publication. Values below are illustrative.
+          Each CRI index is published weekly as an append-only CSV in the
+          <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/" target="_blank" rel="noopener">outputs/</a> directory
+          (e.g. <code>cri-h100-index.csv</code>, <code>cri-h200-index.csv</code>, <code>cri-l40s-index.csv</code>).
+          All indices share an identical CSV schema. Each row is one weekly publication.
+          Example values below reflect the March 5, 2026 inaugural publication.
           First publication: <strong>March 5, 2026</strong>.
         </p>
 
@@ -1025,9 +1027,9 @@
 
               <tr class="group-sep"><td colspan="3">Index value</td></tr>
               <tr class="highlight-row">
-                <td>cri_h100</td>
-                <td>1.8440</td>
-                <td>Trailing 7-day median $/GPU-hour — the published index value, rounded to 4 decimal places</td>
+                <td>index_value</td>
+                <td>1.7350</td>
+                <td>Trailing 7-day median $/GPU-hour — the published index value, rounded to 4 decimal places (e.g. CRI-H100: $1.7350, CRI-H200: $2.3237, CRI-L40S: $0.9370)</td>
               </tr>
               <tr>
                 <td>ci_95_lower</td>
@@ -1078,7 +1080,7 @@
               <tr>
                 <td>low_confidence</td>
                 <td>false</td>
-                <td>true if any day had &lt;10 observations or valid_days &lt;3 — published with disclosure, not suppressed</td>
+                <td>true if any day had &lt;8 observations or valid_days &lt;3 — published with disclosure, not suppressed</td>
               </tr>
               <tr>
                 <td>methodology_version</td>
@@ -1096,7 +1098,7 @@
 
         <p style="font-size:0.81rem; color: var(--text-dim); max-width:820px;">
           Each weekly publication is accompanied by a full audit file at
-          <code>outputs/audits/cri-h100-YYYY-MM-DD.audit.json</code>
+          <code>outputs/audits/cri-[model]-YYYY-MM-DD.audit.json</code>
           containing the complete daily breakdown and outlier removal log.
           See <a href="https://github.com/ccir-index/ccir-methodology/blob/main/REPRODUCIBILITY.md" target="_blank" rel="noopener">REPRODUCIBILITY.md</a> for the full independent verification workflow.
         </p>
@@ -1109,8 +1111,8 @@
       <div class="wrap">
         <h2>Designed For</h2>
         <p>
-          CRI-H100 is designed for structured credit market participants who require
-          an independent, auditable reference rate for GPU-backed exposure.
+          The CRI index family is designed for structured credit market participants who require
+          independent, auditable reference rates for GPU-backed exposure.
         </p>
 
         <div class="audience-grid">
@@ -1175,6 +1177,12 @@
               <td>Inference</td>
               <td><span class="badge live">Live</span></td>
               <td>Weekly median L40S rental rate, US marketplace. Inference-tier reference rate. First publication March 2026.</td>
+            </tr>
+            <tr>
+              <td>CRI-R</td>
+              <td>Reference rates</td>
+              <td><span class="badge live">Live</span></td>
+              <td>Companion series tracking posted rate cards from hyperscalers and mid-market platforms (Azure, AWS, GCP, RunPod). Provides Tier 1 and Tier 2 context for spot market indices. Updated weekly.</td>
             </tr>
             <tr>
               <td>CRI-S</td>
