@@ -971,7 +971,7 @@
           spot rental marketplaces and hyperscaler pricing endpoints.
           Calculated by a deterministic, rules-based pipeline. Independently verifiable by any third party.
           Methodology governed with reference to the <a href="https://www.iosco.org/library/pubdocs/pdf/IOSCOPD415.pdf" target="_blank" rel="noopener">IOSCO Principles for Financial Benchmarks</a>.
-          First publication: <strong>March 5, 2026</strong>.
+          Daily since <strong>March 2026</strong>.
         </p>
 
         <!-- CRI-H200 -->
@@ -1001,16 +1001,31 @@
               const lines = text.trim().split('\n').filter(l => l.trim());
               const last = lines[lines.length - 1].split(',');
               // columns: observation_date,methodology_version,cri_h100,obs_p25,obs_p75,obs_min,obs_max,confidence_flag,total_observations,n_valid_days
-              const date       = last[0];
-              const value      = parseFloat(last[2]);
-              const confidence = last[7];
-              const nObs       = last[8];
-              const version    = last[1];
+              const date        = last[0];
+              const value       = parseFloat(last[2]);
+              const confidence  = last[7];
+              const nObs        = last[8];
+              const nValidDays  = parseInt(last[9]) || 0;
+              const version     = last[1];
+
+              // expose for tier ladder
+              window._criH100 = value;
+
               document.getElementById('cri-h100-value').textContent = '$' + value.toFixed(4);
+
               let meta = `per GPU-hour · ${date} · ${nObs} observations · ${version}`;
-              if (confidence && confidence !== 'high') meta += ` · ⚠ ${confidence} confidence`;
+              if (confidence === 'low' || confidence === 'medium') {
+                meta += ` · window filling (${nValidDays}/7 days)`;
+              }
               document.getElementById('cri-h100-meta').textContent = meta;
-            } catch(e) {
+
+              // sync tier ladder spot row if present
+              const spotEl = document.getElementById('tier-h100-spot');
+              if (spotEl) spotEl.textContent = '$' + value.toFixed(4) + ' / GPU-hr';
+              const spotBarEl = document.getElementById('tier-h100-bar');
+              if (spotBarEl) spotBarEl.style.width = Math.min((value / 14.75) * 100, 100).toFixed(1) + '%';
+
+            } catch (e) {
               document.getElementById('cri-h100-meta').textContent = 'See GitHub for current data.';
             }
           })();
@@ -1238,46 +1253,65 @@
         <h2>GPU Compute &mdash; Market Tier Ladder</h2>
 
         <p>
-          CRI-H100 measures secondary spot marketplace pricing — the marginal clearing price for
-          on-demand H100 compute. The CRI-R companion series tracks posted rate cards from
-          mid-market platforms and hyperscalers. The spread between tiers quantifies the
-          <strong>reliability premium</strong>: what the market charges for managed infrastructure,
-          guaranteed capacity, and enterprise SLAs.
-          Data as of <strong>March 2026</strong>. Updated daily.
+          CRI-H100 measures the marginal clearing price for on-demand H100 spot compute.
+          The CRI-R companion series tracks posted rate cards from hyperscalers and mid-market platforms.
+          The spread between tiers quantifies the <strong>reliability premium</strong>:
+          what the market charges for managed infrastructure, guaranteed capacity, and enterprise SLAs.
+          Hyperscaler rates from CRI-R pipeline, March 2026. Spot from live CRI-H100.
         </p>
 
         <div class="tier-ladder">
 
-          <!-- Tier 1 -->
+          <!-- Tier 1 — scale anchor: Azure HPC $14.75 = 100% -->
           <div class="tier-group-header t1"><span>Tier 1 &mdash; Hyperscaler / Enterprise On-Demand</span></div>
           <div class="tier-row tier-t1">
             <div class="tier-meta">
-              <div class="tier-label">Cloud on-demand</div>
-              <div class="tier-source">GCP &middot; H100 80GB</div>
+              <div class="tier-label">HPC-premium on-demand</div>
+              <div class="tier-source">Azure &middot; ND H100 v5 (8&times; H100) &middot; hpc_premium</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t1" style="width:82%"></div>
-              <span class="tier-price">&#36;9.80 / GPU-hr</span>
+              <div class="tier-bar tb-t1" style="width:100%"></div>
+              <span class="tier-price">&#36;14.75 / GPU-hr</span>
             </div>
           </div>
           <div class="tier-row tier-t1">
             <div class="tier-meta">
-              <div class="tier-label">Cloud on-demand</div>
-              <div class="tier-source">Azure &middot; NC40ads H100 v5</div>
+              <div class="tier-label">HPC-premium on-demand</div>
+              <div class="tier-source">GCP &middot; H100 80GB &middot; hpc_premium</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t1" style="width:58.4%"></div>
-              <span class="tier-price">&#36;6.98 / GPU-hr</span>
+              <div class="tier-bar tb-t1" style="width:82.8%"></div>
+              <span class="tier-price">&#36;12.21 / GPU-hr</span>
             </div>
           </div>
           <div class="tier-row tier-t1">
             <div class="tier-meta">
-              <div class="tier-label">Cloud on-demand</div>
-              <div class="tier-source">AWS &middot; p5.48xlarge</div>
+              <div class="tier-label">Commodity on-demand</div>
+              <div class="tier-source">GCP &middot; H100 80GB &middot; commodity</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t1" style="width:57.5%"></div>
-              <span class="tier-price">&#36;6.88 / GPU-hr</span>
+              <div class="tier-bar tb-t1" style="width:78.4%"></div>
+              <span class="tier-price">&#36;11.56 / GPU-hr</span>
+            </div>
+          </div>
+          <div class="tier-row tier-t1">
+            <div class="tier-meta">
+              <div class="tier-label">Commodity on-demand</div>
+              <div class="tier-source">Azure &middot; NC H100 v5 (1&times; H100) &middot; commodity</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t1" style="width:66.2%"></div>
+              <span class="tier-price">&#36;9.77 / GPU-hr</span>
+            </div>
+          </div>
+          <div class="tier-row tier-t1">
+            <div class="tier-meta">
+              <div class="tier-label">HPC-premium on-demand</div>
+              <div class="tier-source">AWS &middot; p5.48xlarge (8&times; H100 SXM) &middot; hpc_premium</div>
+            </div>
+            <div class="tier-bar-wrap">
+              <div class="tier-bar tb-t1" style="width:49.9%"></div>
+              <span class="tier-price">&#36;7.36 / GPU-hr</span>
             </div>
           </div>
 
@@ -1285,32 +1319,22 @@
           <div class="tier-group-header t2"><span>Tier 2 &mdash; Mid-Market Reserved</span></div>
           <div class="tier-row tier-t2">
             <div class="tier-meta">
-              <div class="tier-label">Mid-market managed</div>
-              <div class="tier-source">RunPod &middot; Secure</div>
+              <div class="tier-label">Marketplace median (spot)</div>
+              <div class="tier-source">Shadeform &middot; H100 SXM &middot; 30+ providers</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t2" style="width:22.4%"></div>
-              <span class="tier-price">&#36;2.69 / GPU-hr</span>
+              <div class="tier-bar tb-t2" style="width:20%"></div>
+              <span class="tier-price">&#36;2.95 / GPU-hr</span>
             </div>
           </div>
           <div class="tier-row tier-t2">
             <div class="tier-meta">
-              <div class="tier-label">Mid-market community</div>
-              <div class="tier-source">RunPod &middot; Community</div>
+              <div class="tier-label">Managed cloud (secure)</div>
+              <div class="tier-source">RunPod &middot; H100 SXM &middot; Secure</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t2" style="width:22.4%"></div>
+              <div class="tier-bar tb-t2" style="width:18.2%"></div>
               <span class="tier-price">&#36;2.69 / GPU-hr</span>
-            </div>
-          </div>
-          <div class="tier-row tier-t2">
-            <div class="tier-meta">
-              <div class="tier-label">Mid-market spot</div>
-              <div class="tier-source">RunPod &middot; Spot</div>
-            </div>
-            <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t2" style="width:14.6%"></div>
-              <span class="tier-price">&#36;1.75 / GPU-hr</span>
             </div>
           </div>
 
@@ -1318,32 +1342,12 @@
           <div class="tier-group-header t3"><span>Tier 3 &mdash; Secondary Spot Marketplace</span></div>
           <div class="tier-row">
             <div class="tier-meta">
-              <div class="tier-label">H200 spot</div>
-              <div class="tier-source">Vast.ai</div>
-            </div>
-            <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t3" style="width:19.4%"></div>
-              <span class="tier-price">&#36;2.3237 / GPU-hr</span>
-            </div>
-          </div>
-          <div class="tier-row">
-            <div class="tier-meta">
               <div class="tier-label">H100 SXM spot &nbsp;<span class="tier-cri-marker">◎ CRI-H100</span></div>
-              <div class="tier-source">Vast.ai</div>
+              <div class="tier-source">Vast.ai &middot; Shadeform &middot; RunPod — live</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t3" style="width:14.5%"></div>
-              <span class="tier-price">&#36;1.7350 / GPU-hr</span>
-            </div>
-          </div>
-          <div class="tier-row">
-            <div class="tier-meta">
-              <div class="tier-label">L40S spot</div>
-              <div class="tier-source">Vast.ai</div>
-            </div>
-            <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t3" style="width:7.8%"></div>
-              <span class="tier-price">&#36;0.9370 / GPU-hr</span>
+              <div class="tier-bar tb-t3" id="tier-h100-bar" style="width:12.7%"></div>
+              <span class="tier-price" id="tier-h100-spot">loading…</span>
             </div>
           </div>
 
@@ -1352,29 +1356,29 @@
         <div class="spread-grid">
           <div class="spread-item">
             <div class="spread-label">Spot-to-enterprise spread</div>
-            <div class="spread-value">3.9&ndash;5.6&times;</div>
-            <div class="spread-desc">RunPod managed to hyperscaler on-demand &mdash; the reliability premium for enterprise GPU compute</div>
+            <div class="spread-value">4&ndash;8&times;</div>
+            <div class="spread-desc">CRI-H100 spot vs hyperscaler on-demand — the reliability premium for enterprise GPU access</div>
           </div>
           <div class="spread-item">
             <div class="spread-label">CRI-R coverage</div>
-            <div class="spread-value">5 platforms · 20+ rates</div>
-            <div class="spread-desc">Azure, AWS, GCP, RunPod — H100 and A100 across commodity and HPC-premium tiers</div>
+            <div class="spread-value">3 hyperscalers &middot; 2 tiers</div>
+            <div class="spread-desc">Azure, AWS, GCP — H100 commodity and HPC-premium tiers separated. Updated daily.</div>
           </div>
           <div class="spread-item">
             <div class="spread-label">Data repository</div>
             <div class="spread-value"><a href="https://github.com/ccir-index/ccir-data/blob/main/cri-r/CRI-R-history.csv" target="_blank" rel="noopener">ccir-data/cri-r/ &rarr;</a></div>
-            <div class="spread-desc">Open CSV — rate cards with daily provenance, updated daily</div>
+            <div class="spread-desc">Open CSV — rate cards with daily provenance</div>
           </div>
         </div>
 
         <p style="font-size:0.81rem; color:var(--text-dim); margin-top:4px;">
-          CRI-R rate cards are posted prices, not market-clearing prices, and are published as
-          contextual reference data only. They are not inputs to the CRI-H100 calculation.
-          Governance note: adding any rate card source as an official benchmark input requires
-          a Material Methodology Change under Governance Framework &sect;5.2.
+          Hyperscaler rates are posted prices, not market-clearing prices, and are published as
+          contextual reference data (CRI-R). They are not inputs to the CRI-H100 calculation.
+          HPC-premium tier reflects 8-GPU NVLink/InfiniBand nodes; commodity tier reflects single-GPU instances.
         </p>
       </div>
     </section>
+
 
 
     <!-- ── Governance at a glance ── -->
@@ -1554,7 +1558,7 @@
           CRI-H100 is published daily as an append-only CSV at
           <a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv" target="_blank" rel="noopener">ccir-data/cri-h100/CRI-H100-history.csv</a>.
           Each row is one daily observation. All CRI indices share an identical schema.
-          Values below are illustrative. First publication: <strong>March 5, 2026</strong>.
+          Values below are illustrative. Daily publication since <strong>March 2026</strong>.
         </p>
 
         <div class="pub-table-wrap">
