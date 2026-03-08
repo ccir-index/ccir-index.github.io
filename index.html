@@ -931,29 +931,28 @@
       </div>
 
       <p class="hero-statement">
-        CCIR publishes the <strong>independent, reproducible benchmark</strong> for GPU rental rates —
-        used in credit agreements, collateral valuation, and structured finance.
+        CCIR publishes <strong>daily GPU compute reference rates</strong> —
+        spot rental, hyperscaler on-demand, and market tier spreads —
+        built on an open, multi-source pipeline. Independently reproducible.
+        Governed for credit document citation.
       </p>
 
       <div class="independence-pills">
-        <span class="pill">No marketplace ownership</span>
-        <span class="pill">No submissions accepted</span>
-        <span class="pill">No GPU hardware exposure</span>
+        <span class="pill">Open source</span>
+        <span class="pill">Daily publication</span>
+        <span class="pill">Multi-source</span>
         <span class="pill">Independently reproducible</span>
-        <span class="pill">IOSCO-referenced governance</span>
+        <span class="pill">Governed methodology</span>
       </div>
 
       <nav>
-        <a href="#index">Index</a>
+        <a href="#index">Indices</a>
         <a href="#how-it-works">How It Works</a>
-        <a href="#two-curve">Analytical Framework</a>
         <a href="#companion-series">Rate Context</a>
         <a href="#market-tiers">Market Tiers</a>
+        <a href="#two-curve">Framework</a>
         <a href="#governance">Governance</a>
         <a href="#documents">Documents</a>
-        <a href="#publication-format">Publication Format</a>
-        <a href="#designed-for">Designed For</a>
-        <a href="#index-family">Index Family</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -961,64 +960,24 @@
 
   <main>
 
-    <!-- ── The problem ── -->
-    <section>
-      <div class="wrap">
-        <h2>The Problem</h2>
-        <p>
-          The GPU-backed lending market exceeds $20 billion in outstanding obligations.
-          Lenders need a neutral, independently verifiable rental rate reference to underwrite
-          collateral, set covenant triggers, and stress-test portfolios. That reference did not
-          previously exist to the governance standard required for credit document citation.
-        </p>
-        <div class="problem-grid">
-          <div class="problem-item">
-            <div class="problem-label">Volatile markets</div>
-            <div class="problem-text">H100 rental rates have declined 60–70% in 18 months. Depreciation assumptions vary by a factor of six across market participants.</div>
-          </div>
-          <div class="problem-item">
-            <div class="problem-label">Proprietary indices</div>
-            <div class="problem-text">Existing rental rate indices are administered by entities with marketplace or trading interests — methodology cannot be independently reproduced or audited.</div>
-          </div>
-          <div class="problem-item">
-            <div class="problem-label">No governance standard</div>
-            <div class="problem-text">Post-LIBOR, benchmarks cited in credit documents require transparent methodology, independent reproducibility, and formal change control. None existed for GPU compute.</div>
-          </div>
-          <div class="problem-item">
-            <div class="problem-label">Lenders abstaining</div>
-            <div class="problem-text">A non-trivial share of institutional lenders have declined to participate in GPU-backed lending, citing inability to develop defensible collateral valuation methodologies.</div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-
-    <!-- ── Live index family ── -->
+    <!-- ── Live indices ── -->
     <section id="index" class="on-white">
       <div class="wrap">
         <h2>Live Indices</h2>
 
         <p>
-          CCIR publishes a family of weekly GPU rental rate indices — each a trailing 7-day median $/GPU-hour
-          for on-demand listings on the US Vast.ai marketplace.
-          Calculated from publicly available data. Independently verifiable by any third party.
-          Governed with reference to the <a href="https://www.iosco.org/library/pubdocs/pdf/IOSCOPD415.pdf" target="_blank" rel="noopener">IOSCO Principles for Financial Benchmarks</a>.
+          CCIR publishes daily GPU compute reference rates sourced from public APIs across
+          spot rental marketplaces and hyperscaler pricing endpoints.
+          Calculated by a deterministic, rules-based pipeline. Independently verifiable by any third party.
+          Methodology governed with reference to the <a href="https://www.iosco.org/library/pubdocs/pdf/IOSCOPD415.pdf" target="_blank" rel="noopener">IOSCO Principles for Financial Benchmarks</a>.
           First publication: <strong>March 5, 2026</strong>.
         </p>
 
         <!-- CRI-H200 -->
-        <div class="status-card live" style="margin-top:24px;">
-          <div class="status-label live">
-            <span class="dot live"></span>
-            CRI-H200 &nbsp;<span style="font-weight:300;font-size:0.85em;color:var(--text-dim)">NVIDIA H200 &middot; US</span>
-          </div>
-          <div class="index-value">$2.3237</div>
-          <div class="index-meta">per GPU-hour &middot; week ending 2026-03-04 &middot; 38 observations &middot; v1.1.1</div>
-          <div class="status-desc">
-            Trailing 7-day median $/GPU-hour, H200, US marketplace. Next-generation training-tier reference rate. Published weekly on Thursdays.&nbsp;
-            <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-h200-index.csv">Full series &rarr;</a>
-          </div>
-        </div>
+        <!-- TODO: CRI-H200 and CRI-L40S — add when export pipeline is live.
+             Cross-tier spread (H200 vs H100 vs L40S) will signal workload migration
+             through training → inference → commodity tiers over time. Core input to CRI-D. -->
 
         <!-- CRI-H100 -->
         <div class="status-card live" style="margin-top:16px;">
@@ -1026,27 +985,37 @@
             <span class="dot live"></span>
             CRI-H100 &nbsp;<span style="font-weight:300;font-size:0.85em;color:var(--text-dim)">NVIDIA H100 SXM &middot; US</span>
           </div>
-          <div class="index-value">$1.7350</div>
-          <div class="index-meta">per GPU-hour &middot; week ending 2026-03-04 &middot; 44 observations &middot; v1.1.1</div>
+          <div class="index-value" id="cri-h100-value">—</div>
+          <div class="index-meta" id="cri-h100-meta">Loading…</div>
           <div class="status-desc">
-            Trailing 7-day median $/GPU-hour, H100 SXM, US marketplace. Current-generation training-tier reference rate. Published weekly on Thursdays.&nbsp;
-            <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-h100-index.csv">Full series &rarr;</a>
+            Trailing 7-day median $/GPU-hour, H100 SXM, US marketplace. Current-generation training-tier reference rate. Updated daily.&nbsp;
+            <a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a>
           </div>
         </div>
+        <script>
+          (async () => {
+            try {
+              const url = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv';
+              const resp = await fetch(url);
+              const text = await resp.text();
+              const lines = text.trim().split('\n').filter(l => l.trim());
+              const last = lines[lines.length - 1].split(',');
+              // columns: observation_date,methodology_version,cri_h100,obs_p25,obs_p75,obs_min,obs_max,confidence_flag,total_observations,n_valid_days
+              const date       = last[0];
+              const value      = parseFloat(last[2]);
+              const confidence = last[7];
+              const nObs       = last[8];
+              const version    = last[1];
+              document.getElementById('cri-h100-value').textContent = '$' + value.toFixed(4);
+              let meta = `per GPU-hour · ${date} · ${nObs} observations · ${version}`;
+              if (confidence && confidence !== 'high') meta += ` · ⚠ ${confidence} confidence`;
+              document.getElementById('cri-h100-meta').textContent = meta;
+            } catch(e) {
+              document.getElementById('cri-h100-meta').textContent = 'See GitHub for current data.';
+            }
+          })();
+        </script>
 
-        <!-- CRI-L40S -->
-        <div class="status-card live" style="margin-top:16px;">
-          <div class="status-label live">
-            <span class="dot live"></span>
-            CRI-L40S &nbsp;<span style="font-weight:300;font-size:0.85em;color:var(--text-dim)">NVIDIA L40S &middot; US</span>
-          </div>
-          <div class="index-value">$0.9370</div>
-          <div class="index-meta">per GPU-hour &middot; week ending 2026-03-04 &middot; 83 observations &middot; v1.1.1</div>
-          <div class="status-desc">
-            Trailing 7-day median $/GPU-hour, L40S, US marketplace. Inference-tier reference rate. Published weekly on Thursdays.&nbsp;
-            <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/cri-l40s-index.csv">Full series &rarr;</a>
-          </div>
-        </div>
 
       </div>
     </section>
@@ -1091,15 +1060,15 @@
 
         <table class="data-table">
           <tbody>
-            <tr><td>Data source</td><td>Vast.ai public API — no authentication required</td></tr>
-            <tr><td>Target GPU</td><td>NVIDIA H100 SXM</td></tr>
-            <tr><td>Geography</td><td>United States</td></tr>
+            <tr><td>Data sources</td><td>Vast.ai, Shadeform, RunPod — public APIs, spot rental listings. No authentication required for primary sources.</td></tr>
+            <tr><td>Target GPU</td><td>NVIDIA H100 SXM (CRI-H100). Additional models tracked as pipeline expands.</td></tr>
+            <tr><td>Geography</td><td>Global marketplace listings — US-weighted by supply concentration</td></tr>
             <tr><td>Quality filters</td><td>Reliability ≥ 0.90, active within 7 days, unrented, ≥ 1 GPU</td></tr>
-            <tr><td>Outlier removal</td><td>Trimmed mean ± 2.5σ</td></tr>
-            <tr><td>Calculation</td><td>Trailing 7-day median $/GPU-hour</td></tr>
-            <tr><td>Publication</td><td>Weekly — Thursdays by 5:00 PM Central</td></tr>
-            <tr><td>Low Confidence flag</td><td>Applied when daily observations &lt; 10 or valid days &lt; 3. Published with disclosure — not suppressed.</td></tr>
-            <tr><td>Reproducibility</td><td>Fully open-source. Any party can independently reproduce any published value.</td></tr>
+            <tr><td>Outlier removal</td><td>IQR × 3 per source and model group — eliminates anomalous listings without removing legitimate price dispersion</td></tr>
+            <tr><td>Calculation</td><td>Trailing 7-day median $/GPU-hour across pooled multi-source observations</td></tr>
+            <tr><td>Publication</td><td>Daily — updated each morning UTC</td></tr>
+            <tr><td>Low confidence flag</td><td>Applied when daily observations &lt; 10 or valid days &lt; 3. Published with disclosure — not suppressed.</td></tr>
+            <tr><td>Reproducibility</td><td>Fully open-source. Any party can independently reproduce any published value from the same public APIs.</td></tr>
           </tbody>
         </table>
       </div>
@@ -1125,8 +1094,9 @@
             <div class="curve-desc">
               The decline in the prevailing market rental rate for a GPU model over time,
               driven by new supply entering the market and improving price-per-performance
-              of newer generations. CRI-H200, CRI-H100, and CRI-L40S measure this curve
-              across training and inference tiers simultaneously.
+              of newer generations. CRI-H100 anchors this curve at the current-generation
+              training tier. Additional tier indices — tracking H200 and inference-grade GPUs
+              — will extend this curve as the pipeline expands.
               Rental rate depreciation affects cash flow projections in GPU lending facilities.
             </div>
           </div>
@@ -1149,9 +1119,9 @@
           floor moves in proportion to rental rates — an assumption that breaks down when
           secondary hardware market dynamics diverge from rental market conditions.
           The two-curve framework makes this assumption explicit and testable.
-          The three live CRI indices — H200 ($2.3237), H100 ($1.7350), and L40S ($0.9370) —
-          capture the current cross-tier rental rate structure, providing the empirical
-          foundation for tracking cascade dynamics as hardware generations evolve.
+          CRI-H100 provides the empirical rental rate anchor; as additional tier indices are
+          published, cross-tier spread dynamics will directly track workload migration from
+          training toward inference and commodity compute.
           CRI-S, the planned companion index, will directly measure the spread between the rental and resale curves.
         </p>
 
@@ -1170,7 +1140,7 @@
         <h2>Reference Rate Context</h2>
 
         <p>
-          CRI-H100 measures Tier 3 on-demand spot pricing on the Vast.ai secondary marketplace.
+          CRI-H100 is calculated from spot rental listings across multiple public marketplaces.
           CCIR also collects posted rate cards from hyperscalers and mid-market platforms —
           published alongside CRI-H100 as contextual data. The spread between these
           posted rates and CRI-H100 is the <strong>reliability premium</strong>:
@@ -1179,13 +1149,50 @@
 
         <div class="companion-grid">
           <div class="companion-card">
+            <div class="companion-ticker">Vast.ai</div>
+            <div class="companion-status" style="background:var(--green-lo);color:var(--green);border-color:var(--green-mid);">Primary</div>
+            <div class="companion-title">Vast.ai Spot Marketplace</div>
+            <div class="companion-desc">
+              Individual GPU rental listings across global providers. The deepest public spot market
+              for H100 and other datacenter GPUs. Primary CRI-H100 input source.
+              No authentication required.
+            </div>
+            <div class="companion-eta">Source: console.vast.ai/api/v0/bundles &nbsp;·&nbsp; Auth: none required</div>
+          </div>
+
+          <div class="companion-card">
+            <div class="companion-ticker">Shadeform</div>
+            <div class="companion-status" style="background:var(--green-lo);color:var(--green);border-color:var(--green-mid);">Collected</div>
+            <div class="companion-title">Shadeform Marketplace</div>
+            <div class="companion-desc">
+              Aggregated spot availability across 30+ GPU cloud providers, normalized to a
+              common schema. 137 H100 offers tracked daily. Each offer treated as a distinct
+              provider observation — Shadeform's role as a transparent aggregator makes
+              individual offers independently meaningful.
+            </div>
+            <div class="companion-eta">Source: api.shadeform.ai/v1/instances/types &nbsp;·&nbsp; Auth: free API key</div>
+          </div>
+
+          <div class="companion-card">
+            <div class="companion-ticker">RunPod</div>
+            <div class="companion-status" style="background:var(--green-lo);color:var(--green);border-color:var(--green-mid);">Collected</div>
+            <div class="companion-title">RunPod Mid-Market Rates</div>
+            <div class="companion-desc">
+              Secure, community, and spot pricing for H100 SXM and other GPU types
+              via the RunPod GraphQL API. Represents the mid-market reserved-capacity
+              tier above secondary spot. Requires a free API key.
+            </div>
+            <div class="companion-eta">Source: api.runpod.io/graphql &nbsp;·&nbsp; Auth: free API key</div>
+          </div>
+
+          <div class="companion-card">
             <div class="companion-ticker">Azure</div>
             <div class="companion-status" style="background:var(--green-lo);color:var(--green);border-color:var(--green-mid);">Collected</div>
             <div class="companion-title">Microsoft Azure Rate Cards</div>
             <div class="companion-desc">
-              On-demand and spot pricing for NC40ads_H100_v5 (1× H100 SXM) via the Azure Retail Prices API.
+              On-demand pricing for H100 and A100 GPU SKUs via the Azure Retail Prices API.
               No authentication required. Fully reproducible by any third party from
-              <code>prices.azure.com</code>. Published for H100, A100, and V100 across US East.
+              <code>prices.azure.com</code>. Commodity and HPC-premium tiers separated.
             </div>
             <div class="companion-eta">Source: prices.azure.com &nbsp;·&nbsp; Auth: none required</div>
           </div>
@@ -1196,8 +1203,8 @@
             <div class="companion-title">AWS EC2 On-Demand Rate Cards</div>
             <div class="companion-desc">
               On-demand pricing for p5.48xlarge (8× H100 SXM) and p4d.24xlarge (8× A100)
-              via the AWS bulk pricing JSON endpoint. No authentication required.
-              Normalized to per-GPU-hour for direct comparison with CRI-H100.
+              via the AWS bulk pricing endpoint. No authentication required.
+              Normalized to per-GPU-hour for direct comparison.
             </div>
             <div class="companion-eta">Source: pricing.us-east-1.amazonaws.com &nbsp;·&nbsp; Auth: none required</div>
           </div>
@@ -1207,32 +1214,19 @@
             <div class="companion-status">Collected</div>
             <div class="companion-title">Google Cloud Rate Cards</div>
             <div class="companion-desc">
-              On-demand and preemptible pricing for H100 and A100 GPU SKUs in us-central1
-              via the Cloud Billing API. Requires a free, freely requestable API key.
-              Substantially reproducible; key requirement disclosed in methodology documentation.
+              On-demand pricing for H100 and A100 GPU SKUs in us-central1
+              via the Cloud Billing API. Substantially reproducible; API key
+              requirement disclosed in methodology documentation.
             </div>
             <div class="companion-eta">Source: cloudbilling.googleapis.com &nbsp;·&nbsp; Auth: free API key</div>
-          </div>
-
-          <div class="companion-card">
-            <div class="companion-ticker">RunPod</div>
-            <div class="companion-status">Collected</div>
-            <div class="companion-title">RunPod Mid-Market Rate Cards</div>
-            <div class="companion-desc">
-              Secure, community, and spot pricing for H100 SXM, A100, and H200 GPU types
-              via the RunPod GraphQL API. Aggregate posted rates — not individual listings.
-              Represents the mid-market reserved-capacity tier above Vast.ai spot.
-              Requires a free API key.
-            </div>
-            <div class="companion-eta">Source: api.runpod.io/graphql &nbsp;·&nbsp; Auth: free API key</div>
           </div>
         </div>
 
         <p style="font-size:0.85rem; color: var(--text-dim);">
-          These rate cards are companion reference data, not inputs to the CRI-H100 calculation.
+          Hyperscaler rate cards are companion reference data, not inputs to the CRI-H100 calculation.
           Raw data published at
-          <a href="https://github.com/ccir-index/cri-h100/tree/main/data/reference-rates" target="_blank" rel="noopener">data/reference-rates/</a>
-          with SHA-256 provenance. Azure and AWS sources are independently reproducible without credentials.
+          <a href="https://github.com/ccir-index/ccir-data/blob/main/cri-r/CRI-R-history.csv" target="_blank" rel="noopener">ccir-data/cri-r/CRI-R-history.csv</a>
+          with daily updates. Azure and AWS sources are independently reproducible without credentials.
         </p>
       </div>
     </section>
@@ -1244,12 +1238,12 @@
         <h2>GPU Compute &mdash; Market Tier Ladder</h2>
 
         <p>
-          CRI-H100 measures the secondary spot marketplace — the marginal clearing price for
+          CRI-H100 measures secondary spot marketplace pricing — the marginal clearing price for
           on-demand H100 compute. The CRI-R companion series tracks posted rate cards from
           mid-market platforms and hyperscalers. The spread between tiers quantifies the
           <strong>reliability premium</strong>: what the market charges for managed infrastructure,
           guaranteed capacity, and enterprise SLAs.
-          Data as of <strong>March 5, 2026</strong>. Updated weekly.
+          Data as of <strong>March 2026</strong>. Updated daily.
         </p>
 
         <div class="tier-ladder">
@@ -1324,7 +1318,7 @@
           <div class="tier-group-header t3"><span>Tier 3 &mdash; Secondary Spot Marketplace</span></div>
           <div class="tier-row">
             <div class="tier-meta">
-              <div class="tier-label">H200 spot &nbsp;<span class="tier-cri-marker">◎ CRI-H200</span></div>
+              <div class="tier-label">H200 spot</div>
               <div class="tier-source">Vast.ai</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1344,7 +1338,7 @@
           </div>
           <div class="tier-row">
             <div class="tier-meta">
-              <div class="tier-label">L40S spot &nbsp;<span class="tier-cri-marker">◎ CRI-L40S</span></div>
+              <div class="tier-label">L40S spot</div>
               <div class="tier-source">Vast.ai</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1363,13 +1357,13 @@
           </div>
           <div class="spread-item">
             <div class="spread-label">CRI-R coverage</div>
-            <div class="spread-value">4 platforms &middot; 18 rates</div>
-            <div class="spread-desc">Azure, AWS, GCP, RunPod &mdash; H100, A100, H200, V100 across tiers</div>
+            <div class="spread-value">5 platforms · 20+ rates</div>
+            <div class="spread-desc">Azure, AWS, GCP, RunPod — H100 and A100 across commodity and HPC-premium tiers</div>
           </div>
           <div class="spread-item">
             <div class="spread-label">Data repository</div>
-            <div class="spread-value"><a href="https://github.com/ccir-index/cri-h100/tree/main/data/reference-rates" target="_blank" rel="noopener">data/reference-rates/ &rarr;</a></div>
-            <div class="spread-desc">Open CSV &mdash; all 18 rate cards with SHA-256 provenance, updated weekly</div>
+            <div class="spread-value"><a href="https://github.com/ccir-index/ccir-data/blob/main/cri-r/CRI-R-history.csv" target="_blank" rel="noopener">ccir-data/cri-r/ &rarr;</a></div>
+            <div class="spread-desc">Open CSV — rate cards with daily provenance, updated daily</div>
           </div>
         </div>
 
@@ -1388,9 +1382,11 @@
       <div class="wrap">
         <h2>Governance at a Glance</h2>
         <p>
-          CRI-H100 governance is designed with reference to the IOSCO Principles for Financial
-          Benchmarks — the post-LIBOR international standard for benchmark administration.
-          Full documentation in the <a href="https://github.com/ccir-index/ccir-methodology/blob/main/GOVERNANCE-v1_0.md" target="_blank" rel="noopener">Governance Framework v1.0</a>.
+          An open methodology is what makes a reference rate citable in credit documents.
+          CCIR's governance framework is designed with reference to the IOSCO Principles for Financial
+          Benchmarks — establishing the structural independence, change control, and audit trail
+          that structured credit practitioners require. Full documentation in the
+          <a href="https://github.com/ccir-index/ccir-methodology/blob/main/GOVERNANCE-v1_0.md" target="_blank" rel="noopener">Governance Framework v1.0</a>.
         </p>
 
         <div class="gov-grid">
@@ -1480,6 +1476,24 @@
             <div class="doc-version">—</div>
           </a>
 
+          <a class="doc-item" href="https://github.com/ccir-index/ccir-data" target="_blank" rel="noopener">
+            <div class="doc-icon primary">GH</div>
+            <div class="doc-content">
+              <div class="doc-title">Public Data — ccir-data</div>
+              <div class="doc-desc">Daily CRI-H100 index series and CRI-R hyperscaler rate card snapshots. Append-only CSV. Citable via commit hash.</div>
+            </div>
+            <div class="doc-version">GitHub</div>
+          </a>
+
+          <a class="doc-item" href="https://github.com/ccir-index/ccir-data/blob/main/cri-r/CRI-R-history.csv" target="_blank" rel="noopener">
+            <div class="doc-icon">GH</div>
+            <div class="doc-content">
+              <div class="doc-title">CRI-R Rate Card History</div>
+              <div class="doc-desc">Daily on-demand GPU rates across AWS, Azure, and GCP — commodity and HPC-premium tiers. Updated daily.</div>
+            </div>
+            <div class="doc-version">GitHub</div>
+          </a>
+
           <a class="doc-item" href="https://github.com/ccir-index/cri-h100" target="_blank" rel="noopener">
             <div class="doc-icon">GH</div>
             <div class="doc-content">
@@ -1537,11 +1551,10 @@
         <h2>Publication Format</h2>
 
         <p style="max-width:820px;">
-          Each CRI index is published weekly as an append-only CSV in the
-          <a href="https://github.com/ccir-index/cri-h100/blob/main/outputs/" target="_blank" rel="noopener">outputs/</a> directory
-          (e.g. <code>cri-h100-index.csv</code>, <code>cri-h200-index.csv</code>, <code>cri-l40s-index.csv</code>).
-          All indices share an identical CSV schema. Values below reflect the March 5, 2026 inaugural publication.
-          First publication: <strong>March 5, 2026</strong>.
+          CRI-H100 is published daily as an append-only CSV at
+          <a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv" target="_blank" rel="noopener">ccir-data/cri-h100/CRI-H100-history.csv</a>.
+          Each row is one daily observation. All CRI indices share an identical schema.
+          Values below are illustrative. First publication: <strong>March 5, 2026</strong>.
         </p>
 
         <div class="pub-table-wrap">
@@ -1549,121 +1562,76 @@
             <thead>
               <tr>
                 <th>Field</th>
-                <th>CRI-H200</th>
-                <th>CRI-H100</th>
-                <th>CRI-L40S</th>
+                <th>Example value</th>
                 <th>Description</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="group-sep"><td colspan="5">Dates</td></tr>
+              <tr class="group-sep"><td colspan="3">Identity</td></tr>
               <tr>
-                <td>publication_date</td>
-                <td>2026-03-05</td>
-                <td>2026-03-05</td>
-                <td>2026-03-05</td>
-                <td>Thursday publication date (YYYY-MM-DD)</td>
-              </tr>
-              <tr>
-                <td>window_start</td>
-                <td>2026-02-27</td>
-                <td>2026-02-27</td>
-                <td>2026-02-27</td>
-                <td>First day of trailing 7-day calculation window</td>
-              </tr>
-              <tr>
-                <td>window_end</td>
-                <td>2026-03-04</td>
-                <td>2026-03-04</td>
-                <td>2026-03-04</td>
-                <td>Last day of calculation window — Wednesday preceding publication</td>
-              </tr>
-
-              <tr class="group-sep"><td colspan="5">Index value</td></tr>
-              <tr class="highlight-row">
-                <td>index_value</td>
-                <td>2.3237</td>
-                <td>1.7350</td>
-                <td>0.9370</td>
-                <td>Trailing 7-day median $/GPU-hour — the published index value, rounded to 4 decimal places</td>
-              </tr>
-
-              <tr class="group-sep"><td colspan="5">Observation counts</td></tr>
-              <tr>
-                <td>valid_days</td>
-                <td>4</td>
-                <td>4</td>
-                <td>6</td>
-                <td>Collection days with ≥ 8 qualifying observations contributing to the weekly pool</td>
-              </tr>
-              <tr>
-                <td>total_observations</td>
-                <td>38</td>
-                <td>44</td>
-                <td>83</td>
-                <td>Total pooled observations after all quality filters and outlier removal</td>
-              </tr>
-
-              <tr class="group-sep"><td colspan="5">Dispersion</td></tr>
-              <tr>
-                <td>obs_min</td>
-                <td>1.8854</td>
-                <td>1.4447</td>
-                <td>0.4668</td>
-                <td>Minimum observation in pool ($/GPU-hour)</td>
-              </tr>
-              <tr>
-                <td>obs_max</td>
-                <td>2.3333</td>
-                <td>2.2689</td>
-                <td>1.2074</td>
-                <td>Maximum observation in pool ($/GPU-hour)</td>
-              </tr>
-              <tr>
-                <td>obs_mean</td>
-                <td>2.2213</td>
-                <td>1.8080</td>
-                <td>0.8866</td>
-                <td>Arithmetic mean of pool — published for reference; median is the index value</td>
-              </tr>
-              <tr>
-                <td>obs_stdev</td>
-                <td>0.1443</td>
-                <td>0.2734</td>
-                <td>0.2878</td>
-                <td>Standard deviation of pool — measures price dispersion in the calculation window</td>
-              </tr>
-
-              <tr class="group-sep"><td colspan="5">Governance</td></tr>
-              <tr>
-                <td>low_confidence</td>
-                <td>false</td>
-                <td>false</td>
-                <td>false</td>
-                <td>true if any day had &lt;8 observations or valid_days &lt;3 — published with disclosure, not suppressed</td>
+                <td>observation_date</td>
+                <td>2026-03-07</td>
+                <td>Date of calculation (YYYY-MM-DD) — updated daily</td>
               </tr>
               <tr>
                 <td>methodology_version</td>
                 <td>v1.1.1</td>
-                <td>v1.1.1</td>
-                <td>v1.1.1</td>
-                <td>Methodology version under which this value was calculated — for contractual version pinning</td>
+                <td>Methodology version — for contractual version pinning</td>
+              </tr>
+
+              <tr class="group-sep"><td colspan="3">Index value</td></tr>
+              <tr class="highlight-row">
+                <td>cri_h100</td>
+                <td>1.8670</td>
+                <td>Trailing 7-day median $/GPU-hour — the published index value, 4 decimal places</td>
               </tr>
               <tr>
-                <td>index_name</td>
-                <td>CRI-H200</td>
-                <td>CRI-H100</td>
-                <td>CRI-L40S</td>
-                <td>Index identifier — used to distinguish series in the shared repository</td>
+                <td>obs_p25</td>
+                <td>1.6500</td>
+                <td>25th percentile of observation pool</td>
+              </tr>
+              <tr>
+                <td>obs_p75</td>
+                <td>2.1200</td>
+                <td>75th percentile of observation pool</td>
+              </tr>
+              <tr>
+                <td>obs_min</td>
+                <td>1.3200</td>
+                <td>Minimum observation in pool ($/GPU-hour)</td>
+              </tr>
+              <tr>
+                <td>obs_max</td>
+                <td>2.4800</td>
+                <td>Maximum observation in pool ($/GPU-hour)</td>
+              </tr>
+
+              <tr class="group-sep"><td colspan="3">Observation counts</td></tr>
+              <tr>
+                <td>total_observations</td>
+                <td>308</td>
+                <td>Total pooled observations after all quality filters and outlier removal</td>
+              </tr>
+              <tr>
+                <td>n_valid_days</td>
+                <td>6</td>
+                <td>Collection days with qualifying observations contributing to the 7-day pool</td>
+              </tr>
+
+              <tr class="group-sep"><td colspan="3">Governance</td></tr>
+              <tr>
+                <td>confidence_flag</td>
+                <td>high</td>
+                <td><code>high</code> / <code>medium</code> / <code>low</code> — based on observation count and valid days. Published with disclosure, never suppressed.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <p style="font-size:0.81rem; color: var(--text-dim); max-width:820px;">
-          Each weekly publication is accompanied by a full audit file at
-          <code>outputs/audits/cri-[model]-YYYY-MM-DD.audit.json</code>
-          containing the complete daily breakdown and outlier removal log.
+          Each daily value is linked to its source data via the append-only audit trail in the pipeline repository.
+          See <a href="https://github.com/ccir-index/ccir-methodology/blob/main/REPRODUCIBILITY.md" target="_blank" rel="noopener">REPRODUCIBILITY.md</a> for the full independent verification workflow.
+        </p>
           See <a href="https://github.com/ccir-index/ccir-methodology/blob/main/REPRODUCIBILITY.md" target="_blank" rel="noopener">REPRODUCIBILITY.md</a> for the full independent verification workflow.
         </p>
       </div>
@@ -1714,6 +1682,13 @@
       <div class="wrap">
         <h2>Index Family</h2>
 
+        <p>
+          CCIR will expand the index family as the pipeline matures — publishing the GPU models
+          that best track tier migration and collateral dynamics, not a fixed predetermined list.
+          Cross-tier spreads between training, inference, and commodity tiers are the signal;
+          the indices are chosen to make that signal legible.
+        </p>
+
         <table class="index-table">
           <thead>
             <tr>
@@ -1725,34 +1700,28 @@
           </thead>
           <tbody>
             <tr>
-              <td>CRI-H200</td>
-              <td>Training (next-gen)</td>
-              <td><span class="badge live">Live</span></td>
-              <td>Weekly median H200 rental rate, US marketplace. Next-generation training-tier reference rate. First publication March 2026.</td>
-            </tr>
-            <tr>
               <td>CRI-H100</td>
               <td>Training</td>
               <td><span class="badge live">Live</span></td>
-              <td>Weekly median H100 SXM rental rate, US marketplace. Current-generation training-tier reference rate. First publication March 2026.</td>
-            </tr>
-            <tr>
-              <td>CRI-L40S</td>
-              <td>Inference</td>
-              <td><span class="badge live">Live</span></td>
-              <td>Weekly median L40S rental rate, US marketplace. Inference-tier reference rate. First publication March 2026.</td>
+              <td>Daily median H100 SXM rental rate, multi-source spot marketplace. Current-generation training-tier reference rate. First publication March 2026.</td>
             </tr>
             <tr>
               <td>CRI-R</td>
               <td>Reference rates</td>
               <td><span class="badge live">Live</span></td>
-              <td>Companion series tracking posted rate cards from hyperscalers and mid-market platforms (Azure, AWS, GCP, RunPod). Tier 1 and Tier 2 context for spot indices. Updated weekly.</td>
+              <td>Companion series tracking posted rate cards from hyperscalers and mid-market platforms (Azure, AWS, GCP, RunPod). Commodity and HPC-premium tiers separated. Updated daily.</td>
+            </tr>
+            <tr>
+              <td>CRI-H200 / CRI-L40S</td>
+              <td>Training / Inference</td>
+              <td><span class="badge planned">Planned</span></td>
+              <td>Next-gen and inference-tier indices. Cross-tier spread between H200, H100, and L40S tracks workload migration from training toward inference and commodity compute — core input to CRI-D.</td>
             </tr>
             <tr>
               <td>CRI-S</td>
               <td>Cross-tier spread</td>
               <td><span class="badge planned">Planned</span></td>
-              <td>Rental-resale spread index. Measures whether the GPU liquidation floor is holding relative to rental rate depreciation. Q3–Q4 2026.</td>
+              <td>Rental-resale spread index. Measures whether the GPU liquidation floor is holding relative to rental rate depreciation. Requires verified resale transaction data. Q3–Q4 2026.</td>
             </tr>
             <tr>
               <td>CRI-D</td>
@@ -1761,16 +1730,10 @@
               <td>Cross-generational depreciation curves derived from CRI time series. Requires 12–18 months of data. Q1–Q2 2027.</td>
             </tr>
             <tr>
-              <td>CRI-H100-PA</td>
-              <td>Performance-adjusted</td>
+              <td>Regional variants</td>
+              <td>Geographic</td>
               <td><span class="badge roadmap">Roadmap</span></td>
-              <td>Performance-adjusted variant accounting for intra-model GPU performance variance.</td>
-            </tr>
-            <tr>
-              <td>CRI-H100-EU / APAC</td>
-              <td>Regional</td>
-              <td><span class="badge roadmap">Roadmap</span></td>
-              <td>Regional variants under identical methodology. Enables geographic spread analysis.</td>
+              <td>EU and APAC variants under identical methodology. Enables geographic spread analysis for cross-border GPU lending facilities.</td>
             </tr>
           </tbody>
         </table>
@@ -1782,7 +1745,7 @@
     <section id="contact" class="on-white">
       <div class="wrap">
         <h2>Contact</h2>
-        <p><a href="/cdn-cgi/l/email-protection#eb998e988e8a998883ab88888299c58284"><span class="__cf_email__" data-cfemail="f18394829490839299b192929883df989e">[email&#160;protected]</span></a></p>
+        <p><a href="mailto:research@ccir.io">research@ccir.io</a></p>
         <p style="font-size:0.87rem; color: var(--text-dim);">
           Licensing inquiries, pre-transaction audit coordination, methodology questions,
           and complaints should be directed to this address. CCIR commits to acknowledging
