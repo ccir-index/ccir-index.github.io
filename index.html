@@ -806,10 +806,18 @@
 
     .tier-bar-wrap { display: flex; align-items: center; gap: 12px; min-height: 24px; }
 
-    .tier-bar {
+    .tier-bar-track {
+      flex: 1;
+      min-width: 0;
       height: 14px;
       border-radius: 3px;
-      flex-shrink: 0;
+      background: var(--surface-2);
+      overflow: hidden;
+    }
+
+    .tier-bar {
+      height: 100%;
+      border-radius: 3px;
     }
 
     .tier-bar.tb-t1 { background: var(--accent); opacity: 0.75; }
@@ -822,6 +830,9 @@
       font-weight: 500;
       color: var(--text-hi);
       white-space: nowrap;
+      flex-shrink: 0;
+      min-width: 120px;
+      text-align: right;
     }
 
     .tier-price.tier-price-pending {
@@ -1270,7 +1281,7 @@
               <div class="tier-source">Azure &middot; ND H100 v5 (8&times; H100) &middot; hpc_premium</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t1" style="width:100%"></div>
+              <div class="tier-bar-track"><div class="tier-bar tb-t1" style="width:100%"></div></div>
               <span class="tier-price">&#36;14.75 / GPU-hr</span>
             </div>
           </div>
@@ -1280,7 +1291,7 @@
               <div class="tier-source">GCP &middot; H100 80GB &middot; hpc_premium</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t1" style="width:82.8%"></div>
+              <div class="tier-bar-track"><div class="tier-bar tb-t1" style="width:82.8%"></div></div>
               <span class="tier-price">&#36;12.21 / GPU-hr</span>
             </div>
           </div>
@@ -1290,7 +1301,7 @@
               <div class="tier-source">GCP &middot; H100 80GB &middot; commodity</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t1" style="width:78.4%"></div>
+              <div class="tier-bar-track"><div class="tier-bar tb-t1" style="width:78.4%"></div></div>
               <span class="tier-price">&#36;11.56 / GPU-hr</span>
             </div>
           </div>
@@ -1300,7 +1311,7 @@
               <div class="tier-source">Azure &middot; NC H100 v5 (1&times; H100) &middot; commodity</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t1" style="width:66.2%"></div>
+              <div class="tier-bar-track"><div class="tier-bar tb-t1" style="width:66.2%"></div></div>
               <span class="tier-price">&#36;9.77 / GPU-hr</span>
             </div>
           </div>
@@ -1310,7 +1321,7 @@
               <div class="tier-source">AWS &middot; p5.48xlarge (8&times; H100 SXM) &middot; hpc_premium</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t1" style="width:49.9%"></div>
+              <div class="tier-bar-track"><div class="tier-bar tb-t1" style="width:49.9%"></div></div>
               <span class="tier-price">&#36;7.36 / GPU-hr</span>
             </div>
           </div>
@@ -1323,7 +1334,7 @@
               <div class="tier-source">Shadeform &middot; H100 SXM &middot; 30+ providers</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t2" style="width:20%"></div>
+              <div class="tier-bar-track"><div class="tier-bar tb-t2" style="width:20%"></div></div>
               <span class="tier-price">&#36;2.95 / GPU-hr</span>
             </div>
           </div>
@@ -1333,7 +1344,7 @@
               <div class="tier-source">RunPod &middot; H100 SXM &middot; Secure</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t2" style="width:18.2%"></div>
+              <div class="tier-bar-track"><div class="tier-bar tb-t2" style="width:18.2%"></div></div>
               <span class="tier-price">&#36;2.69 / GPU-hr</span>
             </div>
           </div>
@@ -1346,7 +1357,7 @@
               <div class="tier-source">Vast.ai &middot; Shadeform &middot; RunPod — live</div>
             </div>
             <div class="tier-bar-wrap">
-              <div class="tier-bar tb-t3" id="tier-h100-bar" style="width:12.7%"></div>
+              <div class="tier-bar-track"><div class="tier-bar tb-t3" id="tier-h100-bar" style="width:12.7%"></div></div>
               <span class="tier-price" id="tier-h100-spot">loading…</span>
             </div>
           </div>
