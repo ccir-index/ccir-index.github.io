@@ -797,6 +797,38 @@
       color: var(--text-hi);
     }
 
+    /* ── Tier label tooltips ── */
+    .tip {
+      position: relative;
+      cursor: help;
+      border-bottom: 1px dashed var(--border-hi);
+      display: inline;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 0;
+      top: calc(100% + 7px);
+      width: 240px;
+      background: var(--text-hi);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 300;
+      line-height: 1.55;
+      padding: 8px 11px;
+      border-radius: 5px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+      z-index: 100;
+      white-space: normal;
+    }
+
+    .tip:hover::after { opacity: 1; }
+
     .tier-source {
       font-family: var(--mono);
       font-size: 0.65rem;
@@ -1066,18 +1098,16 @@
           })();
         </script>
 
-        <!-- Premium indices teaser -->
-        <div style="margin-top:16px;padding:18px 22px;border:1px solid var(--border-hi);border-radius:8px;background:var(--surface-2);">
-          <div style="font-family:var(--mono);font-size:0.63rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;">Premium Indices — Historical Series + API Access</div>
+        <!-- Coming soon + premium services -->
+        <div style="margin-top:16px;padding:18px 22px;border:1px solid var(--border);border-radius:8px;background:var(--surface-2);">
+          <div style="font-family:var(--mono);font-size:0.63rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;">Indices in burn-in — publishing soon</div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
-            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text-hi);background:var(--bg-white);border:1px solid var(--border);border-radius:4px;padding:5px 12px;">🔒 CRI-B200</span>
-            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text-hi);background:var(--bg-white);border:1px solid var(--border);border-radius:4px;padding:5px 12px;">🔒 CRI-H200</span>
-            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text-hi);background:var(--bg-white);border:1px solid var(--border);border-radius:4px;padding:5px 12px;">🔒 CRI-L40S</span>
-            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text-hi);background:var(--bg-white);border:1px solid var(--border);border-radius:4px;padding:5px 12px;">🔒 Full historical series</span>
-            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text-hi);background:var(--bg-white);border:1px solid var(--border);border-radius:4px;padding:5px 12px;">🔒 Cross-tier spreads</span>
-            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text-hi);background:var(--bg-white);border:1px solid var(--border);border-radius:4px;padding:5px 12px;">🔒 API access</span>
+            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--amber);background:var(--amber-lo);border:1px solid var(--amber-mid);border-radius:4px;padding:5px 12px;">CRI-B200</span>
+            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--amber);background:var(--amber-lo);border:1px solid var(--amber-mid);border-radius:4px;padding:5px 12px;">CRI-H200</span>
+            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--amber);background:var(--amber-lo);border:1px solid var(--amber-mid);border-radius:4px;padding:5px 12px;">CRI-L40S</span>
+            <span style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--amber);background:var(--amber-lo);border:1px solid var(--amber-mid);border-radius:4px;padding:5px 12px;">Cross-tier spreads</span>
           </div>
-          <p style="font-size:0.84rem;color:var(--text-dim);margin:0;">Full Blackwell/Hopper/Ada tier coverage with complete daily history from first publication. Designed for credit document citation and structured product due diligence. &nbsp;<a href="mailto:research@ccir.io">research@ccir.io &rarr;</a></p>
+          <p style="font-size:0.84rem;color:var(--text-dim);margin:0;">All CCIR indices are open. Full daily history published at <a href="https://github.com/ccir-index/ccir-data" target="_blank" rel="noopener">github.com/ccir-index/ccir-data</a>. For structured delivery, API access, or pre-transaction audit coordination: <a href="mailto:research@ccir.io">research@ccir.io &rarr;</a></p>
         </div>
 
       </div>
@@ -1315,7 +1345,7 @@
           <div class="tier-group-header t1"><span>Tier 1 &mdash; Hyperscaler / Enterprise On-Demand</span></div>
           <div class="tier-row tier-t1">
             <div class="tier-meta">
-              <div class="tier-label">Cloud on-demand</div>
+              <div class="tier-label"><span class="tip" data-tip="Pay-as-you-go GPU access from a major cloud provider. No commitment required. Highest reliability and SLA guarantees — priced accordingly.">Cloud on-demand</span></div>
               <div class="tier-source">GCP &middot; H100 80GB</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1325,7 +1355,7 @@
           </div>
           <div class="tier-row tier-t1">
             <div class="tier-meta">
-              <div class="tier-label">Cloud on-demand</div>
+              <div class="tier-label"><span class="tip" data-tip="Pay-as-you-go GPU access from a major cloud provider. No commitment required. Highest reliability and SLA guarantees — priced accordingly.">Cloud on-demand</span></div>
               <div class="tier-source">Azure &middot; NC40ads H100 v5</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1335,7 +1365,7 @@
           </div>
           <div class="tier-row tier-t1">
             <div class="tier-meta">
-              <div class="tier-label">Cloud on-demand</div>
+              <div class="tier-label"><span class="tip" data-tip="Pay-as-you-go GPU access from a major cloud provider. No commitment required. Highest reliability and SLA guarantees — priced accordingly.">Cloud on-demand</span></div>
               <div class="tier-source">AWS &middot; p5.48xlarge</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1348,7 +1378,7 @@
           <div class="tier-group-header t2"><span>Tier 2 &mdash; Mid-Market Reserved</span></div>
           <div class="tier-row tier-t2">
             <div class="tier-meta">
-              <div class="tier-label">Mid-market managed</div>
+              <div class="tier-label"><span class="tip" data-tip="Dedicated GPU instances on a managed platform with network isolation, persistent storage, and uptime guarantees. Operator takes responsibility for hardware and infrastructure.">Mid-market managed</span></div>
               <div class="tier-source">RunPod &middot; Secure</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1358,7 +1388,7 @@
           </div>
           <div class="tier-row tier-t2">
             <div class="tier-meta">
-              <div class="tier-label">Mid-market community</div>
+              <div class="tier-label"><span class="tip" data-tip="GPU instances hosted by independent operators on a shared platform. Lower price than managed tier; no guaranteed uptime or SLA. Suitable for interruptible workloads.">Mid-market community</span></div>
               <div class="tier-source">RunPod &middot; Community</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1368,7 +1398,7 @@
           </div>
           <div class="tier-row tier-t2">
             <div class="tier-meta">
-              <div class="tier-label">Mid-market spot</div>
+              <div class="tier-label"><span class="tip" data-tip="Interruptible GPU instances that can be reclaimed by the platform at any time. Lowest price within a managed platform — equivalent to cloud spot instances but on mid-market infrastructure.">Mid-market spot</span></div>
               <div class="tier-source">RunPod &middot; Spot</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1382,7 +1412,7 @@
 
           <div class="tier-row tier-pending">
             <div class="tier-meta">
-              <div class="tier-label">B200 spot &nbsp;<span style="font-family:var(--mono);font-size:0.6rem;background:var(--surface-2);border:1px solid var(--border-hi);border-radius:3px;padding:2px 6px;color:var(--text-dim);">🔒 Premium</span></div>
+              <div class="tier-label"><span class="tip" data-tip="NVIDIA Blackwell-generation GPU. Successor to H100/H200. Early spot availability reflects first-mover supply from operators deploying new hardware ahead of contracted capacity.">B200 spot</span> &nbsp;<span style="font-family:var(--mono);font-size:0.6rem;background:var(--amber-lo);border:1px solid var(--amber-mid);border-radius:3px;padding:2px 6px;color:var(--amber);">Soon</span></div>
               <div class="tier-source">Multi-source &middot; CRI-B200</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1393,7 +1423,7 @@
 
           <div class="tier-row tier-pending">
             <div class="tier-meta">
-              <div class="tier-label">H200 spot &nbsp;<span style="font-family:var(--mono);font-size:0.6rem;background:var(--surface-2);border:1px solid var(--border-hi);border-radius:3px;padding:2px 6px;color:var(--text-dim);">🔒 Premium</span></div>
+              <div class="tier-label"><span class="tip" data-tip="NVIDIA H200 — H100 die with HBM3e memory (141GB vs 80GB). Higher memory bandwidth makes it the preferred tier for large-model training and inference. Commands a premium over H100.">H200 spot</span> &nbsp;<span style="font-family:var(--mono);font-size:0.6rem;background:var(--amber-lo);border:1px solid var(--amber-mid);border-radius:3px;padding:2px 6px;color:var(--amber);">Soon</span></div>
               <div class="tier-source">Multi-source &middot; CRI-H200</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1404,7 +1434,7 @@
 
           <div class="tier-row">
             <div class="tier-meta">
-              <div class="tier-label">H100 SXM spot &nbsp;<span class="tier-cri-marker">◎ CRI-H100</span></div>
+              <div class="tier-label"><span class="tip" data-tip="Unmanaged GPU instances listed directly by operators on a peer-to-peer marketplace. No SLA, no guaranteed uptime. Represents the marginal clearing price for H100 compute — the floor of the market.">H100 SXM spot</span> &nbsp;<span class="tier-cri-marker">◎ CRI-H100</span></div>
               <div class="tier-source">Multi-source spot</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1415,7 +1445,7 @@
 
           <div class="tier-row">
             <div class="tier-meta">
-              <div class="tier-label">A100 SXM spot &nbsp;<span class="tier-cri-marker">◎ CRI-A100</span></div>
+              <div class="tier-label"><span class="tip" data-tip="Prior-generation NVIDIA data center GPU (A100 80GB SXM). Now in active cascade as H100 and H200 displace it from training workloads. Spot price reflects diminishing demand premium and growing supply.">A100 SXM spot</span> &nbsp;<span class="tier-cri-marker">◎ CRI-A100</span></div>
               <div class="tier-source">Multi-source spot</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1426,7 +1456,7 @@
 
           <div class="tier-row tier-pending">
             <div class="tier-meta">
-              <div class="tier-label">L40S spot &nbsp;<span style="font-family:var(--mono);font-size:0.6rem;background:var(--surface-2);border:1px solid var(--border-hi);border-radius:3px;padding:2px 6px;color:var(--text-dim);">🔒 Premium</span></div>
+              <div class="tier-label"><span class="tip" data-tip="NVIDIA Ada Lovelace architecture GPU optimized for inference. Lower memory bandwidth than H100 but strong FP8 throughput. Increasingly used for inference serving as H100 supply tightens at the training tier.">L40S spot</span> &nbsp;<span style="font-family:var(--mono);font-size:0.6rem;background:var(--amber-lo);border:1px solid var(--amber-mid);border-radius:3px;padding:2px 6px;color:var(--amber);">Soon</span></div>
               <div class="tier-source">Multi-source &middot; CRI-L40S</div>
             </div>
             <div class="tier-bar-wrap">
@@ -1849,19 +1879,19 @@
             <tr>
               <td>CRI-B200</td>
               <td>Training / next-gen</td>
-              <td><span class="badge" style="background:var(--accent-lo);color:var(--accent);border:1px solid var(--accent-mid);">Live · Premium</span></td>
-              <td>Daily median B200 rental rate. Blackwell-generation displacement signal. Cross-tier B200/H100 spread available with premium access.</td>
+              <td><span class="badge planned">In burn-in</span></td>
+              <td>Daily median B200 rental rate. Blackwell-generation displacement signal. B200/H100 spread tracks next-gen transition timing.</td>
             </tr>
             <tr>
               <td>CRI-H200</td>
               <td>Training / memory-tier</td>
-              <td><span class="badge" style="background:var(--accent-lo);color:var(--accent);border:1px solid var(--accent-mid);">Live · Premium</span></td>
+              <td><span class="badge planned">In burn-in</span></td>
               <td>Daily median H200 rental rate. Memory-bandwidth premium tier. H200/H100 spread tracks workload migration for memory-intensive training runs.</td>
             </tr>
             <tr>
               <td>CRI-L40S</td>
               <td>Inference</td>
-              <td><span class="badge" style="background:var(--accent-lo);color:var(--accent);border:1px solid var(--accent-mid);">Live · Premium</span></td>
+              <td><span class="badge planned">In burn-in</span></td>
               <td>Daily median L40S rental rate. Inference-tier reference. A100/L40S near-parity spread tracks commodity compute cascade timing.</td>
             </tr>
             <tr>
