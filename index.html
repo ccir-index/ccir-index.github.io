@@ -322,12 +322,12 @@
       } catch(e) { document.getElementById('h100-meta').textContent = 'See GitHub for current data.'; }
       try {
         const a = await csv('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-a100/CRI-A100-history.csv');
-        av = parseFloat(a[2]);
+        av = parseFloat(a[3]);
         document.getElementById('a100-val').textContent = '$' + av.toFixed(4);
         const aDate = new Date(a[0] + 'T12:00:00');
         const aDateStr = aDate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-        const aObs = parseInt(a[8]).toLocaleString();
-        const aConf = (a[9] || a[6] || '').trim();
+        const aObs = parseInt(a[9]).toLocaleString();
+        const aConf = (a[8] || '').trim();
         let am = `Published ${aDateStr}\u00a0\u00b7\u00a0${aObs} obs\u00a0\u00b7\u00a0${aConf} confidence`;
         document.getElementById('a100-meta').textContent = am;
       } catch(e) { document.getElementById('a100-meta').textContent = 'See GitHub for current data.'; }
@@ -420,7 +420,7 @@
     <div class="sec-rule"></div>
     <p>CRI-H100 measures secondary spot marketplace pricing &mdash; the marginal clearing price for on-demand H100 compute. The tier ladder maps the full price structure from hyperscaler on-demand to secondary spot. The spread between tiers quantifies the <strong>reliability premium</strong>. Updated daily.</p>
     <div class="ladder">
-      <div class="tier-hdr t1"><span>Tier 1 &mdash; Hyperscaler / Enterprise On-Demand</span></div>
+      <div class="tier-hdr t1"><span>Tier 1 &mdash; Hyperscaler / Enterprise On-Demand</span><span id="cri-r-date" style="font-family:var(--mono);font-size:.58rem;font-weight:400;opacity:.55;margin-left:10px;"></span></div>
       <div class="tier-row t1bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Pay-as-you-go GPU access from a major cloud provider. No commitment required. Highest reliability and SLA guarantees.">Cloud on-demand</span></div><div class="tier-src">GCP &middot; H100 80GB</div></div><div class="bar-wrap"><div class="bar b1" id="bar-gcp" style="width:82%"></div><span class="tprice" id="tprice-gcp">$9.80 / GPU-hr</span></div></div>
       <div class="tier-row t1bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Pay-as-you-go GPU access from a major cloud provider. No commitment required. Highest reliability and SLA guarantees.">Cloud on-demand</span></div><div class="tier-src">Azure &middot; NC40ads H100 v5</div></div><div class="bar-wrap"><div class="bar b1" id="bar-azure" style="width:58.4%"></div><span class="tprice" id="tprice-azure">$6.98 / GPU-hr</span></div></div>
       <div class="tier-row t1bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Pay-as-you-go GPU access from a major cloud provider. No commitment required. Highest reliability and SLA guarantees.">Cloud on-demand</span></div><div class="tier-src">AWS &middot; p5.48xlarge</div></div><div class="bar-wrap"><div class="bar b1" id="bar-aws" style="width:57.5%"></div><span class="tprice" id="tprice-aws">$6.88 / GPU-hr</span></div></div>
@@ -469,7 +469,7 @@
       } catch(e) {}
       try {
         const ar = await getLastRow('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-a100/CRI-A100-history.csv');
-        av = parseFloat(ar[2]);
+        av = parseFloat(ar[3]);
         document.getElementById('tlbl-a100').textContent = '$' + av.toFixed(4) + ' / GPU-hr';
         document.getElementById('bar-a100').style.width = Math.min(100, (av/MAX)*100).toFixed(1) + '%';
       } catch(e) {}
@@ -480,21 +480,32 @@
       }
 
       // CRI-R: fetch latest reference rates and update tier ladder + spread
+      // CSV schema: observation_date[0], methodology_version[1], source_id[2],
+      //             gpu_model_canonical[3], instance_tier[4], rate_median_usd[5],
+      //             rate_min_usd[6], rate_max_usd[7], sku_count[8], computed_at[9]
       try {
         const rows = await getAllRows('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-r/CRI-R-history.csv');
         if (rows.length === 0) throw new Error('no data');
-        // rows cols: observation_date(0), source_id(1), source(2), gpu_model(3), price_per_gpu_hr(4)
-        // get latest date
+
         const latestDate = rows[rows.length - 1][0];
         const latest = rows.filter(r => r[0] === latestDate);
-        const find = (sid) => { const m = latest.find(r => r[1].trim() === sid); return m ? parseFloat(m[4]) : 0; };
 
-        const gcp   = find('gcp-h100-us-central1');
-        const azure = find('azure-h100-eastus');
-        const aws   = find('aws-h100-us-east-1');
-        const rpSec = find('runpod-h100-sxm-secure');
-        const rpCom = find('runpod-h100-sxm-community');
-        const rpSpt = find('runpod-h100-sxm-spot');
+        // find(source_id, model_substr, instance_tier) → rate_median_usd or 0
+        const find = (sid, model, tier) => {
+          const m = latest.find(r =>
+            r[2].trim() === sid &&
+            r[3].includes(model) &&
+            r[4].trim() === tier
+          );
+          return m ? parseFloat(m[5]) : 0;
+        };
+
+        const gcp   = find('GCP_BILLING',   'H100', 'commodity');
+        const azure = find('AZURE_RETAIL',  'H100', 'commodity');
+        const aws   = find('AWS_BULK',      'H100', 'hpc_premium');
+        const rpSec = find('RUNPOD_SPOT',   'H100 SXM5', 'managed_secure');
+        const rpCom = find('RUNPOD_SPOT',   'H100 SXM5', 'managed_community');
+        const rpSpt = find('RUNPOD_SPOT',   'H100 SXM5', 'spot');
 
         setTier('tprice-gcp',          'bar-gcp',          gcp);
         setTier('tprice-azure',        'bar-azure',        azure);
@@ -502,6 +513,10 @@
         setTier('tprice-rp-secure',    'bar-rp-secure',    rpSec);
         setTier('tprice-rp-community', 'bar-rp-community', rpCom);
         setTier('tprice-rp-spot',      'bar-rp-spot',      rpSpt);
+
+        // Stamp tier ladder with observation date
+        const dateEl = document.getElementById('cri-r-date');
+        if (dateEl) dateEl.textContent = 'CRI-R as of ' + latestDate;
 
         // Live spot-to-enterprise spread: CRI-R hyperscaler on-demand ÷ CRI-H100 spot
         if (hv && hv > 0) {
