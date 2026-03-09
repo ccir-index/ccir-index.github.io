@@ -67,6 +67,14 @@
     .icard-sub { font-family: var(--mono); font-size: .62rem; color: var(--text-dim); }
     .icard-val { font-family: var(--mono); font-size: 2.6rem; font-weight: 400; color: var(--text-hi); letter-spacing: -.025em; line-height: 1; margin-bottom: 8px; }
     .icard-meta { font-family: var(--mono); font-size: .66rem; color: var(--text-dim); margin-bottom: 14px; line-height: 1.6; }
+    .icard-changes { display: flex; gap: 14px; margin: 6px 0 10px; flex-wrap: wrap; }
+    .icard-chg { font-family: var(--mono); font-size: .68rem; display: flex; flex-direction: column; gap: 2px; }
+    .icard-chg-lbl { font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
+    .icard-chg-val { font-weight: 500; }
+    .icard-chg-val.up { color: #2a9d5c; }
+    .icard-chg-val.dn { color: #c0392b; }
+    .icard-chg-val.flat { color: var(--text-dim); }
+    .icard-mver { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); letter-spacing: .06em; margin-bottom: 4px; }
     .icard-desc { font-size: .82rem; color: var(--text-dim); line-height: 1.6; border-top: 1px solid var(--border); padding-top: 12px; }
 
     /* ---- Spread bar ---- */
@@ -287,12 +295,14 @@
       <div class="icard">
         <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-H100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA H100 SXM &middot; US</span></div>
         <div class="icard-val" id="h100-val">&mdash;</div>
+        <div class="icard-changes" id="h100-changes"></div>
         <div class="icard-meta" id="h100-meta">Loading&hellip;</div>
         <div class="icard-desc">Trailing 7-day median $/GPU-hour, H100 SXM, multi-source spot. Current-generation training-tier reference rate.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
       </div>
       <div class="icard">
         <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-A100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA A100 SXM &middot; US</span></div>
         <div class="icard-val" id="a100-val">&mdash;</div>
+        <div class="icard-changes" id="a100-changes"></div>
         <div class="icard-meta" id="a100-meta">Loading&hellip;</div>
         <div class="icard-desc">Trailing 7-day median $/GPU-hour, A100 SXM, multi-source spot. Prior-generation cascade reference rate.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
       </div>
@@ -304,33 +314,68 @@
     <script>
     (async () => {
       let hv = null, av = null;
-      async function csv(url) {
+
+      // Parse full CSV history, return array of row-arrays (skip header)
+      async function csvAll(url) {
         const r = await fetch(url), t = await r.text();
         const lines = t.trim().split('\n').filter(l => l.trim());
-        return lines[lines.length - 1].split(',');
+        return lines.slice(1).map(l => l.split(','));
       }
+
+      // Format a change value as signed $ + (%)
+      function fmtChg(cur, ref) {
+        if (!ref || isNaN(ref) || ref === 0) return {txt: '\u2014', cls: 'flat'};
+        const d = cur - ref;
+        const pct = (d / ref) * 100;
+        const sign = d >= 0 ? '+' : '';
+        const cls = d > 0.0001 ? 'up' : d < -0.0001 ? 'dn' : 'flat';
+        return {txt: `${sign}$${Math.abs(d).toFixed(4)} (${sign}${pct.toFixed(1)}%)`, cls};
+      }
+
+      function renderChanges(elId, cur, rows, valIdx) {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        const prev = rows.length >= 2 ? parseFloat(rows[rows.length - 2][valIdx]) : null;
+        const ago90 = rows.length >= 90 ? parseFloat(rows[rows.length - 90][valIdx]) : null;
+        const c1d = fmtChg(cur, prev);
+        const c90d = fmtChg(cur, ago90);
+        el.innerHTML =
+          `<div class="icard-chg"><div class="icard-chg-lbl">1d change</div><div class="icard-chg-val ${c1d.cls}">${c1d.txt}</div></div>` +
+          `<div class="icard-chg"><div class="icard-chg-lbl">90d change</div><div class="icard-chg-val ${c90d.cls}">${c90d.txt}</div></div>`;
+      }
+
       try {
-        const h = await csv('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv');
+        const hRows = await csvAll('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv');
+        const h = hRows[hRows.length - 1];
         hv = parseFloat(h[2]);
+        const hMver = (h[1] || '').trim();
         document.getElementById('h100-val').textContent = '$' + hv.toFixed(4);
+        renderChanges('h100-changes', hv, hRows, 2);
         const hDate = new Date(h[0] + 'T12:00:00');
         const hDateStr = hDate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
         const hObs = parseInt(h[8]).toLocaleString();
         const hConf = (h[7] || '').trim();
-        let hm = `Published ${hDateStr}\u00a0\u00b7\u00a0${hObs} obs\u00a0\u00b7\u00a0${hConf} confidence`;
-        document.getElementById('h100-meta').textContent = hm;
+        document.getElementById('h100-meta').innerHTML =
+          `<span class="icard-mver">methodology ${hMver}</span>` +
+          `Published ${hDateStr}\u00a0\u00b7\u00a0${hObs} obs\u00a0\u00b7\u00a0${hConf} confidence`;
       } catch(e) { document.getElementById('h100-meta').textContent = 'See GitHub for current data.'; }
+
       try {
-        const a = await csv('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-a100/CRI-A100-history.csv');
+        const aRows = await csvAll('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-a100/CRI-A100-history.csv');
+        const a = aRows[aRows.length - 1];
         av = parseFloat(a[3]);
+        const aMver = (a[1] || '').trim();
         document.getElementById('a100-val').textContent = '$' + av.toFixed(4);
+        renderChanges('a100-changes', av, aRows, 3);
         const aDate = new Date(a[0] + 'T12:00:00');
         const aDateStr = aDate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
         const aObs = parseInt(a[9]).toLocaleString();
         const aConf = (a[8] || '').trim();
-        let am = `Published ${aDateStr}\u00a0\u00b7\u00a0${aObs} obs\u00a0\u00b7\u00a0${aConf} confidence`;
-        document.getElementById('a100-meta').textContent = am;
+        document.getElementById('a100-meta').innerHTML =
+          `<span class="icard-mver">methodology ${aMver}</span>` +
+          `Published ${aDateStr}\u00a0\u00b7\u00a0${aObs} obs\u00a0\u00b7\u00a0${aConf} confidence`;
       } catch(e) { document.getElementById('a100-meta').textContent = 'See GitHub for current data.'; }
+
       if (hv && av) {
         const s = (hv / av).toFixed(2);
         document.getElementById('spread-val').textContent = s + '\u00d7';
@@ -401,7 +446,7 @@
     <div class="sec-rule"></div>
     <p>CRI-H100 is calculated from spot rental listings across multiple public marketplaces. CCIR also collects posted rate cards from hyperscalers and mid-market platforms &mdash; published alongside CRI-H100 as contextual data. The spread between these posted rates and CRI-H100 is the <strong>reliability premium</strong>: what the market charges for enterprise-grade GPU access over marginal spot supply.</p>
     <div class="cgrid">
-      <div class="ccard"><div class="ccard-ticker">Vast.ai</div><div class="cstatus primary">Primary</div><div class="ccard-title">Vast.ai Spot Marketplace</div><div class="ccard-desc">The deepest public spot market for H100 and datacenter GPUs. Individual GPU rental listings across global providers. No authentication required.</div><div class="ccard-eta">console.vast.ai/api/v0/bundles &middot; Auth: none</div></div>
+      <div class="ccard"><div class="ccard-ticker">Vast.ai</div><div class="cstatus active">Collected</div><div class="ccard-title">Vast.ai Spot Marketplace</div><div class="ccard-desc">The deepest public spot market for H100 and datacenter GPUs. Individual GPU rental listings across global providers. No authentication required.</div><div class="ccard-eta">console.vast.ai/api/v0/bundles &middot; Auth: none</div></div>
       <div class="ccard"><div class="ccard-ticker">Shadeform</div><div class="cstatus active">Collected</div><div class="ccard-title">Shadeform Marketplace</div><div class="ccard-desc">Aggregated spot availability across 30+ GPU cloud providers, normalized to a common schema. Each offer treated as a distinct provider observation.</div><div class="ccard-eta">api.shadeform.ai/v1/instances/types &middot; Auth: free API key</div></div>
       <div class="ccard"><div class="ccard-ticker">RunPod</div><div class="cstatus active">Collected</div><div class="ccard-title">RunPod Mid-Market Rates</div><div class="ccard-desc">Secure, community, and spot pricing for H100 SXM via the RunPod GraphQL API. Represents the mid-market reserved-capacity tier above secondary spot.</div><div class="ccard-eta">api.runpod.io/graphql &middot; Auth: free API key</div></div>
       <div class="ccard"><div class="ccard-ticker">Azure</div><div class="cstatus active">Collected</div><div class="ccard-title">Microsoft Azure Rate Cards</div><div class="ccard-desc">On-demand pricing for H100 and A100 GPU SKUs via the Azure Retail Prices API. No authentication required. Commodity and HPC-premium tiers separated.</div><div class="ccard-eta">prices.azure.com &middot; Auth: none</div></div>
