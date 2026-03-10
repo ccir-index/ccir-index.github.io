@@ -56,9 +56,14 @@
     .sec-rule { width: 32px; height: 1px; background: var(--accent); margin-bottom: 22px; }
 
     /* ---- Index cards ---- */
-    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
-    @media (max-width:620px) { .card-grid { grid-template-columns: 1fr; } }
-    .icard { background: var(--bg-white); border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 2px; padding: 24px 26px 20px; box-shadow: var(--sh-sm); }
+    .card-grid { display: flex; flex-direction: column; gap: 0; margin-top: 28px; border: 1px solid var(--border); border-radius: 2px; box-shadow: var(--sh-sm); overflow: hidden; }
+    .icard { display: grid; grid-template-columns: 1fr 380px; background: var(--bg-white); border-top: 1px solid var(--border); border-left: 3px solid var(--accent); }
+    .icard:first-child { border-top: none; }
+    .icard-data { padding: 20px 24px 18px; }
+    .icard-blurb { padding: 20px 22px 18px; background: var(--surface-2); border-left: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+    .icard-blurb-txt { font-size: .80rem; color: var(--text-dim); line-height: 1.65; }
+    .icard-blurb-link { font-size: .76rem; margin-top: 8px; }
+    @media (max-width:760px) { .icard { grid-template-columns: 1fr; } .icard-blurb { border-left: none; border-top: 1px solid var(--border); } }
     .icard-lbl { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
     .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
     .dot.live { background: var(--green); animation: pulse 2.5s infinite; }
@@ -74,7 +79,7 @@
     .icard-chg-val.up { color: #2a9d5c; }
     .icard-chg-val.dn { color: #c0392b; }
     .icard-chg-val.flat { color: var(--text-dim); }
-    .icard-mver { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); letter-spacing: .06em; margin-bottom: 4px; }
+    .icard-mver { display: block; font-family: var(--mono); font-size: .60rem; color: var(--text-dim); letter-spacing: .06em; margin-bottom: 3px; }
     .icard-desc { font-size: .82rem; color: var(--text-dim); line-height: 1.6; border-top: 1px solid var(--border); padding-top: 12px; }
 
     /* ---- Spread bar ---- */
@@ -294,44 +299,73 @@
     <p>CCIR publishes daily GPU compute reference rates sourced from public APIs across spot rental marketplaces and hyperscaler pricing endpoints. Calculated by a deterministic, rules-based pipeline. Independently verifiable by any third party. Methodology governed with reference to the <a href="https://www.iosco.org/library/pubdocs/pdf/IOSCOPD415.pdf" target="_blank" rel="noopener">IOSCO Principles for Financial Benchmarks</a>. First publication: <strong>March 10, 2026</strong>.</p>
     <div class="card-grid">
       <div class="icard">
-        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-B200</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA B200 SXM &middot; US</span></div>
-        <div class="icard-val" id="b200-val">&mdash;</div>
-        <div class="icard-changes" id="b200-changes"></div>
-        <div class="icard-meta" id="b200-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, B200 SXM, multi-source spot. <strong>Blackwell generation &mdash; frontier training.</strong> Highest throughput available; spot listings reflect early operator supply ahead of committed capacity. B200/H100 spread signals the pace of next-gen displacement.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        <div class="icard-data">
+          <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-B200</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA B200 SXM &middot; US</span></div>
+          <div class="icard-val" id="b200-val">&mdash;</div>
+          <div class="icard-changes" id="b200-changes"></div>
+          <div class="icard-meta" id="b200-meta">Loading&hellip;</div>
+        </div>
+        <div class="icard-blurb">
+          <div class="icard-blurb-txt"><strong>Blackwell generation &mdash; frontier training.</strong> Highest throughput available; spot listings reflect early operator supply ahead of committed capacity. B200/H100 spread is the primary next-gen displacement signal.</div>
+          <div class="icard-blurb-link"><a href="https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        </div>
       </div>
       <div class="icard">
-        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-H200</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA H200 SXM &middot; US</span></div>
-        <div class="icard-val" id="h200-val">&mdash;</div>
-        <div class="icard-changes" id="h200-changes"></div>
-        <div class="icard-meta" id="h200-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, H200 SXM, multi-source spot. <strong>HBM3e generation &mdash; large-model training and memory-bound inference.</strong> HBM3e memory (141GB vs 80GB) makes H200 the preferred tier for models where GPU memory capacity is the binding constraint. H200/H100 spread tracks migration out of the current training tier.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        <div class="icard-data">
+          <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-H200</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA H200 SXM &middot; US</span></div>
+          <div class="icard-val" id="h200-val">&mdash;</div>
+          <div class="icard-changes" id="h200-changes"></div>
+          <div class="icard-meta" id="h200-meta">Loading&hellip;</div>
+        </div>
+        <div class="icard-blurb">
+          <div class="icard-blurb-txt"><strong>HBM3e generation &mdash; large-model training and memory-bound inference.</strong> 141GB HBM3e memory makes H200 the preferred tier where GPU memory capacity is the binding constraint. H200/H100 spread tracks migration out of the current training tier.</div>
+          <div class="icard-blurb-link"><a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        </div>
       </div>
       <div class="icard">
-        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-H100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA H100 SXM &middot; US</span></div>
-        <div class="icard-val" id="h100-val">&mdash;</div>
-        <div class="icard-changes" id="h100-changes"></div>
-        <div class="icard-meta" id="h100-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, H100 SXM, multi-source spot. <strong>Current training tier &mdash; fine-tuning and mid-scale inference.</strong> Dominant training chip as of 2025&ndash;26; entering inference and fine-tuning roles as B200/H200 scale. The primary collateral reference rate for GPU-backed lending.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        <div class="icard-data">
+          <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-H100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA H100 SXM &middot; US</span></div>
+          <div class="icard-val" id="h100-val">&mdash;</div>
+          <div class="icard-changes" id="h100-changes"></div>
+          <div class="icard-meta" id="h100-meta">Loading&hellip;</div>
+        </div>
+        <div class="icard-blurb">
+          <div class="icard-blurb-txt"><strong>Current training tier &mdash; fine-tuning and mid-scale inference.</strong> Dominant training chip as of 2025&ndash;26; entering inference and fine-tuning roles as B200/H200 scale. The primary collateral reference rate for GPU-backed lending. Most widely held chip in current GPU loan portfolios.</div>
+          <div class="icard-blurb-link"><a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        </div>
       </div>
       <div class="icard">
-        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-A100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA A100 SXM &middot; US</span></div>
-        <div class="icard-val" id="a100-val">&mdash;</div>
-        <div class="icard-changes" id="a100-changes"></div>
-        <div class="icard-meta" id="a100-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, A100 SXM, multi-source spot. <strong>Prior training generation &mdash; inference and batch workloads.</strong> Displaced from training by H100; now primarily serving inference, batch processing, and cost-sensitive fine-tuning. H100/A100 spread measures active cascade velocity.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        <div class="icard-data">
+          <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-A100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA A100 SXM &middot; US</span></div>
+          <div class="icard-val" id="a100-val">&mdash;</div>
+          <div class="icard-changes" id="a100-changes"></div>
+          <div class="icard-meta" id="a100-meta">Loading&hellip;</div>
+        </div>
+        <div class="icard-blurb">
+          <div class="icard-blurb-txt"><strong>Prior training generation &mdash; inference and batch workloads.</strong> Displaced from training by H100; now primarily serving inference, batch processing, and cost-sensitive fine-tuning. Significant secondary presence in 2021&ndash;23 vintage loan portfolios. H100/A100 spread measures cascade velocity.</div>
+          <div class="icard-blurb-link"><a href="https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        </div>
       </div>
       <div class="icard">
-        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-L40S</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA L40S &middot; US</span></div>
-        <div class="icard-val" id="l40s-val">&mdash;</div>
-        <div class="icard-changes" id="l40s-changes"></div>
-        <div class="icard-meta" id="l40s-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, L40S, multi-source spot. <strong>Inference-optimized &mdash; high-throughput serving at lower cost.</strong> Ada Lovelace architecture with strong FP8 and INT8 throughput; favored for inference serving, RAG, and multimodal applications where FP16 training precision is not required. Near-parity with A100 signals commodity compute pricing.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        <div class="icard-data">
+          <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-L40S</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA L40S &middot; US</span></div>
+          <div class="icard-val" id="l40s-val">&mdash;</div>
+          <div class="icard-changes" id="l40s-changes"></div>
+          <div class="icard-meta" id="l40s-meta">Loading&hellip;</div>
+        </div>
+        <div class="icard-blurb">
+          <div class="icard-blurb-txt"><strong>Inference-optimized &mdash; high-throughput serving at lower cost.</strong> Ada Lovelace architecture with strong FP8 and INT8 throughput; favored for inference serving, RAG, and multimodal applications. Near-parity with A100 signals commodity cascade pricing for non-training compute.</div>
+          <div class="icard-blurb-link"><a href="https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        </div>
       </div>
     </div>
     <div class="spread-bar">
-      <div><div class="sb-label">H100 / A100 Spread</div><div class="sb-val" id="spread-val">&mdash;</div></div>
-      <div class="sb-desc" id="spread-desc">The H100-to-A100 rate ratio measures active tier migration pressure &mdash; how much the market is discounting prior-generation compute relative to the current training tier.</div>
+      <div><div class="sb-label">B200 / H100 Spread</div><div class="sb-val" id="spread-val">&mdash;</div></div>
+      <div class="sb-desc" id="spread-desc">Forward displacement signal for H100 collateral &mdash; how much the market is pricing next-generation Blackwell compute above the current training tier. Narrowing spread indicates accelerating H100 cascade.</div>
+    </div>
+    <div class="spread-bar" style="margin-top:8px;">
+      <div><div class="sb-label">H100 / A100 Spread</div><div class="sb-val" id="spread-val-ha">&mdash;</div></div>
+      <div class="sb-desc" id="spread-desc-ha">Cascade velocity signal &mdash; the current generation premium over prior-gen A100. Narrowing spread signals A100 migration into commodity tiers and rising pressure on 2021&ndash;23 vintage A100 collateral.</div>
     </div>
     <script>
     (async () => {
@@ -378,7 +412,7 @@
         const hObs = parseInt(h[10]).toLocaleString();
         const hConf = (h[9] || '').trim();
         document.getElementById('h100-meta').innerHTML =
-          `<span class="icard-mver">methodology ${hMver}</span>` +
+          `<span class="icard-mver">Published under CCIR Methodology v${hMver}</span>` +
           `Published ${hDateStr}\u00a0\u00b7\u00a0${hObs} obs\u00a0\u00b7\u00a0${hConf} confidence`;
       } catch(e) { document.getElementById('h100-meta').textContent = 'See GitHub for current data.'; }
 
@@ -394,15 +428,17 @@
         const aObs = parseInt(a[10]).toLocaleString();
         const aConf = (a[9] || '').trim();
         document.getElementById('a100-meta').innerHTML =
-          `<span class="icard-mver">methodology ${aMver}</span>` +
+          `<span class="icard-mver">Published under CCIR Methodology v${aMver}</span>` +
           `Published ${aDateStr}\u00a0\u00b7\u00a0${aObs} obs\u00a0\u00b7\u00a0${aConf} confidence`;
       } catch(e) { document.getElementById('a100-meta').textContent = 'See GitHub for current data.'; }
 
-      if (hv && av) {
-        const s = (hv / av).toFixed(2);
-        document.getElementById('spread-val').textContent = s + '\u00d7';
-        document.getElementById('spread-desc').innerHTML =
-          `H100 spot is currently trading at <strong>${s}&times;</strong> the A100 rate &mdash; a migration premium reflecting active workload displacement. As B200 and H200 enter scale production, this spread is the leading indicator of A100 cascade into commodity tiers.`;
+      // H100/A100 secondary spread
+      if (hv && av && av > 0) {
+        const has = (hv / av).toFixed(2);
+        const haEl = document.getElementById('spread-val-ha');
+        const haDesc = document.getElementById('spread-desc-ha');
+        if (haEl) haEl.textContent = has + '\u00d7';
+        if (haDesc) haDesc.innerHTML = `H100 spot is trading at <strong>${has}&times;</strong> the A100 rate &mdash; active cascade velocity signal. Narrowing spread indicates A100 migration into commodity tiers and rising collateral pressure on 2021&ndash;23 vintage A100 loan portfolios.`;
       }
 
       try {
@@ -417,7 +453,7 @@
         const h2Obs = parseInt(h2[10]).toLocaleString();
         const h2Conf = (h2[9] || '').trim();
         document.getElementById('h200-meta').innerHTML =
-          `<span class="icard-mver">methodology ${h2Mver}</span>` +
+          `<span class="icard-mver">Published under CCIR Methodology v${h2Mver}</span>` +
           `Published ${h2DateStr}\u00a0\u00b7\u00a0${h2Obs} obs\u00a0\u00b7\u00a0${h2Conf} confidence`;
       } catch(e) { document.getElementById('h200-meta').textContent = 'See GitHub for current data.'; }
 
@@ -433,7 +469,7 @@
         const lObs = parseInt(l[10]).toLocaleString();
         const lConf = (l[9] || '').trim();
         document.getElementById('l40s-meta').innerHTML =
-          `<span class="icard-mver">methodology ${lMver}</span>` +
+          `<span class="icard-mver">Published under CCIR Methodology v${lMver}</span>` +
           `Published ${lDateStr}\u00a0\u00b7\u00a0${lObs} obs\u00a0\u00b7\u00a0${lConf} confidence`;
       } catch(e) { document.getElementById('l40s-meta').textContent = 'See GitHub for current data.'; }
 
@@ -449,16 +485,21 @@
         const bObs = parseInt(b[10]).toLocaleString();
         const bConf = (b[9] || '').trim();
         document.getElementById('b200-meta').innerHTML =
-          `<span class="icard-mver">methodology ${bMver}</span>` +
+          `<span class="icard-mver">Published under CCIR Methodology v${bMver}</span>` +
           `Published ${bDateStr}\u00a0\u00b7\u00a0${bObs} obs\u00a0\u00b7\u00a0${bConf} confidence`;
       } catch(e) { document.getElementById('b200-meta').textContent = 'See GitHub for current data.'; }
 
-      // Third spread card: B200/H100 displacement signal
+      // B200/H100 primary spread (headline displacement signal for H100 collateral)
       if (bv && hv && hv > 0) {
         const bs = (bv / hv).toFixed(2);
-        document.getElementById('tspread-b200-val').textContent = bs + '\u00d7';
-        document.getElementById('tspread-b200-desc').textContent =
-          `CRI-B200 at $${bv.toFixed(2)} vs CRI-H100 at $${hv.toFixed(2)} \u2014 next-gen displacement premium; narrowing spread signals accelerating H100 cascade`;
+        document.getElementById('spread-val').textContent = bs + '\u00d7';
+        document.getElementById('spread-desc').innerHTML =
+          `CRI-B200 is trading at <strong>${bs}&times;</strong> the H100 rate &mdash; forward displacement premium on the primary collateral chip. Narrowing spread signals accelerating H100 migration into inference and fine-tuning tiers.`;
+        // Also update CRI-R section third spread card
+        const tbs = document.getElementById('tspread-b200-val');
+        const tbd = document.getElementById('tspread-b200-desc');
+        if (tbs) tbs.textContent = bs + '\u00d7';
+        if (tbd) tbd.textContent = `CRI-B200 at $${bv.toFixed(2)} vs CRI-H100 at $${hv.toFixed(2)} \u2014 next-gen displacement premium; narrowing spread signals accelerating H100 cascade`;
       }
 
     })();
