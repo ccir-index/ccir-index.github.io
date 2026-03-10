@@ -544,7 +544,7 @@
     <table class="dtable">
       <tbody>
         <tr><td>Data sources</td><td>Vast.ai, Shadeform, RunPod &mdash; public APIs, spot rental listings. No authentication required for primary sources.</td></tr>
-        <tr><td>Collection frequency</td><td>Hourly collection; daily index calculation. Automated pipeline via scheduled jobs.</td></tr>
+        <tr><td>Collection frequency</td><td>2&times; daily collection &mdash; primary at 09:00&nbsp;CT, fallback at 21:00&nbsp;CT. Silver selection promotes primary; fallback promoted automatically if primary is absent. Daily index calculation.</td></tr>
         <tr><td>Quality filter</td><td>US geography &middot; H100 SXM model &middot; reliability &ge; 0.90 &middot; active listing within 7 days &middot; unrented status</td></tr>
         <tr><td>Outlier removal</td><td>IQR &plusmn;3&times; fence applied per source per day before median calculation</td></tr>
         <tr><td>Index statistic</td><td>Median-of-medians: per-source 7-day median computed first, then median across sources. Each source contributes one vote regardless of listing count.</td></tr>
