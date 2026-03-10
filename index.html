@@ -543,8 +543,10 @@
       <div class="tier-row t1bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Pay-as-you-go GPU access from a major cloud provider. No commitment required. Highest reliability and SLA guarantees.">Cloud on-demand</span></div><div class="tier-src">GCP &middot; H100 80GB</div></div><div class="bar-wrap"><div class="bar b1" id="bar-gcp" style="width:82%"></div><span class="tprice" id="tprice-gcp">$9.80 / GPU-hr</span></div></div>
       <div class="tier-row t1bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Pay-as-you-go GPU access from a major cloud provider. No commitment required. Highest reliability and SLA guarantees.">Cloud on-demand</span></div><div class="tier-src">Azure &middot; NC40ads H100 v5</div></div><div class="bar-wrap"><div class="bar b1" id="bar-azure" style="width:58.4%"></div><span class="tprice" id="tprice-azure">$6.98 / GPU-hr</span></div></div>
       <div class="tier-row t1bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Pay-as-you-go GPU access from a major cloud provider. No commitment required. Highest reliability and SLA guarantees.">Cloud on-demand</span></div><div class="tier-src">AWS &middot; p5.48xlarge</div></div><div class="bar-wrap"><div class="bar b1" id="bar-aws" style="width:57.5%"></div><span class="tprice" id="tprice-aws">$6.88 / GPU-hr</span></div></div>
-      <div class="tier-hdr t2"><span>Tier 2 &mdash; Mid-Market Spot</span></div>
-      <div class="tier-row t2bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Interruptible GPU instances listed on RunPod's marketplace. Spot pricing with no guaranteed uptime. Collected via public GraphQL API.">Mid-market spot</span></div><div class="tier-src">RunPod &middot; Spot &middot; H100 SXM</div></div><div class="bar-wrap"><div class="bar b2" id="bar-rp-spot" style="width:14.6%"></div><span class="tprice" id="tprice-rp-spot">Loading&hellip;</span></div></div>
+      <div class="tier-hdr t2"><span>Tier 2 &mdash; Mid-Market</span></div>
+      <div class="tier-row t2bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Dedicated GPU instances on a managed platform with network isolation, persistent storage, and uptime guarantees.">Mid-market managed</span></div><div class="tier-src">RunPod &middot; Secure &middot; H100 SXM</div></div><div class="bar-wrap"><div class="bar b2" id="bar-rp-secure" style="width:22.4%"></div><span class="tprice" id="tprice-rp-secure">Loading&hellip;</span></div></div>
+      <div class="tier-row t2bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="GPU instances hosted by independent operators on a shared platform. Lower price than managed tier; no guaranteed uptime or SLA.">Mid-market community</span></div><div class="tier-src">RunPod &middot; Community &middot; H100 SXM</div></div><div class="bar-wrap"><div class="bar b2" id="bar-rp-community" style="width:18%"></div><span class="tprice" id="tprice-rp-community">Loading&hellip;</span></div></div>
+      <div class="tier-row t2bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Interruptible GPU instances listed on RunPod's marketplace. Spot pricing with no guaranteed uptime.">Mid-market spot</span></div><div class="tier-src">RunPod &middot; Spot &middot; H100 SXM</div></div><div class="bar-wrap"><div class="bar b2" id="bar-rp-spot" style="width:14.6%"></div><span class="tprice" id="tprice-rp-spot">Loading&hellip;</span></div></div>
       <div class="tier-hdr t3"><span>Tier 3 &mdash; Secondary Spot Marketplace</span></div>
       <div class="tier-row"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="NVIDIA Blackwell-generation GPU. Successor to H100/H200. Early spot availability from operators deploying new hardware ahead of contracted capacity.">B200 spot</span>&nbsp;<span class="cri-badge">&#9675; CRI-B200</span></div><div class="tier-src">Multi-source &middot; CRI-B200</div></div><div class="bar-wrap"><div class="bar b1" id="bar-b200" style="width:42.4%"></div><span class="tprice" id="tlbl-b200">Loading&hellip;</span></div></div>
       <div class="tier-row"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="NVIDIA H200 &mdash; H100 die with HBM3e memory (141GB vs 80GB). Higher memory bandwidth makes it preferred for large-model training and inference.">H200 spot</span>&nbsp;<span class="cri-badge">&#9675; CRI-H200</span></div><div class="tier-src">Multi-source &middot; CRI-H200</div></div><div class="bar-wrap"><div class="bar b3" id="bar-h200" style="width:27.1%"></div><span class="tprice" id="tlbl-h200">Loading&hellip;</span></div></div>
@@ -612,8 +614,6 @@
         const s = (hv/av).toFixed(2);
         document.getElementById('tspread-val').textContent = s + '\u00d7';
         document.getElementById('tspread-desc').textContent = `CRI-H100 at $${hv.toFixed(2)} vs CRI-A100 at $${av.toFixed(2)} \u2014 prior-generation cascade in progress`;
-        // RunPod spot row uses CRI-H100 as proxy (RunPod is a CRI-H100 source)
-        setTier('tprice-rp-spot', 'bar-rp-spot', hv);
       }
 
       // CRI-R: fetch latest reference rates and update tier ladder + spread
@@ -637,16 +637,21 @@
           return m ? parseFloat(m[5]) : 0;
         };
 
-        const gcp   = find('GCP_BILLING',   'H100', 'commodity');
-        const azure = find('AZURE_RETAIL',  'H100', 'commodity');
+        const gcp   = find('GCP_BILLING',   'H100', 'hpc_premium');
+        const azure = find('AZURE_RETAIL',  'H100', 'hpc_premium');
         const aws   = find('AWS_BULK',      'H100', 'hpc_premium');
 
         setTier('tprice-gcp',   'bar-gcp',   gcp);
         setTier('tprice-azure', 'bar-azure', azure);
         setTier('tprice-aws',   'bar-aws',   aws);
 
-        // RunPod spot comes from CRI-H100 tier data (spot_rental_raw), not CRI-R
-        // tprice-rp-spot is populated below from the already-fetched hv if available
+        const rpSec = find('RUNPOD_SPOT',   'H100 SXM5', 'managed_secure');
+        const rpCom = find('RUNPOD_SPOT',   'H100 SXM5', 'managed_community');
+        const rpSpt = find('RUNPOD_SPOT',   'H100 SXM5', 'spot');
+
+        setTier('tprice-rp-secure',    'bar-rp-secure',    rpSec);
+        setTier('tprice-rp-community', 'bar-rp-community', rpCom);
+        setTier('tprice-rp-spot',      'bar-rp-spot',      rpSpt);
 
         // Stamp tier ladder with observation date
         const dateEl = document.getElementById('cri-r-date');
