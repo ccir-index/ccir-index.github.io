@@ -166,6 +166,7 @@
     .tip { position: relative; cursor: help; border-bottom: 1px dashed var(--border-hi); }
     .tip::after { content: attr(data-tip); position:absolute; left:0; top:calc(100% + 8px); width:250px; background:var(--text-hi); color:#F6F3EE; font-family:var(--sans); font-size:.74rem; font-weight:300; line-height:1.6; padding:9px 12px; border-radius:3px; box-shadow:0 6px 18px rgba(14,12,10,.22); opacity:0; pointer-events:none; transition:opacity .15s; z-index:100; white-space:normal; }
     .tip:hover::after { opacity:1; }
+    .tip.tip-up::after { top:auto; bottom:calc(100% + 8px); }
     .cri-badge { font-family: var(--mono); font-size: .57rem; font-weight: 500; letter-spacing: .1em; color: var(--green); background: var(--green-lo); border: 1px solid var(--green-mid); border-radius: 2px; padding: 2px 7px; display: inline-block; }
     .soon-badge { font-family: var(--mono); font-size: .57rem; background: var(--amber-lo); border: 1px solid var(--amber-mid); border-radius: 2px; padding: 2px 6px; color: var(--amber); }
 
@@ -293,39 +294,39 @@
     <p>CCIR publishes daily GPU compute reference rates sourced from public APIs across spot rental marketplaces and hyperscaler pricing endpoints. Calculated by a deterministic, rules-based pipeline. Independently verifiable by any third party. Methodology governed with reference to the <a href="https://www.iosco.org/library/pubdocs/pdf/IOSCOPD415.pdf" target="_blank" rel="noopener">IOSCO Principles for Financial Benchmarks</a>. First publication: <strong>March 10, 2026</strong>.</p>
     <div class="card-grid">
       <div class="icard">
-        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-H100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA H100 SXM &middot; US</span></div>
-        <div class="icard-val" id="h100-val">&mdash;</div>
-        <div class="icard-changes" id="h100-changes"></div>
-        <div class="icard-meta" id="h100-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, H100 SXM, multi-source spot. Current-generation training-tier reference rate.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
-      </div>
-      <div class="icard">
-        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-A100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA A100 SXM &middot; US</span></div>
-        <div class="icard-val" id="a100-val">&mdash;</div>
-        <div class="icard-changes" id="a100-changes"></div>
-        <div class="icard-meta" id="a100-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, A100 SXM, multi-source spot. Prior-generation cascade reference rate.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-B200</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA B200 SXM &middot; US</span></div>
+        <div class="icard-val" id="b200-val">&mdash;</div>
+        <div class="icard-changes" id="b200-changes"></div>
+        <div class="icard-meta" id="b200-meta">Loading&hellip;</div>
+        <div class="icard-desc">Trailing 7-day median $/GPU-hour, B200 SXM, multi-source spot. <strong>Blackwell generation &mdash; frontier training.</strong> Highest throughput available; spot listings reflect early operator supply ahead of committed capacity. B200/H100 spread signals the pace of next-gen displacement.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
       </div>
       <div class="icard">
         <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-H200</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA H200 SXM &middot; US</span></div>
         <div class="icard-val" id="h200-val">&mdash;</div>
         <div class="icard-changes" id="h200-changes"></div>
         <div class="icard-meta" id="h200-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, H200 SXM, multi-source spot. Memory-bandwidth premium tier &mdash; H200/H100 spread tracks large-model migration.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        <div class="icard-desc">Trailing 7-day median $/GPU-hour, H200 SXM, multi-source spot. <strong>HBM3e generation &mdash; large-model training and memory-bound inference.</strong> HBM3e memory (141GB vs 80GB) makes H200 the preferred tier for models where GPU memory capacity is the binding constraint. H200/H100 spread tracks migration out of the current training tier.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+      </div>
+      <div class="icard">
+        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-H100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA H100 SXM &middot; US</span></div>
+        <div class="icard-val" id="h100-val">&mdash;</div>
+        <div class="icard-changes" id="h100-changes"></div>
+        <div class="icard-meta" id="h100-meta">Loading&hellip;</div>
+        <div class="icard-desc">Trailing 7-day median $/GPU-hour, H100 SXM, multi-source spot. <strong>Current training tier &mdash; fine-tuning and mid-scale inference.</strong> Dominant training chip as of 2025&ndash;26; entering inference and fine-tuning roles as B200/H200 scale. The primary collateral reference rate for GPU-backed lending.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+      </div>
+      <div class="icard">
+        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-A100</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA A100 SXM &middot; US</span></div>
+        <div class="icard-val" id="a100-val">&mdash;</div>
+        <div class="icard-changes" id="a100-changes"></div>
+        <div class="icard-meta" id="a100-meta">Loading&hellip;</div>
+        <div class="icard-desc">Trailing 7-day median $/GPU-hour, A100 SXM, multi-source spot. <strong>Prior training generation &mdash; inference and batch workloads.</strong> Displaced from training by H100; now primarily serving inference, batch processing, and cost-sensitive fine-tuning. H100/A100 spread measures active cascade velocity.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
       </div>
       <div class="icard">
         <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-L40S</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA L40S &middot; US</span></div>
         <div class="icard-val" id="l40s-val">&mdash;</div>
         <div class="icard-changes" id="l40s-changes"></div>
         <div class="icard-meta" id="l40s-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, L40S, multi-source spot. Inference-tier reference rate &mdash; A100/L40S near-parity tracks commodity cascade timing.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
-      </div>
-      <div class="icard">
-        <div class="icard-lbl"><span class="dot live"></span><span class="icard-ticker">CRI-B200</span><span class="icard-sub">&nbsp;&middot;&nbsp;NVIDIA B200 SXM &middot; US</span></div>
-        <div class="icard-val" id="b200-val">&mdash;</div>
-        <div class="icard-changes" id="b200-changes"></div>
-        <div class="icard-meta" id="b200-meta">Loading&hellip;</div>
-        <div class="icard-desc">Trailing 7-day median $/GPU-hour, B200 SXM, multi-source spot. Blackwell-generation displacement signal &mdash; B200/H100 spread tracks next-gen transition timing.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
+        <div class="icard-desc">Trailing 7-day median $/GPU-hour, L40S, multi-source spot. <strong>Inference-optimized &mdash; high-throughput serving at lower cost.</strong> Ada Lovelace architecture with strong FP8 and INT8 throughput; favored for inference serving, RAG, and multimodal applications where FP16 training precision is not required. Near-parity with A100 signals commodity compute pricing.&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv" target="_blank" rel="noopener">Full series &rarr;</a></div>
       </div>
     </div>
     <div class="spread-bar">
@@ -546,17 +547,12 @@
       <div class="tier-hdr t2"><span>Tier 2 &mdash; Mid-Market</span></div>
       <div class="tier-row t2bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Dedicated GPU instances on a managed platform with network isolation, persistent storage, and uptime guarantees.">Mid-market managed</span></div><div class="tier-src">RunPod &middot; Secure &middot; H100 SXM</div></div><div class="bar-wrap"><div class="bar b2" id="bar-rp-secure" style="width:22.4%"></div><span class="tprice" id="tprice-rp-secure">Loading&hellip;</span></div></div>
       <div class="tier-row t2bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="GPU instances hosted by independent operators on a shared platform. Lower price than managed tier; no guaranteed uptime or SLA.">Mid-market community</span></div><div class="tier-src">RunPod &middot; Community &middot; H100 SXM</div></div><div class="bar-wrap"><div class="bar b2" id="bar-rp-community" style="width:18%"></div><span class="tprice" id="tprice-rp-community">Loading&hellip;</span></div></div>
-      <div class="tier-row t2bg"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Interruptible GPU instances listed on RunPod's marketplace. Spot pricing with no guaranteed uptime.">Mid-market spot</span></div><div class="tier-src">RunPod &middot; Spot &middot; H100 SXM</div></div><div class="bar-wrap"><div class="bar b2" id="bar-rp-spot" style="width:14.6%"></div><span class="tprice" id="tprice-rp-spot">Loading&hellip;</span></div></div>
       <div class="tier-hdr t3"><span>Tier 3 &mdash; Secondary Spot Marketplace</span></div>
-      <div class="tier-row"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="NVIDIA Blackwell-generation GPU. Successor to H100/H200. Early spot availability from operators deploying new hardware ahead of contracted capacity.">B200 spot</span>&nbsp;<span class="cri-badge">&#9675; CRI-B200</span></div><div class="tier-src">Multi-source &middot; CRI-B200</div></div><div class="bar-wrap"><div class="bar b1" id="bar-b200" style="width:42.4%"></div><span class="tprice" id="tlbl-b200">Loading&hellip;</span></div></div>
-      <div class="tier-row"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="NVIDIA H200 &mdash; H100 die with HBM3e memory (141GB vs 80GB). Higher memory bandwidth makes it preferred for large-model training and inference.">H200 spot</span>&nbsp;<span class="cri-badge">&#9675; CRI-H200</span></div><div class="tier-src">Multi-source &middot; CRI-H200</div></div><div class="bar-wrap"><div class="bar b3" id="bar-h200" style="width:27.1%"></div><span class="tprice" id="tlbl-h200">Loading&hellip;</span></div></div>
-      <div class="tier-row"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Unmanaged GPU instances listed directly by operators on a peer-to-peer marketplace. No SLA, no guaranteed uptime. Represents the marginal clearing price for H100 compute.">H100 SXM spot</span>&nbsp;<span class="cri-badge">&#9675; CRI-H100</span></div><div class="tier-src">Multi-source spot</div></div><div class="bar-wrap"><div class="bar b3" id="bar-h100" style="width:20.8%"></div><span class="tprice" id="tlbl-h100">Loading&hellip;</span></div></div>
-      <div class="tier-row"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="Prior-generation NVIDIA data center GPU (A100 80GB SXM). In active cascade as H100 and H200 displace it from training workloads.">A100 SXM spot</span>&nbsp;<span class="cri-badge">&#9675; CRI-A100</span></div><div class="tier-src">Multi-source spot</div></div><div class="bar-wrap"><div class="bar b3" id="bar-a100" style="width:10.8%"></div><span class="tprice" id="tlbl-a100">Loading&hellip;</span></div></div>
-      <div class="tier-row"><div class="tier-meta"><div class="tier-lbl"><span class="tip" data-tip="NVIDIA Ada Lovelace GPU optimized for inference. Strong FP8 throughput. Increasingly used for inference serving as H100 supply tightens.">L40S spot</span>&nbsp;<span class="cri-badge">&#9675; CRI-L40S</span></div><div class="tier-src">Multi-source &middot; CRI-L40S</div></div><div class="bar-wrap"><div class="bar b3" id="bar-l40s" style="width:10.0%"></div><span class="tprice" id="tlbl-l40s">Loading&hellip;</span></div></div>
+      <div class="tier-row"><div class="tier-meta"><div class="tier-lbl"><span class="tip tip-up" data-tip="Unmanaged GPU instances listed directly by operators on a peer-to-peer marketplace. No SLA, no guaranteed uptime. Represents the marginal clearing price for H100 compute.">H100 SXM spot</span>&nbsp;<span class="cri-badge">&#9675; CRI-H100</span></div><div class="tier-src">Multi-source spot</div></div><div class="bar-wrap"><div class="bar b3" id="bar-h100" style="width:20.8%"></div><span class="tprice" id="tlbl-h100">Loading&hellip;</span></div></div>
     </div>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     (async () => {
-      const MAX = 12.0;
+      let MAX = 12.0; // updated dynamically after all values load
       async function getLastRow(url) {
         const r = await fetch(url), t = await r.text();
         const lines = t.trim().split('\n').filter(l => l.trim());
@@ -584,31 +580,10 @@
         const hr = await getLastRow('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv');
         hv = parseFloat(hr[4]);
         document.getElementById('tlbl-h100').textContent = '$' + hv.toFixed(4) + ' / GPU-hr';
-        document.getElementById('bar-h100').style.width = Math.min(100, (hv/MAX)*100).toFixed(1) + '%';
       } catch(e) {}
       try {
         const ar = await getLastRow('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-a100/CRI-A100-history.csv');
         av = parseFloat(ar[4]);
-        document.getElementById('tlbl-a100').textContent = '$' + av.toFixed(4) + ' / GPU-hr';
-        document.getElementById('bar-a100').style.width = Math.min(100, (av/MAX)*100).toFixed(1) + '%';
-      } catch(e) {}
-      try {
-        const h2r = await getLastRow('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h200/CRI-H200-history.csv');
-        const h2v = parseFloat(h2r[4]);
-        document.getElementById('tlbl-h200').textContent = '$' + h2v.toFixed(4) + ' / GPU-hr';
-        document.getElementById('bar-h200').style.width = Math.min(100, (h2v/MAX)*100).toFixed(1) + '%';
-      } catch(e) {}
-      try {
-        const lr = await getLastRow('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-l40s/CRI-L40S-history.csv');
-        const lv = parseFloat(lr[4]);
-        document.getElementById('tlbl-l40s').textContent = '$' + lv.toFixed(4) + ' / GPU-hr';
-        document.getElementById('bar-l40s').style.width = Math.min(100, (lv/MAX)*100).toFixed(1) + '%';
-      } catch(e) {}
-      try {
-        const br = await getLastRow('https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-b200/CRI-B200-history.csv');
-        const bv = parseFloat(br[4]);
-        document.getElementById('tlbl-b200').textContent = '$' + bv.toFixed(4) + ' / GPU-hr';
-        document.getElementById('bar-b200').style.width = Math.min(100, (bv/MAX)*100).toFixed(1) + '%';
       } catch(e) {}
       if (hv && av) {
         const s = (hv/av).toFixed(2);
@@ -640,18 +615,21 @@
         const gcp   = find('GCP_BILLING',   'H100', 'hpc_premium');
         const azure = find('AZURE_RETAIL',  'H100', 'hpc_premium');
         const aws   = find('AWS_BULK',      'H100', 'hpc_premium');
+        const rpSec = find('RUNPOD_SPOT',   'H100 SXM5', 'managed_secure');
+        const rpCom = find('RUNPOD_SPOT',   'H100 SXM5', 'managed_community');
+
+        // Dynamic MAX: scale bars to the largest real data point + 15% headroom
+        const allVals = [gcp, azure, aws, rpSec, rpCom, hv||0].filter(v => v > 0);
+        if (allVals.length > 0) { MAX = Math.max(...allVals) * 1.15; }
 
         setTier('tprice-gcp',   'bar-gcp',   gcp);
         setTier('tprice-azure', 'bar-azure', azure);
         setTier('tprice-aws',   'bar-aws',   aws);
-
-        const rpSec = find('RUNPOD_SPOT',   'H100 SXM5', 'managed_secure');
-        const rpCom = find('RUNPOD_SPOT',   'H100 SXM5', 'managed_community');
-        const rpSpt = find('RUNPOD_SPOT',   'H100 SXM5', 'spot');
-
         setTier('tprice-rp-secure',    'bar-rp-secure',    rpSec);
         setTier('tprice-rp-community', 'bar-rp-community', rpCom);
-        setTier('tprice-rp-spot',      'bar-rp-spot',      rpSpt);
+        // Redraw H100 bar with calibrated MAX
+        if (hv > 0) { document.getElementById('bar-h100').style.width = Math.min(100,(hv/MAX)*100).toFixed(1)+'%'; }
+
 
         // Stamp tier ladder with observation date
         const dateEl = document.getElementById('cri-r-date');
