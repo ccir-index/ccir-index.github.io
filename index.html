@@ -470,6 +470,10 @@ async function loadChip(chipKey) {
       let spotHtml = spotCardHtml(chip, chipKey, val, prev, mver, conf, obs, dated);
       let mmHtml = '', t2iMmHtml = '', entHtml = '', t2iEntHtml = '';
 
+      // Populate tier ladder spot node immediately (independent of CLS fetches)
+      document.getElementById('tl-spot').textContent = '$' + val.toFixed(4);
+      document.getElementById('tl-spot').classList.remove('tier-placeholder');
+
       // ── MM ──────────────────────────────────────────────────────────────────
       try {
         const mmLines = await fetchCsv(CLS_MM_CSV);
@@ -487,9 +491,7 @@ async function loadChip(chipKey) {
         const mmPrevVal = mmPrev.length ? parseFloat(mmPrev[mmPrev.length - 1].split(',')[4]) : null;
         const mmChg = fmtChg(mmv, mmPrevVal);
 
-        // Update tier ladder
-        document.getElementById('tl-spot').textContent = '$' + val.toFixed(4);
-        document.getElementById('tl-spot').classList.remove('tier-placeholder');
+        // Update tier ladder MM nodes
         document.getElementById('tl-mm').textContent = '$' + mmv.toFixed(4);
         document.getElementById('tl-mm').classList.remove('tier-placeholder');
         if (!isNaN(mmt2i)) {
