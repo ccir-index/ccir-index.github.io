@@ -633,4 +633,15 @@ async function loadChip(chipKey) {
 
 let activeChip = 'h100';
 function selectChip(chipKey) {
-  if (
+  if (activeChip === chipKey) return;
+  activeChip = chipKey;
+  document.querySelectorAll('.chip-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.chip === chipKey);
+  });
+  loadChip(chipKey);
+}
+
+document.addEventListener('DOMContentLoaded', () => loadChip('h100'));
+</script>
+</body>
+</html>
