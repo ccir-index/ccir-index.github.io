@@ -403,6 +403,7 @@ const cache = {};
 async function fetchCsv(url) {
   if (cache[url]) return cache[url];
   const r = await fetch(url);
+  if (!r.ok) throw new Error(`HTTP ${r.status}: ${url}`);
   const t = await r.text();
   const lines = t.trim().split('\n').filter(l => l.trim());
   cache[url] = lines;
