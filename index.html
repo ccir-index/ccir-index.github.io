@@ -121,6 +121,17 @@
       border-top: 1px solid var(--border);
       padding-top: 12px;
     }
+    .rcard-chg {
+      font-family: var(--mono);
+      font-size: .72rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+      min-height: 1em;
+    }
+    .chg-up   { color: var(--green); }
+    .chg-down { color: #A03020; }
+    .chg-flat { color: var(--text-dim); }
+
     .rcard-mver {
       display: block;
       font-size: .60rem;
@@ -178,6 +189,7 @@
           <span class="primary-badge">Primary Reference</span>
         </div>
         <div class="rcard-val" id="h100-val">&mdash;</div>
+        <div class="rcard-chg" id="h100-chg"></div>
         <div class="rcard-desc">Interruptible spot floor &mdash; per GPU / hr. NVIDIA H100 SXM, multi-source spot median. Rental liquidation value reference for GPU-backed credit.</div>
         <div class="rcard-meta" id="h100-meta">Loading&hellip;</div>
       </div>
@@ -190,7 +202,8 @@
           <span class="rcard-ticker">CRI-H100-CLS</span>
         </div>
         <div class="rcard-val" id="cls-val">&mdash;</div>
-        <div class="rcard-desc">Cluster going-concern rate &mdash; per GPU / hr. RunPod cluster-scale H100 rate. The rate a borrower pays to run production workloads at scale.</div>
+        <div class="rcard-chg" id="cls-chg"></div>
+        <div class="rcard-desc">Going-concern cluster revenue rate &mdash; per GPU / hr. What a GPU operator earns deploying H100s at cluster scale. Upper bound on collateral revenue; paired with CRI-H100 to compute the T2I Spread.</div>
         <div class="rcard-meta" id="cls-meta">Loading&hellip;</div>
       </div>
 
@@ -201,7 +214,7 @@
           <span class="rcard-ticker spread">T2I Spread</span>
         </div>
         <div class="rcard-val" id="t2i-val">&mdash;</div>
-        <div class="rcard-desc">Tier-2-to-Interruptible &mdash; (CLS &minus; spot) / CLS. Primary LGD input. Measures the market premium for guaranteed cluster uptime over the spot liquidation floor.</div>
+        <div class="rcard-desc">Tier-2-to-Interruptible &mdash; (CLS &minus; spot) / CLS. Primary LGD input. The revenue haircut from forced spot liquidation &mdash; how much collateral value a lender loses if a borrower defaults and GPUs must be liquidated into the spot market.</div>
         <div class="rcard-meta" id="t2i-meta">Computed from CRI-H100-CLS and CRI-H100</div>
       </div>
 
@@ -239,17 +252,39 @@
   }
 
   // ── CRI-H100 spot ────────────────────────────────────────────────────────────
-  let hv = null;
+  let hv = null, hv_prev = null;
   try {
-    const h = await csvLast(H100_CSV);
-    // columns: as_of_date[0], methodology_version[1], ..., index_value[4], ..., confidence_flag[9], total_observations[10]
+    const resp = await fetch(H100_CSV);
+    const text = await resp.text();
+    const lines = text.trim().split('\n').filter(l => l.trim());
+    // get last two distinct dates for day-over-day change
+    const dataLines = lines.slice(1);
+    const last = dataLines[dataLines.length - 1].split(',');
+    const lastDate = last[0].trim();
+    const prevLines = dataLines.filter(l => l.split(',')[0].trim() !== lastDate);
+    const h = last;
     hv = parseFloat(h[4]);
-    const mver   = (h[1] || '').trim();
-    const conf   = (h[9] || '').trim();
-    const obs    = parseInt(h[10]).toLocaleString();
-    const dated  = fmtDate(h[0].trim());
+    if (prevLines.length) {
+      const prevLine = prevLines[prevLines.length - 1].split(',');
+      hv_prev = parseFloat(prevLine[4]);
+    }
+    const mver  = (h[1] || '').trim();
+    const conf  = (h[12] || '').trim();
+    const obs   = parseInt(h[10]).toLocaleString();
+    const dated = fmtDate(h[0].trim());
 
     document.getElementById('h100-val').textContent = '$' + hv.toFixed(4);
+
+    if (hv_prev !== null && !isNaN(hv_prev)) {
+      const diff = hv - hv_prev;
+      const pct  = (diff / hv_prev * 100);
+      const sign = diff >= 0 ? '+' : '';
+      const cls  = diff > 0.0001 ? 'chg-up' : diff < -0.0001 ? 'chg-down' : 'chg-flat';
+      const arrow = diff > 0.0001 ? '▲' : diff < -0.0001 ? '▼' : '—';
+      document.getElementById('h100-chg').innerHTML =
+        `<span class="${cls}">${arrow} ${sign}$${Math.abs(diff).toFixed(4)} (${sign}${pct.toFixed(1)}%) vs prior day</span>`;
+    }
+
     document.getElementById('h100-meta').innerHTML =
       `<span class="rcard-mver">Methodology ${mver}</span>` +
       `${dated}\u00a0\u00b7\u00a0${obs}\u00a0obs\u00a0\u00b7\u00a0${conf}\u00a0confidence`;
@@ -263,18 +298,37 @@
   let clsv = null;
   if (CLS_CSV) {
     try {
-      const c = await csvLastModel(CLS_CSV, 'H100_SXM');
-      // columns: as_of_date[0], methodology_version[1], gpu_model[2], cls_rate[3],
-      //          interruptible_rate[4], t2i_spread[5], cls_vs_secure_pct[6],
-      //          cls_obs[7], cls_days[8], ..., confidence_flag[12], computed_at[13]
-      clsv           = parseFloat(c[3]);
-      const t2i      = parseFloat(c[5]);
-      const mver     = (c[1] || '').trim();
-      const conf     = (c[12] || '').trim();
-      const obs      = parseInt(c[7]).toLocaleString();
-      const dated    = fmtDate(c[0].trim());
+      const resp = await fetch(CLS_CSV);
+      const text = await resp.text();
+      const lines = text.trim().split('\n').filter(l => l.trim()).slice(1);
+      const h100lines = lines.filter(l => l.split(',')[2].trim() === 'H100_SXM');
+      if (!h100lines.length) throw new Error('no H100_SXM');
+      const c = h100lines[h100lines.length - 1].split(',');
+      const lastDate = c[0].trim();
+      const prevLines = h100lines.slice(0, -1).filter(l => l.split(',')[0].trim() !== lastDate);
+      clsv = parseFloat(c[3]);
+      const t2i   = parseFloat(c[5]);
+      const mver  = (c[1] || '').trim();
+      const conf  = (c[12] || '').trim();
+      const obs   = parseInt(c[7]).toLocaleString();
+      const dated = fmtDate(c[0].trim());
 
       document.getElementById('cls-val').textContent = '$' + clsv.toFixed(4);
+
+      if (prevLines.length) {
+        const prev = prevLines[prevLines.length - 1].split(',');
+        const clsv_prev = parseFloat(prev[3]);
+        if (!isNaN(clsv_prev)) {
+          const diff = clsv - clsv_prev;
+          const pct  = (diff / clsv_prev * 100);
+          const sign = diff >= 0 ? '+' : '';
+          const cls  = diff > 0.0001 ? 'chg-up' : diff < -0.0001 ? 'chg-down' : 'chg-flat';
+          const arrow = diff > 0.0001 ? '▲' : diff < -0.0001 ? '▼' : '—';
+          document.getElementById('cls-chg').innerHTML =
+            `<span class="${cls}">${arrow} ${sign}$${Math.abs(diff).toFixed(4)} (${sign}${pct.toFixed(1)}%) vs prior day</span>`;
+        }
+      }
+
       document.getElementById('cls-meta').innerHTML =
         `<span class="rcard-mver">Methodology ${mver}</span>` +
         `${dated}\u00a0\u00b7\u00a0${obs}\u00a0obs\u00a0\u00b7\u00a0${conf}\u00a0confidence`;
@@ -288,8 +342,6 @@
       document.getElementById('cls-meta').textContent = 'Data unavailable \u2014 see GitHub';
     }
   } else {
-    // CLS CSV not yet published — compute T2I client-side once both values available
-    // This block can be removed once CLS_CSV is set
     document.getElementById('cls-val').textContent = '\u2014';
     document.getElementById('cls-meta').textContent = 'Publishing soon';
     document.getElementById('t2i-val').textContent = '\u2014';
@@ -311,4 +363,7 @@
       <a href="/cdn-cgi/l/email-protection#d2bbbcb6b7aa92b1b1bba0fcbbbd"><span class="__cf_email__" data-cfemail="4d24232928350d2e2e243f632422">[email&#160;protected]</span></a>
     </div>
     <div class="fr">
-      IOSCO-a
+      Data: CC BY 4.0 &nbsp;&middot;&nbsp; Indices published daily
+    </div>
+  </div>
+</footer>
