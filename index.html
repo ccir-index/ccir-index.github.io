@@ -43,14 +43,87 @@
     /* ---- Main section ---- */
     main { padding: 52px 0 72px; }
 
+    /* ---- Tier ladder ---- */
+    .tier-ladder {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin: 28px 0 20px;
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: var(--sh-sm);
+    }
+    .tier-node {
+      flex: 1;
+      padding: 14px 18px 13px;
+      position: relative;
+    }
+    .tier-node + .tier-node {
+      border-left: 1px solid var(--border);
+    }
+    .tier-node-label {
+      font-family: var(--mono);
+      font-size: .56rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 5px;
+    }
+    .tier-node-val {
+      font-family: var(--mono);
+      font-size: 1.18rem;
+      font-weight: 400;
+      letter-spacing: -.02em;
+      color: var(--text-hi);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .tier-node-sub {
+      font-family: var(--mono);
+      font-size: .58rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .tier-node.spot   { border-top: 2px solid var(--border-hi); }
+    .tier-node.mm     { border-top: 2px solid var(--accent); }
+    .tier-node.ent    { border-top: 2px solid var(--amber); }
+    .tier-node.spread-mm  { border-top: 2px solid var(--green); background: var(--green-lo); }
+    .tier-node.spread-ent { border-top: 2px solid var(--amber); background: var(--amber-lo); }
+    .tier-node.mm   .tier-node-val { color: var(--accent); }
+    .tier-node.ent  .tier-node-val { color: var(--amber); }
+    .tier-node.spread-mm  .tier-node-val { color: var(--green); font-size: .95rem; }
+    .tier-node.spread-ent .tier-node-val { color: var(--amber); font-size: .95rem; }
+    .tier-placeholder { color: var(--border-hi) !important; }
+
     /* ---- Rate cards ---- */
     .rate-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 14px;
-      margin-top: 20px;
+      margin-top: 0;
     }
-    @media (max-width: 700px) { .rate-grid { grid-template-columns: 1fr !important; } }
+    .rate-grid.five-card { grid-template-rows: auto auto; }
+    .rate-grid.five-card .row-label {
+      grid-column: 1 / -1;
+      font-family: var(--mono);
+      font-size: .56rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 12px 0 4px;
+      border-top: 1px solid var(--border);
+      margin-top: 6px;
+    }
+    .rate-grid.five-card .row-label:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+    .ent-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; grid-column: 1 / -1; }
+    @media (max-width: 700px) {
+      .rate-grid { grid-template-columns: 1fr !important; }
+      .ent-pair  { grid-template-columns: 1fr; }
+    }
 
     .rcard {
       background: var(--bg-white);
@@ -61,6 +134,7 @@
       box-shadow: var(--sh-sm);
     }
     .rcard.spread { border-top-color: var(--green); }
+    .rcard.spread-ent { border-top-color: var(--amber); }
 
     .rcard-label {
       display: flex;
@@ -105,6 +179,8 @@
       margin-bottom: 10px;
     }
     .rcard.spread .rcard-val { color: var(--green); }
+    .rcard.spread-ent .rcard-val { color: var(--amber); }
+    .rcard.spread-ent .rcard-ticker { color: var(--amber); }
 
     .rcard-desc {
       font-size: .80rem;
@@ -224,6 +300,35 @@
       <button class="chip-btn" data-chip="l40s" onclick="selectChip('l40s')">CRI-L40S<span class="chip-sub">NVIDIA L40S</span></button>
     </div>
 
+    <!-- Tier ladder — visible only on H100 chip -->
+    <div class="tier-ladder" id="tier-ladder" style="display:none;">
+      <div class="tier-node spot">
+        <div class="tier-node-label">Spot Floor</div>
+        <div class="tier-node-val tier-placeholder" id="tl-spot">&mdash;</div>
+        <div class="tier-node-sub">CRI-H100 interruptible</div>
+      </div>
+      <div class="tier-node mm">
+        <div class="tier-node-label">Cluster MM</div>
+        <div class="tier-node-val tier-placeholder" id="tl-mm">&mdash;</div>
+        <div class="tier-node-sub">RunPod + Lambda · mid-market</div>
+      </div>
+      <div class="tier-node spread-mm">
+        <div class="tier-node-label">T2I-MM</div>
+        <div class="tier-node-val tier-placeholder" id="tl-t2i-mm">&mdash;</div>
+        <div class="tier-node-sub">LGD input · (MM&minus;spot)/MM</div>
+      </div>
+      <div class="tier-node ent">
+        <div class="tier-node-label">Cluster ENT</div>
+        <div class="tier-node-val tier-placeholder" id="tl-ent">&mdash;</div>
+        <div class="tier-node-sub">CoreWeave on-demand · incl. CPU/RAM</div>
+      </div>
+      <div class="tier-node spread-ent">
+        <div class="tier-node-label">T2I-ENT</div>
+        <div class="tier-node-val tier-placeholder" id="tl-t2i-ent">&mdash;</div>
+        <div class="tier-node-sub">LGD input · (ENT&minus;spot)/ENT</div>
+      </div>
+    </div>
+
     <div class="rate-grid" id="rate-grid">
     </div>
   </div>
@@ -275,7 +380,14 @@ const CHIPS = {
   },
 };
 
-const CLS_CSV = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls/CRI-H100-CLS-history.csv';
+// New tier-split CLS CSVs (MM = multi-source mid-market, ENT = CoreWeave enterprise)
+// Column indices for CLUSTER_HEADER:
+//   0=as_of_date, 1=methodology_version, 2=gpu_model, 3=cls_tier, 4=cls_rate,
+//   5=source_count, 6=sources, 7=bundle_note, 8=interruptible_rate, 9=t2i_spread,
+//   10=cls_vs_secure_pct, 11=cls_obs, 12=cls_days, 13=interruptible_source_count,
+//   14=interruptible_obs, 15=interruptible_confidence, 16=confidence_flag, 17=computed_at
+const CLS_MM_CSV  = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv';
+const CLS_ENT_CSV = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv';
 
 // ── Cache ─────────────────────────────────────────────────────────────────────
 const cache = {};
@@ -351,63 +463,141 @@ async function loadChip(chipKey) {
     const dated = fmtDate(lastDate);
 
     if (chipKey === 'h100') {
-      // H100: spot card + CLS + T2I
+      // H100: spot + CLS-MM + T2I-MM + CLS-ENT + T2I-ENT (5 cards)
+      const ladder = document.getElementById('tier-ladder');
+      ladder.style.display = 'flex';
+
       let spotHtml = spotCardHtml(chip, chipKey, val, prev, mver, conf, obs, dated);
-      let clsHtml = '', t2iHtml = '';
+      let mmHtml = '', t2iMmHtml = '', entHtml = '', t2iEntHtml = '';
 
+      // ── MM ──────────────────────────────────────────────────────────────────
       try {
-        const clsLines = await fetchCsv(CLS_CSV);
-        const h100lines = clsLines.slice(1).filter(l => l.split(',')[2].trim() === 'H100_SXM');
-        const c = h100lines[h100lines.length - 1].split(',');
-        const clsLastDate = c[0].trim();
-        const clsPrev = h100lines.slice(0, -1).filter(l => l.split(',')[0].trim() !== clsLastDate);
-        const clsv  = parseFloat(c[3]);
-        const t2i   = parseFloat(c[5]);
-        const clsMver = (c[1] || '').trim();
-        const clsConf = (c[12] || '').trim();
-        const clsObs  = parseInt(c[7]).toLocaleString();
-        const clsDated = fmtDate(clsLastDate);
-        const clsPrevVal = clsPrev.length ? parseFloat(clsPrev[clsPrev.length - 1].split(',')[3]) : null;
-        const clsChg = fmtChg(clsv, clsPrevVal);
+        const mmLines = await fetchCsv(CLS_MM_CSV);
+        const h100mm = mmLines.slice(1).filter(l => l.split(',')[2].trim() === 'H100_SXM');
+        const cm = h100mm[h100mm.length - 1].split(',');
+        const mmDate  = cm[0].trim();
+        const mmv     = parseFloat(cm[4]);
+        const mmt2i   = parseFloat(cm[9]);
+        const mmMver  = (cm[1] || '').trim();
+        const mmConf  = (cm[16] || '').trim();
+        const mmObs   = parseInt(cm[11]).toLocaleString();
+        const mmSrc   = (cm[6] || '').trim();
+        const mmDated = fmtDate(mmDate);
+        const mmPrev  = h100mm.slice(0, -1).filter(l => l.split(',')[0].trim() !== mmDate);
+        const mmPrevVal = mmPrev.length ? parseFloat(mmPrev[mmPrev.length - 1].split(',')[4]) : null;
+        const mmChg = fmtChg(mmv, mmPrevVal);
 
-        clsHtml = `
+        // Update tier ladder
+        document.getElementById('tl-spot').textContent = '$' + val.toFixed(4);
+        document.getElementById('tl-spot').classList.remove('tier-placeholder');
+        document.getElementById('tl-mm').textContent = '$' + mmv.toFixed(4);
+        document.getElementById('tl-mm').classList.remove('tier-placeholder');
+        if (!isNaN(mmt2i)) {
+          document.getElementById('tl-t2i-mm').textContent = (mmt2i * 100).toFixed(1) + '%';
+          document.getElementById('tl-t2i-mm').classList.remove('tier-placeholder');
+        }
+
+        mmHtml = `
           <div class="rcard">
             <div class="rcard-label">
               <span class="dot live"></span>
-              <span class="rcard-ticker">CRI-H100-CLS</span>
+              <span class="rcard-ticker">CRI-H100-CLS-MM</span>
             </div>
-            <div class="rcard-val">$${clsv.toFixed(4)}</div>
-            <div class="rcard-chg">${clsChg}</div>
-            <div class="rcard-desc">Going-concern cluster revenue rate — per GPU / hr. What a GPU operator earns deploying H100s at cluster scale. Upper bound on collateral revenue; paired with CRI-H100 to compute the T2I Spread.</div>
+            <div class="rcard-val">$${mmv.toFixed(4)}</div>
+            <div class="rcard-chg">${mmChg}</div>
+            <div class="rcard-desc">Mid-market cluster rate — per GPU / hr. Median of RunPod and Lambda posted 8-GPU cluster prices. Two-source structure dilutes single-operator policy risk.</div>
             <div class="rcard-meta">
-              <span class="rcard-mver">Methodology ${clsMver}</span>
-              ${clsDated}&nbsp;·&nbsp;${clsObs}&nbsp;obs&nbsp;·&nbsp;${clsConf}&nbsp;confidence
-              &nbsp;·&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100-cls/CRI-H100-CLS-history.csv" target="_blank" rel="noopener">Full series →</a>
+              <span class="rcard-mver">Methodology ${mmMver}</span>
+              ${mmDated}&nbsp;·&nbsp;${mmObs}&nbsp;obs&nbsp;·&nbsp;${mmConf}&nbsp;confidence
+              &nbsp;·&nbsp;${mmSrc}
+              &nbsp;·&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv" target="_blank" rel="noopener">Full series →</a>
             </div>
           </div>`;
 
-        t2iHtml = `
+        t2iMmHtml = `
           <div class="rcard spread">
             <div class="rcard-label">
               <span class="dot live"></span>
-              <span class="rcard-ticker spread">T2I Spread</span>
+              <span class="rcard-ticker spread">T2I-MM Spread</span>
             </div>
-            <div class="rcard-val">${(t2i * 100).toFixed(1)}%</div>
-            <div class="rcard-desc">Tier-2-to-Interruptible — (CLS − spot) / CLS. Primary LGD input. The revenue haircut from forced spot liquidation — how much collateral value a lender loses if a borrower defaults and GPUs must be liquidated into the spot market.</div>
+            <div class="rcard-val">${isNaN(mmt2i) ? '&mdash;' : (mmt2i * 100).toFixed(1) + '%'}</div>
+            <div class="rcard-desc">Tier-2-to-Interruptible (mid-market) — (CLS-MM &minus; spot) / CLS-MM. LGD input for mid-market collateral scenarios. Revenue haircut from forced spot liquidation.</div>
             <div class="rcard-meta">
-              <span class="rcard-mver">Computed — (CLS − spot) / CLS</span>
-              CLS&nbsp;$${clsv.toFixed(4)}&nbsp;·&nbsp;Spot&nbsp;$${val.toFixed(4)}&nbsp;·&nbsp;${clsDated}
+              <span class="rcard-mver">Computed &mdash; (CLS-MM &minus; spot) / CLS-MM</span>
+              CLS-MM&nbsp;$${mmv.toFixed(4)}&nbsp;&middot;&nbsp;Spot&nbsp;$${val.toFixed(4)}&nbsp;&middot;&nbsp;${mmDated}
             </div>
           </div>`;
       } catch(e) {
-        clsHtml = `<div class="rcard"><div class="rcard-label"><span class="dot live"></span><span class="rcard-ticker">CRI-H100-CLS</span></div><div class="rcard-val">&mdash;</div><div class="rcard-meta">Data unavailable — see GitHub</div></div>`;
-        t2iHtml = `<div class="rcard spread"><div class="rcard-label"><span class="dot live"></span><span class="rcard-ticker spread">T2I Spread</span></div><div class="rcard-val">&mdash;</div><div class="rcard-meta">Computed from CRI-H100-CLS and CRI-H100</div></div>`;
+        mmHtml = `<div class="rcard"><div class="rcard-label"><span class="dot live"></span><span class="rcard-ticker">CRI-H100-CLS-MM</span></div><div class="rcard-val">&mdash;</div><div class="rcard-meta">Data unavailable</div></div>`;
+        t2iMmHtml = `<div class="rcard spread"><div class="rcard-label"><span class="dot live"></span><span class="rcard-ticker spread">T2I-MM Spread</span></div><div class="rcard-val">&mdash;</div><div class="rcard-meta">Computed from CRI-H100-CLS-MM and CRI-H100</div></div>`;
       }
 
-      grid.innerHTML = spotHtml + clsHtml + t2iHtml;
+      // ── ENT ─────────────────────────────────────────────────────────────────
+      try {
+        const entLines = await fetchCsv(CLS_ENT_CSV);
+        const h100ent = entLines.slice(1).filter(l => l.split(',')[2].trim() === 'H100_SXM');
+        const ce = h100ent[h100ent.length - 1].split(',');
+        const entDate   = ce[0].trim();
+        const entv      = parseFloat(ce[4]);
+        const entt2i    = parseFloat(ce[9]);
+        const entMver   = (ce[1] || '').trim();
+        const entConf   = (ce[16] || '').trim();
+        const entObs    = parseInt(ce[11]).toLocaleString();
+        const entBundle = (ce[7] || '').trim();
+        const entDated  = fmtDate(entDate);
+
+        // Update tier ladder
+        document.getElementById('tl-ent').textContent = '$' + entv.toFixed(4);
+        document.getElementById('tl-ent').classList.remove('tier-placeholder');
+        if (!isNaN(entt2i)) {
+          document.getElementById('tl-t2i-ent').textContent = (entt2i * 100).toFixed(1) + '%';
+          document.getElementById('tl-t2i-ent').classList.remove('tier-placeholder');
+        }
+
+        entHtml = `
+          <div class="rcard spread-ent">
+            <div class="rcard-label">
+              <span class="dot live" style="background:var(--amber)"></span>
+              <span class="rcard-ticker" style="color:var(--amber)">CRI-H100-CLS-ENT</span>
+            </div>
+            <div class="rcard-val" style="color:var(--amber)">$${entv.toFixed(4)}</div>
+            <div class="rcard-desc">Enterprise cluster rate — CoreWeave on-demand 8&times;H100 HGX, per GPU / hr. ${entBundle ? 'Bundled CPU / RAM / interconnect included. ' : ''}Single-source; posted rate card. Confidence: low by design.</div>
+            <div class="rcard-meta">
+              <span class="rcard-mver">Methodology ${entMver}</span>
+              ${entDated}&nbsp;·&nbsp;${entObs}&nbsp;obs&nbsp;·&nbsp;${entConf}&nbsp;confidence&nbsp;·&nbsp;COREWEAVE
+              &nbsp;·&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv" target="_blank" rel="noopener">Full series →</a>
+            </div>
+          </div>`;
+
+        t2iEntHtml = `
+          <div class="rcard spread-ent">
+            <div class="rcard-label">
+              <span class="dot live" style="background:var(--amber)"></span>
+              <span class="rcard-ticker" style="color:var(--amber)">T2I-ENT Spread</span>
+            </div>
+            <div class="rcard-val" style="color:var(--amber)">${isNaN(entt2i) ? '&mdash;' : (entt2i * 100).toFixed(1) + '%'}</div>
+            <div class="rcard-desc">Tier-2-to-Interruptible (enterprise) — (CLS-ENT &minus; spot) / CLS-ENT. LGD input for enterprise collateral scenarios. Higher spread reflects bundled node economics vs. bare GPU spot.</div>
+            <div class="rcard-meta">
+              <span class="rcard-mver">Computed &mdash; (CLS-ENT &minus; spot) / CLS-ENT</span>
+              CLS-ENT&nbsp;$${entv.toFixed(4)}&nbsp;&middot;&nbsp;Spot&nbsp;$${val.toFixed(4)}&nbsp;&middot;&nbsp;${entDated}
+            </div>
+          </div>`;
+      } catch(e) {
+        entHtml = `<div class="rcard spread-ent"><div class="rcard-label"><span class="dot live" style="background:var(--amber)"></span><span class="rcard-ticker" style="color:var(--amber)">CRI-H100-CLS-ENT</span></div><div class="rcard-val">&mdash;</div><div class="rcard-meta">Data unavailable</div></div>`;
+        t2iEntHtml = `<div class="rcard spread-ent"><div class="rcard-label"><span class="dot live" style="background:var(--amber)"></span><span class="rcard-ticker" style="color:var(--amber)">T2I-ENT Spread</span></div><div class="rcard-val">&mdash;</div><div class="rcard-meta">Computed from CRI-H100-CLS-ENT and CRI-H100</div></div>`;
+      }
+
+      grid.className = 'rate-grid five-card';
+      grid.innerHTML =
+        `<div class="row-label">Spot Floor &nbsp;&middot;&nbsp; Mid-Market Cluster &nbsp;&middot;&nbsp; T2I&nbsp;Spread&nbsp;(MM)</div>` +
+        spotHtml + mmHtml + t2iMmHtml +
+        `<div class="row-label">Enterprise Cluster &nbsp;&middot;&nbsp; T2I&nbsp;Spread&nbsp;(ENT) &nbsp;&middot;&nbsp; <span style="font-weight:400;letter-spacing:.04em;text-transform:none;color:var(--amber)">CoreWeave &nbsp;·&nbsp; single-source &nbsp;·&nbsp; bundled node</span></div>` +
+        `<div class="ent-pair">${entHtml}${t2iEntHtml}</div>`;
 
     } else {
-      // Non-H100: just spot card, full-width
+      // Non-H100: hide tier ladder, single spot card
+      document.getElementById('tier-ladder').style.display = 'none';
+      grid.className = 'rate-grid';
       grid.style.gridTemplateColumns = '1fr';
       grid.innerHTML = `<div style="max-width:420px;">${spotCardHtml(chip, chipKey, val, prev, mver, conf, obs, dated)}</div>`;
     }
@@ -423,14 +613,26 @@ function selectChip(chipKey) {
   if (chipKey === activeChip) return;
   activeChip = chipKey;
 
-  // Update button states
   document.querySelectorAll('.chip-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.chip === chipKey);
   });
 
-  // Reset grid columns for H100's 3-col layout
+  // Reset grid for incoming chip
   const grid = document.getElementById('rate-grid');
+  grid.className = 'rate-grid';
   grid.style.gridTemplateColumns = chipKey === 'h100' ? '' : '1fr';
+
+  // Tier ladder only shown for H100
+  if (chipKey !== 'h100') {
+    const ladder = document.getElementById('tier-ladder');
+    ladder.style.display = 'none';
+    // Reset ladder values to placeholder state
+    ['tl-spot','tl-mm','tl-t2i-mm','tl-ent','tl-t2i-ent'].forEach(id => {
+      const el = document.getElementById(id);
+      el.textContent = '—';
+      el.classList.add('tier-placeholder');
+    });
+  }
 
   loadChip(chipKey);
 }
