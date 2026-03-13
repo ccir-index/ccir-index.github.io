@@ -214,10 +214,7 @@
   // ── Data sources ────────────────────────────────────────────────────────────
   const H100_CSV = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv';
 
-  // TODO: replace with actual ccir-data path once gold/cluster_spreads CSV export is live
-  // Expected format: as_of_date, methodology_version, cls_rate, t2i_spread, confidence_flag, cls_obs
-  // e.g. 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls/CRI-H100-CLS-history.csv'
-  const CLS_CSV = null;
+  const CLS_CSV = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls/CRI-H100-CLS-history.csv';
 
   async function csvLast(url) {
     const r = await fetch(url);
@@ -225,6 +222,16 @@
     const lines = t.trim().split('\n').filter(l => l.trim());
     if (lines.length < 2) throw new Error('empty');
     return lines[lines.length - 1].split(',');
+  }
+
+  // CLS CSV has one row per gpu_model per day — filter to H100_SXM, take latest date
+  async function csvLastModel(url, model) {
+    const r = await fetch(url);
+    const t = await r.text();
+    const lines = t.trim().split('\n').filter(l => l.trim()).slice(1); // skip header
+    const matching = lines.filter(l => l.split(',')[2].trim() === model);
+    if (!matching.length) throw new Error('no matching model');
+    return matching[matching.length - 1].split(',');
   }
 
   function fmtDate(iso) {
@@ -256,13 +263,15 @@
   let clsv = null;
   if (CLS_CSV) {
     try {
-      const c = await csvLast(CLS_CSV);
-      // Expected columns: as_of_date[0], methodology_version[1], cls_rate[2], t2i_spread[3], confidence_flag[4], cls_obs[5]
-      clsv           = parseFloat(c[2]);
-      const t2i      = parseFloat(c[3]);
+      const c = await csvLastModel(CLS_CSV, 'H100_SXM');
+      // columns: as_of_date[0], methodology_version[1], gpu_model[2], cls_rate[3],
+      //          interruptible_rate[4], t2i_spread[5], cls_vs_secure_pct[6],
+      //          cls_obs[7], cls_days[8], ..., confidence_flag[12], computed_at[13]
+      clsv           = parseFloat(c[3]);
+      const t2i      = parseFloat(c[5]);
       const mver     = (c[1] || '').trim();
-      const conf     = (c[4] || '').trim();
-      const obs      = parseInt(c[5]).toLocaleString();
+      const conf     = (c[12] || '').trim();
+      const obs      = parseInt(c[7]).toLocaleString();
       const dated    = fmtDate(c[0].trim());
 
       document.getElementById('cls-val').textContent = '$' + clsv.toFixed(4);
@@ -299,14 +308,7 @@
       &nbsp;&middot;&nbsp;
       <a href="https://github.com/ccir-index/ccir-methodology" target="_blank" rel="noopener">Methodology</a>
       &nbsp;&middot;&nbsp;
-      <a href="mailto:index@ccir.io">index@ccir.io</a>
+      <a href="/cdn-cgi/l/email-protection#d2bbbcb6b7aa92b1b1bba0fcbbbd"><span class="__cf_email__" data-cfemail="4d24232928350d2e2e243f632422">[email&#160;protected]</span></a>
     </div>
     <div class="fr">
-      IOSCO-aligned &middot; Open methodology<br>
-      First publication March 10, 2026
-    </div>
-  </div>
-</footer>
-
-</body>
-</html>
+      IOSCO-a
