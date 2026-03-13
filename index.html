@@ -181,6 +181,22 @@
 
     .loading-state { padding: 40px 0; font-family: var(--mono); font-size: .72rem; color: var(--text-dim); opacity: .5; }
 
+    /* ─── WHY CCIR / MARKET GAP ──────────────────────────────────────────── */
+    .gap-section { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 52px 0; }
+    .gap-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; }
+    .gap-label { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: #6a5e54; margin-bottom: 12px; }
+    .gap-headline { font-family: var(--serif); font-size: 1.45rem; font-weight: 500; color: #f0ece6; line-height: 1.3; margin-bottom: 36px; max-width: 600px; }
+    .gap-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 36px; }
+    @media (max-width: 680px) { .gap-grid { grid-template-columns: 1fr; } }
+    .gap-card { border-left: 2px solid #3a3028; padding-left: 20px; }
+    .gap-card-num { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .22em; color: #6a5e54; margin-bottom: 8px; }
+    .gap-card-head { font-size: .875rem; font-weight: 500; color: #f0ece6; line-height: 1.4; margin-bottom: 8px; }
+    .gap-card-body { font-size: .800rem; font-weight: 300; color: #8a827a; line-height: 1.72; }
+    .gap-cta { display: flex; align-items: baseline; gap: 20px; padding-top: 28px; border-top: 1px solid #2a2520; flex-wrap: wrap; }
+    .gap-cta-link { font-family: var(--mono); font-size: .70rem; font-weight: 500; letter-spacing: .08em; color: var(--accent-mid); text-decoration: none; white-space: nowrap; }
+    .gap-cta-link:hover { color: #f0ece6; text-decoration: none; }
+    .gap-cta-sub { font-size: .800rem; font-weight: 300; color: #6a5e54; line-height: 1.6; }
+
     /* ─── COVENANT EXPLAINER ─────────────────────────────────────────────── */
     .cov-explainer {
       background: var(--bg-white); border: 1px solid var(--border);
@@ -210,15 +226,13 @@
       <img src="ccir-logo.jpg" alt="CCIR" class="logo" />
       <div>
         <div class="wordmark">CCIR &middot; Compute Credit Index Research</div>
-        <h1>The Reference Rate<br>Credit Agreements Cite</h1>
+        <h1>Independent Reference Rates<br>for a Market in Transition</h1>
       </div>
     </div>
     <div class="hero-rule"></div>
     <p class="hero-stmt">
-      Lenders structuring GPU-backed credit need a <strong>named, independent reference rate in the covenant</strong> &mdash;
-      to define the collateral floor, trigger maintenance tests, and specify liquidation stress scenarios.
-      Without one, every deal requires a bespoke valuation model that no counterparty can independently verify.
-      CRI-H100 is that rate. Built to be cited by name in credit documents, governed for that purpose.
+      Independent reference rates and the analytics built on them.
+      <strong>Built for lenders structuring GPU-backed credit through a market in transition.</strong>
     </p>
   </div>
 </header>
@@ -228,9 +242,8 @@
   <div class="independence-inner">
     <span class="ind-label">Independence</span>
     <p class="ind-stmt">
-      A rate defined by the lender favors the lender. A rate sourced from a marketplace operator reflects that operator's interests.
       <strong>Covenants require a neutral reference &mdash; one that neither party controls.</strong>
-      CCIR does not trade, broker, lease, or operate GPU infrastructure. We hold no position in the market we measure.
+      CCIR does not trade, broker, lease, or operate GPU infrastructure. We hold no position in the market we measure. Every rate independently verifiable by any counterparty.
     </p>
   </div>
 </div>
@@ -239,19 +252,48 @@
 <div class="pillars">
   <div class="pillar-grid">
     <div class="pillar">
-      <div class="pillar-icon">Covenant Citation</div>
-      <div class="pillar-head">Cite CRI-H100 by Name</div>
-      <p class="pillar-body">Structure maintenance covenants around the market rate, not the borrower&rsquo;s projections. Example: <em>&ldquo;Borrower shall maintain GPU Rental Revenue per Pledged GPU of not less than 2.50&times; the CRI-H100 Reference Rate for the applicable Calculation Date.&rdquo;</em> The independent rate anchors the test to what the market will actually bear.</p>
+      <div class="pillar-icon">Reference Rates</div>
+      <div class="pillar-head">Cited by Name in Credit Documents</div>
+      <p class="pillar-body">Structure maintenance covenants around an independent market rate, not the borrower&rsquo;s projections. Example: <em>&ldquo;Borrower shall maintain GPU Rental Revenue per Pledged GPU of not less than 2.50&times; the CRI-H100 Reference Rate for the applicable Calculation Date.&rdquo;</em> The independent rate anchors the test to what the market will actually bear.</p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">Built for the Deal</div>
-      <div class="pillar-head">H100 Today. Your Collateral Tomorrow.</div>
-      <p class="pillar-body">Most GPU-backed credit today is H100-collateralized &mdash; CRI-H100 is the primary reference. But as collateral evolves, the covenant cites the index for the specific hardware. CRI-B200, CRI-H200, and CRI-A100 are built for the deals being structured next. Mixed-GPU portfolios can reference multiple indices in a single facility.</p>
+      <div class="pillar-icon">Forward-Looking Analytics</div>
+      <div class="pillar-head">Built for the Transitions Defining This Market</div>
+      <p class="pillar-body">T2I Spread measures the empirical gap between going-concern cluster revenue and spot redeployment value &mdash; the LGD input current deals estimate by judgment. Generation Spread tracks Blackwell convergence as it happens. Analytics designed to see through a market in transition, not after it has moved.</p>
     </div>
     <div class="pillar">
       <div class="pillar-icon">Governance</div>
       <div class="pillar-head">IOSCO-Aligned, Open Methodology</div>
-      <p class="pillar-body">No submissions, no conflicts of interest. CCIR follows IOSCO Principles for Financial Benchmarks. Full methodology and data pipeline are publicly reproducible at <a href="https://github.com/ccir-index/ccir-methodology" target="_blank" rel="noopener">ccir-index/ccir-methodology</a>. Every rate independently verifiable by any counterparty.</p>
+      <p class="pillar-body">No submissions, no conflicts of interest. CCIR follows IOSCO Principles for Financial Benchmarks. Full methodology and data pipeline are publicly reproducible at <a href="https://github.com/ccir-index/ccir-methodology" target="_blank" rel="noopener">ccir-index/ccir-methodology</a>. The structural independence that credit documents require.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WHY CCIR / MARKET GAP -->
+<div class="gap-section">
+  <div class="gap-inner">
+    <div class="gap-label">Why CCIR</div>
+    <div class="gap-headline">Traditional covenant structures do not translate well to GPU-backed credit.</div>
+    <div class="gap-grid">
+      <div class="gap-card">
+        <div class="gap-card-num">01</div>
+        <div class="gap-card-head">Collateral marked to the past, not the market</div>
+        <p class="gap-card-body">Current facilities mark GPU collateral using straight-line book depreciation over 3&ndash;5 years. H100 rental rates fell more than 60% in 18 months while book value remained largely intact. A lender relying on depreciation schedules had no covenant signal until the market had already moved past them.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-num">02</div>
+        <div class="gap-card-head">No trigger for the transition already underway</div>
+        <p class="gap-card-body">H100 collateral was underwritten as training hardware. As inference demand grows and Blackwell displaces Hopper for large-model training, the revenue stack changes under existing deals with no contractual mechanism to respond. The workload the facility was underwritten against can migrate entirely before any covenant fires.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-num">03</div>
+        <div class="gap-card-head">Generation obsolescence has no covenant response</div>
+        <p class="gap-card-body">When B200 spot prices converge with H100, the training premium that justifies H100 collateral valuations is effectively arbitraged away. Over a 36-month facility term this is a material exposure &mdash; and no current deal structure has a mechanism that responds to it as it is happening.</p>
+      </div>
+    </div>
+    <div class="gap-cta">
+      <a href="services.html" class="gap-cta-link">Covenant frameworks built for this market &rarr;</a>
+      <span class="gap-cta-sub">Structured to trigger before the market moves past you. Hypothetical facility framework with full drafted covenant language available for download.</span>
     </div>
   </div>
 </div>
@@ -268,17 +310,17 @@
         <div class="cov-item">
           <div class="cov-num">01</div>
           <div class="cov-head">Maintenance Test</div>
-          <div class="cov-body">Borrower must demonstrate GPU Rental Revenue per Pledged GPU stays above a multiple of CRI-H100 each calculation period &mdash; typically quarterly. If the market rate drops and the borrower&rsquo;s revenue follows it down, the test can breach even if the borrower is performing normally.</div>
+          <div class="cov-body">Structure revenue covenants around an independent market rate, not the borrower&rsquo;s projections. A Rate Cap protects a performing borrower with locked contracts from technical breach when the spot market rises &mdash; while preserving the lender&rsquo;s protection when it matters.</div>
         </div>
         <div class="cov-item">
           <div class="cov-num">02</div>
           <div class="cov-head">Collateral Coverage / LTV</div>
-          <div class="cov-body">Collateral value is marked using CRI-H100 capitalized at an agreed rate &mdash; not the borrower&rsquo;s contracted price. Loan principal cannot exceed a specified percentage of that independently marked value. When market rates decline, the collateral marks down, which can trigger prepayment or additional collateral posting.</div>
+          <div class="cov-body">Collateral value marked to CRI-H100 daily &mdash; not book depreciation. The live market rate moves with the redeployment value of the hardware. When the market declines, the collateral marks down in real time and the lender has a covenant signal before the damage is done.</div>
         </div>
         <div class="cov-item">
           <div class="cov-num">03</div>
-          <div class="cov-head">Liquidation Stress Scenario</div>
-          <div class="cov-body">For purposes of the collateral coverage test, the assumed recovery rate is CRI-H100 &mdash; what the lender receives if they must liquidate into the spot rental market. T2I Spread is the empirical measure of how far below going-concern revenue that floor sits, which is the LGD input for the deal.</div>
+          <div class="cov-head">Spot Redeployment Scenario</div>
+          <div class="cov-body">The assumed redeployment rate is CRI-H100 &mdash; what the lender recovers by redeploying repossessed GPUs into the single-unit spot rental market. T2I Spread is the empirical measure of how far below going-concern revenue that floor sits: the LGD input the deal requires.</div>
         </div>
       </div>
       <div class="cov-note">
@@ -332,17 +374,19 @@
       &nbsp;&middot;&nbsp;
       <a href="https://github.com/ccir-index/ccir-methodology" target="_blank" rel="noopener">Methodology</a>
       &nbsp;&middot;&nbsp;
-      <a href="mailto:research@ccir.io">research@ccir.io</a>
+      <a href="services.html">Services</a>
+      &nbsp;&middot;&nbsp;
+      <a href="/cdn-cgi/l/email-protection#8ffdeafceaeefdece7cfecece6fda1e6e0"><span class="__cf_email__" data-cfemail="abd9ced8cecad9c8c3ebc8c8c2d985c2c4">[email&#160;protected]</span></a>
     </div>
     <div class="fr">No financial interest in the market we measure.</div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const CHIPS = {
   b200: { ticker:'CRI-B200', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-b200/CRI-B200-history.csv', desc:'Blackwell generation — frontier training and inference. B200/H100 spread tracks transition timing and cascade velocity into prior-generation collateral.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv', primary:false },
   h200: { ticker:'CRI-H200', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h200/CRI-H200-history.csv', desc:'HBM3e generation — large-model training and memory-bound inference. 141 GB HBM3e. H200/H100 spread tracks migration velocity out of the current training tier.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv', primary:false },
-  h100: { ticker:'CRI-H100', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv', desc:'Interruptible spot floor — per GPU / hr. Multi-source spot median. Primary rental liquidation value reference for GPU-backed credit.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv', primary:true },
+  h100: { ticker:'CRI-H100', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv', desc:'Interruptible spot floor — per GPU / hr. Multi-source spot median. Primary spot redeployment rate reference for GPU-backed credit.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv', primary:true },
   a100: { ticker:'CRI-A100', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-a100/CRI-A100-history.csv', desc:'Prior training generation — inference and batch workloads. H100/A100 spread measures cascade velocity into commodity tiers as H100 collateral matures.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv', primary:false },
   l40s: { ticker:'CRI-L40S', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-l40s/CRI-L40S-history.csv', desc:'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. Near-parity with A100 signals commodity cascade pricing for non-training compute.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv', primary:false },
 };
@@ -440,7 +484,7 @@ async function renderH100(spotLines) {
     <div style="margin-bottom:14px;">
       <div class="stack-header">
         <div class="stack-title">H100 SXM &mdash; GPU Rental Revenue Stack</div>
-        <div class="stack-subtitle">$/GPU/hr &nbsp;&middot;&nbsp; global on-demand &nbsp;&middot;&nbsp; ${spotDtd}</div>
+        <div class="stack-subtitle">$/GPU/hr &nbsp;&middot;&nbsp; US on-demand &nbsp;&middot;&nbsp; ${spotDtd}</div>
       </div>
       <div class="stack-visual">
 
@@ -455,7 +499,7 @@ async function renderH100(spotLines) {
           <div class="stack-spread-spacer"></div>
           <div class="stack-spread-content">
             <div class="spread-vline"></div>
-            <div class="spread-text ent-c"><span class="sv">${D(entt2i,v=>(v*100).toFixed(1)+'%')} T2I-ENT</span> &nbsp;&mdash;&nbsp; liquidation haircut vs enterprise going-concern revenue</div>
+            <div class="spread-text ent-c"><span class="sv">${D(entt2i,v=>(v*100).toFixed(1)+'%')} T2I-ENT</span> &nbsp;&mdash;&nbsp; redeployment spread vs enterprise going-concern revenue</div>
           </div>
           <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
         </div>
@@ -471,7 +515,7 @@ async function renderH100(spotLines) {
           <div class="stack-spread-spacer"></div>
           <div class="stack-spread-content">
             <div class="spread-vline"></div>
-            <div class="spread-text mm-c"><span class="sv">${D(mmt2i,v=>(v*100).toFixed(1)+'%')} T2I-MM</span> &nbsp;&mdash;&nbsp; liquidation haircut vs mid-market going-concern revenue</div>
+            <div class="spread-text mm-c"><span class="sv">${D(mmt2i,v=>(v*100).toFixed(1)+'%')} T2I-MM</span> &nbsp;&mdash;&nbsp; redeployment spread vs mid-market going-concern revenue</div>
           </div>
           <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
         </div>
@@ -484,7 +528,7 @@ async function renderH100(spotLines) {
         </div>
 
         <div class="stack-legend">
-          <div class="legend-item"><div class="legend-dot spot"></div><span>CRI-H100 — Spot floor. Collateral liquidation reference. Worst-case rental recovery rate.</span></div>
+          <div class="legend-item"><div class="legend-dot spot"></div><span>CRI-H100 — Spot floor. Spot redeployment reference. Single-GPU rental floor.</span></div>
           <div class="legend-item"><div class="legend-dot mm"></div><span>CRI-H100-CLS-MM — Mid-market cluster rate. Median of RunPod + Lambda 8-GPU posted prices.</span></div>
           <div class="legend-item"><div class="legend-dot ent"></div><span>CRI-H100-CLS-ENT — Enterprise cluster rate. CoreWeave on-demand, bundled node pricing.</span></div>
         </div>
@@ -498,7 +542,7 @@ async function renderH100(spotLines) {
         <div class="dpanel-ticker"><span class="dot live"></span>CRI-H100 <span class="primary-badge">Primary Reference</span></div>
         <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
         <div class="dpanel-chg">${fmtChg(spotVal, spotPrev)}</div>
-        <div class="dpanel-desc">Interruptible spot floor — per GPU / hr. The rental liquidation value reference for GPU-backed credit. What a lender recovers if GPU collateral must be liquidated into the spot market today.</div>
+        <div class="dpanel-desc">Interruptible spot floor — per GPU / hr. The spot redeployment rate reference for GPU-backed credit. What a lender recovers by redeploying repossessed GPUs into the single-unit spot market.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Methodology ${spotMver}</span>
           ${spotDtd} &middot; ${spotObs} obs &middot; ${spotConf} confidence
@@ -536,7 +580,7 @@ async function renderH100(spotLines) {
             <div class="lgd-item-val ent-v">${D(entt2i,v=>(v*100).toFixed(1)+'%')}</div>
           </div>
         </div>
-        <div class="dpanel-desc">The revenue haircut a lender absorbs when GPU collateral is liquidated into the spot market. Formula: (cluster &minus; spot) / cluster. T2I-MM references mid-market going-concern revenue; T2I-ENT references enterprise bundled node economics.</div>
+        <div class="dpanel-desc">The revenue haircut a lender absorbs when GPU collateral is redeployed into the spot market as single units. Formula: (cluster &minus; spot) / cluster. T2I-MM references mid-market going-concern revenue; T2I-ENT references enterprise bundled node economics.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Computed from CRI-H100, CLS-MM, CLS-ENT</span>
           MM $${D(mmVal,v=>v.toFixed(4))} &middot; ENT $${D(entVal,v=>v.toFixed(4))} &middot; Spot $${spotVal.toFixed(4)}
@@ -588,13 +632,4 @@ async function loadChip(chipKey) {
 
 let activeChip = 'h100';
 function selectChip(chipKey) {
-  if (chipKey === activeChip) return;
-  activeChip = chipKey;
-  document.querySelectorAll('.chip-btn').forEach(b => b.classList.toggle('active', b.dataset.chip === chipKey));
-  loadChip(chipKey);
-}
-
-loadChip('h100');
-</script>
-</body>
-</html>
+  if (
