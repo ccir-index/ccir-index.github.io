@@ -48,9 +48,9 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 14px;
-      margin-top: 36px;
+      margin-top: 20px;
     }
-    @media (max-width: 700px) { .rate-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) { .rate-grid { grid-template-columns: 1fr !important; } }
 
     .rcard {
       background: var(--bg-white);
@@ -139,6 +139,43 @@
       margin-bottom: 2px;
     }
 
+    /* ---- Chip selector ---- */
+    .chip-nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 28px 0 0;
+    }
+    .chip-btn {
+      font-family: var(--mono);
+      font-size: .63rem;
+      font-weight: 500;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: color .12s, border-color .12s, background .12s;
+      line-height: 1;
+    }
+    .chip-btn:hover { color: var(--accent); border-color: var(--accent-mid); background: var(--accent-lo); }
+    .chip-btn.active {
+      color: var(--bg-white);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .chip-btn .chip-sub {
+      display: block;
+      font-size: .54rem;
+      letter-spacing: .06em;
+      opacity: .7;
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
     /* ---- Section header ---- */
     .sec-label {
       font-family: var(--mono);
@@ -179,176 +216,227 @@
     <div class="sec-label">Live Rates &mdash; March 2026</div>
     <div class="sec-rule"></div>
 
-    <div class="rate-grid">
+    <div class="chip-nav" id="chip-nav">
+      <button class="chip-btn" data-chip="b200" onclick="selectChip('b200')">CRI-B200<span class="chip-sub">NVIDIA B200 SXM</span></button>
+      <button class="chip-btn" data-chip="h200" onclick="selectChip('h200')">CRI-H200<span class="chip-sub">NVIDIA H200 SXM</span></button>
+      <button class="chip-btn active" data-chip="h100" onclick="selectChip('h100')">CRI-H100<span class="chip-sub">NVIDIA H100 SXM</span></button>
+      <button class="chip-btn" data-chip="a100" onclick="selectChip('a100')">CRI-A100<span class="chip-sub">NVIDIA A100 SXM</span></button>
+      <button class="chip-btn" data-chip="l40s" onclick="selectChip('l40s')">CRI-L40S<span class="chip-sub">NVIDIA L40S</span></button>
+    </div>
 
-      <!-- CRI-H100: interruptible spot floor -->
-      <div class="rcard">
-        <div class="rcard-label">
-          <span class="dot live"></span>
-          <span class="rcard-ticker">CRI-H100</span>
-          <span class="primary-badge">Primary Reference</span>
-        </div>
-        <div class="rcard-val" id="h100-val">&mdash;</div>
-        <div class="rcard-chg" id="h100-chg"></div>
-        <div class="rcard-desc">Interruptible spot floor &mdash; per GPU / hr. NVIDIA H100 SXM, multi-source spot median. Rental liquidation value reference for GPU-backed credit.</div>
-        <div class="rcard-meta" id="h100-meta">Loading&hellip;</div>
-      </div>
-
-      <!-- CRI-H100-CLS: cluster going-concern rate -->
-      <!-- TODO: point CLS_CSV_URL to ccir-data path once gold/cluster_spreads export is live -->
-      <div class="rcard">
-        <div class="rcard-label">
-          <span class="dot live"></span>
-          <span class="rcard-ticker">CRI-H100-CLS</span>
-        </div>
-        <div class="rcard-val" id="cls-val">&mdash;</div>
-        <div class="rcard-chg" id="cls-chg"></div>
-        <div class="rcard-desc">Going-concern cluster revenue rate &mdash; per GPU / hr. What a GPU operator earns deploying H100s at cluster scale. Upper bound on collateral revenue; paired with CRI-H100 to compute the T2I Spread.</div>
-        <div class="rcard-meta" id="cls-meta">Loading&hellip;</div>
-      </div>
-
-      <!-- T2I Spread: (CLS - interruptible) / CLS -->
-      <div class="rcard spread">
-        <div class="rcard-label">
-          <span class="dot live"></span>
-          <span class="rcard-ticker spread">T2I Spread</span>
-        </div>
-        <div class="rcard-val" id="t2i-val">&mdash;</div>
-        <div class="rcard-desc">Tier-2-to-Interruptible &mdash; (CLS &minus; spot) / CLS. Primary LGD input. The revenue haircut from forced spot liquidation &mdash; how much collateral value a lender loses if a borrower defaults and GPUs must be liquidated into the spot market.</div>
-        <div class="rcard-meta" id="t2i-meta">Computed from CRI-H100-CLS and CRI-H100</div>
-      </div>
-
+    <div class="rate-grid" id="rate-grid">
     </div>
   </div>
 </main>
 
 <script>
-(async () => {
-  // ── Data sources ────────────────────────────────────────────────────────────
-  const H100_CSV = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv';
+// ── Config ───────────────────────────────────────────────────────────────────
+const CHIPS = {
+  b200: {
+    ticker: 'CRI-B200',
+    label:  'NVIDIA B200 SXM · US',
+    csv:    'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-b200/CRI-B200-history.csv',
+    desc:   'Blackwell generation — frontier training. Next-gen displacement signal. B200/H100 spread tracks transition timing and H100 cascade velocity.',
+    github: 'https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv',
+    primary: false,
+  },
+  h200: {
+    ticker: 'CRI-H200',
+    label:  'NVIDIA H200 SXM · US',
+    csv:    'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h200/CRI-H200-history.csv',
+    desc:   'HBM3e generation — large-model training and memory-bound inference. 141 GB HBM3e; H200/H100 spread tracks migration out of the current training tier.',
+    github: 'https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv',
+    primary: false,
+  },
+  h100: {
+    ticker: 'CRI-H100',
+    label:  'NVIDIA H100 SXM · US',
+    csv:    'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv',
+    clsCsv: 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls/CRI-H100-CLS-history.csv',
+    desc:   'Interruptible spot floor — per GPU / hr. Multi-source spot median. Rental liquidation value reference for GPU-backed credit.',
+    github: 'https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv',
+    primary: true,
+  },
+  a100: {
+    ticker: 'CRI-A100',
+    label:  'NVIDIA A100 SXM · US',
+    csv:    'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-a100/CRI-A100-history.csv',
+    desc:   'Prior training generation — inference and batch workloads. H100/A100 spread measures cascade velocity into commodity tiers.',
+    github: 'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv',
+    primary: false,
+  },
+  l40s: {
+    ticker: 'CRI-L40S',
+    label:  'NVIDIA L40S · US',
+    csv:    'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-l40s/CRI-L40S-history.csv',
+    desc:   'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace; near-parity with A100 signals commodity cascade pricing for non-training compute.',
+    github: 'https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv',
+    primary: false,
+  },
+};
 
-  const CLS_CSV = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls/CRI-H100-CLS-history.csv';
+const CLS_CSV = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls/CRI-H100-CLS-history.csv';
 
-  async function csvLast(url) {
-    const r = await fetch(url);
-    const t = await r.text();
-    const lines = t.trim().split('\n').filter(l => l.trim());
-    if (lines.length < 2) throw new Error('empty');
-    return lines[lines.length - 1].split(',');
-  }
+// ── Cache ─────────────────────────────────────────────────────────────────────
+const cache = {};
 
-  // CLS CSV has one row per gpu_model per day — filter to H100_SXM, take latest date
-  async function csvLastModel(url, model) {
-    const r = await fetch(url);
-    const t = await r.text();
-    const lines = t.trim().split('\n').filter(l => l.trim()).slice(1); // skip header
-    const matching = lines.filter(l => l.split(',')[2].trim() === model);
-    if (!matching.length) throw new Error('no matching model');
-    return matching[matching.length - 1].split(',');
-  }
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function fmtDate(iso) {
+  return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+}
 
-  function fmtDate(iso) {
-    return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-  }
+function fmtChg(cur, prev) {
+  if (prev === null || isNaN(prev)) return '';
+  const diff = cur - prev;
+  const pct  = (diff / prev * 100);
+  const sign = diff >= 0 ? '+' : '';
+  const cls  = diff > 0.0001 ? 'chg-up' : diff < -0.0001 ? 'chg-down' : 'chg-flat';
+  const arrow = diff > 0.0001 ? '▲' : diff < -0.0001 ? '▼' : '—';
+  return `<span class="${cls}">${arrow} ${sign}$${Math.abs(diff).toFixed(4)} (${sign}${pct.toFixed(1)}%) vs prior day</span>`;
+}
 
-  // ── CRI-H100 spot ────────────────────────────────────────────────────────────
-  let hv = null, hv_prev = null;
+async function fetchCsv(url) {
+  if (cache[url]) return cache[url];
+  const r = await fetch(url);
+  const t = await r.text();
+  const lines = t.trim().split('\n').filter(l => l.trim());
+  cache[url] = lines;
+  return lines;
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function renderGrid(html) {
+  document.getElementById('rate-grid').innerHTML = html;
+}
+
+function spotCardHtml(chip, chipKey, val, prev, mver, conf, obs, dated) {
+  const chg = fmtChg(val, prev);
+  const isPrimary = chip.primary;
+  return `
+    <div class="rcard">
+      <div class="rcard-label">
+        <span class="dot live"></span>
+        <span class="rcard-ticker">${chip.ticker}</span>
+        ${isPrimary ? '<span class="primary-badge">Primary Reference</span>' : ''}
+      </div>
+      <div class="rcard-val">$${val.toFixed(4)}</div>
+      <div class="rcard-chg">${chg}</div>
+      <div class="rcard-desc">${chip.desc}</div>
+      <div class="rcard-meta">
+        <span class="rcard-mver">Methodology ${mver}</span>
+        ${dated}&nbsp;·&nbsp;${obs}&nbsp;obs&nbsp;·&nbsp;${conf}&nbsp;confidence
+        &nbsp;·&nbsp;<a href="${chip.github}" target="_blank" rel="noopener">Full series →</a>
+      </div>
+    </div>`;
+}
+
+async function loadChip(chipKey) {
+  const chip = CHIPS[chipKey];
+  const grid = document.getElementById('rate-grid');
+
+  // Show loading state
+  grid.innerHTML = `<div class="rcard" style="grid-column:1/-1;opacity:.5;font-family:var(--mono);font-size:.75rem;color:var(--text-dim);padding:32px 24px;">Loading&hellip;</div>`;
+
   try {
-    const resp = await fetch(H100_CSV);
-    const text = await resp.text();
-    const lines = text.trim().split('\n').filter(l => l.trim());
-    // get last two distinct dates for day-over-day change
+    const lines = await fetchCsv(chip.csv);
     const dataLines = lines.slice(1);
     const last = dataLines[dataLines.length - 1].split(',');
     const lastDate = last[0].trim();
     const prevLines = dataLines.filter(l => l.split(',')[0].trim() !== lastDate);
-    const h = last;
-    hv = parseFloat(h[4]);
-    if (prevLines.length) {
-      const prevLine = prevLines[prevLines.length - 1].split(',');
-      hv_prev = parseFloat(prevLine[4]);
-    }
-    const mver  = (h[1] || '').trim();
-    const conf  = (h[12] || '').trim();
-    const obs   = parseInt(h[10]).toLocaleString();
-    const dated = fmtDate(h[0].trim());
+    const val   = parseFloat(last[4]);
+    const prev  = prevLines.length ? parseFloat(prevLines[prevLines.length - 1].split(',')[4]) : null;
+    const mver  = (last[1] || '').trim();
+    const conf  = (last[12] || '').trim();
+    const obs   = parseInt(last[10]).toLocaleString();
+    const dated = fmtDate(lastDate);
 
-    document.getElementById('h100-val').textContent = '$' + hv.toFixed(4);
+    if (chipKey === 'h100') {
+      // H100: spot card + CLS + T2I
+      let spotHtml = spotCardHtml(chip, chipKey, val, prev, mver, conf, obs, dated);
+      let clsHtml = '', t2iHtml = '';
 
-    if (hv_prev !== null && !isNaN(hv_prev)) {
-      const diff = hv - hv_prev;
-      const pct  = (diff / hv_prev * 100);
-      const sign = diff >= 0 ? '+' : '';
-      const cls  = diff > 0.0001 ? 'chg-up' : diff < -0.0001 ? 'chg-down' : 'chg-flat';
-      const arrow = diff > 0.0001 ? '▲' : diff < -0.0001 ? '▼' : '—';
-      document.getElementById('h100-chg').innerHTML =
-        `<span class="${cls}">${arrow} ${sign}$${Math.abs(diff).toFixed(4)} (${sign}${pct.toFixed(1)}%) vs prior day</span>`;
-    }
+      try {
+        const clsLines = await fetchCsv(CLS_CSV);
+        const h100lines = clsLines.slice(1).filter(l => l.split(',')[2].trim() === 'H100_SXM');
+        const c = h100lines[h100lines.length - 1].split(',');
+        const clsLastDate = c[0].trim();
+        const clsPrev = h100lines.slice(0, -1).filter(l => l.split(',')[0].trim() !== clsLastDate);
+        const clsv  = parseFloat(c[3]);
+        const t2i   = parseFloat(c[5]);
+        const clsMver = (c[1] || '').trim();
+        const clsConf = (c[12] || '').trim();
+        const clsObs  = parseInt(c[7]).toLocaleString();
+        const clsDated = fmtDate(clsLastDate);
+        const clsPrevVal = clsPrev.length ? parseFloat(clsPrev[clsPrev.length - 1].split(',')[3]) : null;
+        const clsChg = fmtChg(clsv, clsPrevVal);
 
-    document.getElementById('h100-meta').innerHTML =
-      `<span class="rcard-mver">Methodology ${mver}</span>` +
-      `${dated}\u00a0\u00b7\u00a0${obs}\u00a0obs\u00a0\u00b7\u00a0${conf}\u00a0confidence`;
-  } catch(e) {
-    document.getElementById('h100-val').textContent = '\u2014';
-    document.getElementById('h100-meta').textContent = 'Data unavailable \u2014 see GitHub';
-  }
+        clsHtml = `
+          <div class="rcard">
+            <div class="rcard-label">
+              <span class="dot live"></span>
+              <span class="rcard-ticker">CRI-H100-CLS</span>
+            </div>
+            <div class="rcard-val">$${clsv.toFixed(4)}</div>
+            <div class="rcard-chg">${clsChg}</div>
+            <div class="rcard-desc">Going-concern cluster revenue rate — per GPU / hr. What a GPU operator earns deploying H100s at cluster scale. Upper bound on collateral revenue; paired with CRI-H100 to compute the T2I Spread.</div>
+            <div class="rcard-meta">
+              <span class="rcard-mver">Methodology ${clsMver}</span>
+              ${clsDated}&nbsp;·&nbsp;${clsObs}&nbsp;obs&nbsp;·&nbsp;${clsConf}&nbsp;confidence
+              &nbsp;·&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100-cls/CRI-H100-CLS-history.csv" target="_blank" rel="noopener">Full series →</a>
+            </div>
+          </div>`;
 
-  // ── CRI-H100-CLS and T2I ────────────────────────────────────────────────────
-  // Will activate once CLS_CSV path is set above.
-  let clsv = null;
-  if (CLS_CSV) {
-    try {
-      const resp = await fetch(CLS_CSV);
-      const text = await resp.text();
-      const lines = text.trim().split('\n').filter(l => l.trim()).slice(1);
-      const h100lines = lines.filter(l => l.split(',')[2].trim() === 'H100_SXM');
-      if (!h100lines.length) throw new Error('no H100_SXM');
-      const c = h100lines[h100lines.length - 1].split(',');
-      const lastDate = c[0].trim();
-      const prevLines = h100lines.slice(0, -1).filter(l => l.split(',')[0].trim() !== lastDate);
-      clsv = parseFloat(c[3]);
-      const t2i   = parseFloat(c[5]);
-      const mver  = (c[1] || '').trim();
-      const conf  = (c[12] || '').trim();
-      const obs   = parseInt(c[7]).toLocaleString();
-      const dated = fmtDate(c[0].trim());
-
-      document.getElementById('cls-val').textContent = '$' + clsv.toFixed(4);
-
-      if (prevLines.length) {
-        const prev = prevLines[prevLines.length - 1].split(',');
-        const clsv_prev = parseFloat(prev[3]);
-        if (!isNaN(clsv_prev)) {
-          const diff = clsv - clsv_prev;
-          const pct  = (diff / clsv_prev * 100);
-          const sign = diff >= 0 ? '+' : '';
-          const cls  = diff > 0.0001 ? 'chg-up' : diff < -0.0001 ? 'chg-down' : 'chg-flat';
-          const arrow = diff > 0.0001 ? '▲' : diff < -0.0001 ? '▼' : '—';
-          document.getElementById('cls-chg').innerHTML =
-            `<span class="${cls}">${arrow} ${sign}$${Math.abs(diff).toFixed(4)} (${sign}${pct.toFixed(1)}%) vs prior day</span>`;
-        }
+        t2iHtml = `
+          <div class="rcard spread">
+            <div class="rcard-label">
+              <span class="dot live"></span>
+              <span class="rcard-ticker spread">T2I Spread</span>
+            </div>
+            <div class="rcard-val">${(t2i * 100).toFixed(1)}%</div>
+            <div class="rcard-desc">Tier-2-to-Interruptible — (CLS − spot) / CLS. Primary LGD input. The revenue haircut from forced spot liquidation — how much collateral value a lender loses if a borrower defaults and GPUs must be liquidated into the spot market.</div>
+            <div class="rcard-meta">
+              <span class="rcard-mver">Computed — (CLS − spot) / CLS</span>
+              CLS&nbsp;$${clsv.toFixed(4)}&nbsp;·&nbsp;Spot&nbsp;$${val.toFixed(4)}&nbsp;·&nbsp;${clsDated}
+            </div>
+          </div>`;
+      } catch(e) {
+        clsHtml = `<div class="rcard"><div class="rcard-label"><span class="dot live"></span><span class="rcard-ticker">CRI-H100-CLS</span></div><div class="rcard-val">&mdash;</div><div class="rcard-meta">Data unavailable — see GitHub</div></div>`;
+        t2iHtml = `<div class="rcard spread"><div class="rcard-label"><span class="dot live"></span><span class="rcard-ticker spread">T2I Spread</span></div><div class="rcard-val">&mdash;</div><div class="rcard-meta">Computed from CRI-H100-CLS and CRI-H100</div></div>`;
       }
 
-      document.getElementById('cls-meta').innerHTML =
-        `<span class="rcard-mver">Methodology ${mver}</span>` +
-        `${dated}\u00a0\u00b7\u00a0${obs}\u00a0obs\u00a0\u00b7\u00a0${conf}\u00a0confidence`;
+      grid.innerHTML = spotHtml + clsHtml + t2iHtml;
 
-      document.getElementById('t2i-val').textContent = (t2i * 100).toFixed(1) + '%';
-      document.getElementById('t2i-meta').innerHTML =
-        `<span class="rcard-mver">Computed \u2014 (CLS \u2212 spot) / CLS</span>` +
-        `CLS\u00a0$${clsv.toFixed(4)}\u00a0\u00b7\u00a0Spot\u00a0${hv ? '$'+hv.toFixed(4) : '\u2014'}\u00a0\u00b7\u00a0${dated}`;
-    } catch(e) {
-      document.getElementById('cls-val').textContent = '\u2014';
-      document.getElementById('cls-meta').textContent = 'Data unavailable \u2014 see GitHub';
+    } else {
+      // Non-H100: just spot card, full-width
+      grid.style.gridTemplateColumns = '1fr';
+      grid.innerHTML = `<div style="max-width:420px;">${spotCardHtml(chip, chipKey, val, prev, mver, conf, obs, dated)}</div>`;
     }
-  } else {
-    document.getElementById('cls-val').textContent = '\u2014';
-    document.getElementById('cls-meta').textContent = 'Publishing soon';
-    document.getElementById('t2i-val').textContent = '\u2014';
-    document.getElementById('t2i-meta').textContent = 'Publishing soon';
+  } catch(e) {
+    grid.innerHTML = `<div class="rcard" style="grid-column:1/-1;"><div class="rcard-val">&mdash;</div><div class="rcard-meta">Data unavailable — <a href="${chip.github}" target="_blank" rel="noopener">see GitHub</a></div></div>`;
   }
+}
 
-})();
+// ── Chip selector ─────────────────────────────────────────────────────────────
+let activeChip = 'h100';
+
+function selectChip(chipKey) {
+  if (chipKey === activeChip) return;
+  activeChip = chipKey;
+
+  // Update button states
+  document.querySelectorAll('.chip-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.chip === chipKey);
+  });
+
+  // Reset grid columns for H100's 3-col layout
+  const grid = document.getElementById('rate-grid');
+  grid.style.gridTemplateColumns = chipKey === 'h100' ? '' : '1fr';
+
+  loadChip(chipKey);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadChip('h100');
 </script>
 
 <footer>
