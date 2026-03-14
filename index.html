@@ -259,7 +259,7 @@
     <div class="pillar">
       <div class="pillar-icon">Bespoke Structuring</div>
       <div class="pillar-head">Calibrated to the Specific Deal at Underwriting</div>
-      <p class="pillar-body">Covenant thresholds, Rate Cap levels, and Generation Spread triggers are not one-size-fits-all. CCIR works with lenders to calibrate each parameter to the actual collateral pool, contract structure, and credit profile &mdash; and provides Calculation Date rate packages for ongoing compliance monitoring. <a href="mailto:research@ccir.io">Engage CCIR &rarr;</a></p>
+      <p class="pillar-body">Covenant thresholds, Rate Cap levels, and Generation Spread triggers are not one-size-fits-all. CCIR works with lenders to calibrate each parameter to the actual collateral pool, contract structure, and credit profile &mdash; and provides Calculation Date rate packages for ongoing compliance monitoring. <a href="/cdn-cgi/l/email-protection#30425543555142535870535359421e595f">Engage CCIR &rarr;</a></p>
     </div>
   </div>
 </div>
@@ -380,7 +380,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const CHIPS = {
   b200: { ticker:'CRI-B200', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-b200/CRI-B200-history.csv', desc:'Blackwell generation — frontier training and inference. B200/H100 spread tracks transition timing and cascade velocity into prior-generation collateral.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv', primary:false },
   h200: { ticker:'CRI-H200', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h200/CRI-H200-history.csv', desc:'HBM3e generation — large-model training and memory-bound inference. 141 GB HBM3e. H200/H100 spread tracks migration velocity out of the current training tier.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv', primary:false },
@@ -422,15 +422,17 @@ function fmtChg(cur, prev) {
   return `<span class="${cls}">${arrow} ${sign}$${Math.abs(diff).toFixed(4)} (${sign}${pct.toFixed(1)}%) vs prior day</span>`;
 }
 
-function latestRow(lines, modelFilter) {
+function latestRow(lines, modelFilter, ptypeFilter) {
   const data = lines.slice(1);
-  const rows = modelFilter ? data.filter(l => l.split(',')[2].trim() === modelFilter) : data;
+  let rows = modelFilter ? data.filter(l => l.split(',')[2].trim() === modelFilter) : data;
+  if (ptypeFilter) rows = rows.filter(l => l.split(',')[3].trim() === ptypeFilter);
   return rows.length ? rows[rows.length - 1].split(',') : null;
 }
 
-function prevVal(lines, modelFilter, lastDate, valIdx) {
+function prevVal(lines, modelFilter, lastDate, valIdx, ptypeFilter) {
   const data = lines.slice(1);
-  const rows = modelFilter ? data.filter(l => l.split(',')[2].trim() === modelFilter) : data;
+  let rows = modelFilter ? data.filter(l => l.split(',')[2].trim() === modelFilter) : data;
+  if (ptypeFilter) rows = rows.filter(l => l.split(',')[3].trim() === ptypeFilter);
   const prior = rows.filter(l => l.split(',')[0].trim() !== lastDate);
   return prior.length ? parseFloat(prior[prior.length - 1].split(',')[valIdx]) : null;
 }
@@ -439,14 +441,14 @@ const D = (v, fmt) => (v !== null && !isNaN(v)) ? fmt(v) : '&mdash;';
 
 async function renderH100(spotLines) {
   // Spot
-  const sp      = latestRow(spotLines, null);
+  const sp      = latestRow(spotLines, null, 'seller_ask_interruptible');
   const spotDate = sp[0].trim();
   const spotVal  = parseFloat(sp[4]);
   const spotMver = sp[1].trim();
   const spotConf = sp[12].trim();
   const spotObs  = parseInt(sp[10]).toLocaleString();
   const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(spotLines, null, spotDate, 4);
+  const spotPrev = prevVal(spotLines, null, spotDate, 4, 'seller_ask_interruptible');
 
   // MM
   let mmVal=null,mmt2i=null,mmDtd='',mmMver='',mmConf='',mmObs='',mmSrc='',mmPrev=null;
@@ -592,14 +594,14 @@ async function renderH100(spotLines) {
 async function renderSpot(chipKey) {
   const chip  = CHIPS[chipKey];
   const lines = await fetchCsv(chip.csv);
-  const sp    = latestRow(lines, null);
+  const sp    = latestRow(lines, null, 'seller_ask_interruptible');
   const spotDate = sp[0].trim();
   const spotVal  = parseFloat(sp[4]);
   const spotMver = sp[1].trim();
   const spotConf = sp[12].trim();
   const spotObs  = parseInt(sp[10]).toLocaleString();
   const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(lines, null, spotDate, 4);
+  const spotPrev = prevVal(lines, null, spotDate, 4, 'seller_ask_interruptible');
 
   document.getElementById('rate-area').innerHTML = `
     <div class="spot-single">
@@ -634,12 +636,4 @@ function selectChip(chipKey) {
   if (activeChip === chipKey) return;
   activeChip = chipKey;
   document.querySelectorAll('.chip-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.chip === chipKey);
-  });
-  loadChip(chipKey);
-}
-
-document.addEventListener('DOMContentLoaded', () => loadChip('h100'));
-</script>
-</body>
-</html>
+    b.classList.toggle('active', b.dataset
