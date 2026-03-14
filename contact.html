@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &mdash; CCIR</title>
+  <meta name="description" content="Engage CCIR for covenant structuring, rate monitoring, and bespoke GPU-backed credit documentation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #F6F3EE;
+      --bg-white:  #FDFCF9;
+      --surface-2: #EDEAE3;
+      --border:    #D8D3C9;
+      --border-hi: #BDB7AD;
+      --text:      #38332E;
+      --text-dim:  #8A827A;
+      --text-hi:   #0E0C0A;
+      --accent:    #1A4E6E;
+      --accent-lo: #EAF1F7;
+      --accent-mid:#B3CEDF;
+      --green:     #1A6040;
+      --green-lo:  #EAF5EF;
+      --green-mid: #A8D9BC;
+      --amber:     #7A5400;
+      --amber-lo:  #FBF4E6;
+      --amber-mid: #EACF8A;
+      --ink:       #16130F;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --mono:  'IBM Plex Mono', monospace;
+      --sans:  'DM Sans', sans-serif;
+      --sh-sm: 0 1px 4px rgba(14,12,10,.07), 0 1px 2px rgba(14,12,10,.04);
+    }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 36px; }
+    a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+
+    /* ─── HEADER ─────────────────────────────────────────────────────────── */
+    header { background: var(--bg-white); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 860px; margin: 0 auto; padding: 36px 36px 32px; }
+    .header-top { display: flex; align-items: center; gap: 18px; }
+    .logo { width: 32px; height: 32px; border-radius: 3px; flex-shrink: 0; box-shadow: var(--sh-sm); }
+    .wordmark { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .26em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
+    .nav-links { display: flex; gap: 18px; align-items: center; margin-left: auto; flex-wrap: wrap; }
+    .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: var(--text-dim); }
+    .nav-link:hover { color: var(--accent); text-decoration: none; }
+    .nav-link.active { color: var(--accent); }
+
+    /* ─── HERO ───────────────────────────────────────────────────────────── */
+    .contact-hero { padding: 64px 0 52px; }
+    .sec-label { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .contact-h1 { font-family: var(--serif); font-size: 2.2rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.015em; line-height: 1.18; margin-bottom: 20px; }
+    .hero-rule { width: 44px; height: 2px; background: var(--accent); margin: 20px 0; }
+    .contact-intro { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 580px; }
+
+    /* ─── CONTACT GRID ───────────────────────────────────────────────────── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 48px; }
+    @media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 2px solid var(--border-hi); border-radius: 2px; padding: 28px 28px 24px; box-shadow: var(--sh-sm); }
+    .contact-card.primary { border-top-color: var(--accent); }
+    .contact-card.secondary { border-top-color: var(--border-hi); }
+
+    .card-label { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .20em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .contact-card.secondary .card-label { color: var(--text-dim); }
+    .card-head { font-family: var(--serif); font-size: 1.22rem; font-weight: 500; color: var(--text-hi); line-height: 1.3; margin-bottom: 12px; }
+    .card-body { font-size: .820rem; color: var(--text-dim); line-height: 1.72; margin-bottom: 20px; }
+    .card-body strong { font-weight: 500; color: var(--text); }
+
+    .card-email { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .78rem; font-weight: 500; color: var(--accent); background: var(--accent-lo); border: 1px solid var(--accent-mid); border-radius: 2px; padding: 10px 18px; letter-spacing: .04em; text-decoration: none; }
+    .card-email:hover { background: var(--accent); color: #fff; text-decoration: none; }
+
+    /* ─── WHO WE WORK WITH ───────────────────────────────────────────────── */
+    .who-section { margin-top: 60px; padding-top: 48px; border-top: 1px solid var(--border); padding-bottom: 80px; }
+    .who-head { font-family: var(--serif); font-size: 1.45rem; font-weight: 500; color: var(--text-hi); margin-bottom: 8px; }
+    .who-sub { font-size: .875rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 36px; max-width: 520px; }
+    .who-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+    @media (max-width: 640px) { .who-grid { grid-template-columns: 1fr; } }
+    .who-item { padding: 0 28px 0 0; border-right: 1px solid var(--border); margin-right: 28px; }
+    .who-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .who-icon { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .who-item-head { font-size: .875rem; font-weight: 500; color: var(--text-hi); margin-bottom: 8px; line-height: 1.3; }
+    .who-item-body { font-size: .800rem; color: var(--text-dim); line-height: 1.72; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────────────── */
+    footer { background: var(--bg-white); border-top: 1px solid var(--border); padding: 32px 0 36px; }
+    .footer-in { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .fl { font-size: .80rem; color: var(--text-dim); }
+    .fl a { color: var(--text-dim); } .fl a:hover { color: var(--accent); }
+    .fr { font-family: var(--mono); font-size: .62rem; color: var(--text-dim); text-align: right; line-height: 2.0; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-top">
+      <img src="ccir-logo.jpg" alt="CCIR" class="logo" />
+      <div>
+        <div class="wordmark">CCIR &middot; Compute Credit Index Research</div>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Covenant Frameworks</a>
+        <a href="index.html#chip-selector" class="nav-link">Reference Rates</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<main>
+  <div class="wrap">
+    <div class="contact-hero">
+      <div class="sec-label">Engage CCIR</div>
+      <h1 class="contact-h1">Covenant Structuring.<br>Rate Monitoring. Bespoke Credit Work.</h1>
+      <div class="hero-rule"></div>
+      <p class="contact-intro">CCIR works with lenders, credit analysts, and structured finance counsel on active GPU-backed transactions — from initial covenant calibration at underwriting through ongoing Calculation Date rate packages for compliance monitoring.</p>
+    </div>
+
+    <!-- Contact cards -->
+    <div class="contact-grid">
+
+      <div class="contact-card primary">
+        <div class="card-label">General Enquiries</div>
+        <div class="card-head">Covenant Structuring &amp; Rate Monitoring</div>
+        <div class="card-body">For lenders and counsel working on GPU-backed credit facilities — <strong>covenant calibration, Rate Cap level setting, Generation Spread trigger design</strong>, and Calculation Date rate packages for compliance certificates.</div>
+        <a class="card-email" href="mailto:research@ccir.io">research@ccir.io</a>
+      </div>
+
+      <div class="contact-card secondary">
+        <div class="card-label">Data &amp; Methodology</div>
+        <div class="card-head">Data Partnerships &amp; Index Coverage</div>
+        <div class="card-body">For GPU cloud operators interested in contributing executed pricing data to CCIR's index methodology. <strong>Partners receive permanent citation in published methodology</strong> documentation and direct access to CCIR rate series.</div>
+        <a class="card-email" href="mailto:research@ccir.io">research@ccir.io</a>
+      </div>
+
+    </div>
+
+    <!-- Who we work with -->
+    <div class="who-section">
+      <div class="sec-label">Who Engages CCIR</div>
+      <div class="who-head">Built for transaction practitioners.</div>
+      <p class="who-sub">CCIR's services are designed for professionals working on active GPU-backed credit — not general market participants. The right contact is any party with a role in documenting, underwriting, or monitoring a GPU-collateralized facility.</p>
+      <div class="who-grid">
+        <div class="who-item">
+          <div class="who-icon">Lenders</div>
+          <div class="who-item-head">Credit Officers &amp; Underwriters</div>
+          <div class="who-item-body">Structuring GPU-backed term loans, revolvers, or equipment finance facilities where the collateral is H100, H200, or B200 infrastructure. Covenant calibration from underwriting through maturity.</div>
+        </div>
+        <div class="who-item">
+          <div class="who-icon">Counsel</div>
+          <div class="who-item-head">Structured Finance Attorneys</div>
+          <div class="who-item-body">Drafting credit documentation that requires a named, independently verifiable reference rate in GPU collateral covenants. CCIR provides the rate definition, covenant language, and Calculation Date packages.</div>
+        </div>
+        <div class="who-item">
+          <div class="who-icon">Analysts</div>
+          <div class="who-item-head">Credit Analysts &amp; Rating Staff</div>
+          <div class="who-item-body">Evaluating GPU-collateralized exposure — stress scenarios, LGD calibration, collateral coverage analysis. CRI-H100 and T2I Spread provide the empirical data anchors that analyst judgment currently lacks.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-in">
+    <div class="fl">
+      &copy; 2026 Compute Credit Index Research LLC
+      &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ccir-index" target="_blank" rel="noopener">GitHub</a>
+      &nbsp;&middot;&nbsp;
+      <a href="services.html">Covenant Structuring</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ccir-index/ccir-methodology" target="_blank" rel="noopener">Methodology</a>
+      &nbsp;&middot;&nbsp;
+      <a href="mailto:research@ccir.io">research@ccir.io</a>
+    </div>
+    <div class="fr">No financial interest in the market we measure.</div>
+  </div>
+</footer>
+
+</body>
+</html>
