@@ -324,7 +324,7 @@
       </div>
       <div class="cov-note">
         <span class="cov-note-label">Which index for which deal</span>
-        H100 SXM &rarr; CRI-H100 &nbsp;&middot;&nbsp; H100 PCIe &rarr; CRI-H100-PCIE &nbsp;&middot;&nbsp; H200 &rarr; CRI-H200 &nbsp;&middot;&nbsp; B200 &rarr; CRI-B200 &nbsp;&middot;&nbsp; A100 SXM &rarr; CRI-A100 &nbsp;&middot;&nbsp; Mixed-GPU facility &rarr; each tranche references its own index
+        H100 SXM &rarr; CRI-H100 &nbsp;&middot;&nbsp; H200 &rarr; CRI-H200 &nbsp;&middot;&nbsp; B200 &rarr; CRI-B200 &nbsp;&middot;&nbsp; A100 SXM &rarr; CRI-A100 &nbsp;&middot;&nbsp; Mixed-GPU facility &rarr; each tranche references its own index
       </div>
     </div>
 
@@ -332,7 +332,6 @@
       <button class="chip-btn" data-chip="b200"     onclick="selectChip('b200')">CRI-B200<span class="chip-sub">NVIDIA B200 SXM</span></button>
       <button class="chip-btn" data-chip="h200"     onclick="selectChip('h200')">CRI-H200<span class="chip-sub">NVIDIA H200 SXM</span></button>
       <button class="chip-btn active" data-chip="h100" onclick="selectChip('h100')">CRI-H100<span class="chip-sub">NVIDIA H100 SXM</span></button>
-      <button class="chip-btn" data-chip="h100pcie" onclick="selectChip('h100pcie')">CRI-H100-PCIe<span class="chip-sub">NVIDIA H100 PCIe</span></button>
       <button class="chip-btn" data-chip="a100"     onclick="selectChip('a100')">CRI-A100<span class="chip-sub">NVIDIA A100 SXM</span></button>
       <button class="chip-btn" data-chip="l40s"     onclick="selectChip('l40s')">CRI-L40S<span class="chip-sub">NVIDIA L40S</span></button>
     </div>
@@ -409,12 +408,6 @@ const CHIPS = {
     desc:'Interruptible spot rate — per GPU / hr. Multi-source median. The commodity clearing price for H100 compute. Covenant floors and multiples reference this rate.',
     clsMM: CLS_MM_ALL,
     clsENT:`${RAW}/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv`,
-  },
-  h100pcie: {
-    ticker:'CRI-H100-PCIe', gpuModel:'H100_PCIE', label:'H100 PCIe', primary:false,
-    csv:`${RAW}/cri-h100-pcie/CRI-H100-PCIE-history.csv`,
-    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100-pcie/CRI-H100-PCIE-history.csv',
-    desc:'H100 PCIe — lower-cost H100 interconnect variant. Wider hardware availability. H100 SXM/PCIe spread measures interconnect premium in colocation and mixed-fleet collateral pools.',
   },
   a100: {
     ticker:'CRI-A100', gpuModel:'A100_SXM', label:'A100 SXM', primary:false,
