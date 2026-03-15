@@ -300,7 +300,7 @@
 <!-- RATES -->
 <main id="rates">
   <div class="wrap">
-    <div class="sec-label">The Reference Rates the Covenants Cite &mdash; March 2026</div>
+    <div class="sec-label">The Reference Rates the Covenants Cite</div>
     <div class="sec-rule"></div>
 
     <!-- Covenant explainer -->
@@ -324,16 +324,17 @@
       </div>
       <div class="cov-note">
         <span class="cov-note-label">Which index for which deal</span>
-        H100 collateral &rarr; CRI-H100 &nbsp;&middot;&nbsp; H200 collateral &rarr; CRI-H200 &nbsp;&middot;&nbsp; B200 collateral &rarr; CRI-B200 &nbsp;&middot;&nbsp; Mixed-GPU facility &rarr; each tranche references its own index
+        H100 SXM &rarr; CRI-H100 &nbsp;&middot;&nbsp; H100 PCIe &rarr; CRI-H100-PCIE &nbsp;&middot;&nbsp; H200 &rarr; CRI-H200 &nbsp;&middot;&nbsp; B200 &rarr; CRI-B200 &nbsp;&middot;&nbsp; A100 SXM &rarr; CRI-A100 &nbsp;&middot;&nbsp; Mixed-GPU facility &rarr; each tranche references its own index
       </div>
     </div>
 
     <div id="chip-selector" class="chip-nav">
-      <button class="chip-btn" data-chip="b200" onclick="selectChip('b200')">CRI-B200<span class="chip-sub">NVIDIA B200 SXM</span></button>
-      <button class="chip-btn" data-chip="h200" onclick="selectChip('h200')">CRI-H200<span class="chip-sub">NVIDIA H200 SXM</span></button>
+      <button class="chip-btn" data-chip="b200"     onclick="selectChip('b200')">CRI-B200<span class="chip-sub">NVIDIA B200 SXM</span></button>
+      <button class="chip-btn" data-chip="h200"     onclick="selectChip('h200')">CRI-H200<span class="chip-sub">NVIDIA H200 SXM</span></button>
       <button class="chip-btn active" data-chip="h100" onclick="selectChip('h100')">CRI-H100<span class="chip-sub">NVIDIA H100 SXM</span></button>
-      <button class="chip-btn" data-chip="a100" onclick="selectChip('a100')">CRI-A100<span class="chip-sub">NVIDIA A100 SXM</span></button>
-      <button class="chip-btn" data-chip="l40s" onclick="selectChip('l40s')">CRI-L40S<span class="chip-sub">NVIDIA L40S</span></button>
+      <button class="chip-btn" data-chip="h100pcie" onclick="selectChip('h100pcie')">CRI-H100-PCIe<span class="chip-sub">NVIDIA H100 PCIe</span></button>
+      <button class="chip-btn" data-chip="a100"     onclick="selectChip('a100')">CRI-A100<span class="chip-sub">NVIDIA A100 SXM</span></button>
+      <button class="chip-btn" data-chip="l40s"     onclick="selectChip('l40s')">CRI-L40S<span class="chip-sub">NVIDIA L40S</span></button>
     </div>
 
     <div id="rate-area">
@@ -382,12 +383,52 @@
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const RAW = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main';
+const CLS_MM_ALL = `${RAW}/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv`;
+
 const CHIPS = {
-  b200: { ticker:'CRI-B200', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-b200/CRI-B200-history.csv', desc:'Blackwell generation — frontier training and inference. B200/H100 spread tracks transition timing and cascade velocity into prior-generation collateral.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv', primary:false },
-  h200: { ticker:'CRI-H200', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h200/CRI-H200-history.csv', desc:'HBM3e generation — large-model training and memory-bound inference. 141 GB HBM3e. H200/H100 spread tracks migration velocity out of the current training tier.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv', primary:false },
-  h100: { ticker:'CRI-H100', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100/CRI-H100-history.csv', desc:'Interruptible spot floor — per GPU / hr. Multi-source spot median. Primary spot redeployment rate reference for GPU-backed credit.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv', primary:true },
-  a100: { ticker:'CRI-A100', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-a100/CRI-A100-history.csv', desc:'Prior training generation — inference and batch workloads. H100/A100 spread measures cascade velocity into commodity tiers as H100 collateral matures.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv', primary:false },
-  l40s: { ticker:'CRI-L40S', csv:'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-l40s/CRI-L40S-history.csv', desc:'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. Near-parity with A100 signals commodity cascade pricing for non-training compute.', github:'https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv', primary:false },
+  b200: {
+    ticker:'CRI-B200', gpuModel:'B200_SXM', label:'B200 SXM', primary:false,
+    csv:`${RAW}/cri-b200/CRI-B200-history.csv`,
+    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv',
+    desc:'Blackwell generation — frontier training and inference. B200/H100 spread tracks transition timing and cascade velocity into prior-generation collateral.',
+    clsMM: CLS_MM_ALL,
+    clsENT:`${RAW}/cri-b200-cls-ent/CRI-B200-CLS-ENT-history.csv`,
+  },
+  h200: {
+    ticker:'CRI-H200', gpuModel:'H200_SXM', label:'H200 SXM', primary:false,
+    csv:`${RAW}/cri-h200/CRI-H200-history.csv`,
+    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv',
+    desc:'HBM3e generation — large-model training and memory-bound inference. 141 GB HBM3e. H200/H100 spread tracks migration velocity out of the current training tier.',
+    clsENT:`${RAW}/cri-h200-cls-ent/CRI-H200-CLS-ENT-history.csv`,
+  },
+  h100: {
+    ticker:'CRI-H100', gpuModel:'H100_SXM', label:'H100 SXM', primary:true,
+    csv:`${RAW}/cri-h100/CRI-H100-history.csv`,
+    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv',
+    desc:'Non-interruptible spot rate — per GPU / hr. Multi-source median. Going-concern redeployment reference for GPU-backed credit.',
+    clsMM: CLS_MM_ALL,
+    clsENT:`${RAW}/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv`,
+  },
+  h100pcie: {
+    ticker:'CRI-H100-PCIe', gpuModel:'H100_PCIE', label:'H100 PCIe', primary:false,
+    csv:`${RAW}/cri-h100-pcie/CRI-H100-PCIE-history.csv`,
+    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100-pcie/CRI-H100-PCIE-history.csv',
+    desc:'H100 PCIe — lower-cost H100 interconnect variant. Wider hardware availability. H100 SXM/PCIe spread measures interconnect premium in colocation and mixed-fleet collateral pools.',
+  },
+  a100: {
+    ticker:'CRI-A100', gpuModel:'A100_SXM', label:'A100 SXM', primary:false,
+    csv:`${RAW}/cri-a100/CRI-A100-history.csv`,
+    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv',
+    desc:'Prior training generation — inference and batch workloads. H100/A100 spread measures cascade velocity into commodity tiers as H100 collateral matures.',
+    clsMM: CLS_MM_ALL,
+  },
+  l40s: {
+    ticker:'CRI-L40S', gpuModel:'L40S', label:'L40S', primary:false,
+    csv:`${RAW}/cri-l40s/CRI-L40S-history.csv`,
+    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv',
+    desc:'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. Near-parity with A100 signals commodity cascade pricing for non-training compute.',
+  },
 };
 
 // CLUSTER_HEADER col indices:
@@ -395,8 +436,6 @@ const CHIPS = {
 // 5=source_count 6=sources 7=bundle_note 8=interruptible_rate 9=t2i_spread
 // 10=cls_vs_secure_pct 11=cls_obs 12=cls_days 13=interruptible_source_count
 // 14=interruptible_obs 15=interruptible_confidence 16=confidence_flag 17=computed_at
-const CLS_MM_CSV  = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv';
-const CLS_ENT_CSV = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv';
 
 const cache = {};
 async function fetchCsv(url) {
@@ -440,169 +479,177 @@ function prevVal(lines, modelFilter, lastDate, valIdx, ptypeFilter) {
 
 const D = (v, fmt) => (v !== null && !isNaN(v)) ? fmt(v) : '&mdash;';
 
-async function renderH100(spotLines) {
-  // Spot
-  const sp      = latestRow(spotLines, null, 'seller_ask_interruptible');
+async function renderStack(chipKey, spotLines) {
+  const chip = CHIPS[chipKey];
+
+  // ── Spot (noninterruptible) ──────────────────────────────────────────────
+  const sp       = latestRow(spotLines, null, 'seller_ask_noninterruptible');
   const spotDate = sp[0].trim();
   const spotVal  = parseFloat(sp[4]);
   const spotMver = sp[1].trim();
   const spotConf = sp[12].trim();
   const spotObs  = parseInt(sp[10]).toLocaleString();
   const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(spotLines, null, spotDate, 4, 'seller_ask_interruptible');
+  const spotPrev = prevVal(spotLines, null, spotDate, 4, 'seller_ask_noninterruptible');
 
-  // MM
-  let mmVal=null,mmt2i=null,mmDtd='',mmMver='',mmConf='',mmObs='',mmSrc='',mmPrev=null;
-  try {
-    const mmL = await fetchCsv(CLS_MM_CSV);
-    const mm  = latestRow(mmL, 'H100_SXM');
-    if (mm) {
-      const mmDate=mm[0].trim(); mmVal=parseFloat(mm[4]); mmt2i=parseFloat(mm[9]);
-      mmMver=mm[1].trim(); mmConf=mm[16].trim(); mmObs=parseInt(mm[11]).toLocaleString();
-      mmSrc=(mm[6]||'').trim().replace('LAMBDA_CLUSTER','Lambda').replace('|RUNPOD',' · RunPod').replace('RUNPOD','RunPod');
-      mmDtd=fmtDate(mmDate); mmPrev=prevVal(mmL,'H100_SXM',mmDate,4);
-    }
-  } catch(e){}
+  // ── MM (optional) ────────────────────────────────────────────────────────
+  let mmVal=null, mmt2i=null, mmDtd='', mmMver='', mmConf='', mmObs='', mmSrc='', mmPrev=null;
+  if (chip.clsMM) {
+    try {
+      const mmL = await fetchCsv(chip.clsMM);
+      const mm  = latestRow(mmL, chip.gpuModel);
+      if (mm) {
+        const mmDate=mm[0].trim(); mmVal=parseFloat(mm[4]); mmt2i=parseFloat(mm[9]);
+        mmMver=mm[1].trim(); mmConf=mm[16].trim(); mmObs=parseInt(mm[11]).toLocaleString();
+        mmSrc=(mm[6]||'').trim().replace('LAMBDA_CLUSTER','Lambda').replace('|RUNPOD',' · RunPod').replace('RUNPOD','RunPod');
+        mmDtd=fmtDate(mmDate); mmPrev=prevVal(mmL, chip.gpuModel, mmDate, 4);
+      }
+    } catch(e){}
+  }
 
-  // ENT
-  let entVal=null,entt2i=null,entDtd='',entMver='',entConf='',entObs='';
-  try {
-    const entL = await fetchCsv(CLS_ENT_CSV);
-    const ent  = latestRow(entL, 'H100_SXM');
-    if (ent) {
-      const entDate=ent[0].trim(); entVal=parseFloat(ent[4]); entt2i=parseFloat(ent[9]);
-      entMver=ent[1].trim(); entConf=ent[16].trim(); entObs=parseInt(ent[11]).toLocaleString();
-      entDtd=fmtDate(entDate);
-    }
-  } catch(e){}
+  // ── ENT (optional) ───────────────────────────────────────────────────────
+  let entVal=null, entt2i=null, entDtd='', entMver='', entConf='', entObs='';
+  if (chip.clsENT) {
+    try {
+      const entL = await fetchCsv(chip.clsENT);
+      const ent  = latestRow(entL, chip.gpuModel);
+      if (ent) {
+        const entDate=ent[0].trim(); entVal=parseFloat(ent[4]); entt2i=parseFloat(ent[9]);
+        entMver=ent[1].trim(); entConf=ent[16].trim(); entObs=parseInt(ent[11]).toLocaleString();
+        entDtd=fmtDate(entDate);
+      }
+    } catch(e){}
+  }
 
-  const maxV   = entVal || mmVal || spotVal || 1;
-  const sPct   = (spotVal/maxV*100).toFixed(1);
-  const mmPct  = mmVal  ? (mmVal /maxV*100).toFixed(1) : '0';
-  const entPct = entVal ? (entVal/maxV*100).toFixed(1) : '0';
+  const hasCluster = mmVal !== null || entVal !== null;
+  const maxV  = entVal || mmVal || spotVal || 1;
+  const sPct  = (spotVal/maxV*100).toFixed(1);
+  const mmPct = mmVal  ? (mmVal /maxV*100).toFixed(1) : '0';
+  const entPct= entVal ? (entVal/maxV*100).toFixed(1) : '0';
+
+  // ── ENT bar (only if data) ───────────────────────────────────────────────
+  const entBar = entVal ? `
+    <div class="stack-bar-wrap" style="margin-bottom:4px;">
+      <div class="stack-bar-label">Enterprise</div>
+      <div class="stack-bar-track"><div class="stack-bar-fill ent" style="width:${entPct}%"></div></div>
+      <div class="stack-bar-value">${D(entVal,v=>'$'+v.toFixed(4))}</div>
+      <div class="stack-bar-source">CoreWeave &nbsp;&middot;&nbsp; bundled node</div>
+    </div>
+    <div class="stack-spread-row">
+      <div class="stack-spread-spacer"></div>
+      <div class="stack-spread-content">
+        <div class="spread-vline"></div>
+        <div class="spread-text ent-c"><span class="sv">${D(entt2i,v=>(v*100).toFixed(1)+'%')} T2I-ENT</span> &nbsp;&mdash;&nbsp; redeployment spread vs enterprise going-concern revenue</div>
+      </div>
+      <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
+    </div>` : '';
+
+  // ── MM bar (only if data) ────────────────────────────────────────────────
+  const mmBar = mmVal ? `
+    <div class="stack-bar-wrap" style="margin-bottom:4px;">
+      <div class="stack-bar-label">Mid-Market</div>
+      <div class="stack-bar-track"><div class="stack-bar-fill mm" style="width:${mmPct}%"></div></div>
+      <div class="stack-bar-value">${D(mmVal,v=>'$'+v.toFixed(4))}</div>
+      <div class="stack-bar-source">${mmSrc||'RunPod · Lambda'}</div>
+    </div>
+    <div class="stack-spread-row">
+      <div class="stack-spread-spacer"></div>
+      <div class="stack-spread-content">
+        <div class="spread-vline"></div>
+        <div class="spread-text mm-c"><span class="sv">${D(mmt2i,v=>(v*100).toFixed(1)+'%')} T2I-MM</span> &nbsp;&mdash;&nbsp; redeployment spread vs mid-market going-concern revenue</div>
+      </div>
+      <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
+    </div>` : '';
+
+  // ── Legend (dynamic based on available tiers) ────────────────────────────
+  const entLegend = entVal ? `<div class="legend-item"><div class="legend-dot ent"></div><span>${chip.ticker}-CLS-ENT — Enterprise cluster rate. CoreWeave on-demand, bundled node pricing.</span></div>` : '';
+  const mmLegend  = mmVal  ? `<div class="legend-item"><div class="legend-dot mm"></div><span>${chip.ticker}-CLS-MM — Mid-market cluster rate. Median of RunPod + Lambda 8-GPU posted prices.</span></div>` : '';
+
+  // ── Cluster detail panel (only if cluster data exists) ──────────────────
+  const clsMMLink  = chip.clsMM  ? `&nbsp;&middot;&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv" target="_blank" rel="noopener">MM →</a>` : '';
+  const clsENTLink = chip.clsENT ? `&nbsp;&middot;&nbsp;<a href="${chip.clsENT.replace('raw.githubusercontent.com','github.com').replace('/main/','/blob/main/')}" target="_blank" rel="noopener">ENT →</a>` : '';
+
+  const clusterPanel = hasCluster ? `
+    <div class="dpanel mm-panel">
+      <div class="dpanel-ticker"><span class="dot live"></span>Cluster Rates</div>
+      <div style="margin-bottom:4px;">
+        ${mmVal ? `<div class="lgd-item-label">Mid-Market &nbsp;&middot;&nbsp; ${chip.ticker}-CLS-MM</div>
+        <div class="dpanel-val">${D(mmVal,v=>'$'+v.toFixed(4))}</div>
+        <div class="dpanel-chg" style="margin-bottom:10px;">${fmtChg(mmVal,mmPrev)}</div>` : ''}
+        ${entVal ? `<div class="lgd-item-label">Enterprise &nbsp;&middot;&nbsp; ${chip.ticker}-CLS-ENT</div>
+        <div class="dpanel-val" style="color:var(--amber);">${D(entVal,v=>'$'+v.toFixed(4))}</div>` : ''}
+      </div>
+      <div class="dpanel-desc">Going-concern revenue at cluster scale — per GPU / hr.${mmVal?' MM: median of RunPod + Lambda 8-GPU prices.':''}${entVal?' ENT: CoreWeave on-demand rate card, bundled CPU / RAM / interconnect.':''}</div>
+      <div class="dpanel-meta">
+        <span class="dpanel-mver">Methodology ${mmMver||spotMver||'&mdash;'}</span>
+        ${mmDtd||entDtd}${mmVal?` &middot; MM ${mmObs} obs`:''}${entVal?` &middot; ENT ${entObs} obs`:''}
+        ${clsMMLink}${clsENTLink}
+      </div>
+    </div>
+
+    <div class="dpanel lgd-panel">
+      <div class="dpanel-ticker"><span class="dot live lgd"></span>T2I Spreads &mdash; LGD Inputs</div>
+      <div class="lgd-pair">
+        ${mmVal ? `<div><div class="lgd-item-label">T2I-MM</div><div class="lgd-item-val">${D(mmt2i,v=>(v*100).toFixed(1)+'%')}</div></div>` : ''}
+        ${entVal ? `<div><div class="lgd-item-label">T2I-ENT</div><div class="lgd-item-val ent-v">${D(entt2i,v=>(v*100).toFixed(1)+'%')}</div></div>` : ''}
+      </div>
+      <div class="dpanel-desc">The revenue haircut a lender absorbs when GPU collateral is redeployed into the interruptible spot market as single units. Formula: (cluster &minus; interruptible floor) / cluster.</div>
+      <div class="dpanel-meta">
+        <span class="dpanel-mver">Computed from ${chip.ticker}${mmVal?', CLS-MM':''}${entVal?', CLS-ENT':''}</span>
+        ${mmVal?`MM $${D(mmVal,v=>v.toFixed(4))} &middot; `:''}${entVal?`ENT $${D(entVal,v=>v.toFixed(4))} &middot; `:''}Spot $${ spotVal.toFixed(4)}
+      </div>
+    </div>` : '';
 
   document.getElementById('rate-area').innerHTML = `
-    <!-- Stack -->
     <div style="margin-bottom:14px;">
       <div class="stack-header">
-        <div class="stack-title">H100 SXM &mdash; GPU Rental Revenue Stack</div>
-        <div class="stack-subtitle">$/GPU/hr &nbsp;&middot;&nbsp; US on-demand &nbsp;&middot;&nbsp; ${spotDtd}</div>
+        <div class="stack-title">${chip.label} &mdash; GPU Rental Revenue Stack</div>
+        <div class="stack-subtitle">$/GPU/hr &nbsp;&middot;&nbsp; on-demand &nbsp;&middot;&nbsp; ${spotDtd}</div>
       </div>
       <div class="stack-visual">
-
-        <div class="stack-bar-wrap" style="margin-bottom:4px;">
-          <div class="stack-bar-label">Enterprise</div>
-          <div class="stack-bar-track"><div class="stack-bar-fill ent" style="width:${entPct}%"></div></div>
-          <div class="stack-bar-value">${D(entVal,v=>'$'+v.toFixed(4))}</div>
-          <div class="stack-bar-source">CoreWeave &nbsp;&middot;&nbsp; bundled node</div>
-        </div>
-
-        <div class="stack-spread-row">
-          <div class="stack-spread-spacer"></div>
-          <div class="stack-spread-content">
-            <div class="spread-vline"></div>
-            <div class="spread-text ent-c"><span class="sv">${D(entt2i,v=>(v*100).toFixed(1)+'%')} T2I-ENT</span> &nbsp;&mdash;&nbsp; redeployment spread vs enterprise going-concern revenue</div>
-          </div>
-          <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
-        </div>
-
-        <div class="stack-bar-wrap" style="margin-bottom:4px;">
-          <div class="stack-bar-label">Mid-Market</div>
-          <div class="stack-bar-track"><div class="stack-bar-fill mm" style="width:${mmPct}%"></div></div>
-          <div class="stack-bar-value">${D(mmVal,v=>'$'+v.toFixed(4))}</div>
-          <div class="stack-bar-source">${mmSrc||'RunPod · Lambda'}</div>
-        </div>
-
-        <div class="stack-spread-row">
-          <div class="stack-spread-spacer"></div>
-          <div class="stack-spread-content">
-            <div class="spread-vline"></div>
-            <div class="spread-text mm-c"><span class="sv">${D(mmt2i,v=>(v*100).toFixed(1)+'%')} T2I-MM</span> &nbsp;&mdash;&nbsp; redeployment spread vs mid-market going-concern revenue</div>
-          </div>
-          <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
-        </div>
-
+        ${entBar}
+        ${mmBar}
         <div class="stack-bar-wrap">
-          <div class="stack-bar-label">Spot Floor</div>
+          <div class="stack-bar-label">Spot${hasCluster?' Floor':''}</div>
           <div class="stack-bar-track"><div class="stack-bar-fill spot" style="width:${sPct}%"></div></div>
           <div class="stack-bar-value">$${spotVal.toFixed(4)}</div>
-          <div class="stack-bar-source">interruptible &nbsp;&middot;&nbsp; multi-source median</div>
+          <div class="stack-bar-source">non-interruptible &nbsp;&middot;&nbsp; multi-source median</div>
         </div>
-
         <div class="stack-legend">
-          <div class="legend-item"><div class="legend-dot spot"></div><span>CRI-H100 — Spot floor. Spot redeployment reference. Single-GPU rental floor.</span></div>
-          <div class="legend-item"><div class="legend-dot mm"></div><span>CRI-H100-CLS-MM — Mid-market cluster rate. Median of RunPod + Lambda 8-GPU posted prices.</span></div>
-          <div class="legend-item"><div class="legend-dot ent"></div><span>CRI-H100-CLS-ENT — Enterprise cluster rate. CoreWeave on-demand, bundled node pricing.</span></div>
+          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — Non-interruptible spot rate. Going-concern redeployment reference. Single-GPU on-demand rental floor.</span></div>
+          ${mmLegend}
+          ${entLegend}
         </div>
       </div>
     </div>
 
-    <!-- Detail panels -->
     <div class="detail-grid">
-
       <div class="dpanel mm-panel">
-        <div class="dpanel-ticker"><span class="dot live"></span>CRI-H100 <span class="primary-badge">Primary Reference</span></div>
+        <div class="dpanel-ticker"><span class="dot live"></span>${chip.ticker}${chip.primary?' <span class="primary-badge">Primary Reference</span>':''}</div>
         <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
         <div class="dpanel-chg">${fmtChg(spotVal, spotPrev)}</div>
-        <div class="dpanel-desc">Interruptible spot floor — per GPU / hr. The spot redeployment rate reference for GPU-backed credit. What a lender recovers by redeploying repossessed GPUs into the single-unit spot market.</div>
+        <div class="dpanel-desc">Non-interruptible spot rate — per GPU / hr. Going-concern redeployment reference for GPU-backed credit. What a lender recovers by redeploying repossessed GPUs into the single-unit on-demand rental market.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Methodology ${spotMver}</span>
           ${spotDtd} &middot; ${spotObs} obs &middot; ${spotConf} confidence
-          &nbsp;&middot;&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv" target="_blank" rel="noopener">Full series →</a>
+          &nbsp;&middot;&nbsp;<a href="${chip.github}" target="_blank" rel="noopener">Full series →</a>
         </div>
       </div>
-
-      <div class="dpanel mm-panel">
-        <div class="dpanel-ticker"><span class="dot live"></span>Cluster Rates</div>
-        <div style="margin-bottom:4px;">
-          <div class="lgd-item-label">Mid-Market &nbsp;&middot;&nbsp; CRI-H100-CLS-MM</div>
-          <div class="dpanel-val">${D(mmVal,v=>'$'+v.toFixed(4))}</div>
-          <div class="dpanel-chg" style="margin-bottom:10px;">${fmtChg(mmVal,mmPrev)}</div>
-          <div class="lgd-item-label">Enterprise &nbsp;&middot;&nbsp; CRI-H100-CLS-ENT</div>
-          <div class="dpanel-val" style="color:var(--amber);">${D(entVal,v=>'$'+v.toFixed(4))}</div>
-        </div>
-        <div class="dpanel-desc">Going-concern revenue at cluster scale — per GPU / hr. MM: median of RunPod + Lambda 8-GPU prices. ENT: CoreWeave on-demand rate card, bundled CPU / RAM / interconnect.</div>
-        <div class="dpanel-meta">
-          <span class="dpanel-mver">Methodology ${mmMver||'&mdash;'}</span>
-          ${mmDtd} &middot; MM ${mmObs} obs &middot; ENT ${entObs} obs
-          &nbsp;&middot;&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv" target="_blank" rel="noopener">MM →</a>
-          &nbsp;&middot;&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv" target="_blank" rel="noopener">ENT →</a>
-        </div>
-      </div>
-
-      <div class="dpanel lgd-panel">
-        <div class="dpanel-ticker"><span class="dot live lgd"></span>T2I Spreads &mdash; LGD Inputs</div>
-        <div class="lgd-pair">
-          <div>
-            <div class="lgd-item-label">T2I-MM</div>
-            <div class="lgd-item-val">${D(mmt2i,v=>(v*100).toFixed(1)+'%')}</div>
-          </div>
-          <div>
-            <div class="lgd-item-label">T2I-ENT</div>
-            <div class="lgd-item-val ent-v">${D(entt2i,v=>(v*100).toFixed(1)+'%')}</div>
-          </div>
-        </div>
-        <div class="dpanel-desc">The revenue haircut a lender absorbs when GPU collateral is redeployed into the spot market as single units. Formula: (cluster &minus; spot) / cluster. T2I-MM references mid-market going-concern revenue; T2I-ENT references enterprise bundled node economics.</div>
-        <div class="dpanel-meta">
-          <span class="dpanel-mver">Computed from CRI-H100, CLS-MM, CLS-ENT</span>
-          MM $${D(mmVal,v=>v.toFixed(4))} &middot; ENT $${D(entVal,v=>v.toFixed(4))} &middot; Spot $${spotVal.toFixed(4)}
-        </div>
-      </div>
-
+      ${clusterPanel}
     </div>`;
 }
 
 async function renderSpot(chipKey) {
   const chip  = CHIPS[chipKey];
   const lines = await fetchCsv(chip.csv);
-  const sp    = latestRow(lines, null, 'seller_ask_interruptible');
+  const sp    = latestRow(lines, null, 'seller_ask_noninterruptible');
   const spotDate = sp[0].trim();
   const spotVal  = parseFloat(sp[4]);
   const spotMver = sp[1].trim();
   const spotConf = sp[12].trim();
   const spotObs  = parseInt(sp[10]).toLocaleString();
   const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(lines, null, spotDate, 4, 'seller_ask_interruptible');
+  const spotPrev = prevVal(lines, null, spotDate, 4, 'seller_ask_noninterruptible');
 
   document.getElementById('rate-area').innerHTML = `
     <div class="spot-single">
@@ -620,15 +667,16 @@ async function renderSpot(chipKey) {
 
 async function loadChip(chipKey) {
   document.getElementById('rate-area').innerHTML = '<div class="loading-state">Loading&hellip;</div>';
+  const chip = CHIPS[chipKey];
   try {
-    if (chipKey === 'h100') {
-      const spotLines = await fetchCsv(CHIPS.h100.csv);
-      await renderH100(spotLines);
+    if (chip.clsMM || chip.clsENT) {
+      const spotLines = await fetchCsv(chip.csv);
+      await renderStack(chipKey, spotLines);
     } else {
       await renderSpot(chipKey);
     }
   } catch(e) {
-    document.getElementById('rate-area').innerHTML = `<div class="spot-single"><div class="spot-val">&mdash;</div><div class="spot-meta">Data unavailable &mdash; <a href="${CHIPS[chipKey].github}" target="_blank" rel="noopener">see GitHub</a></div></div>`;
+    document.getElementById('rate-area').innerHTML = `<div class="spot-single"><div class="spot-val">&mdash;</div><div class="spot-meta">Data unavailable &mdash; <a href="${chip.github}" target="_blank" rel="noopener">see GitHub</a></div></div>`;
   }
 }
 
