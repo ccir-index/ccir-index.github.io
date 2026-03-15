@@ -319,7 +319,7 @@
         <div class="cov-item">
           <div class="cov-num">03</div>
           <div class="cov-head">Spot Redeployment Scenario</div>
-          <div class="cov-body">The assumed redeployment rate is CRI-H100 &mdash; what the lender recovers by redeploying repossessed GPUs into the single-unit spot rental market. T2I Spread is the empirical measure of how far below going-concern revenue that floor sits: the LGD input the deal requires.</div>
+          <div class="cov-body">The liquidation floor is CRI-H100 &mdash; the interruptible spot rate, the most commodity-like clearing price in the market. Covenant floors and multiples reference this rate directly. T2I Spread is the empirical measure of how far above it cluster going-concern revenue sits: the LGD input the deal requires.</div>
         </div>
       </div>
       <div class="cov-note">
@@ -406,7 +406,7 @@ const CHIPS = {
     ticker:'CRI-H100', gpuModel:'H100_SXM', label:'H100 SXM', primary:true,
     csv:`${RAW}/cri-h100/CRI-H100-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv',
-    desc:'Non-interruptible spot rate — per GPU / hr. Multi-source median. Going-concern redeployment reference for GPU-backed credit.',
+    desc:'Interruptible spot rate — per GPU / hr. Multi-source median. The commodity clearing price for H100 compute. Covenant floors and multiples reference this rate.',
     clsMM: CLS_MM_ALL,
     clsENT:`${RAW}/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv`,
   },
@@ -482,15 +482,15 @@ const D = (v, fmt) => (v !== null && !isNaN(v)) ? fmt(v) : '&mdash;';
 async function renderStack(chipKey, spotLines) {
   const chip = CHIPS[chipKey];
 
-  // ── Spot (noninterruptible) ──────────────────────────────────────────────
-  const sp       = latestRow(spotLines, null, 'seller_ask_noninterruptible');
+  // ── Spot (interruptible) ────────────────────────────────────────────────
+  const sp       = latestRow(spotLines, null, 'seller_ask_interruptible');
   const spotDate = sp[0].trim();
   const spotVal  = parseFloat(sp[4]);
   const spotMver = sp[1].trim();
   const spotConf = sp[12].trim();
   const spotObs  = parseInt(sp[10]).toLocaleString();
   const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(spotLines, null, spotDate, 4, 'seller_ask_noninterruptible');
+  const spotPrev = prevVal(spotLines, null, spotDate, 4, 'seller_ask_interruptible');
 
   // ── MM (optional) ────────────────────────────────────────────────────────
   let mmVal=null, mmt2i=null, mmDtd='', mmMver='', mmConf='', mmObs='', mmSrc='', mmPrev=null;
@@ -613,10 +613,10 @@ async function renderStack(chipKey, spotLines) {
           <div class="stack-bar-label">Spot${hasCluster?' Floor':''}</div>
           <div class="stack-bar-track"><div class="stack-bar-fill spot" style="width:${sPct}%"></div></div>
           <div class="stack-bar-value">$${spotVal.toFixed(4)}</div>
-          <div class="stack-bar-source">non-interruptible &nbsp;&middot;&nbsp; multi-source median</div>
+          <div class="stack-bar-source">interruptible &nbsp;&middot;&nbsp; multi-source median</div>
         </div>
         <div class="stack-legend">
-          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — Non-interruptible spot rate. Going-concern redeployment reference. Single-GPU on-demand rental floor.</span></div>
+          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — Interruptible spot rate. Commodity clearing price for GPU compute. Covenant floors and multiples reference this rate.</span></div>
           ${mmLegend}
           ${entLegend}
         </div>
@@ -628,7 +628,7 @@ async function renderStack(chipKey, spotLines) {
         <div class="dpanel-ticker"><span class="dot live"></span>${chip.ticker}${chip.primary?' <span class="primary-badge">Primary Reference</span>':''}</div>
         <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
         <div class="dpanel-chg">${fmtChg(spotVal, spotPrev)}</div>
-        <div class="dpanel-desc">Non-interruptible spot rate — per GPU / hr. Going-concern redeployment reference for GPU-backed credit. What a lender recovers by redeploying repossessed GPUs into the single-unit on-demand rental market.</div>
+        <div class="dpanel-desc">Interruptible spot rate — per GPU / hr. The commodity clearing price for GPU compute. Covenant floors and multiples reference this rate; T2I Spread measures how far above it cluster going-concern revenue sits.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Methodology ${spotMver}</span>
           ${spotDtd} &middot; ${spotObs} obs &middot; ${spotConf} confidence
@@ -642,14 +642,14 @@ async function renderStack(chipKey, spotLines) {
 async function renderSpot(chipKey) {
   const chip  = CHIPS[chipKey];
   const lines = await fetchCsv(chip.csv);
-  const sp    = latestRow(lines, null, 'seller_ask_noninterruptible');
+  const sp    = latestRow(lines, null, 'seller_ask_interruptible');
   const spotDate = sp[0].trim();
   const spotVal  = parseFloat(sp[4]);
   const spotMver = sp[1].trim();
   const spotConf = sp[12].trim();
   const spotObs  = parseInt(sp[10]).toLocaleString();
   const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(lines, null, spotDate, 4, 'seller_ask_noninterruptible');
+  const spotPrev = prevVal(lines, null, spotDate, 4, 'seller_ask_interruptible');
 
   document.getElementById('rate-area').innerHTML = `
     <div class="spot-single">
