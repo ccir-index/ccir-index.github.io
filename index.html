@@ -164,6 +164,29 @@
     .spot-desc { font-size: .82rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 14px; }
     .spot-meta { font-family: var(--mono); font-size: .62rem; color: var(--text-dim); line-height: 1.75; border-top: 1px solid var(--border); padding-top: 12px; }
 
+    /* ─── GENERATION SPREAD SECTION ──────────────────────────────────────── */
+    .gen-spread-section { padding: 48px 0 52px; border-top: 1px solid var(--border); }
+    .gen-spread-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; }
+    .gen-spread-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 10px; }
+    .gen-spread-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 500; color: var(--text-hi); }
+    .gen-spread-sub { font-size: .80rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 28px; max-width: 580px; }
+    .gen-spread-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 600px) { .gen-spread-grid { grid-template-columns: 1fr; } }
+    .gen-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 2px solid var(--accent); border-radius: 2px; padding: 22px 22px 18px; box-shadow: var(--sh-sm); }
+    .gen-card.secondary { border-top-color: var(--border-hi); }
+    .gen-card-label { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .gen-card.secondary .gen-card-label { color: var(--text-dim); }
+    .gen-card-spread { font-family: var(--mono); font-size: 2.4rem; font-weight: 400; letter-spacing: -.03em; line-height: 1; color: var(--accent); margin-bottom: 6px; }
+    .gen-card.secondary .gen-card-spread { color: var(--text-hi); }
+    .gen-card-spread.converging { color: var(--amber); }
+    .gen-card-spread.warning { color: #A03020; }
+    .gen-card-rates { font-family: var(--mono); font-size: .68rem; color: var(--text-dim); margin-bottom: 12px; line-height: 1.8; }
+    .gen-card-rates span { color: var(--text-hi); font-weight: 500; }
+    .gen-card-desc { font-size: .780rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 12px; }
+    .gen-card-covenant { display: inline-block; font-family: var(--mono); font-size: .54rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); background: var(--accent-lo); border: 1px solid var(--accent-mid); border-radius: 2px; padding: 2px 8px; }
+    .gen-card.secondary .gen-card-covenant { color: var(--text-dim); background: var(--surface-2); border-color: var(--border); }
+    .gen-card-meta { font-family: var(--mono); font-size: .58rem; color: var(--text-dim); border-top: 1px solid var(--border); padding-top: 10px; margin-top: 12px; line-height: 1.7; }
+
     /* ─── GOVERNANCE BAR ──────────────────────────────────────────────────── */
     .gov-bar { background: var(--bg-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 0; margin-top: 60px; }
     .gov-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; gap: 36px; flex-wrap: wrap; align-items: center; }
@@ -340,6 +363,36 @@
     </div>
   </div>
 </main>
+
+<!-- GENERATION SPREAD -->
+<div class="gen-spread-section">
+  <div class="gen-spread-inner">
+    <div class="sec-label">Generation Spread</div>
+    <div class="sec-rule"></div>
+    <div class="gen-spread-header">
+      <div class="gen-spread-title">Collateral Obsolescence — Live Signal</div>
+    </div>
+    <p class="gen-spread-sub">The Generation Spread measures whether next-generation hardware is converging on H100 pricing in real time. When CRI-B200 falls toward CRI-H100, the training premium that justifies H100 collateral valuations erodes. The §7.04 Generation Spread covenant triggers on this signal. The H100/A100 spread shows the longer-term commoditization trajectory — where H100 is headed as inference demand absorbs prior-generation capacity.</p>
+    <div class="gen-spread-grid" id="gen-spread-grid">
+      <div class="gen-card" id="gen-b200-card">
+        <div class="gen-card-label">CRI-B200 vs CRI-H100 &nbsp;·&nbsp; §7.04 Trigger</div>
+        <div class="gen-card-spread" id="gen-b200-spread">&mdash;</div>
+        <div class="gen-card-rates" id="gen-b200-rates">Loading&hellip;</div>
+        <div class="gen-card-desc">Premium of H100 on-demand rate over B200. Compression signals that next-generation hardware is repricing toward H100 levels — the collateral obsolescence signal a 36-month H100 facility must monitor.</div>
+        <div class="gen-card-covenant">§7.04 Covenant Anchor &nbsp;·&nbsp; Threshold: 15%</div>
+        <div class="gen-card-meta" id="gen-b200-meta"></div>
+      </div>
+      <div class="gen-card secondary" id="gen-a100-card">
+        <div class="gen-card-label">CRI-H100 vs CRI-A100 &nbsp;·&nbsp; Commoditization Trajectory</div>
+        <div class="gen-card-spread" id="gen-a100-spread">&mdash;</div>
+        <div class="gen-card-rates" id="gen-a100-rates">Loading&hellip;</div>
+        <div class="gen-card-desc">Premium of H100 over A100 on-demand rate. Compression signals H100 pricing is cascading toward the prior inference generation — the forward trajectory for H100 collateral as Blackwell absorbs training demand.</div>
+        <div class="gen-card-covenant">Commoditization Signal &nbsp;·&nbsp; 18–24 mo horizon</div>
+        <div class="gen-card-meta" id="gen-a100-meta"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- GOVERNANCE BAR -->
 <div class="gov-bar">
@@ -587,8 +640,8 @@ async function renderStack(chipKey, spotLines) {
       </div>
       <div class="dpanel-desc">Illustrative spread between cluster revenue and the interruptible spot floor &mdash; the rate a lender recovers if a defaulted cluster is restructured into interruptible spot deployment. CCIR publishes both rates to support this specific recovery scenario. LGD calibration requires deal-specific assumptions on utilization, cap rate, and contract structure; engage CCIR for structuring consultation.</div>
       <div class="dpanel-meta">
-        <span class="dpanel-mver">Computed from ${chip.ticker}${mmVal?', CLS-MM':''}${entVal?', CLS-ENT':''}</span>
-        ${mmVal?`MM $${D(mmVal,v=>v.toFixed(4))} &middot; `:''}${entVal?`ENT $${D(entVal,v=>v.toFixed(4))} &middot; `:''}Spot $${ spotVal.toFixed(4)}
+        <span class="dpanel-mver">Computed from${mmVal?` CLS-MM`:''}${entVal?`, CLS-ENT`:''} &mdash; interruptible floor</span>
+        ${mmVal?`MM $${D(mmVal,v=>v.toFixed(4))} &middot; `:''}${entVal?`ENT $${D(entVal,v=>v.toFixed(4))} &middot; `:''}Int. floor $${D(spotVal,v=>v.toFixed(4))}
       </div>
     </div>` : '';
 
@@ -682,7 +735,74 @@ function selectChip(chipKey) {
   loadChip(chipKey);
 }
 
-document.addEventListener('DOMContentLoaded', () => loadChip('h100'));
+async function renderGenSpread() {
+  try {
+    const h100Lines = await fetchCsv(CHIPS['h100'].csv);
+    const b200Lines = await fetchCsv(CHIPS['b200'].csv);
+    const a100Lines = await fetchCsv(CHIPS['a100'].csv);
+
+    const h100 = latestRow(h100Lines, null, 'seller_ask_noninterruptible');
+    const b200 = latestRow(b200Lines, null, 'seller_ask_noninterruptible');
+    const a100 = latestRow(a100Lines, null, 'seller_ask_noninterruptible');
+
+    if (!h100 || !b200 || !a100) return;
+
+    const h100Val = parseFloat(h100[4]);
+    const b200Val = parseFloat(b200[4]);
+    const a100Val = parseFloat(a100[4]);
+    const h100Date = h100[0].trim();
+    const b200Date = b200[0].trim();
+    const a100Date = a100[0].trim();
+
+    // B200 vs H100: (H100 - B200) / H100
+    // Positive = H100 still commands a premium over B200
+    // Negative = B200 has fallen below H100 (convergence complete)
+    const b200Spread = (h100Val - b200Val) / h100Val;
+    const b200Pct = (b200Spread * 100).toFixed(1);
+
+    // H100 vs A100: (H100 - A100) / H100
+    const a100Spread = (h100Val - a100Val) / h100Val;
+    const a100Pct = (a100Spread * 100).toFixed(1);
+
+    // Color the B200 spread based on convergence risk
+    const b200SpreadEl = document.getElementById('gen-b200-spread');
+    b200SpreadEl.textContent = b200Spread >= 0 ? `+${b200Pct}%` : `${b200Pct}%`;
+    if (b200Spread < 0) {
+      b200SpreadEl.className = 'gen-card-spread warning';
+    } else if (b200Spread < 0.15) {
+      b200SpreadEl.className = 'gen-card-spread converging';
+    } else {
+      b200SpreadEl.className = 'gen-card-spread';
+    }
+
+    document.getElementById('gen-b200-rates').innerHTML =
+      `CRI-H100 &nbsp;<span>$${h100Val.toFixed(4)}</span> &nbsp;&middot;&nbsp; ` +
+      `CRI-B200 &nbsp;<span>$${b200Val.toFixed(4)}</span>`;
+
+    document.getElementById('gen-b200-meta').innerHTML =
+      `As of ${fmtDate(h100Date)} &nbsp;&middot;&nbsp; on-demand spot rates`;
+
+    // A100 spread
+    const a100SpreadEl = document.getElementById('gen-a100-spread');
+    a100SpreadEl.textContent = `+${a100Pct}%`;
+
+    document.getElementById('gen-a100-rates').innerHTML =
+      `CRI-H100 &nbsp;<span>$${h100Val.toFixed(4)}</span> &nbsp;&middot;&nbsp; ` +
+      `CRI-A100 &nbsp;<span>$${a100Val.toFixed(4)}</span>`;
+
+    document.getElementById('gen-a100-meta').innerHTML =
+      `As of ${fmtDate(a100Date)} &nbsp;&middot;&nbsp; on-demand spot rates`;
+
+  } catch(e) {
+    document.getElementById('gen-b200-spread').textContent = '—';
+    document.getElementById('gen-a100-spread').textContent = '—';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadChip('h100');
+  renderGenSpread();
+});
 </script>
 </body>
 </html>
