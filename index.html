@@ -378,16 +378,16 @@
         <div class="gen-card-label">CRI-B200 vs CRI-H100 &nbsp;·&nbsp; §7.04 Trigger</div>
         <div class="gen-card-spread" id="gen-b200-spread">&mdash;</div>
         <div class="gen-card-rates" id="gen-b200-rates">Loading&hellip;</div>
-        <div class="gen-card-desc">Premium of H100 on-demand rate over B200. Compression signals that next-generation hardware is repricing toward H100 levels — the collateral obsolescence signal a 36-month H100 facility must monitor.</div>
-        <div class="gen-card-covenant">§7.04 Covenant Anchor &nbsp;·&nbsp; Threshold: 15%</div>
+        <div class="gen-card-desc" id="gen-b200-desc"></div>
+        <div class="gen-card-covenant" id="gen-b200-covenant">§7.04 Covenant Anchor &nbsp;·&nbsp; Threshold: 15%</div>
         <div class="gen-card-meta" id="gen-b200-meta"></div>
       </div>
       <div class="gen-card secondary" id="gen-a100-card">
         <div class="gen-card-label">CRI-H100 vs CRI-A100 &nbsp;·&nbsp; Commoditization Trajectory</div>
         <div class="gen-card-spread" id="gen-a100-spread">&mdash;</div>
         <div class="gen-card-rates" id="gen-a100-rates">Loading&hellip;</div>
-        <div class="gen-card-desc">Premium of H100 over A100 on-demand rate. Compression signals H100 pricing is cascading toward the prior inference generation — the forward trajectory for H100 collateral as Blackwell absorbs training demand.</div>
-        <div class="gen-card-covenant">Commoditization Signal &nbsp;·&nbsp; 18–24 mo horizon</div>
+        <div class="gen-card-desc" id="gen-a100-desc"></div>
+        <div class="gen-card-covenant" id="gen-a100-covenant">Commoditization Signal &nbsp;·&nbsp; 18–24 mo horizon</div>
         <div class="gen-card-meta" id="gen-a100-meta"></div>
       </div>
     </div>
@@ -465,14 +465,14 @@ const CHIPS = {
     ticker:'CRI-A100', gpuModel:'A100_SXM', label:'A100 SXM', primary:false,
     csv:`${RAW}/cri-a100/CRI-A100-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv',
-    desc:'Inference and batch workloads. A100 rates have held as inference demand grows — H100/A100 spread measures how quickly the prior training generation absorbs demand displaced from higher tiers.',
+    desc:'Inference and batch workloads. A100 now trading below L40S on-demand — inference demand is pricing Ada Lovelace above prior-gen training silicon. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.',
     clsMM: CLS_MM_ALL,
   },
   l40s: {
     ticker:'CRI-L40S', gpuModel:'L40S', label:'L40S', primary:false,
     csv:`${RAW}/cri-l40s/CRI-L40S-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv',
-    desc:'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. Near-parity with A100 signals commodity cascade pricing for non-training compute.',
+    desc:'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. Currently trading above A100 on-demand — inference demand pricing purpose-built inference silicon above prior-gen training hardware.',
   },
 };
 
@@ -751,26 +751,91 @@ async function renderGenSpread() {
     const b200Val = parseFloat(b200[4]);
     const a100Val = parseFloat(a100[4]);
     const h100Date = h100[0].trim();
-    const b200Date = b200[0].trim();
     const a100Date = a100[0].trim();
 
-    // B200 vs H100: (H100 - B200) / H100
-    // Positive = H100 still commands a premium over B200
-    // Negative = B200 has fallen below H100 (convergence complete)
-    const b200Spread = (h100Val - b200Val) / h100Val;
-    const b200Pct = (b200Spread * 100).toFixed(1);
+    // ── B200 / H100 spread ───────────────────────────────────────────────────
+    // Formula: (B200 - H100) / B200
+    // Positive = B200 commands premium over H100 (training tier intact)
+    // Near zero = converging toward §7.04 threshold
+    // Negative = H100 above B200 (unexpected inversion)
+    const b200Raw  = (b200Val - h100Val) / b200Val;
+    const b200Pct  = Math.abs(b200Raw * 100).toFixed(1);
+    const b200El   = document.getElementById('gen-b200-spread');
+    const b200Desc = document.getElementById('gen-b200-desc');
+    const b200Cov  = document.getElementById('gen-b200-covenant');
 
-    // H100 vs A100: (H100 - A100) / H100
-    const a100Spread = (h100Val - a100Val) / h100Val;
-    const a100Pct = (a100Spread * 100).toFixed(1);
+    if (b200Raw > 0.15) {
+      // Premium intact
+      b200El.textContent = `+${b200Pct}%`;
+      b200El.className = 'gen-card-spread';
+      b200Desc.textContent = `B200 trading at ${b200Pct}% premium to H100 — training-tier pricing intact. Generation Spread well above the §7.04 threshold.`;
+      b200Cov.textContent = '§7.04 — Threshold: 15% · Status: Intact';
+    } else if (b200Raw >= 0) {
+      // Converging — approaching threshold
+      b200El.textContent = `+${b200Pct}%`;
+      b200El.className = 'gen-card-spread converging';
+      b200Desc.textContent = `B200 trading at ${b200Pct}% premium to H100 — approaching §7.04 threshold. B200 supply expanding; training-tier premium compressing. Monitor for covenant trigger.`;
+      b200Cov.textContent = '§7.04 — Threshold: 15% · Status: Converging';
+      b200Cov.style.color = 'var(--amber)';
+      b200Cov.style.background = 'var(--amber-lo)';
+      b200Cov.style.borderColor = 'var(--amber-mid)';
+    } else {
+      // Inverted — H100 above B200
+      b200El.textContent = `${b200Pct}% discount`;
+      b200El.className = 'gen-card-spread warning';
+      b200Desc.textContent = `H100 trading at ${b200Pct}% premium to B200 — convergence complete. §7.04 accelerated amortization triggered. H100 collateral no longer commands a training-tier premium.`;
+      b200Cov.textContent = '§7.04 — Status: Triggered';
+      b200Cov.style.color = '#A03020';
+      b200Cov.style.background = '#FDF0EE';
+      b200Cov.style.borderColor = '#E8B8B0';
+    }
 
-    // Color the B200 spread based on convergence risk
-    const b200SpreadEl = document.getElementById('gen-b200-spread');
-    b200SpreadEl.textContent = b200Spread >= 0 ? `+${b200Pct}%` : `${b200Pct}%`;
-    if (b200Spread < 0) {
-      b200SpreadEl.className = 'gen-card-spread warning';
-    } else if (b200Spread < 0.15) {
-      b200SpreadEl.className = 'gen-card-spread converging';
+    document.getElementById('gen-b200-rates').innerHTML =
+      `CRI-B200 &nbsp;<span>$${b200Val.toFixed(4)}</span> &nbsp;&middot;&nbsp; ` +
+      `CRI-H100 &nbsp;<span>$${h100Val.toFixed(4)}</span>`;
+
+    document.getElementById('gen-b200-meta').innerHTML =
+      `As of ${fmtDate(h100Date)} &nbsp;&middot;&nbsp; on-demand spot rates`;
+
+    // ── H100 / A100 spread ───────────────────────────────────────────────────
+    // Formula: (H100 - A100) / H100
+    // Positive = H100 commands premium (normal, prior-gen below current-gen)
+    // Negative = A100 above H100 (inversion — inference demand thesis)
+    const a100Raw  = (h100Val - a100Val) / h100Val;
+    const a100Pct  = Math.abs(a100Raw * 100).toFixed(1);
+    const a100El   = document.getElementById('gen-a100-spread');
+    const a100Desc = document.getElementById('gen-a100-desc');
+    const a100Cov  = document.getElementById('gen-a100-covenant');
+
+    if (a100Raw > 0) {
+      // Normal — H100 above A100
+      a100El.textContent = `+${a100Pct}%`;
+      a100El.className = 'gen-card-spread';
+      a100Desc.textContent = `H100 trading at ${a100Pct}% premium to A100 — prior training generation below current-gen. Compression signals H100 commoditizing toward inference-tier pricing.`;
+      a100Cov.textContent = 'Commoditization Signal · 18–24 mo horizon';
+    } else {
+      // Inverted — A100 above H100
+      a100El.textContent = `${a100Pct}% discount`;
+      a100El.className = 'gen-card-spread converging';
+      a100Desc.textContent = `H100 trading at ${a100Pct}% discount to A100 — inference-tier inversion. Inference demand is pricing Ada Lovelace above prior-gen training silicon. H100 commoditizing faster than the prior generation.`;
+      a100Cov.textContent = 'Inference-Tier Inversion · Active signal';
+      a100Cov.style.color = 'var(--amber)';
+      a100Cov.style.background = 'var(--amber-lo)';
+      a100Cov.style.borderColor = 'var(--amber-mid)';
+    }
+
+    document.getElementById('gen-a100-rates').innerHTML =
+      `CRI-H100 &nbsp;<span>$${h100Val.toFixed(4)}</span> &nbsp;&middot;&nbsp; ` +
+      `CRI-A100 &nbsp;<span>$${a100Val.toFixed(4)}</span>`;
+
+    document.getElementById('gen-a100-meta').innerHTML =
+      `As of ${fmtDate(a100Date)} &nbsp;&middot;&nbsp; on-demand spot rates`;
+
+  } catch(e) {
+    document.getElementById('gen-b200-spread').textContent = '—';
+    document.getElementById('gen-a100-spread').textContent = '—';
+  }
+}
     } else {
       b200SpreadEl.className = 'gen-card-spread';
     }
