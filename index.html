@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CCIR &mdash; Compute Credit Index Research</title>
+  <title>CCIR &mdash; The Reference Standard for GPU Collateral</title>
   <meta name="description" content="The independent GPU compute reference rate for credit agreements, collateral appraisals, and structured finance. IOSCO-aligned. No financial interest in the market we measure." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -226,13 +226,12 @@
       <img src="ccir-logo.jpg" alt="CCIR" class="logo" />
       <div>
         <div class="wordmark">CCIR &middot; Compute Credit Index Research</div>
-        <h1>Forward-Looking Covenant<br>Frameworks for GPU-Backed Credit</h1>
+        <h1>The Reference Standard<br>for GPU Collateral.</h1>
       </div>
     </div>
     <div class="hero-rule"></div>
     <p class="hero-stmt">
-      Workload migration, generation obsolescence, collateral repricing &mdash; these happen before any existing covenant fires.
-      <strong>CCIR builds the covenants that respond. The first forward-looking covenant frameworks built for this market, anchored to independent reference rates built for credit documents.</strong>
+      Independent reference rates for GPU-backed credit &mdash; <strong>built for citation in loan covenants, collateral appraisals, and compliance certificates.</strong> The structural independence and IOSCO-aligned methodology credit documents require.
     </p>
     <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;">
       <a href="services.html" style="font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;background:var(--accent);color:#fff;padding:10px 22px;border-radius:2px;text-decoration:none;">Covenant Frameworks &rarr;</a>
@@ -249,13 +248,13 @@
   <div class="pillar-grid">
     <div class="pillar">
       <div class="pillar-icon">Novel Covenants</div>
-      <div class="pillar-head">The Only Forward-Looking Frameworks in the Market</div>
+      <div class="pillar-head">Covenants That Respond to What's Actually Happening</div>
       <p class="pillar-body">Two covenants that don&rsquo;t exist in current GPU-backed deal documentation: a <strong>Workload Composition trigger</strong> that detects training-to-inference migration before it becomes a coverage breach, and a <strong>Generation Spread covenant</strong> that responds to Blackwell convergence as it happens &mdash; not after the collateral has repriced. <a href="services.html">See the full framework &rarr;</a></p>
     </div>
     <div class="pillar">
       <div class="pillar-icon">Reference Rates</div>
       <div class="pillar-head">H100 Today. Your Collateral Tomorrow.</div>
-      <p class="pillar-body">CRI-H100 and the full CCIR index family give covenants a named, independent market anchor &mdash; one that neither party controls and any counterparty can verify. Collateral marked to the live spot floor daily, not book depreciation. The structural independence credit documents require.</p>
+      <p class="pillar-body">CRI-H100 and the full CCIR index family give covenants a named, independent market anchor &mdash; one that neither party controls and any counterparty can verify. Collateral marked to the live on-demand rate daily, not book depreciation. The structural independence credit documents require.</p>
     </div>
     <div class="pillar">
       <div class="pillar-icon">Bespoke Structuring</div>
@@ -284,7 +283,7 @@
       <div class="gap-card">
         <div class="gap-card-num">03</div>
         <div class="gap-card-head">Generation obsolescence has no covenant response</div>
-        <p class="gap-card-body">When B200 spot prices converge with H100, the training premium that justifies H100 collateral valuations is effectively arbitraged away. Over a 36-month facility term this is a material exposure &mdash; and no current deal structure has a mechanism that responds to it as it is happening.</p>
+        <p class="gap-card-body">When B200 spot prices converge with H100, the training premium that justifies H100 collateral valuations is effectively arbitraged away. The risk is not simply one-directional: H100 rates have shown resilience as inference demand absorbs capacity previously dedicated to training. Over a 36-month facility term, no current deal structure has a mechanism that responds to either dynamic &mdash; convergence or re-rating &mdash; as it is happening.</p>
       </div>
     </div>
     <div class="gap-cta">
@@ -318,8 +317,8 @@
         </div>
         <div class="cov-item">
           <div class="cov-num">03</div>
-          <div class="cov-head">Spot Redeployment Scenario</div>
-          <div class="cov-body">The liquidation floor is CRI-H100 &mdash; the interruptible spot rate, the most commodity-like clearing price in the market. Covenant floors and multiples reference this rate directly. T2I Spread is the empirical measure of how far above it cluster going-concern revenue sits: the LGD input the deal requires.</div>
+          <div class="cov-head">Generation Obsolescence</div>
+          <div class="cov-body">The Generation Spread &mdash; CRI-B200 versus CRI-H100 &mdash; measures collateral obsolescence in real time. When B200 supply expands and its price falls toward H100 levels, the training premium erodes. The spread also captures the reverse: H100 rates have shown resilience as inference demand absorbs capacity displaced from training. CCIR publishes both rates daily. The §7.04 Generation Spread covenant responds to convergence as it happens, not after the collateral has repriced.</div>
         </div>
       </div>
       <div class="cov-note">
@@ -405,7 +404,7 @@ const CHIPS = {
     ticker:'CRI-H100', gpuModel:'H100_SXM', label:'H100 SXM', primary:true,
     csv:`${RAW}/cri-h100/CRI-H100-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv',
-    desc:'Interruptible spot rate — per GPU / hr. Multi-source median. The commodity clearing price for H100 compute. Covenant floors and multiples reference this rate.',
+    desc:'On-demand spot rate — per GPU / hr. Going-concern reference rate for H100 collateral. Inference demand has supported rates as training workloads migrate to Blackwell. Generation Spread vs CRI-B200 measures net obsolescence signal in real time.',
     clsMM: CLS_MM_ALL,
     clsENT:`${RAW}/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv`,
   },
@@ -413,7 +412,7 @@ const CHIPS = {
     ticker:'CRI-A100', gpuModel:'A100_SXM', label:'A100 SXM', primary:false,
     csv:`${RAW}/cri-a100/CRI-A100-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv',
-    desc:'Prior training generation — inference and batch workloads. H100/A100 spread measures cascade velocity into commodity tiers as H100 collateral matures.',
+    desc:'Inference and batch workloads. A100 rates have held as inference demand grows — H100/A100 spread measures how quickly the prior training generation absorbs demand displaced from higher tiers.',
     clsMM: CLS_MM_ALL,
   },
   l40s: {
@@ -475,15 +474,15 @@ const D = (v, fmt) => (v !== null && !isNaN(v)) ? fmt(v) : '&mdash;';
 async function renderStack(chipKey, spotLines) {
   const chip = CHIPS[chipKey];
 
-  // ── Spot (interruptible) ────────────────────────────────────────────────
-  const sp       = latestRow(spotLines, null, 'seller_ask_interruptible');
+  // ── Spot (non-interruptible) ─────────────────────────────────────────────
+  const sp       = latestRow(spotLines, null, 'seller_ask_noninterruptible');
   const spotDate = sp[0].trim();
   const spotVal  = parseFloat(sp[4]);
   const spotMver = sp[1].trim();
   const spotConf = sp[12].trim();
   const spotObs  = parseInt(sp[10]).toLocaleString();
   const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(spotLines, null, spotDate, 4, 'seller_ask_interruptible');
+  const spotPrev = prevVal(spotLines, null, spotDate, 4, 'seller_ask_noninterruptible');
 
   // ── MM (optional) ────────────────────────────────────────────────────────
   let mmVal=null, mmt2i=null, mmDtd='', mmMver='', mmConf='', mmObs='', mmSrc='', mmPrev=null;
@@ -532,7 +531,7 @@ async function renderStack(chipKey, spotLines) {
       <div class="stack-spread-spacer"></div>
       <div class="stack-spread-content">
         <div class="spread-vline"></div>
-        <div class="spread-text ent-c"><span class="sv">${D(entt2i,v=>(v*100).toFixed(1)+'%')} T2I-ENT</span> &nbsp;&mdash;&nbsp; redeployment spread vs enterprise going-concern revenue</div>
+        <div class="spread-text ent-c"><span class="sv">${D(entt2i,v=>(v*100).toFixed(1)+'%')} T2I-ENT</span> &nbsp;&mdash;&nbsp; illustrative redeployment spread vs enterprise cluster rate</div>
       </div>
       <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
     </div>` : '';
@@ -549,7 +548,7 @@ async function renderStack(chipKey, spotLines) {
       <div class="stack-spread-spacer"></div>
       <div class="stack-spread-content">
         <div class="spread-vline"></div>
-        <div class="spread-text mm-c"><span class="sv">${D(mmt2i,v=>(v*100).toFixed(1)+'%')} T2I-MM</span> &nbsp;&mdash;&nbsp; redeployment spread vs mid-market going-concern revenue</div>
+        <div class="spread-text mm-c"><span class="sv">${D(mmt2i,v=>(v*100).toFixed(1)+'%')} T2I-MM</span> &nbsp;&mdash;&nbsp; illustrative redeployment spread vs mid-market cluster rate</div>
       </div>
       <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
     </div>` : '';
@@ -581,12 +580,12 @@ async function renderStack(chipKey, spotLines) {
     </div>
 
     <div class="dpanel lgd-panel">
-      <div class="dpanel-ticker"><span class="dot live lgd"></span>T2I Spreads &mdash; LGD Inputs</div>
+      <div class="dpanel-ticker"><span class="dot live lgd"></span>T2I Spreads &mdash; Redeployment Scenario (Illustrative)</div>
       <div class="lgd-pair">
         ${mmVal ? `<div><div class="lgd-item-label">T2I-MM</div><div class="lgd-item-val">${D(mmt2i,v=>(v*100).toFixed(1)+'%')}</div></div>` : ''}
         ${entVal ? `<div><div class="lgd-item-label">T2I-ENT</div><div class="lgd-item-val ent-v">${D(entt2i,v=>(v*100).toFixed(1)+'%')}</div></div>` : ''}
       </div>
-      <div class="dpanel-desc">The revenue haircut a lender absorbs when GPU collateral is redeployed into the interruptible spot market as single units. Formula: (cluster &minus; interruptible floor) / cluster.</div>
+      <div class="dpanel-desc">Illustrative spread between cluster revenue and the interruptible spot floor &mdash; the rate a lender recovers if a defaulted cluster is restructured into interruptible spot deployment. CCIR publishes both rates to support this specific recovery scenario. LGD calibration requires deal-specific assumptions on utilization, cap rate, and contract structure; engage CCIR for structuring consultation.</div>
       <div class="dpanel-meta">
         <span class="dpanel-mver">Computed from ${chip.ticker}${mmVal?', CLS-MM':''}${entVal?', CLS-ENT':''}</span>
         ${mmVal?`MM $${D(mmVal,v=>v.toFixed(4))} &middot; `:''}${entVal?`ENT $${D(entVal,v=>v.toFixed(4))} &middot; `:''}Spot $${ spotVal.toFixed(4)}
@@ -603,13 +602,13 @@ async function renderStack(chipKey, spotLines) {
         ${entBar}
         ${mmBar}
         <div class="stack-bar-wrap">
-          <div class="stack-bar-label">Spot${hasCluster?' Floor':''}</div>
+          <div class="stack-bar-label">Spot${hasCluster?' (On-Demand)':''}</div>
           <div class="stack-bar-track"><div class="stack-bar-fill spot" style="width:${sPct}%"></div></div>
           <div class="stack-bar-value">$${spotVal.toFixed(4)}</div>
-          <div class="stack-bar-source">interruptible &nbsp;&middot;&nbsp; multi-source median</div>
+          <div class="stack-bar-source">on-demand &nbsp;&middot;&nbsp; multi-source median</div>
         </div>
         <div class="stack-legend">
-          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — Interruptible spot rate. Commodity clearing price for GPU compute. Covenant floors and multiples reference this rate.</span></div>
+          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — On-demand spot rate. Going-concern reference rate for GPU collateral. Covenant floors and multiples reference this rate.</span></div>
           ${mmLegend}
           ${entLegend}
         </div>
@@ -621,7 +620,7 @@ async function renderStack(chipKey, spotLines) {
         <div class="dpanel-ticker"><span class="dot live"></span>${chip.ticker}${chip.primary?' <span class="primary-badge">Primary Reference</span>':''}</div>
         <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
         <div class="dpanel-chg">${fmtChg(spotVal, spotPrev)}</div>
-        <div class="dpanel-desc">Interruptible spot rate — per GPU / hr. The commodity clearing price for GPU compute. Covenant floors and multiples reference this rate; T2I Spread measures how far above it cluster going-concern revenue sits.</div>
+        <div class="dpanel-desc">On-demand spot rate — per GPU / hr. Going-concern reference rate for GPU collateral. Published alongside the interruptible rate to support redeployment scenario analysis.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Methodology ${spotMver}</span>
           ${spotDtd} &middot; ${spotObs} obs &middot; ${spotConf} confidence
@@ -635,14 +634,14 @@ async function renderStack(chipKey, spotLines) {
 async function renderSpot(chipKey) {
   const chip  = CHIPS[chipKey];
   const lines = await fetchCsv(chip.csv);
-  const sp    = latestRow(lines, null, 'seller_ask_interruptible');
+  const sp    = latestRow(lines, null, 'seller_ask_noninterruptible');
   const spotDate = sp[0].trim();
   const spotVal  = parseFloat(sp[4]);
   const spotMver = sp[1].trim();
   const spotConf = sp[12].trim();
   const spotObs  = parseInt(sp[10]).toLocaleString();
   const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(lines, null, spotDate, 4, 'seller_ask_interruptible');
+  const spotPrev = prevVal(lines, null, spotDate, 4, 'seller_ask_noninterruptible');
 
   document.getElementById('rate-area').innerHTML = `
     <div class="spot-single">

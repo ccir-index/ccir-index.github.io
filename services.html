@@ -151,14 +151,13 @@
       <img src="ccir-logo.jpg" alt="CCIR" class="logo" />
       <div>
         <div class="wordmark"><a href="index.html">CCIR &middot; Compute Credit Index Research</a></div>
-        <h1>Forward-Looking Covenant<br>Frameworks for GPU-Backed Credit</h1>
+        <h1>Covenant Frameworks<br>for GPU-Backed Credit</h1>
       </div>
     </div>
     <div class="hero-rule"></div>
     <p class="hero-stmt">
-      Traditional covenant structures do not translate well to GPU-backed credit &mdash; they leave lenders exposed to a fast-moving market they were not designed for.
-      <strong>CCIR&rsquo;s covenant frameworks are built specifically for this asset class, providing protection and forward visibility through the transitions that define it.</strong>
-      Structured to trigger before the market moves past you.
+      Traditional covenant structures do not translate to GPU-backed credit &mdash; they leave lenders exposed to transitions they were not designed to see.
+      <strong>CCIR&rsquo;s covenant frameworks are built specifically for this asset class, providing protection and forward visibility through workload migration, generation obsolescence, and collateral repricing.</strong>
     </p>
   </div>
 </header>
@@ -208,7 +207,7 @@
       <div class="problem-card amber-top">
         <div class="problem-label">Generation Obsolescence</div>
         <div class="problem-head">Collateral can reprice within a facility term with no trigger</div>
-        <p class="problem-body">When B200 spot prices converge with H100, the training premium justifying H100 collateral valuations is effectively arbitraged away and the hardware reprices to inference-tier economics. Over a 36-month facility term this is a material exposure &mdash; and no current deal structure responds to it as it is happening.</p>
+        <p class="problem-body">When B200 spot prices converge with H100, the training premium justifying H100 collateral valuations is effectively arbitraged away. The risk is not one-directional: H100 rates have shown resilience as inference demand absorbs capacity displaced from training. Over a 36-month facility term, convergence and re-rating are both live exposures &mdash; and no current deal structure responds to either as it is happening.</p>
       </div>
 
     </div>
@@ -246,7 +245,7 @@
         <div class="cs-cov">
           <div class="cs-cov-num">§ 7.02</div>
           <div class="cs-cov-head">Collateral Coverage / LTV</div>
-          <div class="cs-cov-body">Collateral Value = GPUs &times; CRI-H100 &times; 8,760 hrs &times; 72% utilization &divide; 28% cap rate. Maximum LTV 80%. Marked to market daily via CRI-H100, not book depreciation.</div>
+          <div class="cs-cov-body">Collateral Value = GPUs &times; CRI-H100 &times; 8,760 hrs &times; 72% utilization &divide; 28% cap rate. Maximum LTV 80%. Marked to the live on-demand rate daily via CRI-H100, not book depreciation.</div>
           <span class="cs-cov-tag">Live mark vs. book value</span>
         </div>
         <div class="cs-cov">
@@ -270,8 +269,8 @@
           <thead>
             <tr>
               <th>Scenario</th>
-              <th>CRI-H100</th>
-              <th>T2I</th>
+              <th>CRI-H100<br><span style="font-weight:300;letter-spacing:0;">on-demand</span></th>
+              <th>T2I<br><span style="font-weight:300;letter-spacing:0;">illustrative</span></th>
               <th>Maintenance</th>
               <th>Collateral LTV</th>
               <th>Workload</th>
@@ -280,42 +279,42 @@
           <tbody>
             <tr>
               <td class="scenario-name">Baseline</td>
-              <td class="mono">$2.05</td>
-              <td class="mono">39.7%</td>
-              <td class="pass">PASS 2.93&times;</td>
-              <td class="pass">PASS 68%</td>
+              <td class="mono">$3.20</td>
+              <td class="mono">55.9%</td>
+              <td class="pass">PASS 1.88&times;</td>
+              <td class="pass">PASS 42%</td>
               <td class="pass">PASS 80%</td>
             </tr>
             <tr>
               <td class="scenario-name">Spot decline</td>
-              <td class="mono">$1.45</td>
-              <td class="mono">54.7%</td>
+              <td class="mono">$2.00</td>
+              <td class="mono">68.8%</td>
               <td class="pass">PASS &mdash; locked</td>
-              <td class="warn">WATCH</td>
+              <td class="warn">WATCH 67%</td>
               <td class="warn">WATCH 65%</td>
             </tr>
             <tr>
               <td class="scenario-name">Spot rise</td>
-              <td class="mono">$3.10</td>
-              <td class="mono">31.1%</td>
+              <td class="mono">$4.50</td>
+              <td class="mono">51.9%</td>
               <td class="warn">CAP ENGAGED</td>
-              <td class="pass">PASS</td>
+              <td class="pass">PASS 29%</td>
               <td class="pass">PASS</td>
             </tr>
             <tr>
               <td class="scenario-name">Training collapse</td>
-              <td class="mono">$1.20</td>
-              <td class="mono">57.1%</td>
+              <td class="mono">$1.40</td>
+              <td class="mono">73.2%</td>
               <td class="pass">PASS &mdash; locked</td>
-              <td class="breach">BREACH</td>
+              <td class="breach">BREACH 95%</td>
               <td class="breach">BREACH 35%</td>
             </tr>
             <tr>
               <td class="scenario-name">Blackwell cascade</td>
-              <td class="mono">$1.05</td>
-              <td class="mono">56.3%</td>
-              <td class="pass">PASS &mdash; locked</td>
-              <td class="breach">BREACH</td>
+              <td class="mono">$1.20</td>
+              <td class="mono">72.9%</td>
+              <td class="pass">PASS &mdash; contracts</td>
+              <td class="breach">BREACH 111%</td>
               <td class="breach">BREACH</td>
             </tr>
           </tbody>
@@ -323,7 +322,7 @@
       </div>
 
       <div class="cs-note">
-        No single scenario causes all three covenants to breach simultaneously &mdash; the framework is designed to give graduated signals, not a binary default trigger. The Rate Cap matters most in a rising market: without it, a borrower earning $2.80/hr against a $3.10 spot floor would show a 0.90&times; coverage ratio and breach, despite performing exactly on contract. Full scenario analysis, collateral value formula derivations, and all drafted covenant language in the downloadable framework above.
+        No single scenario causes all three covenants to breach simultaneously &mdash; the framework is designed to give graduated signals, not a binary default trigger. The Rate Cap matters most in a rising market: without it, a borrower earning a contracted rate below the on-demand market rate would show below-threshold coverage despite performing exactly on contract. T2I Spread values in the table are illustrative &mdash; calculated as (CLS-MM minus interruptible floor) / CLS-MM; the interruptible floor is published alongside CRI-H100 to support redeployment scenario analysis. Full scenario analysis, collateral value formula derivations, and all drafted covenant language in the downloadable framework above.
       </div>
     </div>
 
