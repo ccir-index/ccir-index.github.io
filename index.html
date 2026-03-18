@@ -435,7 +435,7 @@
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const RAW = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main';
-const CLS_MM_ALL = `${RAW}/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv`;
+const CLS_MM_ALL = `${RAW}/cri-cls-mm/CRI-CLS-MM-history.csv`;
 
 const CHIPS = {
   b200: {
@@ -611,7 +611,7 @@ async function renderStack(chipKey, spotLines) {
   const mmLegend  = mmVal  ? `<div class="legend-item"><div class="legend-dot mm"></div><span>${chip.ticker}-CLS-MM — Mid-market cluster rate. Median of RunPod + Lambda 8-GPU posted prices.</span></div>` : '';
 
   // ── Cluster detail panel (only if cluster data exists) ──────────────────
-  const clsMMLink  = chip.clsMM  ? `&nbsp;&middot;&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv" target="_blank" rel="noopener">MM →</a>` : '';
+  const clsMMLink  = chip.clsMM  ? `&nbsp;&middot;&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-cls-mm/CRI-CLS-MM-history.csv" target="_blank" rel="noopener">MM →</a>` : '';
   const clsENTLink = chip.clsENT ? `&nbsp;&middot;&nbsp;<a href="${chip.clsENT.replace('raw.githubusercontent.com','github.com').replace('/main/','/blob/main/')}" target="_blank" rel="noopener">ENT →</a>` : '';
 
   const clusterPanel = hasCluster ? `
