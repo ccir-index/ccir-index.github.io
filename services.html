@@ -239,13 +239,13 @@
         <div class="cs-cov">
           <div class="cs-cov-num">§ 7.01</div>
           <div class="cs-cov-head">Maintenance Test</div>
-          <div class="cs-cov-body">GPU Rental Revenue Per Pledged GPU &ge; 2.50&times; the Capped CRI-H100 Reference Rate. Rate Cap of $2.80/hr protects a performing borrower from technical breach when spot prices rise above contracted rates.</div>
+          <div class="cs-cov-body">Borrower&rsquo;s contracted GPU revenue must cover the on-demand CRI-H100 rate by a negotiated multiple set at underwriting. Rate Cap protects a performing borrower from technical breach when spot prices rise above their contracted rate.</div>
           <span class="cs-cov-tag">CRI-H100 cited by name</span>
         </div>
         <div class="cs-cov">
           <div class="cs-cov-num">§ 7.02</div>
           <div class="cs-cov-head">Collateral Coverage / LTV</div>
-          <div class="cs-cov-body">Collateral Value = GPUs &times; CRI-H100 &times; 8,760 hrs &times; 72% utilization &divide; 28% cap rate. Maximum LTV 80%. Marked to the live on-demand rate daily via CRI-H100, not book depreciation.</div>
+          <div class="cs-cov-body">Collateral Value = GPUs &times; CRI-H100 &times; 8,760 hrs &times; 72% utilization &divide; 28% cap rate. Maximum LTV 80%. Marked to the live on-demand noninterruptible rate daily via CRI-H100 &mdash; the appropriate anchor for redeployment scenarios, where the lender requires structured placement, not interruptible spot listings.</div>
           <span class="cs-cov-tag">Live mark vs. book value</span>
         </div>
         <div class="cs-cov">
@@ -270,7 +270,6 @@
             <tr>
               <th>Scenario</th>
               <th>CRI-H100<br><span style="font-weight:300;letter-spacing:0;">on-demand</span></th>
-              <th>T2I<br><span style="font-weight:300;letter-spacing:0;">illustrative</span></th>
               <th>Maintenance</th>
               <th>Collateral LTV</th>
               <th>Workload</th>
@@ -280,15 +279,13 @@
             <tr>
               <td class="scenario-name">Baseline</td>
               <td class="mono">$3.20</td>
-              <td class="mono">55.9%</td>
-              <td class="pass">PASS 1.88&times;</td>
+              <td class="pass">PASS &mdash; contracted</td>
               <td class="pass">PASS 42%</td>
               <td class="pass">PASS 80%</td>
             </tr>
             <tr>
               <td class="scenario-name">Spot decline</td>
               <td class="mono">$2.00</td>
-              <td class="mono">68.8%</td>
               <td class="pass">PASS &mdash; locked</td>
               <td class="warn">WATCH 67%</td>
               <td class="warn">WATCH 65%</td>
@@ -296,7 +293,6 @@
             <tr>
               <td class="scenario-name">Spot rise</td>
               <td class="mono">$4.50</td>
-              <td class="mono">51.9%</td>
               <td class="warn">CAP ENGAGED</td>
               <td class="pass">PASS 29%</td>
               <td class="pass">PASS</td>
@@ -304,7 +300,6 @@
             <tr>
               <td class="scenario-name">Training collapse</td>
               <td class="mono">$1.40</td>
-              <td class="mono">73.2%</td>
               <td class="pass">PASS &mdash; locked</td>
               <td class="breach">BREACH 95%</td>
               <td class="breach">BREACH 35%</td>
@@ -312,7 +307,6 @@
             <tr>
               <td class="scenario-name">Blackwell cascade</td>
               <td class="mono">$1.20</td>
-              <td class="mono">72.9%</td>
               <td class="pass">PASS &mdash; contracts</td>
               <td class="breach">BREACH 111%</td>
               <td class="breach">BREACH</td>
@@ -322,7 +316,7 @@
       </div>
 
       <div class="cs-note">
-        No single scenario causes all three covenants to breach simultaneously &mdash; the framework is designed to give graduated signals, not a binary default trigger. The Rate Cap matters most in a rising market: without it, a borrower earning a contracted rate below the on-demand market rate would show below-threshold coverage despite performing exactly on contract. T2I Spread values in the table are illustrative &mdash; calculated as (CLS-MM minus interruptible floor) / CLS-MM; the interruptible floor is published alongside CRI-H100 to support redeployment scenario analysis. Full scenario analysis, collateral value formula derivations, and all drafted covenant language in the downloadable framework above.
+        No single scenario causes all three covenants to breach simultaneously &mdash; the framework is designed to give graduated signals, not a binary default trigger. The Rate Cap matters most in a rising market: without it, a borrower earning a contracted rate below the on-demand market rate would show below-threshold coverage despite performing exactly on contract. Full scenario analysis, collateral value formula derivations, and all drafted covenant language in the downloadable framework above.
       </div>
     </div>
 
@@ -348,7 +342,7 @@
         </div>
         <div class="engage-item">
           <div class="engage-item-head">Ongoing rate monitoring</div>
-          <div class="engage-item-body">Calculation Date rate packages showing CRI-H100, T2I Spread, and Generation Spread in a format designed for compliance certificate review.</div>
+          <div class="engage-item-body">Calculation Date rate packages showing CRI-H100 and Generation Spread in a format designed for compliance certificate review.</div>
         </div>
       </div>
       <div class="engage-cta">
