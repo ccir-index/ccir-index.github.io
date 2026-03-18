@@ -465,14 +465,14 @@ const CHIPS = {
     ticker:'CRI-A100', gpuModel:'A100_SXM', label:'A100 SXM', primary:false,
     csv:`${RAW}/cri-a100/CRI-A100-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv',
-    desc:'Inference and batch workloads. A100 now trading below L40S on-demand — inference demand is pricing Ada Lovelace above prior-gen training silicon. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.',
+    desc:'Inference and batch workloads. A100 on-demand rate now below L40S — inference demand is pricing Ada Lovelace above prior-gen training silicon. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.',
     clsMM: CLS_MM_ALL,
   },
   l40s: {
     ticker:'CRI-L40S', gpuModel:'L40S', label:'L40S', primary:false,
     csv:`${RAW}/cri-l40s/CRI-L40S-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv',
-    desc:'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. Currently trading above A100 on-demand — inference demand pricing purpose-built inference silicon above prior-gen training hardware.',
+    desc:'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. On-demand rate currently above A100 — inference demand pricing purpose-built inference silicon above prior-gen training hardware.',
   },
 };
 
@@ -768,13 +768,13 @@ async function renderGenSpread() {
       // Premium intact
       b200El.textContent = `+${b200Pct}%`;
       b200El.className = 'gen-card-spread';
-      b200Desc.textContent = `B200 trading at ${b200Pct}% premium to H100 — training-tier pricing intact. Generation Spread well above the §7.04 threshold.`;
+      b200Desc.textContent = `B200 priced ${b200Pct}% above H100 — training-tier pricing intact. Generation Spread well above the §7.04 threshold.`;
       b200Cov.textContent = '§7.04 — Threshold: 15% · Status: Intact';
     } else if (b200Raw >= 0) {
       // Converging — approaching threshold
       b200El.textContent = `+${b200Pct}%`;
       b200El.className = 'gen-card-spread converging';
-      b200Desc.textContent = `B200 trading at ${b200Pct}% premium to H100 — approaching §7.04 threshold. B200 supply expanding; training-tier premium compressing. Monitor for covenant trigger.`;
+      b200Desc.textContent = `B200 priced ${b200Pct}% above H100 — approaching §7.04 threshold. B200 supply expanding; training-tier premium compressing. Monitor for covenant trigger.`;
       b200Cov.textContent = '§7.04 — Threshold: 15% · Status: Converging';
       b200Cov.style.color = 'var(--amber)';
       b200Cov.style.background = 'var(--amber-lo)';
@@ -783,7 +783,7 @@ async function renderGenSpread() {
       // Inverted — H100 above B200
       b200El.textContent = `${b200Pct}% discount`;
       b200El.className = 'gen-card-spread warning';
-      b200Desc.textContent = `H100 trading at ${b200Pct}% premium to B200 — convergence complete. §7.04 accelerated amortization triggered. H100 collateral no longer commands a training-tier premium.`;
+      b200Desc.textContent = `H100 priced ${b200Pct}% above B200 — convergence complete. §7.04 accelerated amortization triggered. H100 collateral no longer commands a training-tier premium.`;
       b200Cov.textContent = '§7.04 — Status: Triggered';
       b200Cov.style.color = '#A03020';
       b200Cov.style.background = '#FDF0EE';
@@ -811,13 +811,13 @@ async function renderGenSpread() {
       // Normal — H100 above A100
       a100El.textContent = `+${a100Pct}%`;
       a100El.className = 'gen-card-spread';
-      a100Desc.textContent = `H100 trading at ${a100Pct}% premium to A100 — prior training generation below current-gen. Compression signals H100 commoditizing toward inference-tier pricing.`;
+      a100Desc.textContent = `H100 priced ${a100Pct}% above A100 — prior training generation below current-gen. Compression signals H100 commoditizing toward inference-tier pricing.`;
       a100Cov.textContent = 'Commoditization Signal · 18–24 mo horizon';
     } else {
       // Inverted — A100 above H100
       a100El.textContent = `${a100Pct}% discount`;
       a100El.className = 'gen-card-spread converging';
-      a100Desc.textContent = `H100 trading at ${a100Pct}% discount to A100 — inference-tier inversion. Inference demand is pricing Ada Lovelace above prior-gen training silicon. H100 commoditizing faster than the prior generation.`;
+      a100Desc.textContent = `H100 priced ${a100Pct}% below A100 — inference-tier inversion. Inference demand is pricing Ada Lovelace above prior-gen training silicon. H100 commoditizing faster than the prior generation.`;
       a100Cov.textContent = 'Inference-Tier Inversion · Active signal';
       a100Cov.style.color = 'var(--amber)';
       a100Cov.style.background = 'var(--amber-lo)';
