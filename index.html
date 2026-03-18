@@ -611,7 +611,6 @@ async function renderStack(chipKey, spotLines) {
         <span class="dpanel-mver">Methodology ${mmMver||spotMver||'&mdash;'}</span>
         ${mmDtd||entDtd}${mmVal?` &middot; MM ${mmObs} obs`:''}${entVal?` &middot; ENT ${entObs} obs`:''}
         ${clsMMLink}${clsENTLink}
-        <span style="display:block;margin-top:4px;">Commodity floor (interruptible): $${D(spotVal,v=>v.toFixed(4))}</span>
       </div>
     </div>` : '';
 
@@ -643,7 +642,7 @@ async function renderStack(chipKey, spotLines) {
         <div class="dpanel-ticker"><span class="dot live"></span>${chip.ticker}${chip.primary?' <span class="primary-badge">Primary Reference</span>':''}</div>
         <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
         <div class="dpanel-chg">${fmtChg(spotVal, spotPrev)}</div>
-        <div class="dpanel-desc">On-demand spot rate — per GPU / hr. Going-concern reference rate for GPU collateral. The commodity floor (interruptible rate) is shown in cluster panel metadata where applicable.</div>
+        <div class="dpanel-desc">On-demand spot rate — per GPU / hr. Going-concern reference rate for GPU collateral.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Methodology ${spotMver}</span>
           ${spotDtd} &middot; ${spotObs} obs &middot; ${spotConf} confidence
