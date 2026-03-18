@@ -836,33 +836,6 @@ async function renderGenSpread() {
     document.getElementById('gen-a100-spread').textContent = '—';
   }
 }
-    } else {
-      b200SpreadEl.className = 'gen-card-spread';
-    }
-
-    document.getElementById('gen-b200-rates').innerHTML =
-      `CRI-H100 &nbsp;<span>$${h100Val.toFixed(4)}</span> &nbsp;&middot;&nbsp; ` +
-      `CRI-B200 &nbsp;<span>$${b200Val.toFixed(4)}</span>`;
-
-    document.getElementById('gen-b200-meta').innerHTML =
-      `As of ${fmtDate(h100Date)} &nbsp;&middot;&nbsp; on-demand spot rates`;
-
-    // A100 spread
-    const a100SpreadEl = document.getElementById('gen-a100-spread');
-    a100SpreadEl.textContent = `+${a100Pct}%`;
-
-    document.getElementById('gen-a100-rates').innerHTML =
-      `CRI-H100 &nbsp;<span>$${h100Val.toFixed(4)}</span> &nbsp;&middot;&nbsp; ` +
-      `CRI-A100 &nbsp;<span>$${a100Val.toFixed(4)}</span>`;
-
-    document.getElementById('gen-a100-meta').innerHTML =
-      `As of ${fmtDate(a100Date)} &nbsp;&middot;&nbsp; on-demand spot rates`;
-
-  } catch(e) {
-    document.getElementById('gen-b200-spread').textContent = '—';
-    document.getElementById('gen-a100-spread').textContent = '—';
-  }
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   loadChip('h100');
