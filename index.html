@@ -120,7 +120,7 @@
     .legend-dot.ent  { background: var(--amber); }
 
     /* ─── DETAIL PANELS ───────────────────────────────────────────────────── */
-    .detail-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 700px) { .detail-grid { grid-template-columns: 1fr; } }
 
     .dpanel { background: var(--bg-white); border: 1px solid var(--border); border-top: 2px solid var(--border-hi); border-radius: 2px; padding: 22px 22px 20px; box-shadow: var(--sh-sm); }
@@ -579,14 +579,6 @@ async function renderStack(chipKey, spotLines) {
       <div class="stack-bar-track"><div class="stack-bar-fill ent" style="width:${entPct}%"></div></div>
       <div class="stack-bar-value">${D(entVal,v=>'$'+v.toFixed(4))}</div>
       <div class="stack-bar-source">CoreWeave &nbsp;&middot;&nbsp; bundled node</div>
-    </div>
-    <div class="stack-spread-row">
-      <div class="stack-spread-spacer"></div>
-      <div class="stack-spread-content">
-        <div class="spread-vline"></div>
-        <div class="spread-text ent-c"><span class="sv">${D(entt2i,v=>(v*100).toFixed(1)+'%')} T2I-ENT</span> &nbsp;&mdash;&nbsp; illustrative redeployment spread vs enterprise cluster rate</div>
-      </div>
-      <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
     </div>` : '';
 
   // ── MM bar (only if data) ────────────────────────────────────────────────
@@ -596,14 +588,6 @@ async function renderStack(chipKey, spotLines) {
       <div class="stack-bar-track"><div class="stack-bar-fill mm" style="width:${mmPct}%"></div></div>
       <div class="stack-bar-value">${D(mmVal,v=>'$'+v.toFixed(4))}</div>
       <div class="stack-bar-source">${mmSrc||'RunPod · Lambda'}</div>
-    </div>
-    <div class="stack-spread-row">
-      <div class="stack-spread-spacer"></div>
-      <div class="stack-spread-content">
-        <div class="spread-vline"></div>
-        <div class="spread-text mm-c"><span class="sv">${D(mmt2i,v=>(v*100).toFixed(1)+'%')} T2I-MM</span> &nbsp;&mdash;&nbsp; illustrative redeployment spread vs mid-market cluster rate</div>
-      </div>
-      <div class="stack-value-pad"></div><div class="stack-source-pad"></div>
     </div>` : '';
 
   // ── Legend (dynamic based on available tiers) ────────────────────────────
@@ -629,19 +613,7 @@ async function renderStack(chipKey, spotLines) {
         <span class="dpanel-mver">Methodology ${mmMver||spotMver||'&mdash;'}</span>
         ${mmDtd||entDtd}${mmVal?` &middot; MM ${mmObs} obs`:''}${entVal?` &middot; ENT ${entObs} obs`:''}
         ${clsMMLink}${clsENTLink}
-      </div>
-    </div>
-
-    <div class="dpanel lgd-panel">
-      <div class="dpanel-ticker"><span class="dot live lgd"></span>T2I Spreads &mdash; Redeployment Scenario (Illustrative)</div>
-      <div class="lgd-pair">
-        ${mmVal ? `<div><div class="lgd-item-label">T2I-MM</div><div class="lgd-item-val">${D(mmt2i,v=>(v*100).toFixed(1)+'%')}</div></div>` : ''}
-        ${entVal ? `<div><div class="lgd-item-label">T2I-ENT</div><div class="lgd-item-val ent-v">${D(entt2i,v=>(v*100).toFixed(1)+'%')}</div></div>` : ''}
-      </div>
-      <div class="dpanel-desc">Illustrative spread between cluster revenue and the interruptible spot floor &mdash; the rate a lender recovers if a defaulted cluster is restructured into interruptible spot deployment. CCIR publishes both rates to support this specific recovery scenario. LGD calibration requires deal-specific assumptions on utilization, cap rate, and contract structure; engage CCIR for structuring consultation.</div>
-      <div class="dpanel-meta">
-        <span class="dpanel-mver">Computed from${mmVal?` CLS-MM`:''}${entVal?`, CLS-ENT`:''} &mdash; interruptible floor</span>
-        ${mmVal?`MM $${D(mmVal,v=>v.toFixed(4))} &middot; `:''}${entVal?`ENT $${D(entVal,v=>v.toFixed(4))} &middot; `:''}Int. floor $${D(spotVal,v=>v.toFixed(4))}
+        <span style="display:block;margin-top:4px;">Commodity floor (interruptible): $${D(spotVal,v=>v.toFixed(4))}</span>
       </div>
     </div>` : '';
 
@@ -673,7 +645,7 @@ async function renderStack(chipKey, spotLines) {
         <div class="dpanel-ticker"><span class="dot live"></span>${chip.ticker}${chip.primary?' <span class="primary-badge">Primary Reference</span>':''}</div>
         <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
         <div class="dpanel-chg">${fmtChg(spotVal, spotPrev)}</div>
-        <div class="dpanel-desc">On-demand spot rate — per GPU / hr. Going-concern reference rate for GPU collateral. Published alongside the interruptible rate to support redeployment scenario analysis.</div>
+        <div class="dpanel-desc">On-demand spot rate — per GPU / hr. Going-concern reference rate for GPU collateral. The commodity floor (interruptible rate) is shown in cluster panel metadata where applicable.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Methodology ${spotMver}</span>
           ${spotDtd} &middot; ${spotObs} obs &middot; ${spotConf} confidence
