@@ -602,7 +602,7 @@ async function renderStack(chipKey, spotLines) {
       <div style="margin-bottom:4px;">
         ${mmVal ? `<div class="lgd-item-label">Mid-Market &nbsp;&middot;&nbsp; ${chip.ticker}-CLS-MM</div>
         <div class="dpanel-val">${D(mmVal,v=>'$'+v.toFixed(4))}</div>
-        <div class="dpanel-chg" style="margin-bottom:10px;">${fmtChg(mmVal,mmPrev)}</div>` : ''}
+
         ${entVal ? `<div class="lgd-item-label">Enterprise &nbsp;&middot;&nbsp; ${chip.ticker}-CLS-ENT</div>
         <div class="dpanel-val" style="color:var(--amber);">${D(entVal,v=>'$'+v.toFixed(4))}</div>` : ''}
       </div>
@@ -641,7 +641,7 @@ async function renderStack(chipKey, spotLines) {
       <div class="dpanel mm-panel">
         <div class="dpanel-ticker"><span class="dot live"></span>${chip.ticker}${chip.primary?' <span class="primary-badge">Primary Reference</span>':''}</div>
         <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
-        <div class="dpanel-chg">${fmtChg(spotVal, spotPrev)}</div>
+
         <div class="dpanel-desc">On-demand spot rate — per GPU / hr. Going-concern reference rate for GPU collateral.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Methodology ${spotMver}</span>
@@ -669,7 +669,7 @@ async function renderSpot(chipKey) {
     <div class="spot-single">
       <div class="spot-ticker"><span class="dot live"></span>${chip.ticker}</div>
       <div class="spot-val">$${spotVal.toFixed(4)}</div>
-      <div class="spot-chg">${fmtChg(spotVal, spotPrev)}</div>
+
       <div class="spot-desc">${chip.desc}</div>
       <div class="spot-meta">
         <span style="display:block;font-size:.58rem;margin-bottom:2px;">Methodology ${spotMver}</span>
