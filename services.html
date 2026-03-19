@@ -154,9 +154,10 @@
     </div>
     <div class="hero-rule"></div>
     <p class="hero-stmt">
-      Traditional covenant structures do not translate to GPU-backed credit &mdash; they leave lenders exposed to transitions they were not designed to see.
-      <strong>CCIR&rsquo;s covenant frameworks are built specifically for this asset class, providing protection and forward visibility through workload migration, generation obsolescence, and collateral repricing.</strong>
+      GPU collateral moves faster than traditional covenant structures were built for &mdash; and the transitions are foreseeable, not random.
+      <strong>CCIR&rsquo;s covenant frameworks respond to the market as it moves: workload migration, generation convergence, and collateral repricing &mdash; before the lender is past them.</strong>
     </p>
+    <p style="font-family:var(--serif);font-size:1.05rem;font-weight:300;color:var(--text-dim);margin-top:14px;letter-spacing:-.005em;line-height:1.5;">Predicting the future is hard. Structuring credit to maximize your options doesn&rsquo;t have to be.</p>
   </div>
 </header>
 
@@ -200,14 +201,14 @@
 
       <div class="problem-card amber-top">
         <div class="problem-label">Workload Migration</div>
-        <div class="problem-head">The revenue stack can change before any covenant fires</div>
-        <p class="problem-body">H100 collateral was underwritten as training hardware commanding a training-tier revenue premium. As inference demand grows and Blackwell displaces Hopper for large-model training, that premium erodes. No current GPU facility covenant structure contains a mechanism to detect or respond to this transition before it becomes a coverage breach.</p>
+        <div class="problem-head">The collateral&rsquo;s revenue profile can change character with no lender signal</div>
+        <p class="problem-body">Training workloads are contracted, sticky, and predictable. Inference workloads are spot-adjacent, elastic, and reprice faster when the market moves. A standard revenue covenant cannot distinguish between the two &mdash; equivalent utilization rates look identical regardless of what the hardware is actually doing. Without workload visibility, the lender has no way to gauge whether reported revenue is durable, what rolloff risk looks like when contracts expire, or whether reported revenue is defensible against what the spot market is currently bearing for comparable hardware.</p>
       </div>
 
       <div class="problem-card amber-top">
-        <div class="problem-label">Generation Obsolescence</div>
-        <div class="problem-head">Collateral can reprice within a facility term with no trigger</div>
-        <p class="problem-body">When B200 spot prices converge with H100, the training premium justifying H100 collateral valuations is effectively arbitraged away. The risk is not one-directional: H100 rates have shown resilience as inference demand absorbs capacity displaced from training. Over a 36-month facility term, convergence and re-rating are both live exposures &mdash; and no current deal structure responds to either as it is happening.</p>
+        <div class="problem-label">Generation Convergence</div>
+        <div class="problem-head">A 36-month facility spans at least one full GPU generation transition</div>
+        <p class="problem-body">When B200 spot prices converge with H100, the training premium justifying H100 collateral valuations is effectively arbitraged away. This is not a tail scenario &mdash; it is a foreseeable transition that a 36-month lender is almost certain to face. No current deal structure has a mechanism that responds to convergence as it is happening. By the time a standard covenant fires, the collateral has already repriced.</p>
       </div>
 
     </div>
@@ -260,6 +261,10 @@
           <div class="cs-cov-body">If CRI-B200 converges within 15% of CRI-H100 for two consecutive periods: accelerated amortization at 10%/period and Cap Rate steps up from 28% to 35%, reflecting repricing to inference-tier economics.</div>
           <span class="cs-cov-tag amber">Novel &mdash; not in current market</span>
         </div>
+      </div>
+
+      <div style="font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--text-dim);padding:14px 18px;background:var(--surface-2);border:1px solid var(--border);border-radius:2px;margin-top:14px;line-height:1.8;">
+        <span style="color:var(--accent);">§7.03</span> gives lenders visibility to the borrower &nbsp;&middot;&nbsp; <span style="color:var(--accent);">§7.04</span> gives lenders visibility to the market
       </div>
 
       <!-- Scenario table -->
