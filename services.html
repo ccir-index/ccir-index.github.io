@@ -52,7 +52,7 @@
     .hero-stmt strong { font-weight: 500; color: var(--text-hi); }
 
     /* ─── NAV STRIP ───────────────────────────────────────────────────────── */
-    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; }
+    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: center; gap: 28px; }
     .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; text-decoration: none; }
     .nav-link:hover { color: #f0ece6; text-decoration: none; }
@@ -168,8 +168,6 @@
     <a href="services.html" class="nav-link active">Covenant Structuring</a>
     <span class="nav-sep">/</span>
     <a href="index.html#chip-selector" class="nav-link">Reference Rates</a>
-    <span class="nav-sep">/</span>
-    <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_0_0.pdf" target="_blank" rel="noopener" class="nav-link">Methodology</a>
     <span class="nav-sep">/</span>
     <a href="changelog.html" class="nav-link">Changelog</a>
     <span class="nav-sep">/</span>
@@ -379,7 +377,7 @@
     </div>
     <div class="gov-item">
       <span class="gov-icon">Daily</span>
-      <span class="gov-text"><strong>Published nightly</strong> to ccir-index/ccir-data</span>
+      <span class="gov-text"><strong>Published nightly</strong> to <a href="https://github.com/ccir-index/ccir-data" target="_blank" rel="noopener">ccir-index/ccir-data</a></span>
     </div>
     <div class="gov-item">
       <span class="gov-icon">v1.0.0</span>
