@@ -45,6 +45,12 @@
     .header-inner { max-width: 860px; margin: 0 auto; padding: 48px 36px 44px; }
     .header-top { display: flex; align-items: flex-start; gap: 22px; margin-bottom: 32px; }
     .wordmark { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .26em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 8px; }
+    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; }
+    .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: center; gap: 28px; }
+    .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; text-decoration: none; }
+    .nav-link:hover { color: #f0ece6; text-decoration: none; }
+    .nav-link.active { color: var(--accent-mid); }
+    .nav-sep { color: #3a3530; font-size: .70rem; }
     h1 { font-family: var(--serif); font-size: 2.0rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.015em; line-height: 1.18; }
     .hero-rule { width: 44px; height: 2px; background: var(--accent); margin: 26px 0 22px; }
     .hero-stmt { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 640px; }
@@ -258,14 +264,6 @@
         <div class="wordmark">CCIR &middot; Compute Credit Index Research</div>
         <h1>The Reference Standard<br>for GPU Collateral.</h1>
       </div>
-      <nav style="display:flex;gap:18px;align-items:center;margin-left:auto;flex-wrap:wrap;">
-        <a href="index.html" style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--accent);text-decoration:none;">Home</a>
-        <a href="services.html" style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;">Covenant Structuring</a>
-        <a href="index.html#chip-selector" style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;">Reference Rates</a>
-        <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_0_0.pdf" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;">Methodology</a>
-        <a href="changelog.html" style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;">Changelog</a>
-        <a href="contact.html" style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;">Contact</a>
-      </nav>
     </div>
     <div class="hero-rule"></div>
     <p class="hero-stmt">
@@ -284,6 +282,19 @@
     </div>
   </div>
 </header>
+<div class="nav-strip">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-link active">Home</a>
+    <span class="nav-sep">/</span>
+    <a href="services.html" class="nav-link">Covenant Structuring</a>
+    <span class="nav-sep">/</span>
+    <a href="index.html#chip-selector" class="nav-link">Reference Rates</a>
+    <span class="nav-sep">/</span>
+    <a href="changelog.html" class="nav-link">Changelog</a>
+    <span class="nav-sep">/</span>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+</div>
 
 
 
@@ -837,16 +848,11 @@ async function renderGenSpread() {
 document.addEventListener('DOMContentLoaded', () => {
   loadChip('h100');
   renderGenSpread();
-  // Populate hero rate display from H100 CSV
-  const h100Url = CHIPS['h100'].csv;
-  fetchCsv(h100Url).then(lines => {
+  fetchCsv(CHIPS['h100'].csv).then(lines => {
     const sp = latestRow(lines, null, 'seller_ask_noninterruptible');
     if (sp) {
-      const val = parseFloat(sp[4]);
-      const date = sp[0].trim();
-      document.getElementById('hero-rate-val').textContent = '$' + val.toFixed(2);
-      document.getElementById('hero-rate-meta').textContent =
-        'On-demand spot \u00b7 As of ' + fmtDate(date);
+      document.getElementById('hero-rate-val').textContent = '$' + parseFloat(sp[4]).toFixed(2);
+      document.getElementById('hero-rate-meta').textContent = 'On-demand spot \u00b7 As of ' + fmtDate(sp[0].trim());
     }
   }).catch(() => {
     document.getElementById('hero-rate-meta').textContent = 'On-demand spot';

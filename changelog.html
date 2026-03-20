@@ -44,10 +44,12 @@
     .header-inner { max-width: 860px; margin: 0 auto; padding: 36px 36px 32px; }
     .header-top { display: flex; align-items: center; gap: 18px; }
     .wordmark { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .26em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
-    .nav-links { display: flex; gap: 18px; align-items: center; margin-left: auto; flex-wrap: wrap; }
-    .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: var(--text-dim); }
-    .nav-link:hover { color: var(--accent); text-decoration: none; }
-    .nav-link.active { color: var(--accent); }
+    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; }
+    .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: center; gap: 28px; }
+    .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; text-decoration: none; }
+    .nav-link:hover { color: #f0ece6; text-decoration: none; }
+    .nav-link.active { color: var(--accent-mid); }
+    .nav-sep { color: #3a3530; font-size: .70rem; }
 
     /* ─── HERO ───────────────────────────────────────────────────────────── */
     .hero { padding: 60px 0 48px; }
@@ -120,16 +122,22 @@
       <div>
         <div class="wordmark"><a href="index.html" style="color:inherit;text-decoration:none;">CCIR &middot; Compute Credit Index Research</a></div>
       </div>
-      <nav class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="services.html" class="nav-link">Covenant Structuring</a>
-        <a href="index.html#chip-selector" class="nav-link">Reference Rates</a>
-        <a href="changelog.html" class="nav-link active">Changelog</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
     </div>
   </div>
 </header>
+<div class="nav-strip">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-link">Home</a>
+    <span class="nav-sep">/</span>
+    <a href="services.html" class="nav-link">Covenant Structuring</a>
+    <span class="nav-sep">/</span>
+    <a href="index.html#chip-selector" class="nav-link">Reference Rates</a>
+    <span class="nav-sep">/</span>
+    <a href="changelog.html" class="nav-link active">Changelog</a>
+    <span class="nav-sep">/</span>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <main>
@@ -233,4 +241,4 @@
     </div>
     <div class="fr">
       CCIR &middot; Compute Credit Index Research<br>
-      <a href="/cdn-cgi/l/email-protection#13617660767261707b5370707a613d7a7c" style="color:var(--text-dim);"><span class="__cf_email__" da
+      <a href="/cdn-cgi/l/email-protection#691b0c1a0c081b0a01290a0a001b470006" style="color:var(--text-dim);"><span class="__cf_email__" da
