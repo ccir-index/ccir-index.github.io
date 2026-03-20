@@ -97,6 +97,26 @@
     .fl { font-size: .80rem; color: var(--text-dim); }
     .fl a { color: var(--text-dim); } .fl a:hover { color: var(--accent); }
     .fr { font-family: var(--mono); font-size: .62rem; color: var(--text-dim); text-align: right; line-height: 2.0; }
+
+    @media (max-width: 640px) {
+      /* Nav */
+      .nav-inner { gap: 0; flex-wrap: wrap; padding: 0 20px; }
+      .nav-link { font-size: .56rem; padding: 10px 8px; letter-spacing: .08em; }
+      .nav-sep { display: none; }
+      /* Header */
+      .header-inner { padding: 32px 20px 28px; }
+      h1 { font-size: 1.65rem; }
+      /* Main content */
+      .wrap { padding: 0 20px; }
+      .contact-hero { padding: 40px 0 32px; }
+      /* Who grid */
+      .who-item { border-right: none; border-bottom: 1px solid var(--border); margin: 0 0 24px; padding: 0 0 24px; }
+      .who-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+      /* Footer */
+      .footer-in { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .fr { text-align: left; }
+      .fl { font-size: .75rem; line-height: 2.0; }
+    }
   </style>
 </head>
 <body>
