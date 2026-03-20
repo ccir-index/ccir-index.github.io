@@ -49,6 +49,15 @@
     .hero-rule { width: 44px; height: 2px; background: var(--accent); margin: 26px 0 22px; }
     .hero-stmt { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 640px; }
     .hero-stmt strong { font-weight: 500; color: var(--text-hi); }
+    .hero-rate-display { margin-top: 28px; display: flex; align-items: baseline; gap: 28px; flex-wrap: wrap; padding: 18px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .hero-rate-left { display: flex; align-items: baseline; gap: 10px; }
+    .hero-rate-ticker { font-family: var(--mono); font-size: .62rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); }
+    .hero-rate-val { font-family: var(--mono); font-size: 1.55rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.01em; }
+    .hero-rate-unit { font-family: var(--mono); font-size: .68rem; color: var(--text-dim); }
+    .hero-rate-right { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    #hero-rate-meta { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); letter-spacing: .04em; }
+    .hero-rate-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); text-decoration: none; }
+    .hero-rate-link:hover { text-decoration: underline; }
 
     /* ─── INDEPENDENCE STRIP ──────────────────────────────────────────────── */
     .independence-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 22px 0; }
@@ -262,10 +271,16 @@
     <p class="hero-stmt">
       Independent reference rates for GPU-backed credit &mdash; <strong>built for citation in loan covenants, collateral appraisals, and compliance certificates.</strong> The structural independence and IOSCO-aligned methodology credit documents require.
     </p>
-    <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;">
-      <a href="services.html" style="font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;background:var(--accent);color:#fff;padding:10px 22px;border-radius:2px;text-decoration:none;">Covenant Frameworks &rarr;</a>
-      <a href="#chip-selector" style="font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;background:transparent;color:var(--accent);border:1px solid var(--accent-mid);padding:10px 22px;border-radius:2px;text-decoration:none;">Reference Rates</a>
-      <a href="contact.html" style="font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;background:transparent;color:var(--text-dim);border:1px solid var(--border);padding:10px 22px;border-radius:2px;text-decoration:none;">Contact</a>
+    <div class="hero-rate-display">
+      <div class="hero-rate-left">
+        <span class="hero-rate-ticker">CRI-H100</span>
+        <span class="hero-rate-val" id="hero-rate-val">&mdash;</span>
+        <span class="hero-rate-unit">/ GPU &middot; hr</span>
+      </div>
+      <div class="hero-rate-right">
+        <span id="hero-rate-meta">On-demand spot &middot; loading&hellip;</span>
+        <a href="#chip-selector" class="hero-rate-link">See all rates &darr;</a>
+      </div>
     </div>
   </div>
 </header>
@@ -822,6 +837,20 @@ async function renderGenSpread() {
 document.addEventListener('DOMContentLoaded', () => {
   loadChip('h100');
   renderGenSpread();
+  // Populate hero rate display from H100 CSV
+  const h100Url = CHIPS['h100'].csv;
+  fetchCsv(h100Url).then(lines => {
+    const sp = latestRow(lines, null, 'seller_ask_noninterruptible');
+    if (sp) {
+      const val = parseFloat(sp[4]);
+      const date = sp[0].trim();
+      document.getElementById('hero-rate-val').textContent = '$' + val.toFixed(2);
+      document.getElementById('hero-rate-meta').textContent =
+        'On-demand spot \u00b7 As of ' + fmtDate(date);
+    }
+  }).catch(() => {
+    document.getElementById('hero-rate-meta').textContent = 'On-demand spot';
+  });
 });
 </script>
 </body>
