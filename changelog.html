@@ -41,10 +41,14 @@
 
     /* ─── HEADER ─────────────────────────────────────────────────────────── */
     header { background: var(--bg-white); border-bottom: 1px solid var(--border); }
-    .header-inner { max-width: 860px; margin: 0 auto; padding: 36px 36px 32px; }
-    .header-top { display: flex; align-items: center; gap: 18px; }
-    .wordmark { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .26em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
-    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; position: sticky; top: 0; z-index: 100; }
+    .header-inner { max-width: 860px; margin: 0 auto; padding: 40px 36px 36px; }
+    .header-top { display: flex; align-items: flex-start; gap: 22px; margin-bottom: 28px; }
+    .wordmark { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .26em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+    .wordmark a { color: var(--text-dim); } .wordmark a:hover { color: var(--accent); text-decoration: none; }
+    h1 { font-family: var(--serif); font-size: 2.0rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.015em; line-height: 1.18; }
+    .hero-rule { width: 44px; height: 2px; background: var(--accent); margin: 22px 0 18px; }
+    .hero-stmt { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 640px; }
+    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; }
     .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: center; gap: 28px; }
     .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; text-decoration: none; }
     .nav-link:hover { color: #f0ece6; text-decoration: none; }
@@ -120,9 +124,12 @@
   <div class="header-inner">
     <div class="header-top">
       <div>
-        <div class="wordmark"><a href="index.html" style="color:inherit;text-decoration:none;">CCIR &middot; Compute Credit Index Research</a></div>
+        <div class="wordmark"><a href="index.html">CCIR &middot; Compute Credit Index Research</a></div>
+        <h1>Methodology<br>Changelog</h1>
       </div>
     </div>
+    <div class="hero-rule"></div>
+    <p class="hero-stmt">Every change to the CRI methodology, index scope, data sources, or governance framework is classified, documented with rationale, and versioned. Historical index values computed under a prior methodology version are never restated. This log is the public record of that discipline.</p>
   </div>
 </header>
 <div class="nav-strip">
@@ -139,15 +146,9 @@
   </div>
 </div>
 
-<!-- HERO -->
 <main>
   <div class="wrap">
-    <div class="hero">
-      <div class="sec-label">Version History</div>
-      <h1 class="hero-h1">Methodology Changelog</h1>
-      <div class="hero-rule"></div>
-      <p class="hero-sub">Every change to the CRI methodology, index scope, data sources, or governance framework is classified, documented with rationale, and versioned. Historical index values computed under a prior methodology version are never restated. This log is the public record of that discipline.</p>
-    </div>
+    <div>
 
     <!-- Change tier policy summary -->
     <div class="policy-strip">
