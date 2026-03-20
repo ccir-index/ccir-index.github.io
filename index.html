@@ -55,14 +55,22 @@
     .hero-rule { width: 44px; height: 2px; background: var(--accent); margin: 26px 0 22px; }
     .hero-stmt { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 640px; }
     .hero-stmt strong { font-weight: 500; color: var(--text-hi); }
-    .hero-rate-display { margin-top: 28px; display: flex; align-items: baseline; gap: 28px; flex-wrap: wrap; padding: 18px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .hero-rate-left { display: flex; align-items: center; gap: 10px; }
-    .hero-rate-ticker { font-family: var(--mono); font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--text-hi); }
-    .hero-rate-val { font-family: var(--mono); font-size: 1.55rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.01em; }
-    .hero-rate-unit { font-family: var(--mono); font-size: .68rem; color: var(--text-dim); }
-    .hero-rate-right { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
-    #hero-rate-meta { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); letter-spacing: .04em; }
-    .hero-rate-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); text-decoration: none; }
+    .ticker-strip { margin-top: 28px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; position: relative; height: 42px; display: flex; align-items: center; }
+    .ticker-fixed-label { display: flex; align-items: center; gap: 8px; padding: 0 18px 0 0; border-right: 1px solid var(--border); flex-shrink: 0; height: 100%; }
+    .ticker-live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: ticker-pulse 2.4s ease-in-out infinite; }
+    @keyframes ticker-pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .ticker-fixed-text { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap; }
+    .ticker-scroll-wrap { flex: 1; overflow: hidden; height: 100%; display: flex; align-items: center; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%); }
+    .ticker-track { display: flex; align-items: baseline; white-space: nowrap; animation: ticker-scroll 36s linear infinite; }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes ticker-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .t-item { display: inline-flex; align-items: baseline; gap: 0; padding-right: 40px; }
+    .t-sym { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .11em; text-transform: uppercase; color: var(--text-dim); margin-right: 10px; }
+    .t-val { font-family: var(--mono); font-size: .90rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.01em; }
+    .t-unit { font-family: var(--mono); font-size: .58rem; color: var(--text-dim); margin-left: 5px; letter-spacing: .04em; }
+    .t-sep { color: var(--border-hi); font-family: var(--mono); font-size: .75rem; padding-right: 40px; }
+    .ticker-date { font-family: var(--mono); font-size: .58rem; color: var(--text-dim); letter-spacing: .06em; padding-left: 14px; border-left: 1px solid var(--border); flex-shrink: 0; height: 100%; display: flex; align-items: center; white-space: nowrap; }
+    .hero-rate-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding-left: 14px; border-left: 1px solid var(--border); flex-shrink: 0; height: 100%; display: flex; align-items: center; white-space: nowrap; }
     .hero-rate-link:hover { text-decoration: underline; }
 
     /* ─── INDEPENDENCE STRIP ──────────────────────────────────────────────── */
@@ -269,16 +277,27 @@
     <p class="hero-stmt">
       Independent reference rates for GPU-backed credit &mdash; <strong>built for citation in loan covenants, collateral appraisals, and compliance certificates.</strong> The structural independence and IOSCO-aligned methodology credit documents require.
     </p>
-    <div class="hero-rate-display">
-      <div class="hero-rate-left">
-        <span class="hero-rate-ticker">CRI-H100</span>
-        <span class="hero-rate-val" id="hero-rate-val">&mdash;</span>
-        <span class="hero-rate-unit">/ GPU &middot; hr</span>
+    <div class="ticker-strip">
+      <div class="ticker-fixed-label">
+        <div class="ticker-live-dot"></div>
+        <span class="ticker-fixed-text">CCIR Spot</span>
       </div>
-      <div class="hero-rate-right">
-        <span id="hero-rate-meta">On-demand spot &middot; loading&hellip;</span>
-        <a href="#chip-selector" class="hero-rate-link">See all rates &darr;</a>
+      <div class="ticker-scroll-wrap">
+        <div class="ticker-track" id="ticker-track">
+          <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+          <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+          <span class="t-item"><span class="t-sym">CRI-H100</span><span class="t-val" id="t-h100">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+          <span class="t-item"><span class="t-sym">CRI-A100</span><span class="t-val" id="t-a100">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+          <span class="t-item"><span class="t-sym">CRI-L40S</span><span class="t-val" id="t-l40s">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+          <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+          <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+          <span class="t-item"><span class="t-sym">CRI-H100</span><span class="t-val" id="t-h100-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+          <span class="t-item"><span class="t-sym">CRI-A100</span><span class="t-val" id="t-a100-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+          <span class="t-item"><span class="t-sym">CRI-L40S</span><span class="t-val" id="t-l40s-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+        </div>
       </div>
+      <span class="ticker-date" id="ticker-date">loading&hellip;</span>
+      <a href="#chip-selector" class="hero-rate-link">See all rates &darr;</a>
     </div>
   </div>
 </header>
@@ -848,15 +867,25 @@ async function renderGenSpread() {
 document.addEventListener('DOMContentLoaded', () => {
   loadChip('h100');
   renderGenSpread();
-  fetchCsv(CHIPS['h100'].csv).then(lines => {
-    const sp = latestRow(lines, null, 'seller_ask_noninterruptible');
-    if (sp) {
-      document.getElementById('hero-rate-val').textContent = '$' + parseFloat(sp[4]).toFixed(2);
-      document.getElementById('hero-rate-meta').textContent = 'On-demand spot \u00b7 As of ' + fmtDate(sp[0].trim());
+  (async () => {
+    const ids = ['b200','h200','h100','a100','l40s'];
+    let asOfDate = '';
+    await Promise.allSettled(ids.map(async id => {
+      try {
+        const lines = await fetchCsv(CHIPS[id].csv);
+        const sp = latestRow(lines, null, 'seller_ask_noninterruptible');
+        if (sp) {
+          const val = '$' + parseFloat(sp[4]).toFixed(2);
+          document.getElementById('t-' + id).textContent = val;
+          document.getElementById('t-' + id + '-2').textContent = val;
+          if (!asOfDate) asOfDate = sp[0].trim();
+        }
+      } catch(e) {}
+    }));
+    if (asOfDate) {
+      document.getElementById('ticker-date').textContent = 'As of ' + fmtDate(asOfDate);
     }
-  }).catch(() => {
-    document.getElementById('hero-rate-meta').textContent = 'On-demand spot';
-  });
+  })();
 });
 </script>
 </body>
