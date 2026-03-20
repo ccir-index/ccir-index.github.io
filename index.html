@@ -55,7 +55,8 @@
     .hero-rule { width: 44px; height: 2px; background: var(--accent); margin: 26px 0 22px; }
     .hero-stmt { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 640px; }
     .hero-stmt strong { font-weight: 500; color: var(--text-hi); }
-    .ticker-strip { margin-top: 28px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; position: relative; height: 42px; display: flex; align-items: center; }
+    .ticker-wrap { background: var(--bg); padding: 28px 0; }
+    .ticker-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; position: relative; height: 42px; display: flex; align-items: center; }
     .ticker-fixed-label { display: flex; align-items: center; gap: 8px; padding: 0 18px 0 0; border-right: 1px solid var(--border); flex-shrink: 0; height: 100%; }
     .ticker-live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: ticker-pulse 2.4s ease-in-out infinite; }
     @keyframes ticker-pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
@@ -277,28 +278,6 @@
     <p class="hero-stmt">
       Independent reference rates for GPU-backed credit &mdash; <strong>built for citation in loan covenants, collateral appraisals, and compliance certificates.</strong> The structural independence and IOSCO-aligned methodology credit documents require.
     </p>
-    <div class="ticker-strip">
-      <div class="ticker-fixed-label">
-        <div class="ticker-live-dot"></div>
-        <span class="ticker-fixed-text">CCIR Spot</span>
-      </div>
-      <div class="ticker-scroll-wrap">
-        <div class="ticker-track" id="ticker-track">
-          <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-          <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-          <span class="t-item"><span class="t-sym">CRI-H100</span><span class="t-val" id="t-h100">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-          <span class="t-item"><span class="t-sym">CRI-A100</span><span class="t-val" id="t-a100">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-          <span class="t-item"><span class="t-sym">CRI-L40S</span><span class="t-val" id="t-l40s">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-          <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-          <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-          <span class="t-item"><span class="t-sym">CRI-H100</span><span class="t-val" id="t-h100-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-          <span class="t-item"><span class="t-sym">CRI-A100</span><span class="t-val" id="t-a100-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-          <span class="t-item"><span class="t-sym">CRI-L40S</span><span class="t-val" id="t-l40s-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-        </div>
-      </div>
-      <span class="ticker-date" id="ticker-date">loading&hellip;</span>
-      <a href="#chip-selector" class="hero-rate-link">See all rates &darr;</a>
-    </div>
   </div>
 </header>
 <div class="nav-strip">
@@ -313,6 +292,30 @@
     <span class="nav-sep">/</span>
     <a href="contact.html" class="nav-link">Contact</a>
   </div>
+</div>
+<div class="ticker-wrap">
+<div class="ticker-strip">
+  <div class="ticker-fixed-label">
+    <div class="ticker-live-dot"></div>
+    <span class="ticker-fixed-text">CCIR Spot</span>
+  </div>
+  <div class="ticker-scroll-wrap">
+    <div class="ticker-track" id="ticker-track">
+      <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-H100</span><span class="t-val" id="t-h100">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-A100</span><span class="t-val" id="t-a100">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-L40S</span><span class="t-val" id="t-l40s">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-H100</span><span class="t-val" id="t-h100-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-A100</span><span class="t-val" id="t-a100-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-L40S</span><span class="t-val" id="t-l40s-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+    </div>
+  </div>
+  <span class="ticker-date" id="ticker-date">loading&hellip;</span>
+  <a href="#chip-selector" class="hero-rate-link">See all rates &darr;</a>
+</div>
 </div>
 
 
@@ -362,8 +365,8 @@
     </div>
     <div class="gap-cta">
       <div>
-        <div style="font-family:var(--serif);font-size:1.15rem;font-weight:500;color:#f0ece6;margin-bottom:10px;line-height:1.35;">The only covenant framework built to respond to all three &mdash; with full drafted language available for download.</div>
-        <div style="font-size:.82rem;font-weight:300;color:#8a827a;line-height:1.65;margin-bottom:20px;">Full drafted covenant language, scenario analysis, and a hypothetical $50M facility framework available for download.</div>
+        <div style="font-family:var(--serif);font-size:1.15rem;font-weight:500;color:#f0ece6;margin-bottom:10px;line-height:1.35;">The only covenant framework built to respond to all three &mdash; with scenario analysis and a facility-level structuring framework available for download.</div>
+
         <a href="services.html" style="display:inline-block;font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;background:var(--accent);color:#fff;padding:11px 24px;border-radius:2px;text-decoration:none;">See the Covenant Framework &rarr;</a>
       </div>
     </div>
