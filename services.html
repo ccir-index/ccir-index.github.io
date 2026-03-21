@@ -148,9 +148,9 @@
       /* Header */
       .header-inner { padding: 32px 20px 28px; }
       h1 { font-size: 1.65rem; }
-      /* Scenario table — horizontal scroll within viewport */
-      .cs-scenario { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: calc(100vw - 40px); }
-      .cs-scenario table { min-width: 520px; }
+      /* Scenario table — break out of wrap padding to full viewport width */
+      .cs-scenario { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-left: -20px; margin-right: -20px; border-radius: 0; border-left: none; border-right: none; }
+      .cs-scenario table { min-width: 480px; }
       /* Footer */
       .footer-in { flex-direction: column; align-items: flex-start; gap: 12px; }
       .fr { text-align: left; }
