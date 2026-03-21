@@ -527,7 +527,6 @@
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const RAW = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main';
-const CLS_MM_ALL = `${RAW}/cri-cls-mm/CRI-CLS-MM-history.csv`;
 
 const CHIPS = {
   b200: {
@@ -535,7 +534,7 @@ const CHIPS = {
     csv:`${RAW}/cri-b200/CRI-B200-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv',
     desc:'Blackwell generation — frontier training and inference. B200/H100 spread tracks transition timing and cascade velocity into prior-generation collateral.',
-    clsMM: CLS_MM_ALL,
+    clsMM:`${RAW}/cri-b200-cls-mm/CRI-B200-CLS-MM-history.csv`,
     clsENT:`${RAW}/cri-b200-cls-ent/CRI-B200-CLS-ENT-history.csv`,
   },
   h200: {
@@ -550,7 +549,7 @@ const CHIPS = {
     csv:`${RAW}/cri-h100/CRI-H100-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv',
     desc:'On-demand spot rate — per GPU / hr. Going-concern reference rate for H100 collateral. Inference demand has supported rates as training workloads migrate to Blackwell. Generation Spread vs CRI-B200 measures net obsolescence signal in real time.',
-    clsMM: CLS_MM_ALL,
+    clsMM:`${RAW}/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv`,
     clsENT:`${RAW}/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv`,
   },
   a100: {
@@ -558,7 +557,7 @@ const CHIPS = {
     csv:`${RAW}/cri-a100/CRI-A100-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv',
     desc:'Inference and batch workloads. A100 on-demand rate now below L40S — inference demand is pricing Ada Lovelace above prior-gen training silicon. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.',
-    clsMM: CLS_MM_ALL,
+    clsMM:`${RAW}/cri-a100-cls-mm/CRI-A100-CLS-MM-history.csv`,
   },
   l40s: {
     ticker:'CRI-L40S', gpuModel:'L40S', label:'L40S', primary:false,
@@ -689,7 +688,7 @@ async function renderStack(chipKey, spotLines) {
   const mmLegend  = mmVal  ? `<div class="legend-item"><div class="legend-dot mm"></div><span>${chip.ticker}-CLS-MM — Mid-market cluster rate. Median of RunPod + Lambda 8-GPU posted prices.</span></div>` : '';
 
   // ── Cluster detail panel (only if cluster data exists) ──────────────────
-  const clsMMLink  = chip.clsMM  ? `&nbsp;&middot;&nbsp;<a href="https://github.com/ccir-index/ccir-data/blob/main/cri-cls-mm/CRI-CLS-MM-history.csv" target="_blank" rel="noopener">MM →</a>` : '';
+  const clsMMLink  = chip.clsMM  ? `&nbsp;&middot;&nbsp;<a href="${chip.clsMM.replace('raw.githubusercontent.com','github.com').replace('/main/','/blob/main/')}" target="_blank" rel="noopener">MM →</a>` : '';
   const clsENTLink = chip.clsENT ? `&nbsp;&middot;&nbsp;<a href="${chip.clsENT.replace('raw.githubusercontent.com','github.com').replace('/main/','/blob/main/')}" target="_blank" rel="noopener">ENT →</a>` : '';
 
   const clusterPanel = hasCluster ? `
