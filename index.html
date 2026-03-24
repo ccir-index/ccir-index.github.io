@@ -463,7 +463,7 @@
         <div class="gen-card-spread" id="gen-b200-spread">&mdash;</div>
         <div class="gen-card-rates" id="gen-b200-rates">Loading&hellip;</div>
         <div class="gen-card-desc" id="gen-b200-desc"></div>
-        <div class="gen-card-covenant" id="gen-b200-covenant">§7.04 Covenant Anchor &nbsp;·&nbsp; Threshold: 15%</div>
+        <div class="gen-card-covenant" id="gen-b200-covenant">§7.04 Covenant Anchor &nbsp;·&nbsp; Threshold: 25%</div>
         <div class="gen-card-meta" id="gen-b200-meta"></div>
       </div>
       <div class="gen-card secondary" id="gen-a100-card">
@@ -819,24 +819,24 @@ async function renderGenSpread() {
     // Positive = B200 commands premium over H100 (training tier intact)
     // Near zero = converging toward §7.04 threshold
     // Negative = H100 above B200 (unexpected inversion)
-    const b200Raw  = (b200Val - h100Val) / b200Val;
+    const b200Raw  = (b200Val - h100Val) / h100Val;
     const b200Pct  = Math.abs(b200Raw * 100).toFixed(1);
     const b200El   = document.getElementById('gen-b200-spread');
     const b200Desc = document.getElementById('gen-b200-desc');
     const b200Cov  = document.getElementById('gen-b200-covenant');
 
-    if (b200Raw > 0.15) {
+    if (b200Raw > 0.25) {
       // Premium intact
       b200El.textContent = `+${b200Pct}%`;
       b200El.className = 'gen-card-spread';
       b200Desc.textContent = `B200 next-gen premium holding — H100 collateral not yet displaced by B200 supply. Generation Spread well above the §7.04 threshold.`;
-      b200Cov.textContent = '§7.04 — Threshold: 15% · Status: Intact';
+      b200Cov.textContent = '§7.04 — Threshold: 25% · Status: Intact';
     } else if (b200Raw >= 0) {
       // Converging — approaching threshold
       b200El.textContent = `+${b200Pct}%`;
       b200El.className = 'gen-card-spread converging';
       b200Desc.textContent = `B200 priced ${b200Pct}% above H100 — approaching §7.04 threshold. B200 supply expanding; training-tier premium compressing. Monitor for covenant trigger.`;
-      b200Cov.textContent = '§7.04 — Threshold: 15% · Status: Converging';
+      b200Cov.textContent = '§7.04 — Threshold: 25% · Status: Converging';
       b200Cov.style.color = 'var(--amber)';
       b200Cov.style.background = 'var(--amber-lo)';
       b200Cov.style.borderColor = 'var(--amber-mid)';
@@ -844,7 +844,7 @@ async function renderGenSpread() {
       // Inverted — H100 above B200
       b200El.textContent = `${b200Pct}% discount`;
       b200El.className = 'gen-card-spread warning';
-      b200Desc.textContent = `H100 priced ${b200Pct}% above B200 — convergence complete. §7.04 accelerated amortization triggered. H100 collateral no longer commands a training-tier premium.`;
+      b200Desc.textContent = `H100 priced ${b200Pct}% above B200 — convergence complete. §7.04 Generation Convergence Event triggered. Cap Rate steps up to 35% in §7.02; LTV recalculates. H100 collateral no longer commands a training-tier premium.`;
       b200Cov.textContent = '§7.04 — Status: Triggered';
       b200Cov.style.color = '#A03020';
       b200Cov.style.background = '#FDF0EE';
