@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reference Rate Applications &mdash; CCIR</title>
-  <meta name="description" content="Independent GPU compute benchmark rates for GPU-backed structured finance. Illustrative examples of how CRI-H100 may be cited in revenue coverage tests, market monitoring covenants, and borrowing base formulas." />
+  <meta name="description" content="Independent GPU compute benchmark rates for GPU-backed structured finance. Two covenant frameworks for contracted-revenue and mixed-book GPU operators, addressing collateral coverage, contract renewal risk, workload composition, and generation spread." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
@@ -171,8 +171,7 @@
     </div>
     <div class="hero-rule"></div>
     <p class="hero-stmt">
-      GPU-backed credit agreements need an independent, named market rate &mdash; one that neither party controls and any counterparty can verify.
-      <strong>These illustrative examples show how CRI-H100 may be cited as a reference rate in revenue coverage tests, market monitoring covenants, and borrowing base formulas.</strong> All parameters and thresholds are set by counsel and lenders. CCIR publishes the rate.
+      GPU-backed credit agreements need an independent, named market rate &mdash; one that neither party controls and any counterparty can verify. <strong>CRI-H100 is the independent market reference that underpins collateral valuation, contract coverage, and covenant performance in GPU-backed facilities.</strong> All parameters and thresholds are set by counsel and lenders. CCIR publishes the rate.
     </p>
   </div>
 </header>
@@ -206,7 +205,7 @@
         <div class="problem-head">Book depreciation does not move with the rental market</div>
         <div class="problem-stat">60&ndash;70%</div>
         <div class="problem-stat-label">H100 rental rate decline, early 2024 &rarr; late 2025</div>
-        <p class="problem-body" style="margin-top:12px;">H100 on-demand asking prices fell more than 60% in 18 months. Revenue covenants and borrowing base formulas that reference the live on-demand market need an independent, named rate to anchor those calculations &mdash; one both parties can verify independently.</p>
+        <p class="problem-body" style="margin-top:12px;">GPU rental rates have declined materially since 2024. Revenue covenants and borrowing base formulas that reference the live on-demand market need an independent, named rate to anchor those calculations &mdash; one both parties can verify independently.</p>
       </div>
 
       <div class="problem-card accent-top">
@@ -214,19 +213,19 @@
         <div class="problem-head">A rate defined by either party creates documentation risk</div>
         <div class="problem-stat">No standard</div>
         <div class="problem-stat-label">No independent GPU compute reference rate in current deal documentation</div>
-        <p class="problem-body" style="margin-top:12px;">A rate defined by the lender favors the lender. A rate defined by the borrower favors the borrower. Syndicated facilities need a rate all lenders can independently verify. Post-LIBOR, compliance functions have developed institutional resistance to reference rates that lack independent governance and published methodology. CRI-H100 is structured to meet that standard.</p>
+        <p class="problem-body" style="margin-top:12px;"><strong>A rate defined by the lender favors the lender. A rate defined by the borrower favors the borrower.</strong> Syndicated facilities need a rate all lenders can independently verify. Post-LIBOR, compliance functions have developed institutional resistance to reference rates that lack independent governance and published methodology. CRI-H100 is structured to meet that standard.</p>
       </div>
 
       <div class="problem-card amber-top">
-        <div class="problem-label">Rate Deterioration Visibility</div>
-        <div class="problem-head">Quarterly calculation dates create blind windows between signals</div>
-        <p class="problem-body">When on-demand spot rates begin to fall, quarterly financial covenants leave 60&ndash;90 days between the signal and the lender&rsquo;s next checkpoint. A market monitoring covenant that references CRI-H100 daily can surface rate deterioration as it happens &mdash; enabling borrower disclosure and increased surveillance frequency before the decline compounds into a financial covenant trigger.</p>
+        <div class="problem-label">Contract Renewal Risk</div>
+        <div class="problem-head">Contract-to-spot spread is the key renewal risk signal &mdash; and requires an independent rate to measure</div>
+        <p class="problem-body">In a contracted-revenue structure, the most important surveillance question is the spread between the borrower&rsquo;s base contracted rate and the current spot market. When CRI-H100 falls toward the borrower&rsquo;s base contracted rate, renewal leverage erodes. That spread &mdash; the Contract Premium Ratio &mdash; cannot be measured without an independent spot rate that neither party controls.</p>
       </div>
 
       <div class="problem-card amber-top">
-        <div class="problem-label">Monthly Borrowing Base</div>
-        <div class="problem-head">Collateral certification needs an independently verifiable rate</div>
-        <p class="problem-body">A monthly borrowing base certificate marking the GPU fleet to the on-demand market requires a rate neither party controls. Without a named independent reference rate, borrowing base availability is either frozen to closing assumptions or calculated from a number that cannot be independently reproduced &mdash; creating exactly the interpretive friction that surfaces in workouts. CRI-H100 is published daily and reproducible by any party with access to the underlying sources.</p>
+        <div class="problem-label">Workout &amp; Disposition</div>
+        <div class="problem-head">UCC &sect;9-627 requires an independent rate to defend collateral disposition</div>
+        <p class="problem-body">Under UCC &sect;9-627, a disposition is commercially reasonable only if conducted at &ldquo;the price current in any recognized market.&rdquo; Without a named independent rate, a lender cannot defend GPU collateral disposition against a borrower who argues the sale was commercially unreasonable &mdash; and under UCC &sect;9-626, a commercially unreasonable disposition may eliminate the deficiency judgment. CRI-H100, cited in the credit agreement, provides the independent market reference that survives that scrutiny.</p>
       </div>
 
     </div>
@@ -235,131 +234,254 @@
     <div class="sec-label">Illustrative Reference Rate Applications</div>
     <div class="sec-rule"></div>
 
+    <!-- Document selector -->
+    <div style="background:var(--bg-white);border:1px solid var(--border);border-radius:2px;padding:22px 24px 20px;margin-bottom:20px;box-shadow:var(--sh-sm);">
+      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Illustrative covenant frameworks</div>
+
+      <!-- MPM — full width, leads -->
+      <div style="border:1px solid var(--border);border-left:3px solid var(--green);border-radius:2px;padding:14px 16px;margin-bottom:12px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:260px;">
+            <div style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Market Price Monitoring &mdash; Any GPU Facility</div>
+            <div style="font-size:.800rem;font-weight:500;color:var(--text-hi);margin-bottom:6px;">The lowest-friction CRI-H100 citation &mdash; no financial consequence</div>
+            <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;">Profile-agnostic surveillance covenant. Two disclosure thresholds anchored to CRI-H100 at closing. No prepayment trigger, no formula adjustment, no Event of Default. Compatible with any GPU-backed credit agreement regardless of deal structure.</div>
+          </div>
+          <div style="flex-shrink:0;">
+            <a href="CCIR_Market_Price_Monitoring.pdf" class="dl-btn" download style="font-size:.60rem;padding:8px 14px;background:var(--green);color:var(--bg-white);border:none;">
+              <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Market Price Monitoring
+            </a>
+            <div style="font-family:var(--mono);font-size:.53rem;color:var(--text-dim);margin-top:5px;">.pdf</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile A + B side by side -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div style="border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:2px;padding:14px 16px;">
+          <div style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">Profile A &mdash; Contracted Revenue</div>
+          <div style="font-size:.800rem;font-weight:500;color:var(--text-hi);margin-bottom:6px;">Primary credit support: customer offtake agreements</div>
+          <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;margin-bottom:10px;">Enterprise SLA contracts, committed-term agreements, or named customer revenue. GPU hardware as backstop collateral. Typical deal size $100M+. Three covenants: &sect;7.02 Collateral Coverage, &sect;7.04 Generation Spread, &sect;7.05 Contract Premium Ratio.</div>
+          <a href="CCIR_Illustrative_Credit_Applications_Profile_A.pdf" class="dl-btn" download style="font-size:.60rem;padding:8px 14px;">
+            <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Profile A Framework
+          </a>
+          <div style="font-family:var(--mono);font-size:.53rem;color:var(--text-dim);margin-top:5px;">.pdf</div>
+        </div>
+        <div style="border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:2px;padding:14px 16px;">
+          <div style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;">Profile B &mdash; Mixed-Book Operator</div>
+          <div style="font-size:.800rem;font-weight:500;color:var(--text-hi);margin-bottom:6px;">Primary credit support: GPU collateral</div>
+          <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;margin-bottom:10px;">Mixed or spot-market revenue, borrowing base format. No hyperscaler backstop. Typical deal size $20M&ndash;$75M. Four covenants: &sect;7.01 Market Capture, &sect;7.02 Collateral Coverage, &sect;7.03 Workload Composition, &sect;7.04 Generation Spread.</div>
+          <a href="CCIR_Illustrative_Credit_Applications_Profile_B.pdf" class="dl-btn" download style="font-size:.60rem;padding:8px 14px;background:var(--surface-2);color:var(--text-hi);border:1px solid var(--border);">
+            <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Profile B Framework
+          </a>
+          <div style="font-family:var(--mono);font-size:.53rem;color:var(--text-dim);margin-top:5px;">.pdf</div>
+          <div style="margin-top:8px;"><a href="CCIR_Borrowing_Base_Certificate_Profile_B.pdf" style="font-family:var(--mono);font-size:.56rem;font-weight:500;color:var(--accent);" download>Exhibit F (Borrowing Base Certificate) &rarr;</a></div>
+        </div>
+      </div>
+
+      <div style="font-family:var(--mono);font-size:.55rem;color:var(--text-dim);margin-top:2px;line-height:2.0;">
+        <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Benchmark_Design_Rationale_v1_0_0.pdf" target="_blank" rel="noopener" style="color:var(--accent);">Benchmark Design Rationale &rarr;</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Fallback_Language_Guidance_v1_0_0.pdf" target="_blank" rel="noopener" style="color:var(--accent);">Fallback Language Guidance &rarr;</a>
+      </div>
+    </div>
+
     <div class="case-study">
       <div class="cs-header">
         <div class="cs-title-block">
-          <div class="cs-eyebrow">Illustrative Example</div>
-          <div class="cs-title">GPU Co., LLC &mdash; $50M Senior Secured<br><span style="font-size:1.1rem;color:var(--text-dim);">1,500 &times; NVIDIA H100 SXM &nbsp;&middot;&nbsp; 36-month term</span></div>
-          <div class="cs-meta">Reference rate: CRI-H100 &nbsp;&middot;&nbsp; All parameters illustrative &nbsp;&middot;&nbsp; Thresholds, multiples, and advance rates are credit judgments set by counsel and lenders</div>
-        </div>
-        <div class="cs-download">
-          <a href="CCIR_Illustrative_Credit_Applications_v1_0_0.pdf" class="dl-btn" download>
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Download
-          </a>
-          <div style="font-family:var(--mono);font-size:.55rem;color:var(--text-dim);margin-top:6px;text-align:right;">.pdf &nbsp;&middot;&nbsp; Illustrative credit applications</div>
-          <div style="margin-top:14px;">
-            <a href="CCIR_Borrowing_Base_Certificate_Illustrative.pdf" class="dl-btn" style="background:var(--surface-2);color:var(--accent);border:1px solid var(--border);" download>
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Compliance Certificate
-            </a>
-          </div>
-          <div style="font-family:var(--mono);font-size:.55rem;color:var(--text-dim);margin-top:6px;text-align:right;">.pdf &nbsp;&middot;&nbsp; Illustrative Exhibit F template</div>
-          <div style="font-family:var(--mono);font-size:.55rem;color:var(--text-dim);margin-top:12px;line-height:2.0;text-align:right;">
-            <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Benchmark_Design_Rationale_v1_0_0.pdf" target="_blank" rel="noopener" style="color:var(--accent);">Benchmark Design Rationale →</a><br>
-            <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Fallback_Language_Guidance_v1_0_0.pdf" target="_blank" rel="noopener" style="color:var(--accent);">Fallback Language Guidance →</a>
-          </div>
+          <div class="cs-eyebrow">Illustrative Applications</div>
+          <div class="cs-title">CRI-H100 as a Reference Rate<br><span style="font-size:1.1rem;color:var(--text-dim);">Two Profiles &nbsp;&middot;&nbsp; Six Covenants &nbsp;&middot;&nbsp; 36-month term</span></div>
+          <div class="cs-meta">All parameters illustrative &nbsp;&middot;&nbsp; Thresholds, multiples, and advance rates are credit judgments set by counsel and lenders</div>
         </div>
       </div>
       <div class="cs-rule"></div>
 
       <!-- Covenant cards -->
-      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:14px;">Illustrative Applications of CRI-H100 as a Reference Rate</div>
+      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;">Profile A &mdash; Contracted Revenue Operator</div>
+      <div style="font-size:.760rem;color:var(--text-dim);margin-bottom:14px;">8,000 &times; H100 SXM5 &nbsp;&middot;&nbsp; $200M outstanding &nbsp;&middot;&nbsp; Gross contracted $3.80/hr &nbsp;&middot;&nbsp; Base contracted $2.90/hr (after Premium Schedule deductions)</div>
       <div class="cs-covenant-grid">
         <div class="cs-cov">
-          <div class="cs-cov-num">Application A</div>
-          <div class="cs-cov-head">Revenue Coverage Test</div>
-          <div class="cs-cov-body">A revenue maintenance test may cite CRI-H100 as the independent market floor against which contracted GPU revenue is measured &mdash; at a coverage multiple negotiated by counsel and lenders at underwriting. A Rate Cap provision protects a performing borrower from technical breach when the spot market rises above their contracted rate. Threshold levels are credit judgments; CRI-H100 is the observable market anchor they reference.</div>
-          <span class="cs-cov-tag">CRI-H100 cited by name</span>
+          <div class="cs-cov-num">&sect;7.02</div>
+          <div class="cs-cov-head">Collateral Coverage / LTV</div>
+          <div class="cs-cov-body"><strong>Marks the pledged GPU fleet to CRI-H100 monthly using a cap rate formula &mdash; not book depreciation, not contracted revenue.</strong> CV = GPUs &times; CRI-H100 &times; 8,760 hrs &times; 72% utilization &divide; 28% cap rate. Cap rate steps to 35% on Generation Convergence Event. LTV maintained below 80%.</div>
+          <span class="cs-cov-tag">Financial covenant</span>
         </div>
         <div class="cs-cov">
-          <div class="cs-cov-num">Application B</div>
-          <div class="cs-cov-head">Market Price Monitoring</div>
-          <div class="cs-cov-body">A surveillance covenant may reference CRI-H100 as the independently verifiable market signal for rental rate deterioration &mdash; triggering borrower disclosure and increased calculation frequency when the rate declines materially from the Closing Date Rate. Decline thresholds are set by counsel and lenders based on the facility&rsquo;s LTV cushion and contract coverage at origination. Not a financial trigger; increases lender visibility before a coverage breach materializes.</div>
-          <span class="cs-cov-tag">Surveillance · no financial trigger</span>
+          <div class="cs-cov-num">&sect;7.04</div>
+          <div class="cs-cov-head">Generation Spread</div>
+          <div class="cs-cov-body"><strong>Monitors (CRI-B200 &minus; CRI-H100) &divide; CRI-H100 as a proxy for H100 training-tier obsolescence.</strong> When the spread falls below 25% for two consecutive dates, the &sect;7.02 Capitalization Rate steps from 28% to 35% &mdash; tightening the collateral mark without an amendment.</div>
+          <span class="cs-cov-tag amber">Surveillance &rarr; feeds &sect;7.02</span>
+        </div>
+        <div class="cs-cov" style="grid-column:1/-1;">
+          <div class="cs-cov-num">&sect;7.05</div>
+          <div class="cs-cov-head">Contract Premium Ratio</div>
+          <div class="cs-cov-body"><strong>Measures Base Contracted Rate divided by CRI-H100.</strong> Notice at 1.10&times;; Renewal Reserve deposit or contractual runway demonstration at 1.00&times; parity; Advance Rate step-down in &sect;7.02 if neither condition met. Designed for contracted-revenue structures where gross rate comparisons overstate coverage during base rate compression.</div>
+          <span class="cs-cov-tag">Contract renewal risk surveillance</span>
+        </div>
+      </div>
+
+      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin:24px 0 6px;">Profile B &mdash; Mixed-Book Operator</div>
+      <div style="font-size:.760rem;color:var(--text-dim);margin-bottom:14px;">1,500 &times; H100 SXM5 &nbsp;&middot;&nbsp; $30M outstanding &nbsp;&middot;&nbsp; 70% training / 30% inference at baseline</div>
+      <div class="cs-covenant-grid">
+        <div class="cs-cov">
+          <div class="cs-cov-num">&sect;7.01</div>
+          <div class="cs-cov-head">Market Capture Ratio</div>
+          <div class="cs-cov-body"><strong>Measures whether the borrower&rsquo;s actual revenue per GPU achieves a minimum percentage of CRI-H100.</strong> Detects underpricing, underutilization, or customer mix deterioration. A coverage ratio applied to a spot-market operator is nearly inert; the Market Capture Ratio instead asks: is the borrower getting market rates? Rate compression is detected by &sect;7.02. Both signals are needed; neither substitutes for the other.</div>
+          <span class="cs-cov-tag">Operational efficiency &middot; 85% floor</span>
         </div>
         <div class="cs-cov">
-          <div class="cs-cov-num">Application C</div>
-          <div class="cs-cov-head">Borrowing Base Reference Rate</div>
-          <div class="cs-cov-body">A monthly borrowing base formula may cite CRI-H100 as the market rate used to calculate eligible GPU collateral value &mdash; at a fixed utilization assumption and advance rate negotiated by counsel and lenders at closing. The formula marks the fleet to the live on-demand market monthly rather than to book depreciation or the borrower&rsquo;s contracted revenue. The utilization assumption is fixed at a conservative redeployment rate; it does not vary with the borrower&rsquo;s actual reported utilization. All parameters other than CRI-H100 are fixed at closing; CRI-H100 is the single observable input that updates each period. The cap rate steps up automatically if a Generation Convergence Event fires under §7.04 &mdash; tightening collateral value without requiring an amendment.</div>
-          <span class="cs-cov-tag">Monthly mark · independent daily rate</span>
-          <div style="margin-top:10px;"><a href="CCIR_Borrowing_Base_Certificate_Illustrative.pdf" style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.06em;color:var(--accent);" download>Illustrative Exhibit F &rarr;</a></div>
+          <div class="cs-cov-num">&sect;7.02</div>
+          <div class="cs-cov-head">Collateral Coverage / LTV</div>
+          <div class="cs-cov-body"><strong>Marks the pledged GPU fleet to CRI-H100 monthly using a cap rate formula.</strong> CV = GPUs &times; CRI-H100 &times; 8,760 hrs &times; 72% utilization &divide; 28% cap rate. Cap rate steps to 35% on Generation Convergence Event. CRI-H100 is the single observable input that updates each period; all other parameters are fixed at closing and independently verifiable by any party.</div>
+          <span class="cs-cov-tag">Financial covenant &middot; independent daily rate</span>
+          <div style="margin-top:10px;"><a href="CCIR_Borrowing_Base_Certificate_Profile_B.pdf" style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.06em;color:var(--accent);" download>Exhibit F (Borrowing Base Certificate) &rarr;</a></div>
         </div>
         <div class="cs-cov">
-          <div class="cs-cov-num">Application D</div>
-          <div class="cs-cov-head">Generation Spread Surveillance</div>
-          <div class="cs-cov-body">A surveillance covenant may cite the Generation Spread &mdash; (CRI-B200 &minus; CRI-H100) &divide; CRI-H100 &mdash; as an observable proxy for H100 collateral obsolescence risk. When B200 prices converge toward H100 levels, the spread compresses. Counsel and lenders determine what spread level triggers borrower notice requirements and whether subsequent adjustments to borrowing base parameters are warranted. CCIR publishes both rates daily.</div>
-          <span class="cs-cov-tag amber">CRI-B200 &amp; CRI-H100 cited together</span>
+          <div class="cs-cov-num">&sect;7.03</div>
+          <div class="cs-cov-head">Workload Composition</div>
+          <div class="cs-cov-body"><strong>Requires borrower certification of training vs. inference workload mix each Calculation Date.</strong> If Training Workload Percentage falls below 50% for two consecutive periods, a Blended Utilization Rate adjusts the &sect;7.02 Collateral Value (72% training / 65% inference, weighted). Surfaces workload migration before it propagates into a &sect;7.02 deficiency &mdash; the borrower can migrate workloads while reporting identical headline utilization.</div>
+          <span class="cs-cov-tag">Surveillance &rarr; adjusts &sect;7.02</span>
+        </div>
+        <div class="cs-cov">
+          <div class="cs-cov-num">&sect;7.04</div>
+          <div class="cs-cov-head">Generation Spread</div>
+          <div class="cs-cov-body"><strong>Monitors (CRI-B200 &minus; CRI-H100) &divide; CRI-H100 as a proxy for H100 training-tier obsolescence.</strong> When the spread falls below 25% for two consecutive dates, the &sect;7.02 Capitalization Rate steps from 28% to 35% &mdash; tightening the collateral mark without an amendment. CCIR publishes both rates daily; the threshold and step-up mechanics are credit judgments set at underwriting.</div>
+          <span class="cs-cov-tag amber">CRI-B200 &amp; CRI-H100 &middot; feeds &sect;7.02</span>
         </div>
       </div>
 
       <div style="font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--text-dim);padding:14px 18px;background:var(--surface-2);border:1px solid var(--border);border-radius:2px;margin-top:14px;line-height:1.8;">
-        CCIR publishes the rate &nbsp;&middot;&nbsp; Counsel and lenders set the thresholds &nbsp;&middot;&nbsp; All parameters set by counsel and lenders
+        &sect;7.02 and &sect;7.04 apply to both profiles &nbsp;&middot;&nbsp; Counsel and lenders set all thresholds and parameters &nbsp;&middot;&nbsp; CCIR publishes the rate
       </div>
 
-      <!-- Workload insight callout -->
-      <div style="background:var(--accent-lo);border:1px solid var(--accent-mid);border-left:3px solid var(--accent);border-radius:2px;padding:18px 22px;margin:14px 0 24px;font-size:.800rem;color:var(--text);line-height:1.78;">
-        <span style="font-family:var(--mono);font-size:.56rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;">On workload composition</span>
-        A revenue coverage test anchored to CRI-H100 is sensitive to workload composition without requiring the borrower to report it. Training revenue sits materially above the on-demand spot rate; inference revenue competes with it. A borrower whose contracted GPU revenue is converging toward CRI-H100 may be migrating toward lower-value workloads &mdash; the coverage test catches that compression as it happens, because the rate it measures against is live and independent.
-      </div>
+
 
       <!-- Scenario table -->
-      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin:24px 0 10px;">Illustrative Scenario Analysis &mdash; How CRI-H100 Movements Affect Each Application</div>
-      <div style="font-family:var(--sans);font-size:.72rem;color:var(--text-dim);margin-bottom:14px;">Assumed at closing: contracted revenue above market; borrowing base comfortably covered. All threshold levels illustrative &mdash; set by counsel and lenders.</div>
+      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin:24px 0 6px;">Profile A &mdash; Illustrative Scenario Analysis</div>
+      <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:10px;">8,000 GPUs &middot; $200M outstanding &middot; Base contracted $2.90/hr &middot; CRI-H100 $2.18 at baseline. All parameters illustrative.</div>
       <div class="cs-scenario">
         <table>
           <thead>
             <tr>
               <th>Scenario</th>
-              <th>CRI-H100<br><span style="font-weight:300;letter-spacing:0;">on-demand</span></th>
-              <th>A &mdash; Revenue Coverage</th>
-              <th>B &mdash; Price Monitoring</th>
-              <th>C &mdash; Borrowing Base</th>
+              <th>CRI-H100</th>
+              <th>&sect;7.02 Collateral Coverage</th>
+              <th>&sect;7.04 Gen Spread</th>
+              <th>&sect;7.05 Contract Premium Ratio</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="scenario-name">Baseline</td>
-              <td class="mono">At closing level</td>
-              <td class="pass">PASS &mdash; contracted revenue covers market</td>
-              <td class="pass">OK &mdash; no decline from closing</td>
-              <td class="pass">PASS &mdash; BB comfortably covered</td>
+              <td class="mono">$2.18</td>
+              <td class="pass">PASS &mdash; LTV 50.9%, BB $255M</td>
+              <td class="pass">PASS &mdash; 145.4%</td>
+              <td class="pass">PASS &mdash; CPR 1.33&times;</td>
             </tr>
             <tr>
-              <td class="scenario-name">Moderate decline</td>
-              <td class="mono">~20&ndash;30% below closing</td>
-              <td class="pass">PASS &mdash; locked contracts hold</td>
-              <td class="warn">NOTICE &mdash; borrower assessment due</td>
-              <td class="warn">WATCH &mdash; BB availability tightening</td>
+              <td class="scenario-name">Spot compression<br><span style="font-weight:300;font-size:.72rem;">Contracts hold</span></td>
+              <td class="mono">$1.64 (&minus;25%)</td>
+              <td class="breach">BREACH &mdash; BB $191M &lt; $200M outstanding</td>
+              <td class="pass">PASS &mdash; 174%</td>
+              <td class="pass">IMPROVING &mdash; CPR 1.77&times;</td>
             </tr>
             <tr>
-              <td class="scenario-name">Significant decline</td>
-              <td class="mono">&gt;35% below closing</td>
-              <td class="pass">PASS &mdash; locked contracts hold</td>
-              <td class="warn">EVENT &mdash; monthly calculation frequency</td>
-              <td class="breach">DEFICIENCY &mdash; repayment or additional collateral</td>
+              <td class="scenario-name">Generation convergence<br><span style="font-weight:300;font-size:.72rem;">B200 falls toward H100</span></td>
+              <td class="mono">$2.00</td>
+              <td class="warn">TIGHTENS &mdash; cap rate 28%&rarr;35%, BB $204M</td>
+              <td class="warn">EVENT &mdash; spread 12.5%, cap steps up</td>
+              <td class="pass">PASS &mdash; CPR 1.45&times;</td>
             </tr>
             <tr>
-              <td class="scenario-name">Spot rise</td>
-              <td class="mono">Above contracted rate</td>
-              <td class="warn">RATE CAP ENGAGED &mdash; technical breach prevented</td>
-              <td class="pass">OK &mdash; rate above closing</td>
-              <td class="pass">PASS &mdash; BB availability improves</td>
+              <td class="scenario-name">Contract renewal pressure<br><span style="font-weight:300;font-size:.72rem;">40% pool re-contracted</span></td>
+              <td class="mono">$1.50</td>
+              <td class="breach">BREACH &mdash; BB $175M &lt; $200M</td>
+              <td class="pass">PASS &mdash; 167%</td>
+              <td class="warn">NOTICE &mdash; CPR 1.10&times; at threshold</td>
             </tr>
             <tr>
-              <td class="scenario-name">Contract expiry<br>+ rate decline</td>
-              <td class="mono">&gt;35% below closing</td>
-              <td class="breach">BREACH &mdash; revenue no longer covers market floor</td>
-              <td class="warn">EVENT &mdash; active</td>
-              <td class="breach">DEFICIENCY &mdash; compound pressure</td>
+              <td class="scenario-name">Combined stress<br><span style="font-weight:300;font-size:.72rem;">All three fire</span></td>
+              <td class="mono">$1.40</td>
+              <td class="breach">BREACH &mdash; BB $121M (cap 35%, adv 60%)</td>
+              <td class="warn">EVENT &mdash; cap 28%&rarr;35%</td>
+              <td class="breach">PARITY &mdash; CPR 0.93&times;, adv steps to 60%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cs-note" style="margin-bottom:24px;">
+        The defining Profile A asymmetry: spot compression tightens &sect;7.02 (hardware marks down) while &sect;7.05 improves (locked contracts look stronger vs. a falling floor). Both must be monitored. The inflection is contract renewal &mdash; when the borrower re-contracts into a depressed market, the CPR compresses rapidly. Lenders should model the combined stress scenario at origination: &sect;7.04 cap rate step-up and &sect;7.05 advance rate step-down compound in &sect;7.02, producing a $78.9M deficiency in the combined scenario above. Each of those developments individually fires a covenant notice; the combined stress is what happens when all three signals were ignored.
+      </div>
+
+      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin:8px 0 6px;">Profile B &mdash; Illustrative Scenario Analysis</div>
+      <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:10px;">1,500 GPUs &middot; $30M outstanding &middot; 70% training at baseline &middot; CRI-H100 $2.18. All parameters illustrative.</div>
+      <div class="cs-scenario">
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>CRI-H100</th>
+              <th>&sect;7.01 Market Capture</th>
+              <th>&sect;7.02 Collateral Coverage</th>
+              <th>&sect;7.03 Workload</th>
+              <th>&sect;7.04 Gen Spread</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="scenario-name">Baseline</td>
+              <td class="mono">$2.18</td>
+              <td class="pass">PASS &mdash; 95% capture</td>
+              <td class="pass">PASS &mdash; LTV 40.7%</td>
+              <td class="pass">PASS &mdash; 70% training</td>
+              <td class="pass">PASS &mdash; 145%</td>
+            </tr>
+            <tr>
+              <td class="scenario-name">Market underperformance<br><span style="font-weight:300;font-size:.72rem;">Borrower below market rate</span></td>
+              <td class="mono">$2.18</td>
+              <td class="breach">BREACH &mdash; 81.8% capture</td>
+              <td class="pass">PASS &mdash; LTV unchanged</td>
+              <td class="pass">PASS</td>
+              <td class="pass">PASS</td>
+            </tr>
+            <tr>
+              <td class="scenario-name">Spot compression<br><span style="font-weight:300;font-size:.72rem;">No locked contracts</span></td>
+              <td class="mono">$1.64 (&minus;25%)</td>
+              <td class="warn">WATCH &mdash; efficiency still OK</td>
+              <td class="warn">WATCH &mdash; BB $35.9M, cushion $5.9M</td>
+              <td class="pass">PASS</td>
+              <td class="pass">PASS</td>
+            </tr>
+            <tr>
+              <td class="scenario-name">Workload migration breach<br><span style="font-weight:300;font-size:.72rem;">42% training, 2nd period</span></td>
+              <td class="mono">$1.80</td>
+              <td class="pass">PASS</td>
+              <td class="warn">TIGHTENS &mdash; blended util adjusts CV</td>
+              <td class="breach">BREACH &mdash; blended util in &sect;7.02</td>
+              <td class="pass">PASS</td>
+            </tr>
+            <tr>
+              <td class="scenario-name">Combined stress<br><span style="font-weight:300;font-size:.72rem;">Rate + workload + gen spread</span></td>
+              <td class="mono">$1.50</td>
+              <td class="pass">PASS &mdash; efficient in weak market</td>
+              <td class="breach">BREACH &mdash; LTV 82% (cap 35%)</td>
+              <td class="breach">BREACH &mdash; 35% training</td>
+              <td class="warn">EVENT &mdash; cap 28%&rarr;35%</td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <div class="cs-note">
-        The key asymmetry: a declining spot rate makes the Revenue Coverage Test easier to pass (locked contracts look better relative to a falling floor) while simultaneously reducing Borrowing Base availability (the fleet marks down against outstanding principal). Lenders must monitor both together. The final scenario shows the compound risk when contract protection expires into a lower market &mdash; the same rate decline that was previously absorbed by locked contracts now flows directly into the coverage test. All threshold levels, advance rates, and formula parameters are credit judgments set by counsel and lenders; CRI-H100 is the independent market rate they are applied to.
+        <strong>The key Profile B distinction: for a mixed-book operator, a falling CRI-H100 rate tightens both &sect;7.01 Market Capture and &sect;7.02 Collateral Coverage simultaneously &mdash; there is no locked-contract cushion.</strong> The Market Underperformance scenario is the clearest demonstration of &sect;7.01&rsquo;s purpose: CRI is flat, hardware value is flat, but the borrower is underpricing. &sect;7.01 fires; &sect;7.02 does not. Without &sect;7.01, this borrower delivers a clean borrowing base certificate while quietly losing market position. In the Combined Stress scenario, &sect;7.01 still passes (the borrower is efficiently capturing a depressed market) &mdash; the problem is hardware value and workload mix, not operational execution.
       </div>
+    </div>
+
+    <!-- WORKOUT SECTION -->
+    <div style="font-size:.800rem;color:var(--text-dim);line-height:1.82;border-left:2px solid var(--border-hi);padding-left:18px;margin-bottom:48px;">
+      The covenants above serve their primary function during the facility term. The named independent rate also matters at default: under UCC &sect;9-627, a collateral disposition is commercially reasonable only if conducted at the price current in a recognized market. A named rate, cited in the credit agreement and verifiable by any party, provides that reference without post-hoc reconstruction &mdash; and because CCIR&rsquo;s methodology is open and reproducible, an expert witness can independently replicate the rate calculation. Under UCC &sect;9-626, a commercially unreasonable disposition may eliminate the deficiency judgment right. The citation that supports covenant surveillance during the facility term is the same citation that makes the disposition defensible if it does not.
     </div>
 
     <!-- ENGAGE -->
@@ -368,19 +490,19 @@
 
     <div class="engage">
       <div class="engage-head">Citing CRI-H100 in a GPU-backed facility?</div>
-      <div class="engage-sub">CCIR provides what the citation requires at each stage of the deal &mdash; from credit agreement drafting through final maturity. Counsel and lenders set all thresholds, advance rates, and formula parameters. CCIR publishes the benchmark rate they are applied to.</div>
+      <div class="engage-sub">CCIR provides what the citation requires at each stage of the deal &mdash; from credit agreement drafting through final maturity. Counsel and lenders set all thresholds, advance rates, and formula parameters. CCIR publishes the rate and maintains the governance record that makes the citation defensible.</div>
       <div class="engage-grid">
         <div class="engage-item">
           <div class="engage-item-head">At drafting</div>
-          <div class="engage-item-body">CRI benchmark rate definition language, methodology version references, and fallback provisions for benchmark unavailability &mdash; for use in credit agreement drafting. Counsel is responsible for all operative agreement language.</div>
+          <div class="engage-item-body">CRI benchmark rate definition language, methodology version references, Profile A and Profile B covenant framework documents, and fallback provisions for benchmark unavailability. Counsel is responsible for all operative agreement language.</div>
         </div>
         <div class="engage-item">
           <div class="engage-item-head">At closing</div>
-          <div class="engage-item-body">Published methodology documentation and IOSCO compliance statement for inclusion in due diligence packages and rating agency review. Reproducible by any party with access to the underlying sources.</div>
+          <div class="engage-item-body">Published methodology documentation and IOSCO compliance statement for inclusion in due diligence packages and rating agency review. Both are reproducible by any party with access to the underlying sources.</div>
         </div>
         <div class="engage-item">
           <div class="engage-item-head">During the facility term</div>
-          <div class="engage-item-body">Calculation Date packages showing CRI-H100 and Generation Spread in a format designed for compliance certificate review and borrowing base certification on each Calculation Date.</div>
+          <div class="engage-item-body">Calculation Date packages showing CRI-H100, CRI-B200, and Generation Spread in a format designed for compliance certificate review, borrowing base certification, and Contract Premium Ratio calculation on each Calculation Date. Historical rate data available for cap rate calibration analysis.</div>
         </div>
       </div>
       <div class="engage-cta">
