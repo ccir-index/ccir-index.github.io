@@ -273,24 +273,26 @@
     .gap-cta-link:hover { color: #f0ece6; text-decoration: none; }
     .gap-cta-sub { font-size: .800rem; font-weight: 300; color: #6a5e54; line-height: 1.6; }
 
-    /* ─── COVENANT EXPLAINER ─────────────────────────────────────────────── */
-    .cov-explainer {
-      background: var(--bg-white); border: 1px solid var(--border);
-      border-left: 3px solid var(--accent); border-radius: 2px;
-      padding: 24px 24px 18px; margin-bottom: 32px; box-shadow: var(--sh-sm);
-    }
-    .cov-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
-    @media (max-width: 680px) { .cov-row { grid-template-columns: 1fr; } }
-    .cov-item { padding: 0 24px 0 0; border-right: 1px solid var(--border); margin-right: 24px; }
-    .cov-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
-    .cov-num { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .20em; color: var(--accent-mid); margin-bottom: 6px; }
-    .cov-head { font-family: var(--sans); font-size: .84rem; font-weight: 500; color: var(--text-hi); margin-bottom: 8px; }
-    .cov-body { font-size: .775rem; color: var(--text-dim); line-height: 1.72; }
-    .cov-note {
-      margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border);
-      font-family: var(--mono); font-size: .60rem; color: var(--text-dim); line-height: 1.8;
-    }
-    .cov-note-label { font-weight: 500; color: var(--accent); margin-right: 10px; letter-spacing: .06em; text-transform: uppercase; }
+    /* ─── APPLICATION CARDS ──────────────────────────────────────────────── */
+    .cov-rate-note { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); background: var(--accent-lo); border: 1px solid var(--accent-mid); border-radius: 2px; padding: 9px 14px; margin-bottom: 28px; line-height: 1.8; }
+    .cov-rate-note strong { font-weight: 500; color: var(--accent); margin-right: 8px; letter-spacing: .04em; }
+    .cov-primary-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .cov-secondary-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+    @media (max-width: 680px) { .cov-primary-row, .cov-secondary-row { grid-template-columns: 1fr; } }
+    .cov-sublabel { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); margin: 20px 0 12px; }
+    .app-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 2px solid var(--border-hi); border-radius: 2px; padding: 22px 22px 18px; box-shadow: var(--sh-sm); display: flex; flex-direction: column; }
+    .app-card.hero { border-top: 3px solid var(--accent); }
+    .app-card.primary { border-top-color: var(--accent); }
+    .app-num { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .18em; color: var(--accent-mid); margin-bottom: 8px; }
+    .app-card.hero .app-num { color: var(--accent); }
+    .app-head { font-size: .925rem; font-weight: 500; color: var(--text-hi); margin-bottom: 8px; line-height: 1.3; }
+    .app-card.hero .app-head { font-size: 1.0rem; }
+    .app-body { font-size: .790rem; color: var(--text-dim); line-height: 1.68; flex: 1; margin-bottom: 14px; }
+    .app-rate { font-family: var(--mono); font-size: .57rem; font-weight: 500; letter-spacing: .06em; color: var(--accent); background: var(--accent-lo); border: 1px solid var(--accent-mid); border-radius: 2px; padding: 3px 8px; display: inline-block; margin-top: auto; }
+    .cov-disposition { border-left: 2px solid var(--border-hi); padding: 12px 0 12px 16px; margin-bottom: 32px; display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .cov-disposition-text { font-size: .800rem; color: var(--text-dim); line-height: 1.65; max-width: 560px; }
+    .cov-disposition-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); white-space: nowrap; text-decoration: none; }
+    .cov-disposition-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -301,12 +303,12 @@
     <div class="header-top">
       <div>
         <div class="wordmark">CCIR &middot; Compute Credit Index Research</div>
-        <h1>The Reference Standard<br>for GPU Collateral.</h1>
+        <h1>The Reference Rate for<br>GPU-Backed Credit.</h1>
       </div>
     </div>
     <div class="hero-rule"></div>
     <p class="hero-stmt">
-      Independent reference rates for GPU-backed credit &mdash; <strong>built for citation in loan covenants, borrowing base formulas, and compliance certificates.</strong> The structural independence and IOSCO-aligned methodology credit documents require.
+      Independent GPU compute reference rates for borrowing bases, covenants, collateral monitoring, and compliance certificates. <strong>Open methodology. Daily publication. Built for citation.</strong>
     </p>
   </div>
 </header>
@@ -350,23 +352,23 @@
 
 
 
-<!-- USE CASE PILLARS -->
+<!-- WHY CCIR WORKS -->
 <div class="pillars">
   <div class="pillar-grid">
     <div class="pillar">
-      <div class="pillar-icon">Market Signals</div>
-      <div class="pillar-head">Observable Signals Counsel Can Reference by Name</div>
-      <p class="pillar-body">A named published rate that makes traditional equipment lending structures work for GPU collateral &mdash; <strong>borrowing bases, market price monitoring covenants, and revenue coverage tests</strong> that equipment finance practitioners recognize, applied to a new asset class. <a href="services.html">See illustrative applications &rarr;</a></p>
+      <div class="pillar-icon">Independent Publisher</div>
+      <div class="pillar-head">CCIR Has No Financial Interest in the Market It Measures</div>
+      <p class="pillar-body">No marketplace position. No trading operations. No financial stake in GPU compute pricing. The independence that makes a reference rate citable by both parties in a credit agreement.</p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">Reference Rates</div>
-      <div class="pillar-head">A Named Rate Neither Party Controls</div>
-      <p class="pillar-body">CRI-H100 and the full CCIR benchmark rate family give credit agreements a named, independent market anchor that any counterparty can verify independently. Published daily. Open methodology. No marketplace position. The structural independence credit documents require.</p>
+      <div class="pillar-icon">Named, Observable Rate</div>
+      <div class="pillar-head">A Consistent Reference Rate Both Parties Can Cite</div>
+      <p class="pillar-body">CRI-H100 and the full CCIR benchmark rate family give credit agreements a named, independently verifiable market anchor. Published daily. Open methodology. Any counterparty can reproduce the calculation. <a href="services.html">See illustrative applications &rarr;</a></p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">Rate Provider</div>
-      <div class="pillar-head">CCIR Publishes the Rate. Counsel Sets the Thresholds.</div>
-      <p class="pillar-body">CCIR provides the rate definition language, methodology documentation, and Calculation Date packages that put independently verifiable numbers behind each reference in the credit agreement. All threshold levels, advance rates, and formula parameters are credit judgments set by counsel and lenders. <a href="/cdn-cgi/l/email-protection#30425543555142535870535359421e595f">Engage CCIR &rarr;</a></p>
+      <div class="pillar-icon">Counsel-Controlled Thresholds</div>
+      <div class="pillar-head">CCIR Provides the Benchmark. Lenders and Counsel Determine How It Is Used.</div>
+      <p class="pillar-body">CCIR provides rate definition language, methodology documentation, and Calculation Date packages. All threshold levels, advance rates, and formula parameters are credit judgments set by counsel and lenders &mdash; not CCIR. <a href="/cdn-cgi/l/email-protection#30425543555142535870535359421e595f">Engage CCIR &rarr;</a></p>
     </div>
   </div>
 </div>
@@ -374,32 +376,58 @@
 <!-- RATES -->
 <main id="rates">
   <div class="wrap">
-    <div class="sec-label">Illustrative Reference Rate Applications</div>
+    <div class="sec-label">How CCIR Is Used in Facilities</div>
     <div class="sec-rule"></div>
 
-    <!-- Covenant explainer -->
-    <div class="cov-explainer">
-      <div class="cov-row">
-        <div class="cov-item">
-          <div class="cov-num">01</div>
-          <div class="cov-head">Revenue Coverage Test</div>
-          <div class="cov-body">CRI-H100 may be cited as the independent market floor against which contracted GPU revenue is measured &mdash; at a coverage multiple set by counsel and lenders at underwriting. A Rate Cap prevents technical breach when the spot market rises above a borrower&rsquo;s contracted rate.</div>
-        </div>
-        <div class="cov-item">
-          <div class="cov-num">02</div>
-          <div class="cov-head">Borrowing Base Reference Rate</div>
-          <div class="cov-body">CRI-H100 may be cited as the market rate in a monthly borrowing base formula, marking GPU collateral to the live on-demand market rather than book depreciation. Utilization factors and advance rates are set by counsel and lenders at closing.</div>
-        </div>
-        <div class="cov-item">
-          <div class="cov-num">03</div>
-          <div class="cov-head">Generation Spread Signal</div>
-          <div class="cov-body">The Generation Spread &mdash; (CRI-B200 &minus; CRI-H100) &divide; CRI-H100 &mdash; is an observable proxy for H100 obsolescence risk. When B200 supply expands and its price falls toward H100 levels, the spread compresses. CCIR publishes both rates daily; counsel and lenders determine what spread thresholds mean for the deal.</div>
-        </div>
+    <!-- Which rate note -->
+    <div class="cov-rate-note">
+      <strong>Which rate for which deal</strong>
+      H100 SXM &rarr; CRI-H100 &nbsp;&middot;&nbsp; H200 &rarr; CRI-H200 &nbsp;&middot;&nbsp; B200 &rarr; CRI-B200 &nbsp;&middot;&nbsp; A100 SXM &rarr; CRI-A100 &nbsp;&middot;&nbsp; Mixed-GPU facility &rarr; each tranche references its own rate
+    </div>
+
+    <!-- Primary cards -->
+    <div class="cov-primary-row">
+      <div class="app-card hero">
+        <div class="app-num">01</div>
+        <div class="app-head">Market Monitoring Covenants</div>
+        <div class="app-body">The lowest-friction path to citation. Add a market monitoring covenant referencing CRI-H100 to any facility — existing or new. If the rate crosses a threshold set by counsel and lenders, the trigger fires. No restructuring of the borrowing base required.</div>
+        <span class="app-rate">Rate: CRI-H100</span>
       </div>
-      <div class="cov-note">
-        <span class="cov-note-label">Which rate for which deal</span>
-        H100 SXM &rarr; CRI-H100 &nbsp;&middot;&nbsp; H200 &rarr; CRI-H200 &nbsp;&middot;&nbsp; B200 &rarr; CRI-B200 &nbsp;&middot;&nbsp; A100 SXM &rarr; CRI-A100 &nbsp;&middot;&nbsp; Mixed-GPU facility &rarr; each tranche references its own rate
+      <div class="app-card primary">
+        <div class="app-num">02</div>
+        <div class="app-head">Borrowing Base</div>
+        <div class="app-body">Marks GPU collateral to the current on-demand market rather than book depreciation. CRI-H100 anchors the monthly borrowing base calculation. Utilization factors and advance rates are set by counsel and lenders at closing.</div>
+        <span class="app-rate">Rate: CRI-H100</span>
       </div>
+      <div class="app-card primary">
+        <div class="app-num">03</div>
+        <div class="app-head">Revenue Coverage</div>
+        <div class="app-body">Detects revenue quality deterioration before it shows in coverage ratios. Contracted revenue converging toward the CRI-H100 spot rate signals workload migration — without requiring the borrower to report it.</div>
+        <span class="app-rate">Rate: CRI-H100</span>
+      </div>
+    </div>
+
+    <!-- Secondary cards -->
+    <div class="cov-sublabel">Additional applications</div>
+    <div class="cov-secondary-row">
+      <div class="app-card">
+        <div class="app-num">04</div>
+        <div class="app-head">Generation Spread Analysis</div>
+        <div class="app-body">Observable proxy for H100 obsolescence risk. When B200 spot prices fall toward H100 levels, the spread compresses and the training premium justifying H100 collateral valuations erodes. Published daily alongside spot rates.</div>
+        <span class="app-rate">Rates: CRI-H100, CRI-B200</span>
+      </div>
+      <div class="app-card">
+        <div class="app-num">05</div>
+        <div class="app-head">Compliance Certificates</div>
+        <div class="app-body">CCIR provides Calculation Date rate packages showing CRI rates and Generation Spread in a format designed for agent review, borrowing base certification, and compliance certificate delivery.</div>
+        <span class="app-rate">Rates: CRI-H100, CRI-B200</span>
+      </div>
+    </div>
+
+    <!-- Disposition micro -->
+    <div class="cov-disposition">
+      <div class="cov-disposition-text">At disposition, lenders must demonstrate collateral was sold at a commercially reasonable market price. A named, independent rate cited in the agreement provides that reference without post-hoc reconstruction.</div>
+      <a href="services.html" class="cov-disposition-link">Workout &amp; Disposition &rarr;</a>
     </div>
 
     <div id="chip-selector" class="chip-nav">
@@ -450,29 +478,30 @@
 <div class="gap-section">
   <div class="gap-inner">
     <div class="gap-label">Where Current Documentation Falls Short</div>
-    <div class="gap-headline">Four gaps that leave lenders exposed on active GPU-backed facilities.</div>
+    <div class="gap-headline">Four reasons conventional equipment finance breaks on GPU collateral.</div>
     <div class="gap-grid">
       <div class="gap-card">
         <div class="gap-card-num">01</div>
-        <div class="gap-card-head">Collateral marked to the past, not the market</div>
-        <p class="gap-card-body">H100 on-demand asking prices fell more than 60% in 18 months. A lender without a live market reference rate had no covenant signal until that move had already happened.</p>
+        <div class="gap-card-head">Collateral marked to historical assumptions, not current market levels</div>
+        <p class="gap-card-body">H100 on-demand asking prices fell more than 60% in 18 months. Without a live reference rate, covenant signals arrive only after value has already moved.</p>
       </div>
       <div class="gap-card">
         <div class="gap-card-num">02</div>
-        <div class="gap-card-head">No trigger for the transition already underway</div>
-        <p class="gap-card-body">H100 collateral was underwritten as training hardware &mdash; and training contracts carry materially less revenue volatility than inference. As Blackwell displaces Hopper for large-model training, a borrower&rsquo;s revenue mix can shift from contracted and sticky to spot-adjacent and elastic. A lender monitoring utilization figures has no line of sight to that migration until it shows up as a coverage problem. A revenue coverage test anchored to CRI-H100 is sensitive to that shift without requiring the borrower to report it &mdash; contracted revenue converging toward the on-demand spot rate is the signal.</p>
+        <div class="gap-card-head">No trigger for the revenue transition already underway</div>
+        <p class="gap-card-body">The signal is not utilization &mdash; it is revenue quality. As contracted training revenue decays toward spot-priced inference, risk increases before coverage ratios show it.</p>
       </div>
       <div class="gap-card">
         <div class="gap-card-num">03</div>
-        <div class="gap-card-head">GPU collateral moves faster than the documentation was built for</div>
-        <p class="gap-card-body">A 36-month facility spans at least one full GPU generation transition &mdash; a foreseeable event, not a tail risk. When B200 spot prices converge with H100, the training premium justifying H100 collateral valuations is effectively arbitraged away. No current deal structure has a mechanism to respond to it as it happens.</p>
+        <div class="gap-card-head">GPU collateral evolves faster than the documentation was built for</div>
+        <p class="gap-card-body">Generation transitions are scheduled market events, not tail risks. Most current structures lack real-time mechanisms to respond as they occur.</p>
       </div>
       <div class="gap-card">
         <div class="gap-card-num">04</div>
-        <div class="gap-card-head">No defensible rate at disposition</div>
-        <p class="gap-card-body">Under UCC &sect;9-627, a collateral disposition is commercially reasonable only if conducted at the price current in a recognized market. Without a named independent rate cited in the credit agreement, a lender cannot establish that reference without post-hoc reconstruction &mdash; and a borrower who argues commercial unreasonableness may eliminate the deficiency judgment right under UCC &sect;9-626. The citation that supports covenant surveillance during the facility term is the same citation that makes the disposition defensible if it does not.</p>
+        <div class="gap-card-head">No defensible market price at disposition</div>
+        <p class="gap-card-body">At disposition, lenders must demonstrate that collateral was sold at a commercially reasonable market price. Without a named, independent reference rate cited in the agreement, that price must be reconstructed after the fact &mdash; introducing litigation risk and weakening recovery claims.</p>
       </div>
     </div>
+    <p style="font-size:.875rem;font-weight:300;color:#8a827a;line-height:1.75;margin-bottom:32px;max-width:640px;">All three gaps stem from the absence of a consistent, observable market reference rate usable across underwriting, monitoring, and disposition.</p>
     <div class="gap-cta">
       <div>
         <div style="font-family:var(--serif);font-size:1.15rem;font-weight:500;color:#f0ece6;margin-bottom:10px;line-height:1.35;">Illustrative applications of CRI rates in revenue coverage tests, market monitoring covenants, and borrowing base formulas &mdash; with scenario analysis available for download.</div>
@@ -501,6 +530,13 @@
       <span class="gov-icon">v1.0.0</span>
       <span class="gov-text"><a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_0_0.pdf" target="_blank" rel="noopener">Open methodology</a> &mdash; reproducible pipeline</span>
     </div>
+  </div>
+</div>
+
+<div style="background:var(--bg-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0;">
+  <div style="max-width:860px;margin:0 auto;padding:0 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <span style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--text-hi);letter-spacing:-.01em;">CCIR provides the benchmark. Lenders and counsel determine how it is used.</span>
+    <a href="contact.html" style="font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--accent);text-decoration:none;white-space:nowrap;">Engage CCIR &rarr;</a>
   </div>
 </div>
 
