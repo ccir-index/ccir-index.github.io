@@ -203,8 +203,6 @@
       <div class="problem-card accent-top">
         <div class="problem-label">Market Rate vs. Book Value</div>
         <div class="problem-head">Book depreciation does not move with the rental market</div>
-        <div class="problem-stat">60&ndash;70%</div>
-        <div class="problem-stat-label">H100 rental rate decline, early 2024 &rarr; late 2025</div>
         <p class="problem-body" style="margin-top:12px;">GPU rental rates have declined materially since 2024. Revenue covenants and borrowing base formulas that reference the live on-demand market need an independent, named rate to anchor those calculations &mdash; one both parties can verify independently.</p>
       </div>
 
@@ -219,7 +217,7 @@
       <div class="problem-card amber-top">
         <div class="problem-label">Contract Renewal Risk</div>
         <div class="problem-head">Contract-to-spot spread is the key renewal risk signal &mdash; and requires an independent rate to measure</div>
-        <p class="problem-body">In a contracted-revenue structure, the most important surveillance question is the spread between the borrower&rsquo;s base contracted rate and the current spot market. When CRI-H100 falls toward the borrower&rsquo;s base contracted rate, renewal leverage erodes. That spread &mdash; the Contract Premium Ratio &mdash; cannot be measured without an independent spot rate that neither party controls.</p>
+        <p class="problem-body">In a contracted-revenue structure, the most important surveillance question is the spread between the borrower&rsquo;s base contracted rate and the current on-demand market. When CRI-H100 falls toward the borrower&rsquo;s base contracted rate, renewal leverage erodes. That spread &mdash; the Contract Premium Ratio &mdash; cannot be measured without an independent reference rate that neither party controls.</p>
       </div>
 
       <div class="problem-card amber-top">
@@ -271,7 +269,7 @@
         <div style="border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:2px;padding:14px 16px;">
           <div style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;">Profile B &mdash; Mixed-Book Operator</div>
           <div style="font-size:.800rem;font-weight:500;color:var(--text-hi);margin-bottom:6px;">Primary credit support: GPU collateral</div>
-          <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;margin-bottom:10px;">Mixed or spot-market revenue, borrowing base format. No hyperscaler backstop. Typical deal size $20M&ndash;$75M. Four covenants: &sect;7.01 Market Capture, &sect;7.02 Collateral Coverage, &sect;7.03 Workload Composition, &sect;7.04 Generation Spread.</div>
+          <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;margin-bottom:10px;">Mixed or on-demand market revenue, borrowing base format. No hyperscaler backstop. Typical deal size $20M&ndash;$75M. Four covenants: &sect;7.01 Market Capture, &sect;7.02 Collateral Coverage, &sect;7.03 Workload Composition, &sect;7.04 Generation Spread.</div>
           <a href="CCIR_Illustrative_Credit_Applications_Profile_B.pdf" class="dl-btn" download style="font-size:.60rem;padding:8px 14px;background:var(--surface-2);color:var(--text-hi);border:1px solid var(--border);">
             <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Profile B Framework
@@ -328,7 +326,7 @@
         <div class="cs-cov">
           <div class="cs-cov-num">&sect;7.01</div>
           <div class="cs-cov-head">Market Capture Ratio</div>
-          <div class="cs-cov-body"><strong>Measures whether the borrower&rsquo;s actual revenue per GPU achieves a minimum percentage of CRI-H100.</strong> Detects underpricing, underutilization, or customer mix deterioration. A coverage ratio applied to a spot-market operator is nearly inert; the Market Capture Ratio instead asks: is the borrower getting market rates? Rate compression is detected by &sect;7.02. Both signals are needed; neither substitutes for the other.</div>
+          <div class="cs-cov-body"><strong>Measures whether the borrower&rsquo;s actual revenue per GPU achieves a minimum percentage of CRI-H100.</strong> Detects underpricing, underutilization, or customer mix deterioration. A coverage ratio applied to an on-demand market operator is nearly inert; the Market Capture Ratio instead asks: is the borrower getting market rates? Rate compression is detected by &sect;7.02. Both signals are needed; neither substitutes for the other.</div>
           <span class="cs-cov-tag">Operational efficiency &middot; 85% floor</span>
         </div>
         <div class="cs-cov">
@@ -381,7 +379,7 @@
               <td class="pass">PASS &mdash; CPR 1.33&times;</td>
             </tr>
             <tr>
-              <td class="scenario-name">Spot compression<br><span style="font-weight:300;font-size:.72rem;">Contracts hold</span></td>
+              <td class="scenario-name">Rate compression<br><span style="font-weight:300;font-size:.72rem;">Contracts hold</span></td>
               <td class="mono">$1.64 (&minus;25%)</td>
               <td class="breach">BREACH &mdash; BB $191M &lt; $200M outstanding</td>
               <td class="pass">PASS &mdash; 174%</td>
@@ -412,7 +410,7 @@
         </table>
       </div>
       <div class="cs-note" style="margin-bottom:24px;">
-        The defining Profile A asymmetry: spot compression tightens &sect;7.02 (hardware marks down) while &sect;7.05 improves (locked contracts look stronger vs. a falling floor). Both must be monitored. The inflection is contract renewal &mdash; when the borrower re-contracts into a depressed market, the CPR compresses rapidly. Lenders should model the combined stress scenario at origination: &sect;7.04 cap rate step-up and &sect;7.05 advance rate step-down compound in &sect;7.02, producing a $78.9M deficiency in the combined scenario above. Each of those developments individually fires a covenant notice; the combined stress is what happens when all three signals were ignored.
+        The defining Profile A asymmetry: rate compression tightens &sect;7.02 (hardware marks down) while &sect;7.05 improves (locked contracts look stronger vs. a falling floor). Both must be monitored. The inflection is contract renewal &mdash; when the borrower re-contracts into a depressed market, the CPR compresses rapidly. Lenders should model the combined stress scenario at origination: &sect;7.04 cap rate step-up and &sect;7.05 advance rate step-down compound in &sect;7.02, producing a $78.9M deficiency in the combined scenario above. Each of those developments individually fires a covenant notice; the combined stress is what happens when all three signals were ignored.
       </div>
 
       <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin:8px 0 6px;">Profile B &mdash; Illustrative Scenario Analysis</div>
@@ -447,7 +445,7 @@
               <td class="pass">PASS</td>
             </tr>
             <tr>
-              <td class="scenario-name">Spot compression<br><span style="font-weight:300;font-size:.72rem;">No locked contracts</span></td>
+              <td class="scenario-name">Rate compression<br><span style="font-weight:300;font-size:.72rem;">No locked contracts</span></td>
               <td class="mono">$1.64 (&minus;25%)</td>
               <td class="warn">WATCH &mdash; efficiency still OK</td>
               <td class="warn">WATCH &mdash; BB $35.9M, cushion $5.9M</td>
@@ -490,7 +488,7 @@
 
     <div class="engage">
       <div class="engage-head">Referencing CRI rates in a GPU-backed facility?</div>
-      <div class="engage-sub">CCIR provides what the citation requires at each stage of the deal &mdash; from credit agreement drafting through final maturity. All threshold levels, advance rates, and formula parameters are credit judgments set by counsel and lenders. CCIR publishes the rate and maintains the governance record that makes the citation defensible.</div>
+      <div class="engage-sub">CCIR provides what the citation requires at each stage of the deal &mdash; from credit agreement drafting through final maturity. All threshold levels, advance rates, and structural terms are credit judgments set by counsel and lenders. CCIR publishes the rate and maintains the governance record that makes the citation defensible.</div>
       <div class="engage-grid">
         <div class="engage-item">
           <div class="engage-item-head">At drafting</div>

@@ -216,12 +216,12 @@
         </div>
         <div class="entry-body">
           <div class="entry-title">CRI v1.0.0 — Initial Publication</div>
-          <div class="entry-desc">First publication of the CRI index family under Methodology v1.0.0. Five spot indices and six cluster indices across two tiers. Full governance stack published alongside rate data.</div>
+          <div class="entry-desc">First publication of the CRI index family under Methodology v1.0.0. Five reference rate indices and six cluster indices across two tiers. Full governance stack published alongside rate data.</div>
           <ul class="entry-items">
-            <li><strong>Spot indices:</strong> CRI-H100, CRI-A100, CRI-H200, CRI-L40S, CRI-B200</li>
+            <li><strong>Reference rate indices:</strong> CRI-H100, CRI-A100, CRI-H200, CRI-L40S, CRI-B200</li>
             <li><strong>Cluster indices (MM):</strong> CRI-H100-CLS-MM, CRI-A100-CLS-MM, CRI-B200-CLS-MM</li>
             <li><strong>Cluster indices (ENT):</strong> CRI-H100-CLS-ENT, CRI-H200-CLS-ENT, CRI-B200-CLS-ENT</li>
-            <li><strong>Primary rate:</strong> seller_ask_noninterruptible — on-demand spot, no preemption risk</li>
+            <li><strong>Primary rate:</strong> seller_ask_noninterruptible — noninterruptible, on-demand access to compute capacity</li>
             <li><strong>Sources:</strong> RunPod, Shadeform, Lambda Labs, TensorDock, Nebius (spot); RunPod Cluster, Lambda Cluster (MM); CoreWeave (ENT)</li>
             <li><strong>Computation:</strong> Flat median (percentile_approx 0.5) across all Silver-eligible observations in trailing 7-day window</li>
             <li><strong>Pipeline:</strong> Azure Databricks, Delta Lake medallion architecture, nightly audit_pipeline + weekly audit_sources</li>
