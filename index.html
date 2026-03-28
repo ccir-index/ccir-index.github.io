@@ -560,14 +560,38 @@ const CHIPS = {
     ticker:'CRI-A100', gpuModel:'A100_SXM', label:'A100 SXM', primary:false,
     csv:`${RAW}/cri-a100/CRI-A100-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv',
-    desc:'Inference and batch workloads. A100 on-demand rate now below L40S — inference demand is pricing Ada Lovelace above prior-gen training silicon. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.',
+    crossChip:'l40s',
+    descFn(ownVal, crossVal) {
+      if (crossVal === null) return 'Inference and batch workloads. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.';
+      const diff = ownVal - crossVal;
+      const pct  = Math.abs(diff / crossVal * 100).toFixed(1);
+      if (diff > crossVal * 0.05) {
+        return `Inference and batch workloads. A100 on-demand rate ${pct}% above CRI-L40S — prior-gen training silicon holding above purpose-built inference hardware. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.`;
+      } else if (diff < -(crossVal * 0.05)) {
+        return `Inference and batch workloads. A100 on-demand rate ${pct}% below CRI-L40S — inference demand pricing Ada Lovelace above prior-gen training silicon. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.`;
+      } else {
+        return `Inference and batch workloads. A100 and CRI-L40S at near parity (${pct}% spread) — pricing convergence between prior-gen training silicon and purpose-built inference hardware. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.`;
+      }
+    },
     clsMM:`${RAW}/cri-a100-cls-mm/CRI-A100-CLS-MM-history.csv`,
   },
   l40s: {
     ticker:'CRI-L40S', gpuModel:'L40S', label:'L40S', primary:false,
     csv:`${RAW}/cri-l40s/CRI-L40S-history.csv`,
     github:'https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv',
-    desc:'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. On-demand rate currently above A100 — inference demand pricing purpose-built inference silicon above prior-gen training hardware.',
+    crossChip:'a100',
+    descFn(ownVal, crossVal) {
+      if (crossVal === null) return 'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace.';
+      const diff = ownVal - crossVal;
+      const pct  = Math.abs(diff / crossVal * 100).toFixed(1);
+      if (diff > crossVal * 0.05) {
+        return `Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. On-demand rate ${pct}% above CRI-A100 — inference demand pricing purpose-built inference silicon above prior-gen training hardware.`;
+      } else if (diff < -(crossVal * 0.05)) {
+        return `Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. On-demand rate ${pct}% below CRI-A100 — inference silicon supply has expanded, compressing the premium against prior-gen training hardware.`;
+      } else {
+        return `Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. On-demand rate near parity with CRI-A100 (${pct}% spread) — pricing convergence between purpose-built inference silicon and prior-gen training hardware.`;
+      }
+    },
   },
 };
 
@@ -760,13 +784,24 @@ async function renderSpot(chipKey) {
   const spotConf = sp[12].trim();
   const spotObs  = parseInt(sp[10]).toLocaleString();
   const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(lines, null, spotDate, 4, 'seller_ask_noninterruptible');
+
+  // Resolve description -- static string or live cross-chip comparison
+  let desc = chip.desc || '';
+  if (chip.descFn) {
+    let crossVal = null;
+    try {
+      const crossLines = await fetchCsv(CHIPS[chip.crossChip].csv);
+      const crossRow   = latestRow(crossLines, null, 'seller_ask_noninterruptible');
+      if (crossRow) crossVal = parseFloat(crossRow[4]);
+    } catch(e) {}
+    desc = chip.descFn(spotVal, crossVal);
+  }
 
   document.getElementById('rate-area').innerHTML = `
     <div class="spot-single">
       <div class="spot-ticker"><span class="dot live"></span>${chip.ticker}</div>
       <div class="spot-val">$${spotVal.toFixed(4)}</div>
-      <div class="spot-desc">${chip.desc}</div>
+      <div class="spot-desc">${desc}</div>
       <div class="spot-meta">
         <span style="display:block;font-size:.58rem;margin-bottom:2px;">Methodology ${spotMver}</span>
         ${spotDtd} &middot; ${spotObs} obs &middot; ${spotConf} confidence
