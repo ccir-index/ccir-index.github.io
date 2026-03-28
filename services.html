@@ -216,8 +216,8 @@
 
       <div class="problem-card amber-top">
         <div class="problem-label">Contract Renewal Risk</div>
-        <div class="problem-head">Contract-to-spot spread is the key renewal risk signal &mdash; and requires an independent rate to measure</div>
-        <p class="problem-body">In a contracted-revenue structure, the most important surveillance question is the spread between the borrower&rsquo;s base contracted rate and the current on-demand market. When CRI-H100 falls toward the borrower&rsquo;s base contracted rate, renewal leverage erodes. That spread &mdash; the Contract Premium Ratio &mdash; cannot be measured without an independent reference rate that neither party controls.</p>
+        <div class="problem-head">Contract renewal risk is the key credit signal &mdash; and requires an independent rate to measure</div>
+        <p class="problem-body">In a contracted-revenue structure, the most important surveillance question is the spread between the borrower&rsquo;s base contracted rate and the current on-demand market. When CRI-H100 falls toward the borrower&rsquo;s base contracted rate, renewal leverage erodes &mdash; a Convergence Notice signal. When CRI-H100 falls well below contracted rates with near-term expiry concentration, the re-pricing cliff widens &mdash; a Reset Cliff signal. Both require an independent reference rate that neither party controls.</p>
       </div>
 
       <div class="problem-card amber-top">
@@ -258,8 +258,8 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
         <div style="border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:2px;padding:14px 16px;">
           <div style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">Profile A &mdash; Contracted Revenue</div>
-          <div style="font-size:.800rem;font-weight:500;color:var(--text-hi);margin-bottom:6px;">Primary credit support: customer offtake agreements</div>
-          <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;margin-bottom:10px;">Enterprise SLA contracts, committed-term agreements, or named customer revenue. GPU hardware as backstop collateral. Typical deal size $100M+. Three covenants: &sect;7.02 Collateral Coverage, &sect;7.04 Generation Spread, &sect;7.05 Contract Premium Ratio.</div>
+          <div style="font-size:.800rem;font-weight:500;color:var(--text-hi);margin-bottom:6px;">Primary credit support: committed-term customer contracts</div>
+          <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;margin-bottom:10px;">Enterprise SLA contracts, committed-term agreements, or named customer revenue. GPU hardware as backstop collateral. Typical deal size $100M+. Three covenants: &sect;7.01 Contract Renewal Risk, &sect;7.02 Collateral Coverage, &sect;7.03 Generation Spread.</div>
           <a href="CCIR_Illustrative_Credit_Applications_Profile_A.pdf" class="dl-btn" download style="font-size:.60rem;padding:8px 14px;">
             <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Profile A Framework
@@ -307,16 +307,16 @@
           <span class="cs-cov-tag">Financial covenant</span>
         </div>
         <div class="cs-cov">
-          <div class="cs-cov-num">&sect;7.04</div>
+          <div class="cs-cov-num">&sect;7.03</div>
           <div class="cs-cov-head">Generation Spread</div>
           <div class="cs-cov-body"><strong>Monitors (CRI-B200 &minus; CRI-H100) &divide; CRI-H100 as a proxy for H100 training-tier obsolescence.</strong> When the spread falls below 25% for two consecutive dates, the &sect;7.02 Capitalization Rate steps from 28% to 35% &mdash; tightening the collateral mark without an amendment.</div>
           <span class="cs-cov-tag amber">Surveillance &rarr; feeds &sect;7.02</span>
         </div>
         <div class="cs-cov" style="grid-column:1/-1;">
-          <div class="cs-cov-num">&sect;7.05</div>
-          <div class="cs-cov-head">Contract Premium Ratio</div>
-          <div class="cs-cov-body"><strong>Measures Base Contracted Rate divided by CRI-H100.</strong> Notice at 1.10&times;; Renewal Reserve deposit or contractual runway demonstration at 1.00&times; parity; Advance Rate step-down in &sect;7.02 if neither condition met. Designed for contracted-revenue structures where gross rate comparisons overstate coverage during base rate compression.</div>
-          <span class="cs-cov-tag">Contract renewal risk surveillance</span>
+          <div class="cs-cov-num">&sect;7.01</div>
+          <div class="cs-cov-head">Contract Renewal Risk</div>
+          <div class="cs-cov-body"><strong>Two-sided surveillance over a rolling 6-period forward window.</strong> Convergence Notice at CPR below 1.10&times; &mdash; Base Contracted Rate approaching on-demand market rate, renewal leverage eroding. Reset Cliff Notice when CPR exceeds 1.50&times; and Forward Renewal Exposure exceeds 30% of contracted GPU-hours &mdash; wide spread with near-term expiry concentration signals a material re-pricing cliff. Both triggers require the same disclosure: expiring contracts by customer, renewal prospects, and projected revenue under a re-pricing scenario at current CRI-H100.</div>
+          <span class="cs-cov-tag">Contract renewal risk surveillance &middot; disclosure only</span>
         </div>
       </div>
 
@@ -351,7 +351,7 @@
       </div>
 
       <div style="font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--text-dim);padding:14px 18px;background:var(--surface-2);border:1px solid var(--border);border-radius:2px;margin-top:14px;line-height:1.8;">
-        &sect;7.02 and &sect;7.04 apply to both profiles &nbsp;&middot;&nbsp; Counsel and lenders set all thresholds and parameters &nbsp;&middot;&nbsp; CCIR publishes the rate
+        &sect;7.02 Collateral Coverage applies to both profiles &nbsp;&middot;&nbsp; &sect;7.03 Generation Spread feeds &sect;7.02 in Profile A; &sect;7.04 Generation Spread feeds &sect;7.02 in Profile B &nbsp;&middot;&nbsp; Counsel and lenders set all thresholds and parameters &nbsp;&middot;&nbsp; CCIR publishes the rate
       </div>
 
 
@@ -366,8 +366,8 @@
               <th>Scenario</th>
               <th>CRI-H100</th>
               <th>&sect;7.02 Collateral Coverage</th>
-              <th>&sect;7.04 Gen Spread</th>
-              <th>&sect;7.05 Contract Premium Ratio</th>
+              <th>&sect;7.03 Gen Spread</th>
+              <th>&sect;7.01 Contract Renewal Risk</th>
             </tr>
           </thead>
           <tbody>
@@ -376,41 +376,41 @@
               <td class="mono">$2.18</td>
               <td class="pass">PASS &mdash; LTV 50.9%, BB $255M</td>
               <td class="pass">PASS &mdash; 145.4%</td>
-              <td class="pass">PASS &mdash; CPR 1.33&times;</td>
+              <td class="pass">PASS &mdash; CPR 1.33&times;, no trigger</td>
             </tr>
             <tr>
               <td class="scenario-name">Rate compression<br><span style="font-weight:300;font-size:.72rem;">Contracts hold</span></td>
               <td class="mono">$1.64 (&minus;25%)</td>
               <td class="breach">BREACH &mdash; BB $191M &lt; $200M outstanding</td>
               <td class="pass">PASS &mdash; 174%</td>
-              <td class="pass">IMPROVING &mdash; CPR 1.77&times;</td>
+              <td class="warn">RESET CLIFF WATCH &mdash; CPR 1.77&times;; monitor Forward Renewal Exposure vs. 30% threshold</td>
             </tr>
             <tr>
               <td class="scenario-name">Generation convergence<br><span style="font-weight:300;font-size:.72rem;">B200 falls toward H100</span></td>
               <td class="mono">$2.00</td>
               <td class="warn">TIGHTENS &mdash; cap rate 28%&rarr;35%, BB $204M</td>
               <td class="warn">EVENT &mdash; spread 12.5%, cap steps up</td>
-              <td class="pass">PASS &mdash; CPR 1.45&times;</td>
+              <td class="pass">PASS &mdash; CPR 1.45&times;, between thresholds</td>
             </tr>
             <tr>
               <td class="scenario-name">Contract renewal pressure<br><span style="font-weight:300;font-size:.72rem;">40% pool re-contracted</span></td>
               <td class="mono">$1.50</td>
               <td class="breach">BREACH &mdash; BB $175M &lt; $200M</td>
               <td class="pass">PASS &mdash; 167%</td>
-              <td class="warn">NOTICE &mdash; CPR 1.10&times; at threshold</td>
+              <td class="warn">CONVERGENCE NOTICE &mdash; CPR compressing toward 1.10&times; as contracts re-price; borrower disclosure triggered</td>
             </tr>
             <tr>
               <td class="scenario-name">Combined stress<br><span style="font-weight:300;font-size:.72rem;">All three fire</span></td>
               <td class="mono">$1.40</td>
               <td class="breach">BREACH &mdash; BB $121M (cap 35%, adv 60%)</td>
               <td class="warn">EVENT &mdash; cap 28%&rarr;35%</td>
-              <td class="breach">PARITY &mdash; CPR 0.93&times;, adv steps to 60%</td>
+              <td class="warn">RESET CLIFF NOTICE &mdash; CPR &gt;1.50&times;, Forward Renewal Exposure elevated; re-pricing scenario disclosure required</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="cs-note" style="margin-bottom:24px;">
-        The defining Profile A asymmetry: rate compression tightens &sect;7.02 (hardware marks down) while &sect;7.05 improves (locked contracts look stronger vs. a falling floor). Both must be monitored. The inflection is contract renewal &mdash; when the borrower re-contracts into a depressed market, the CPR compresses rapidly. Lenders should model the combined stress scenario at origination: &sect;7.04 cap rate step-up and &sect;7.05 advance rate step-down compound in &sect;7.02, producing a $78.9M deficiency in the combined scenario above. Each of those developments individually fires a covenant notice; the combined stress is what happens when all three signals were ignored.
+        The defining Profile A asymmetry: rate compression tightens &sect;7.02 (hardware marks down) while &sect;7.01 widens the spread (locked contracts hold above a falling on-demand rate floor). Both must be monitored. The inflection is contract renewal &mdash; when the borrower re-contracts into a depressed market, the CPR compresses rapidly toward the Convergence Notice threshold. Lenders should model the combined stress scenario at origination: &sect;7.03 cap rate step-up compounds in &sect;7.02, and &sect;7.01 Reset Cliff disclosure surfaces the re-pricing exposure before it propagates into a deficiency. Each of those signals individually fires a notice; the combined stress is what happens when all three were ignored.
       </div>
 
       <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin:8px 0 6px;">Profile B &mdash; Illustrative Scenario Analysis</div>
@@ -500,7 +500,7 @@
         </div>
         <div class="engage-item">
           <div class="engage-item-head">During the facility term</div>
-          <div class="engage-item-body">Calculation Date packages showing CRI-H100, CRI-B200, and Generation Spread in a format designed for compliance certificate review, borrowing base certification, and Contract Premium Ratio calculation on each Calculation Date. Historical rate data available for cap rate calibration analysis.</div>
+          <div class="engage-item-body">Calculation Date packages showing CRI-H100, CRI-B200, and Generation Spread in a format designed for compliance certificate review, borrowing base certification, and Contract Renewal Risk surveillance on each Calculation Date. Historical rate data available for cap rate calibration analysis.</div>
         </div>
       </div>
       <div class="engage-cta">
