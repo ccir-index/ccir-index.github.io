@@ -147,8 +147,8 @@
     .stack-bar-label { font-family: var(--mono); font-size: .57rem; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: var(--text-dim); width: 82px; flex-shrink: 0; text-align: right; }
     .stack-bar-track { flex: 1; height: 30px; background: var(--surface-2); border-radius: 1px; overflow: hidden; }
     .stack-bar-fill { height: 100%; border-radius: 1px; transition: width .7s cubic-bezier(.4,0,.2,1); }
-    .stack-bar-fill.spot { background: var(--border-hi); }
-    .stack-bar-fill.mm   { background: var(--accent); }
+    .stack-bar-fill.spot { background: var(--accent); }
+    .stack-bar-fill.mm   { background: var(--border-hi); }
     .stack-bar-fill.ent  { background: var(--amber); }
     .stack-bar-value { font-family: var(--mono); font-size: .82rem; font-weight: 500; color: var(--text-hi); width: 74px; flex-shrink: 0; }
 
@@ -170,8 +170,8 @@
     .stack-legend { display: flex; gap: 18px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); flex-wrap: wrap; }
     .legend-item { display: flex; align-items: flex-start; gap: 8px; font-size: .775rem; color: var(--text-dim); line-height: 1.55; max-width: 260px; }
     .legend-dot { width: 8px; height: 8px; border-radius: 1px; flex-shrink: 0; margin-top: 4px; }
-    .legend-dot.spot { background: var(--border-hi); }
-    .legend-dot.mm   { background: var(--accent); }
+    .legend-dot.spot { background: var(--accent); }
+    .legend-dot.mm   { background: var(--border-hi); }
     .legend-dot.ent  { background: var(--amber); }
 
     /* ─── DETAIL PANELS ───────────────────────────────────────────────────── */
@@ -742,8 +742,8 @@ async function renderStack(chipKey, spotLines) {
     </div>` : '';
 
   // ── Legend (dynamic based on available tiers) ────────────────────────────
-  const entLegend = entVal ? `<div class="legend-item"><div class="legend-dot ent"></div><span>${chip.ticker}-CLS-ENT — Enterprise cluster rate. CoreWeave on-demand, bundled node pricing.</span></div>` : '';
-  const mmLegend  = mmVal  ? `<div class="legend-item"><div class="legend-dot mm"></div><span>${chip.ticker}-CLS-MM — Mid-market cluster rate. Median of RunPod + Lambda 8-GPU posted prices.</span></div>` : '';
+  const entLegend = entVal ? `<div class="legend-item"><div class="legend-dot ent"></div><span>${chip.ticker}-CLS-ENT — Enterprise cluster rate. Bundled pricing — compute, memory, networking, and provider SLA included in the per-GPU rate.</span></div>` : '';
+  const mmLegend  = mmVal  ? `<div class="legend-item"><div class="legend-dot mm"></div><span>${chip.ticker}-CLS-MM — Mid-market cluster rate. Unbundled multi-GPU pricing from independent cloud providers.</span></div>` : '';
 
   // ── Cluster detail panel (only if cluster data exists) ──────────────────
   const clsMMLink  = chip.clsMM  ? `&nbsp;&middot;&nbsp;<a href="${chip.clsMM.replace('raw.githubusercontent.com','github.com').replace('/main/','/blob/main/')}" target="_blank" rel="noopener">MM →</a>` : '';
@@ -758,7 +758,7 @@ async function renderStack(chipKey, spotLines) {
         ${entVal ? `<div class="lgd-item-label">Enterprise &nbsp;&middot;&nbsp; ${chip.ticker}-CLS-ENT</div>
         <div class="dpanel-val" style="color:var(--amber);">${D(entVal,v=>'$'+v.toFixed(4))}</div>` : ''}
       </div>
-      <div class="dpanel-desc">Cluster rate — per GPU / hr.${mmVal?' MM: median of RunPod + Lambda 8-GPU prices.':''}${entVal?' ENT: CoreWeave on-demand rate card, bundled CPU / RAM / interconnect.':''}</div>
+      <div class="dpanel-desc">Cluster rate — per GPU / hr.${mmVal?' MM: unbundled multi-GPU pricing from independent cloud providers.':''}${entVal?' ENT: bundled pricing — compute, memory, networking, and provider SLA included.':''}</div>
       <div class="dpanel-meta">
         <span class="dpanel-mver">Methodology ${mmMver||spotMver||'&mdash;'}</span>
         ${mmDtd||entDtd}
@@ -782,7 +782,7 @@ async function renderStack(chipKey, spotLines) {
           <div class="stack-bar-value">$${spotVal.toFixed(4)}</div>
         </div>
         <div class="stack-legend">
-          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — On-demand noninterruptible rate. Multi-source daily median.</span></div>
+          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — On-demand market rate for guaranteed, noninterruptible compute access. No term commitment, no provider SLA bundle. Multi-source daily median.</span></div>
           ${mmLegend}
           ${entLegend}
         </div>
@@ -793,7 +793,7 @@ async function renderStack(chipKey, spotLines) {
       <div class="dpanel mm-panel">
         <div class="dpanel-ticker"><span class="dot live"></span>${chip.ticker}${chip.primary?' <span class="primary-badge">Primary Reference</span>':''}</div>
         <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
-        <div class="dpanel-desc">On-demand noninterruptible rate. Multi-source daily median.</div>
+        <div class="dpanel-desc">On-demand market rate for guaranteed, noninterruptible compute access. No term commitment, no provider SLA bundle. Multi-source daily median.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Methodology ${spotMver}</span>
           ${spotDtd} &middot; ${spotConf} confidence
