@@ -113,7 +113,6 @@
       .stack-visual { padding: 20px 16px 18px; }
       .stack-bar-label { width: 62px; font-size: .52rem; }
       .stack-bar-value { width: 58px; font-size: .75rem; }
-      .stack-bar-source { display: none; }
       .stack-spread-spacer { width: 62px; }
       .stack-value-pad { width: 58px; }
       .stack-legend { flex-direction: column; gap: 10px; }
@@ -152,7 +151,11 @@
     .stack-bar-fill.mm   { background: var(--accent); }
     .stack-bar-fill.ent  { background: var(--amber); }
     .stack-bar-value { font-family: var(--mono); font-size: .82rem; font-weight: 500; color: var(--text-hi); width: 74px; flex-shrink: 0; }
-    .stack-bar-source { font-family: var(--mono); font-size: .55rem; color: var(--text-dim); flex: 1; }
+
+    .stack-bar-wrap { position: relative; }
+    .stack-tooltip { display: none; position: absolute; top: -36px; left: 50%; transform: translateX(-50%); background: var(--ink); color: #c8c2bb; font-family: var(--mono); font-size: .56rem; letter-spacing: .04em; padding: 6px 12px; border-radius: 2px; white-space: nowrap; z-index: 10; pointer-events: none; box-shadow: var(--sh-md); }
+    .stack-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 4px solid transparent; border-top-color: var(--ink); }
+    .stack-bar-wrap:hover .stack-tooltip { display: block; }
 
     .stack-spread-row { display: flex; align-items: stretch; gap: 14px; margin: 2px 0 2px; }
     .stack-spread-spacer { width: 82px; flex-shrink: 0; }
@@ -163,7 +166,6 @@
     .spread-text.mm-c  .sv { color: var(--green); }
     .spread-text.ent-c .sv { color: var(--amber); }
     .stack-value-pad { width: 74px; flex-shrink: 0; }
-    .stack-source-pad { flex: 1; }
 
     .stack-legend { display: flex; gap: 18px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); flex-wrap: wrap; }
     .legend-item { display: flex; align-items: flex-start; gap: 8px; font-size: .775rem; color: var(--text-dim); line-height: 1.55; max-width: 260px; }
@@ -274,8 +276,6 @@
     .gap-cta-sub { font-size: .800rem; font-weight: 300; color: #6a5e54; line-height: 1.6; }
 
     /* ─── APPLICATION CARDS ──────────────────────────────────────────────── */
-    .cov-rate-note { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); background: var(--accent-lo); border: 1px solid var(--accent-mid); border-radius: 2px; padding: 9px 14px; margin-bottom: 28px; line-height: 1.8; }
-    .cov-rate-note strong { font-weight: 500; color: var(--accent); margin-right: 8px; letter-spacing: .04em; }
     .cov-primary-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
     .cov-secondary-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
     @media (max-width: 680px) { .cov-primary-row, .cov-secondary-row { grid-template-columns: 1fr; } }
@@ -379,12 +379,6 @@
     <div class="sec-label">How CCIR Is Used in Facilities</div>
     <div class="sec-rule"></div>
 
-    <!-- Which rate note -->
-    <div class="cov-rate-note">
-      <strong>Which rate for which deal</strong>
-      H100 SXM &rarr; CRI-H100 &nbsp;&middot;&nbsp; H200 &rarr; CRI-H200 &nbsp;&middot;&nbsp; B200 &rarr; CRI-B200 &nbsp;&middot;&nbsp; A100 SXM &rarr; CRI-A100 &nbsp;&middot;&nbsp; Mixed-GPU facility &rarr; each tranche references its own rate
-    </div>
-
     <!-- Primary cards -->
     <div class="cov-primary-row">
       <div class="app-card hero">
@@ -396,7 +390,7 @@
       <div class="app-card primary">
         <div class="app-num">02</div>
         <div class="app-head">Borrowing Base</div>
-        <div class="app-body">Marks GPU collateral to the current on-demand market rather than book depreciation. CRI-H100 anchors the monthly borrowing base calculation. Utilization factors and advance rates are set by counsel and lenders at closing.</div>
+        <div class="app-body">Marks GPU collateral to the current on-demand market rather than book depreciation. CRI-H100 anchors the monthly borrowing base calculation; mixed-generation collateral pools reference the applicable CRI rate per tranche. Utilization factors and advance rates are set by counsel and lenders at closing.</div>
         <span class="app-rate">Rate: CRI-H100</span>
       </div>
       <div class="app-card primary">
@@ -732,19 +726,19 @@ async function renderStack(chipKey, spotLines) {
   // ── ENT bar (only if data) ───────────────────────────────────────────────
   const entBar = entVal ? `
     <div class="stack-bar-wrap" style="margin-bottom:4px;">
+      <div class="stack-tooltip">CoreWeave on-demand · bundled node · ${chip.ticker}-CLS-ENT</div>
       <div class="stack-bar-label">Enterprise</div>
       <div class="stack-bar-track"><div class="stack-bar-fill ent" style="width:${entPct}%"></div></div>
       <div class="stack-bar-value">${D(entVal,v=>'$'+v.toFixed(4))}</div>
-      <div class="stack-bar-source">CoreWeave &nbsp;&middot;&nbsp; bundled node</div>
     </div>` : '';
 
   // ── MM bar (only if data) ────────────────────────────────────────────────
   const mmBar = mmVal ? `
     <div class="stack-bar-wrap" style="margin-bottom:4px;">
+      <div class="stack-tooltip">${mmSrc||'RunPod · Lambda'} · 8-GPU cluster · ${chip.ticker}-CLS-MM</div>
       <div class="stack-bar-label">Mid-Market</div>
       <div class="stack-bar-track"><div class="stack-bar-fill mm" style="width:${mmPct}%"></div></div>
       <div class="stack-bar-value">${D(mmVal,v=>'$'+v.toFixed(4))}</div>
-      <div class="stack-bar-source">${mmSrc||'RunPod · Lambda'}</div>
     </div>` : '';
 
   // ── Legend (dynamic based on available tiers) ────────────────────────────
@@ -767,7 +761,7 @@ async function renderStack(chipKey, spotLines) {
       <div class="dpanel-desc">Cluster rate — per GPU / hr.${mmVal?' MM: median of RunPod + Lambda 8-GPU prices.':''}${entVal?' ENT: CoreWeave on-demand rate card, bundled CPU / RAM / interconnect.':''}</div>
       <div class="dpanel-meta">
         <span class="dpanel-mver">Methodology ${mmMver||spotMver||'&mdash;'}</span>
-        ${mmDtd||entDtd}${mmVal?` &middot; MM ${mmObs} obs`:''}${entVal?` &middot; ENT ${entObs} obs`:''}
+        ${mmDtd||entDtd}
         ${clsMMLink}${clsENTLink}
       </div>
     </div>` : '';
@@ -782,13 +776,13 @@ async function renderStack(chipKey, spotLines) {
         ${entBar}
         ${mmBar}
         <div class="stack-bar-wrap">
-          <div class="stack-bar-label">Spot${hasCluster?' (On-Demand)':''}</div>
+          <div class="stack-tooltip">Multi-source daily median · noninterruptible · ${chip.ticker}</div>
+          <div class="stack-bar-label">On-Demand</div>
           <div class="stack-bar-track"><div class="stack-bar-fill spot" style="width:${sPct}%"></div></div>
           <div class="stack-bar-value">$${spotVal.toFixed(4)}</div>
-          <div class="stack-bar-source">on-demand &nbsp;&middot;&nbsp; multi-source median</div>
         </div>
         <div class="stack-legend">
-          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — On-demand noninterruptible spot rate. Multi-source daily median.</span></div>
+          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — On-demand noninterruptible rate. Multi-source daily median.</span></div>
           ${mmLegend}
           ${entLegend}
         </div>
@@ -799,10 +793,10 @@ async function renderStack(chipKey, spotLines) {
       <div class="dpanel mm-panel">
         <div class="dpanel-ticker"><span class="dot live"></span>${chip.ticker}${chip.primary?' <span class="primary-badge">Primary Reference</span>':''}</div>
         <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
-        <div class="dpanel-desc">On-demand noninterruptible spot rate. Multi-source daily median.</div>
+        <div class="dpanel-desc">On-demand noninterruptible rate. Multi-source daily median.</div>
         <div class="dpanel-meta">
           <span class="dpanel-mver">Methodology ${spotMver}</span>
-          ${spotDtd} &middot; ${spotObs} obs &middot; ${spotConf} confidence
+          ${spotDtd} &middot; ${spotConf} confidence
           &nbsp;&middot;&nbsp;<a href="${chip.github}" target="_blank" rel="noopener">Full series →</a>
         </div>
       </div>
@@ -840,7 +834,7 @@ async function renderSpot(chipKey) {
       <div class="spot-desc">${desc}</div>
       <div class="spot-meta">
         <span style="display:block;font-size:.58rem;margin-bottom:2px;">Methodology ${spotMver}</span>
-        ${spotDtd} &middot; ${spotObs} obs &middot; ${spotConf} confidence
+        ${spotDtd} &middot; ${spotConf} confidence
         &nbsp;&middot;&nbsp;<a href="${chip.github}" target="_blank" rel="noopener">Full series →</a>
       </div>
     </div>`;
