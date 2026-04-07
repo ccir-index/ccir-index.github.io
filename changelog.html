@@ -228,7 +228,9 @@
             <li><strong>Cluster indices (MM):</strong> CRI-H100-CLS-MM, CRI-A100-CLS-MM, CRI-B200-CLS-MM</li>
             <li><strong>Cluster indices (ENT):</strong> CRI-H100-CLS-ENT, CRI-H200-CLS-ENT, CRI-B200-CLS-ENT</li>
             <li><strong>Primary rate:</strong> seller_ask_noninterruptible — noninterruptible, on-demand access to compute capacity</li>
-            <li><strong>Sources:</strong> RunPod, Lambda Labs, TensorDock, Nebius, Verda, Hyperstack (on-demand); Vast.ai (interruptible); Shadeform (supplementary &mdash; surveillance only); Thunder, Scaleway (PCIe &mdash; Bronze only); RunPod Cluster, Lambda Cluster (MM); CoreWeave (ENT)</li>
+            <li><strong>On-demand sources:</strong> RunPod, Lambda Labs, TensorDock, Nebius, Verda (1G-executable); Vast.ai (interruptible); Shadeform (supplementary &mdash; surveillance only); Hyperstack, Thunder, Scaleway (PCIe / cluster &mdash; Bronze only); Crusoe (L40S on-demand; H100/H200 cluster)</li>
+            <li><strong>Cluster sources (MM):</strong> RunPod Cluster, Lambda Cluster, Vultr, Voltage Park, Hyperstack, Crusoe</li>
+            <li><strong>Cluster sources (ENT):</strong> CoreWeave</li>
             <li><strong>Computation:</strong> Flat median (percentile_approx 0.5) across all Silver-eligible observations in trailing 7-day window</li>
             <li><strong>Pipeline:</strong> Azure Databricks, Delta Lake medallion architecture, nightly audit_pipeline + weekly audit_sources</li>
           </ul>

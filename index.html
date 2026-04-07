@@ -705,7 +705,11 @@ async function renderStack(chipKey, spotLines) {
       if (mm) {
         const mmDate=mm[0].trim(); mmVal=parseFloat(mm[4]); mmt2i=parseFloat(mm[9]);
         mmMver=mm[1].trim(); mmConf=mm[16].trim(); mmObs=parseInt(mm[11]).toLocaleString();
-        mmSrc=(mm[6]||'').trim().replace('LAMBDA_CLUSTER','Lambda').replace('|RUNPOD',' · RunPod').replace('RUNPOD','RunPod');
+        mmSrc=(mm[6]||'').trim()
+          .replace('LAMBDA_CLUSTER','Lambda').replace('RUNPOD_CLUSTER','RunPod')
+          .replace('VOLTAGEPARK','Voltage Park').replace('HYPERSTACK','Hyperstack')
+          .replace('CRUSOE','Crusoe').replace('VULTR','Vultr')
+          .replace(/\|/g,' \u00b7 ');
         mmDtd=fmtDate(mmDate); mmPrev=prevVal(mmL, chip.gpuModel, mmDate, 4);
       }
     } catch(e){}
@@ -743,7 +747,7 @@ async function renderStack(chipKey, spotLines) {
   // ── MM bar (only if data) ────────────────────────────────────────────────
   const mmBar = mmVal ? `
     <div class="stack-bar-wrap" style="margin-bottom:4px;">
-      <div class="stack-tooltip">${mmSrc||'RunPod · Lambda'} · 8-GPU cluster · ${chip.ticker}-CLS-MM</div>
+      <div class="stack-tooltip">${mmSrc||'Multi-source cluster'} · 8-GPU cluster · ${chip.ticker}-CLS-MM</div>
       <div class="stack-bar-label">Mid-Market</div>
       <div class="stack-bar-track"><div class="stack-bar-fill mm" style="width:${mmPct}%"></div></div>
       <div class="stack-bar-value">${D(mmVal,v=>'$'+v.toFixed(4))}</div>
