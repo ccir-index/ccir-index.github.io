@@ -170,6 +170,8 @@
     <span class="nav-sep">/</span>
     <a href="services.html" class="nav-link">Reference Rate Applications</a>
     <span class="nav-sep">/</span>
+    <a href="governance.html" class="nav-link">Governance</a>
+    <span class="nav-sep">/</span>
     <a href="changelog.html" class="nav-link active">Changelog</a>
     <span class="nav-sep">/</span>
     <a href="contact.html" class="nav-link">Contact</a>
@@ -206,7 +208,7 @@
       <!-- v1.0.0 Initial Publication -->
       <div class="entry">
         <div class="entry-meta">
-          <div class="entry-date">Mar 31, 2026</div>
+          <div class="entry-date">Apr 8, 2026</div>
           <div class="entry-version">v1.0.0</div>
           <div class="entry-badge badge-initial">Initial Publication</div>
         </div>
@@ -216,7 +218,8 @@
           <ul class="entry-items">
             <li><strong>Published rates:</strong> CRI-H100, CRI-A100, CRI-H200, CRI-B200 &mdash; 8-GPU InfiniBand node on-demand rate per GPU per hour</li>
             <li><strong>Publication threshold:</strong> 4 sources minimum per model. Below 4, rate computed but not published.</li>
-            <li><strong>Sources:</strong> RunPod Cluster, Lambda Cluster, Hyperstack, Vultr, Crusoe, Voltage Park, Genesis Cloud, Together AI</li>
+            <li><strong>CRI-8G sources (VM/cloud only):</strong> RunPod Cluster, Lambda Cluster, Hyperstack, Nebius, Verda, Massed Compute</li>
+            <li><strong>Bronze surveillance:</strong> Vultr, Crusoe, Voltage Park, Genesis Cloud, Together AI (bare-metal; collected for market monitoring, excluded from published rate)</li>
             <li><strong>Surveillance only:</strong> Vast.ai (interruptible), Shadeform (aggregator), Thunder (PCIe), Scaleway (PCIe), CoreWeave (single-source enterprise)</li>
             <li><strong>Computation:</strong> Flat median across all eligible observations in trailing 7-day window. Daily source dedup (one observation per source per model per day).</li>
             <li><strong>Pipeline:</strong> Azure Databricks, Delta Lake medallion architecture, config-driven engines, nightly audit</li>
@@ -228,6 +231,7 @@
             <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Fallback_Language_Guidance_v1_0_0.pdf" target="_blank" rel="noopener" class="entry-doc-link">Fallback Guidance v1.0.0</a>
             <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Complaints_Procedure_v1_0.pdf" target="_blank" rel="noopener" class="entry-doc-link">Complaints Procedure v1.0</a>
             <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Benchmark_Design_Rationale_v1_0_0.pdf" target="_blank" rel="noopener" class="entry-doc-link">Design Rationale v1.0.0</a>
+            <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Data_Source_Quality_Policy_v1_0_0.pdf" target="_blank" rel="noopener" class="entry-doc-link">Data Source Quality v1.0.0</a>
           </div>
         </div>
       </div>

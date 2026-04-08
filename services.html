@@ -153,7 +153,7 @@
     </div>
     <div class="hero-rule"></div>
     <p class="hero-stmt">
-      How CRI rates are referenced in GPU-backed credit agreements. <strong>CCIR publishes the rate. Lenders and counsel determine how it is used.</strong>
+      Governed, versioned, and independently administered benchmark rates designed for contractual reference in credit agreements. <strong>CCIR publishes the rate. Lenders and counsel determine how it is used.</strong>
     </p>
   </div>
 </header>
@@ -165,40 +165,11 @@
     <span class="nav-sep">/</span>
     <a href="services.html" class="nav-link active">Reference Rate Applications</a>
     <span class="nav-sep">/</span>
+    <a href="governance.html" class="nav-link">Governance</a>
+    <span class="nav-sep">/</span>
     <a href="changelog.html" class="nav-link">Changelog</a>
     <span class="nav-sep">/</span>
     <a href="contact.html" class="nav-link">Contact</a>
-  </div>
-</div>
-
-<!-- WHY A PURPOSE-BUILT RATE -->
-<div class="gap-section">
-  <div class="gap-inner">
-    <div class="gap-label">Where Current Documentation Falls Short</div>
-    <div class="gap-headline">Four reasons GPU collateral deals need a purpose-built rate.</div>
-    <div class="gap-grid">
-      <div class="gap-card">
-        <div class="gap-card-num">01</div>
-        <div class="gap-card-head">Collateral marked to historical assumptions, not current market levels</div>
-        <p class="gap-card-body">H100 on-demand access rates have declined materially since 2024. Without a live reference rate, covenant signals arrive only after value has already moved.</p>
-      </div>
-      <div class="gap-card">
-        <div class="gap-card-num">02</div>
-        <div class="gap-card-head">No trigger for the revenue transition already underway</div>
-        <p class="gap-card-body">The signal is not utilization &mdash; it is revenue quality. As contracted training revenue decays toward inference-tier rates, risk increases before coverage ratios show it.</p>
-      </div>
-      <div class="gap-card">
-        <div class="gap-card-num">03</div>
-        <div class="gap-card-head">GPU collateral evolves faster than the documentation was built for</div>
-        <p class="gap-card-body">Generation transitions are scheduled market events, not tail risks. Most current structures lack real-time mechanisms to respond as they occur.</p>
-      </div>
-      <div class="gap-card">
-        <div class="gap-card-num">04</div>
-        <div class="gap-card-head">No defensible market price at disposition</div>
-        <p class="gap-card-body">At disposition, lenders must demonstrate that collateral was sold at a commercially reasonable market price. Without a named, independent reference rate cited in the agreement, that price must be reconstructed after the fact &mdash; introducing litigation risk and weakening recovery claims.</p>
-      </div>
-    </div>
-    <p style="font-size:.875rem;font-weight:300;color:#8a827a;line-height:1.75;max-width:640px;">All four gaps stem from the absence of a consistent, observable market reference rate usable across underwriting, monitoring, and disposition.</p>
   </div>
 </div>
 
@@ -243,15 +214,15 @@
       <div class="example-box">
         <div class="example-label">Illustrative Example</div>
         <div class="example-body">
-          Closing CRI-8G (H100): <strong>$2.50/GPU/hr</strong><br>
-          Level 1 trigger: CRI-8G &lt; $1.875 for two consecutive dates<br>
-          Level 2 trigger: CRI-8G &lt; $1.250 for two consecutive dates<br><br>
-          If CRI-8G publishes at $1.80 on two consecutive Calculation Dates, a Level 1 Market Price Notice is triggered. The borrower delivers notice. The lender now has a documented, independently sourced data point for portfolio monitoring &mdash; and the borrower has a documented record of timely disclosure tied to a named benchmark.
+          Closing CRI-8G (H100): <strong>$2.95/GPU/hr</strong><br>
+          Level 1 trigger: CRI-8G &lt; $2.21 for two consecutive dates<br>
+          Level 2 trigger: CRI-8G &lt; $1.48 for two consecutive dates<br><br>
+          If CRI-8G publishes at $2.15 on two consecutive Calculation Dates, a Level 1 Market Price Notice is triggered. The borrower delivers notice. The lender now has a documented, independently sourced data point for portfolio monitoring &mdash; and the borrower has a documented record of timely disclosure tied to a named benchmark.
         </div>
       </div>
 
       <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-        <a href="CCIR_Market_Price_Monitoring.pdf" class="dl-btn" download>
+        <a href="CCIR_Market_Price_Monitoring_v1_0_0.pdf" class="dl-btn" download>
           <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Market Price Monitoring
         </a>
@@ -259,10 +230,156 @@
       </div>
     </div>
 
-    <div style="font-size:.800rem;color:var(--text-dim);line-height:1.82;border-left:2px solid var(--border-hi);padding-left:18px;margin-bottom:48px;">
-      All thresholds and notice mechanics are illustrative. Counsel and lenders set all parameters. Additional covenant frameworks &mdash; including collateral coverage, generation spread, and borrowing base applications &mdash; are available on request.
+    <div style="height:16px;"></div>
+
+    <div class="sec-label">Borrowing Base Certificate</div>
+    <div class="sec-rule"></div>
+
+    <div class="mpm-card">
+      <div class="mpm-eyebrow">Borrowing Base &mdash; Per-Model CRI-8G Collateral Valuation</div>
+      <div class="mpm-title">How much the borrower can draw, recalculated every Determination Date.</div>
+      <div class="mpm-body">
+        The borrowing base converts per-model CRI-8G rates into a collateral value using a capitalization rate approach, then applies an advance rate to determine the borrower's available credit. Each Eligible GPU Model contributes independently &mdash; a mixed H100/B200 fleet rolls up into a single aggregate borrowing base anchored to <strong>live, per-model on-demand market rates</strong>.
+      </div>
+
+      <table class="threshold-table">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Formula</th>
+            <th>Illustrative Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">Per-Model Collateral Value</td>
+            <td>(GPU Count &times; CRI-8G Rate &times; Utilization &times; 8,760 hrs) &divide; Cap Rate</td>
+            <td>H100: <strong>$63.1M</strong> &nbsp;|&nbsp; B200: <strong>$47.6M</strong></td>
+          </tr>
+          <tr>
+            <td class="mono">Aggregate Collateral Value</td>
+            <td>&Sigma; Per-Model Collateral Values</td>
+            <td><strong>$110.6M</strong></td>
+          </tr>
+          <tr>
+            <td class="mono">Borrowing Base</td>
+            <td>Aggregate Collateral Value &times; Advance Rate (65%) &minus; Reserves</td>
+            <td><strong>$71.9M</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="example-box">
+        <div class="example-label">Rate Cap Scenario &mdash; &sect;7.02(d)</div>
+        <div class="example-body">
+          At <strong>$45M outstanding</strong> against a $71.9M borrowing base (40.7% LTV), the facility has $26.9M of cushion in the base case. A uniform &minus;35% stress across both models narrows that to +$1.8M. A &minus;50% stress produces a $9.1M deficiency at 81.4% LTV &mdash; breaching the 80% covenant. The certificate includes full stress tables at &minus;25%, &minus;35%, and &minus;50%.
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <a href="CCIR_Borrowing_Base_Certificate_v1_0_0.pdf" class="dl-btn" download>
+          <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Borrowing Base Certificate
+        </a>
+        <span style="font-family:var(--mono);font-size:.53rem;color:var(--text-dim);">.pdf &middot; Illustrative covenant language, compliance certificate &amp; stress analysis</span>
+      </div>
     </div>
 
+    <div style="height:16px;"></div>
+
+    <div class="sec-label">GPU Credit Framework</div>
+    <div class="sec-rule"></div>
+
+    <div class="mpm-card">
+      <div class="mpm-eyebrow">Three-Covenant Framework &mdash; CRI-8G Benchmark Series</div>
+      <div class="mpm-title">Illustrative applications of CRI-8G rates in credit structures.</div>
+      <div class="mpm-body">
+        The GPU Credit Framework maps three distinct credit risks to three covenants, each anchored to per-model CRI-8G rates. Together they give lenders <strong>continuous visibility across revenue quality, collateral value, and contract renewal risk</strong> &mdash; the three dimensions that drive credit performance in GPU-backed facilities.
+      </div>
+
+      <table class="threshold-table">
+        <thead>
+          <tr>
+            <th>Covenant</th>
+            <th>What It Monitors</th>
+            <th>CRI-8G Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">&sect;7.01</td>
+            <td><strong>Revenue Coverage</strong> &mdash; ratio of actual GPU revenue to CRI-implied market revenue. Tests whether contracted rates still exceed what the on-demand market would pay.</td>
+            <td>Denominator: CRI-8G &times; pledged GPUs &times; hours = market revenue baseline</td>
+          </tr>
+          <tr>
+            <td class="mono">&sect;7.02</td>
+            <td><strong>Collateral Coverage / LTV</strong> &mdash; marks the pledged GPU fleet to current on-demand market levels using a capitalization rate approach, not book depreciation.</td>
+            <td>Numerator input: CRI-8G rate &times; utilization &times; hours &div; cap rate = per-model collateral value</td>
+          </tr>
+          <tr>
+            <td class="mono">&sect;7.03</td>
+            <td><strong>Contract Renewal Risk</strong> &mdash; monitors the spread between the borrower's contracted rate and CRI-8G per model across a rolling forward window.</td>
+            <td>Denominator: CRI-8G rate per model. Convergence and reset-cliff triggers fire per model, not fleet-weighted.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="example-box">
+        <div class="example-label">Key Asymmetry</div>
+        <div class="example-body">
+          A declining CRI-8G rate tightens &sect;7.02 Collateral Coverage (the hardware backstop marks down) while &sect;7.03 Contract Renewal Risk may improve (existing contracts look richer relative to a falling market). The three covenants are designed to capture this asymmetry &mdash; no single metric covers all three risk dimensions.
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <a href="CCIR_GPU_Credit_Framework_v1_0_0.pdf" class="dl-btn" download>
+          <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          GPU Credit Framework
+        </a>
+        <span style="font-family:var(--mono);font-size:.53rem;color:var(--text-dim);">.pdf &middot; Illustrative covenant language, worked examples &amp; scenario analysis</span>
+      </div>
+    </div>
+
+    <div style="font-size:.800rem;color:var(--text-dim);line-height:1.82;border-left:2px solid var(--border-hi);padding-left:18px;margin-bottom:48px;">
+      All thresholds, covenant structures, and notice mechanics are illustrative. Counsel and lenders set all parameters.
+    </div>
+
+  </div>
+</main>
+
+<!-- WHY A PURPOSE-BUILT RATE -->
+<div class="gap-section">
+  <div class="gap-inner">
+    <div class="gap-label">Where Current Documentation Falls Short</div>
+    <div class="gap-headline">Four reasons GPU collateral deals need a purpose-built rate.</div>
+    <div class="gap-grid">
+      <div class="gap-card">
+        <div class="gap-card-num">01</div>
+        <div class="gap-card-head">Collateral marked to historical assumptions, not current market levels</div>
+        <p class="gap-card-body">H100 on-demand access rates have declined materially since 2024. Without a live reference rate, covenant signals arrive only after value has already moved.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-num">02</div>
+        <div class="gap-card-head">No trigger for the revenue transition already underway</div>
+        <p class="gap-card-body">The signal is not utilization &mdash; it is revenue quality. As contracted training revenue decays toward inference-tier rates, risk increases before coverage ratios show it.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-num">03</div>
+        <div class="gap-card-head">GPU collateral evolves faster than the documentation was built for</div>
+        <p class="gap-card-body">Generation transitions are scheduled market events, not tail risks. Most current structures lack real-time mechanisms to respond as they occur.</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-num">04</div>
+        <div class="gap-card-head">No defensible market price at disposition</div>
+        <p class="gap-card-body">At disposition, lenders must demonstrate that collateral was sold at a commercially reasonable market price. Without a named, independent reference rate cited in the agreement, that price must be reconstructed after the fact &mdash; introducing litigation risk and weakening recovery claims.</p>
+      </div>
+    </div>
+    <p style="font-size:.875rem;font-weight:300;color:#8a827a;line-height:1.75;max-width:640px;">All four gaps stem from the absence of a consistent, observable market reference rate usable across underwriting, monitoring, and disposition.</p>
+  </div>
+</div>
+
+<div style="background:var(--bg);padding:56px 0 80px;">
+  <div style="max-width:860px;margin:0 auto;padding:0 36px;">
     <!-- ENGAGE -->
     <div class="engage">
       <div class="engage-head">Referencing CRI rates in a facility?</div>
@@ -270,9 +387,8 @@
       <div class="engage-email"><a href="mailto:research@ccir.io">research@ccir.io</a></div>
       <div class="engage-disclaimer">CCIR holds no financial interest in the GPU compute market it measures. This page does not constitute legal or financial advice.</div>
     </div>
-
   </div>
-</main>
+</div>
 
 <!-- GOV BAR -->
 <div class="gov-bar">
