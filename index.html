@@ -59,7 +59,7 @@
     .hero-stmt strong { font-weight: 500; color: var(--text-hi); }
 
     /* ─── NAV ─── */
-    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; }
+    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: center; gap: 28px; }
     .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; text-decoration: none; }
     .nav-link:hover { color: #f0ece6; text-decoration: none; }
@@ -91,7 +91,7 @@
     .rate-table-title { font-family: var(--serif); font-size: 1.30rem; font-weight: 500; color: var(--text-hi); }
     .rate-table-date { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); letter-spacing: .08em; }
     .rate-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 2px; overflow: hidden; box-shadow: var(--sh-sm); }
-    .rate-grid-head { background: var(--ink); font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; padding: 12px 16px; text-align: center; }
+    .rate-grid-head { background: var(--accent); font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); padding: 12px 16px; text-align: center; }
     .rate-grid-head:first-child { text-align: left; }
     .rate-grid-cell { background: var(--bg-white); padding: 14px 16px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
     .rate-grid-cell.model { justify-content: flex-start; font-family: var(--mono); font-size: .72rem; font-weight: 500; color: var(--text-hi); letter-spacing: .04em; }
@@ -111,13 +111,6 @@
       .rate-grid-cell { padding: 10px 10px; }
       .rate-grid-cell.rate-val { font-size: .78rem; }
     }
-
-    /* ─── INDEPENDENCE STRIP ─── */
-    .independence-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 22px 0; }
-    .independence-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
-    .ind-label { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: #6a5e54; flex-shrink: 0; }
-    .ind-stmt { font-size: .875rem; font-weight: 300; color: #c8c2bb; line-height: 1.7; }
-    .ind-stmt strong { font-weight: 500; color: #f0ece6; }
 
     /* ─── PILLARS ─── */
     .pillars { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 40px 0; }
@@ -149,8 +142,8 @@
     .ex-card-body strong { font-weight: 500; color: var(--text); }
     .ex-card-bottom { padding: 14px 24px; border-top: 1px solid var(--border); background: var(--bg); }
     .ex-card-meta { font-family: var(--mono); font-size: .56rem; color: var(--text-dim); line-height: 1.9; }
-    .analogy-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 3px solid var(--green); border-radius: 2px; box-shadow: var(--sh-sm); overflow: hidden; }
-    .analogy-card .ex-card-label { color: var(--green); }
+    .analogy-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 2px; box-shadow: var(--sh-sm); overflow: hidden; }
+    .analogy-card .ex-card-label { color: var(--accent); }
 
     /* ─── GENERATION SPREAD ─── */
     .gen-spread-section { padding: 48px 0 52px; border-top: 1px solid var(--border); }
@@ -275,7 +268,7 @@
 <div class="rate-section">
   <div class="rate-table">
     <div class="rate-table-header">
-      <div class="rate-table-title">Published Rates</div>
+      <div class="rate-table-title">Published CRI-8G Rates</div>
       <div class="rate-table-date" id="rate-date">Loading...</div>
     </div>
     <div class="rate-grid" id="rate-grid">
@@ -291,75 +284,28 @@
   </div>
 </div>
 
-<!-- INDEPENDENCE STRIP -->
-<div class="independence-strip">
-  <div class="independence-inner">
-    <div class="ind-label">Independence</div>
-    <div class="ind-stmt"><strong>No marketplace. No trading desk. No swap book.</strong> CCIR has no financial interest in the market it measures &mdash; the structural independence that post-LIBOR governance requires for credit document citation.</div>
-  </div>
-</div>
-
-<!-- PILLARS -->
+<!-- RATE PRODUCT -->
 <div class="pillars">
   <div class="pillar-grid">
     <div class="pillar">
-      <div class="pillar-icon">Indicative</div>
-      <div class="pillar-head">Observable Market Rates, Not Executed Prices</div>
-      <p class="pillar-body">CRI rates reflect posted on-demand asks from named sources &mdash; what the market offers, not what traded. The same distinction AVITAS draws between appraised values and transaction prices.</p>
+      <div class="pillar-icon">CRI-8G</div>
+      <div class="pillar-head">The Production Benchmark</div>
+      <p class="pillar-body">8-GPU InfiniBand node on-demand rate &mdash; the unit GPU collateral is deployed in. What the collateral earns in the configuration lenders underwrite. The rate covenants cite. Additional rate tiers &mdash; single-GPU on-demand and interruptible &mdash; are available for liquidation and distressed analysis.</p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">Open Methodology</div>
-      <div class="pillar-head">Published, Reproducible, Auditable</div>
-      <p class="pillar-body">Full methodology, source list, and computation logic published openly. Any counterparty can reproduce any published rate. <a href="https://github.com/ccir-index/ccir-methodology" target="_blank" rel="noopener">Read the methodology</a></p>
+      <div class="pillar-icon">Named Rate</div>
+      <div class="pillar-head">A Consistent Reference Both Parties Can Cite</div>
+      <p class="pillar-body">CRI-8G gives credit agreements a named, independently verifiable market anchor. Published daily. Open methodology. Any counterparty can reproduce the calculation. <a href="services.html">See illustrative applications &rarr;</a></p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">Audit Trail</div>
-      <div class="pillar-head">SHA-256 Hashed at Collection</div>
-      <p class="pillar-body">Every published rate traceable to the specific API response that generated it. Append-only Bronze layer. Delta Lake time travel. Hash-chained pipeline runs.</p>
+      <div class="pillar-icon">Counsel-Set</div>
+      <div class="pillar-head">CCIR Provides the Rate. Lenders and Counsel Determine How It Is Used.</div>
+      <p class="pillar-body">CCIR provides rate definition language, methodology documentation, and Calculation Date packages. All threshold levels, advance rates, and structural terms are credit judgments set by counsel and lenders. <a href="contact.html">Engage CCIR &rarr;</a></p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">IOSCO Aligned</div>
-      <div class="pillar-head">The Governance Standard Rating Agencies Require</div>
-      <p class="pillar-body">Voluntary alignment with all 19 IOSCO Principles for Financial Benchmarks. 17 compliant, 2 targeted. <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Governance_v1_0_0.pdf" target="_blank" rel="noopener">Governance statement</a></p>
-    </div>
-  </div>
-</div>
-
-<!-- EXPLAINER CARDS -->
-<div class="explainer">
-  <div class="wrap">
-    <div class="sec-label">What CRI Is</div>
-    <div class="sec-rule"></div>
-    <div class="explainer-title">The benchmark rate for GPU compute in the configuration lenders underwrite.</div>
-    <p class="explainer-sub">Lenders finance 8-GPU InfiniBand clusters. CRI publishes the daily benchmark rate for that configuration &mdash; one rate per chip, built for credit practitioners.</p>
-    <div class="explainer-grid">
-      <div class="ex-card">
-        <div class="ex-card-top">
-          <div class="ex-card-label">The Rate</div>
-          <div class="ex-card-name">What the Collateral Earns</div>
-          <div class="ex-card-body">If you seized this collateral tomorrow and racked it identically to how the borrower runs it, what does the market pay? CRI is that number. <strong>The on-demand benchmark rate for an 8-GPU InfiniBand node</strong> &mdash; the unit GPU collateral is deployed in. One rate answers every covenant question: DSCR, collateral coverage, and borrowing base all derive from the same published reference.</div>
-        </div>
-        <div class="ex-card-bottom">
-          <div class="ex-card-meta">
-            8 named sources for H100 &middot; Flat median &middot; 7-day window<br>
-            All sources are 8-GPU HGX nodes with InfiniBand interconnect<br>
-            Named sources published daily in each CSV
-          </div>
-        </div>
-      </div>
-      <div class="analogy-card">
-        <div class="ex-card-top">
-          <div class="ex-card-label">The Analogy</div>
-          <div class="ex-card-name">AVITAS for GPU Compute</div>
-          <div class="ex-card-body">In aircraft finance, AVITAS publishes indicative base values &mdash; what the market would pay for an aircraft in a standard configuration, independent of any specific lease. EETCs contractually require AVITAS citations. Rating agencies mandate them. <strong>CRI occupies the same lane for GPU-backed credit:</strong> an independent indicative rate that gets written into Section 6 of the credit agreement, not a trading price that settles a derivative.</div>
-        </div>
-        <div class="ex-card-bottom">
-          <div class="ex-card-meta">
-            Indicative &ne; executable &middot; Appraisal input &ne; settlement rate<br>
-            CCIR publishes the rate &mdash; lenders and counsel determine the valuation
-          </div>
-        </div>
-      </div>
+      <div class="pillar-icon">Gen Spread</div>
+      <div class="pillar-head">The Surveillance Signal</div>
+      <p class="pillar-body">Cross-generation rate compression as an observable proxy for obsolescence velocity. When the spread narrows, the next generation is displacing the current one. <a href="#gen-spread-grid">Live signal below</a></p>
     </div>
   </div>
 </div>
@@ -392,11 +338,20 @@
   </div>
 </div>
 
-<!-- GAP SECTION -->
+<!-- WHY AN INDEPENDENT RATE -->
 <div class="gap-section">
   <div class="gap-inner">
-    <div class="gap-label">Where Current Documentation Falls Short</div>
-    <div class="gap-headline">Four reasons GPU collateral deals need a purpose-built rate.</div>
+    <div class="gap-label">Why an Independent Reference Rate</div>
+
+    <!-- AVITAS analogy card -->
+    <div style="background:rgba(255,255,255,.06);border:1px solid #3a3028;border-top:3px solid var(--accent);border-radius:2px;padding:28px 28px 24px;margin-bottom:28px;">
+      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-mid);margin-bottom:10px;">The Structural Parallel</div>
+      <div style="font-family:var(--serif);font-size:1.35rem;font-weight:500;color:#f0ece6;line-height:1.3;margin-bottom:14px;">AVITAS for GPU Compute</div>
+      <p style="font-size:.860rem;font-weight:300;color:#c8c2bb;line-height:1.78;margin-bottom:16px;">In aircraft finance, AVITAS publishes indicative base values cited in EETC indentures &mdash; independent of any airline, lessor, or trading desk. Rating agencies require them. Offering documents include them. The rate is contractually embedded, not optional.</p>
+      <p style="font-size:.860rem;font-weight:300;color:#c8c2bb;line-height:1.78;margin-bottom:16px;"><strong style="font-weight:500;color:#f0ece6;">CRI occupies the same lane for GPU-backed credit.</strong> Independent of GPU marketplaces. Independent of swap counterparties. No financial interest in the market it measures. The structural independence that makes the citation defensible when a breach is in dispute.</p>
+      <div style="font-family:var(--mono);font-size:.54rem;color:#6a5e54;line-height:1.8;border-top:1px solid #2a2520;padding-top:10px;margin-top:4px;">Indicative &ne; executable &middot; Appraisal input &ne; settlement rate &middot; CCIR publishes the rate &mdash; lenders and counsel determine the valuation</div>
+    </div>
+
     <div class="gap-grid">
       <div class="gap-card">
         <div class="gap-card-num">01</div>
@@ -405,22 +360,12 @@
       </div>
       <div class="gap-card">
         <div class="gap-card-num">02</div>
-        <div class="gap-card-head">No trigger for the revenue transition already underway</div>
-        <p class="gap-card-body">The signal is not utilization &mdash; it is revenue quality. As contracted training revenue decays toward inference-tier rates, risk increases before coverage ratios show it.</p>
-      </div>
-      <div class="gap-card">
-        <div class="gap-card-num">03</div>
         <div class="gap-card-head">GPU collateral evolves faster than the documentation was built for</div>
-        <p class="gap-card-body">Generation transitions are scheduled market events, not tail risks. Most current structures lack real-time mechanisms to respond as they occur.</p>
-      </div>
-      <div class="gap-card">
-        <div class="gap-card-num">04</div>
-        <div class="gap-card-head">No defensible market price at disposition</div>
-        <p class="gap-card-body">At disposition, lenders must demonstrate that collateral was sold at a commercially reasonable market price. Without a named, independent reference rate cited in the agreement, that price must be reconstructed after the fact &mdash; introducing litigation risk.</p>
+        <p class="gap-card-body">Generation transitions are scheduled market events, not tail risks. Most current structures lack real-time mechanisms to respond as they occur. The Generation Spread is that mechanism.</p>
       </div>
     </div>
-    <p style="font-size:.875rem;font-weight:300;color:#8a827a;line-height:1.75;margin-bottom:32px;max-width:640px;">All four gaps stem from the absence of a consistent, observable market reference rate usable across underwriting, monitoring, and disposition.</p>
-    <div>
+
+    <div style="margin-top:36px;">
       <div style="font-family:var(--serif);font-size:1.15rem;font-weight:500;color:#f0ece6;margin-bottom:14px;line-height:1.35;">Illustrative covenant language, scenario analysis, and borrowing base certificates available for download.</div>
       <a href="services.html" style="display:inline-block;font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;background:var(--accent);color:#fff;padding:11px 24px;border-radius:2px;text-decoration:none;">Reference Rate Applications</a>
     </div>
@@ -475,7 +420,7 @@
       &nbsp;&middot;&nbsp;
       <a href="contact.html">Contact</a>
       &nbsp;&middot;&nbsp;
-      research@ccir.io
+      <a href="mailto:research@ccir.io">research@ccir.io</a>
     </div>
     <div class="fr">No financial interest in the market we measure.</div>
   </div>
@@ -659,7 +604,8 @@ async function renderTicker() {
     } catch (e) {}
   }
   if (dateStr) {
-    document.getElementById('ticker-date').textContent = fmtDate(dateStr);
+    const el = document.getElementById('ticker-date');
+    if (el) el.textContent = fmtDate(dateStr);
   }
 }
 

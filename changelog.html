@@ -54,7 +54,7 @@
     h1 { font-family: var(--serif); font-size: 2.0rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.015em; line-height: 1.18; }
     .hero-rule { width: 44px; height: 2px; background: var(--accent); margin: 22px 0 18px; }
     .hero-stmt { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 640px; }
-    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; }
+    .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: center; gap: 28px; }
     .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; text-decoration: none; }
     .nav-link:hover { color: #f0ece6; text-decoration: none; }
@@ -176,14 +176,6 @@
   </div>
 </div>
 
-<main>
-  <div class="wrap">
-    <div style="height: 48px;"></div>
-
-    <!-- Change tier policy summary -->
-    </div>
-  </div>
-</main>
 <div class="policy-section">
   <div class="policy-strip">
       <div class="policy-item">
@@ -220,9 +212,9 @@
         </div>
         <div class="entry-body">
           <div class="entry-title">CRI v1.0.0 &mdash; Initial Publication</div>
-          <div class="entry-desc">First publication of the CRI index family under Methodology v1.0.0. Five published CRI-8G reference rates &mdash; the benchmark rate for 8-GPU InfiniBand node on-demand compute. Full governance stack published alongside rate data.</div>
+          <div class="entry-desc">First publication of the CRI index family under Methodology v1.0.0. Four published CRI-8G reference rates &mdash; the benchmark rate for 8-GPU InfiniBand node on-demand compute. Full governance stack published alongside rate data.</div>
           <ul class="entry-items">
-            <li><strong>Published rates:</strong> CRI-H100, CRI-A100, CRI-H200, CRI-L40S, CRI-B200 &mdash; 8-GPU InfiniBand node on-demand rate per GPU per hour</li>
+            <li><strong>Published rates:</strong> CRI-H100, CRI-A100, CRI-H200, CRI-B200 &mdash; 8-GPU InfiniBand node on-demand rate per GPU per hour</li>
             <li><strong>Publication threshold:</strong> 4 sources minimum per model. Below 4, rate computed but not published.</li>
             <li><strong>Sources:</strong> RunPod Cluster, Lambda Cluster, Hyperstack, Vultr, Crusoe, Voltage Park, Genesis Cloud, Together AI</li>
             <li><strong>Surveillance only:</strong> Vast.ai (interruptible), Shadeform (aggregator), Thunder (PCIe), Scaleway (PCIe), CoreWeave (single-source enterprise)</li>
@@ -264,4 +256,10 @@
     </div>
     <div class="fr">
       CCIR &middot; Compute Credit Index Research<br>
-      <a href="mailto:research@ccir.io" style="color:var(--text-dim);"><span class="__cf_email__" da
+      <a href="mailto:research@ccir.io" style="color:var(--text-dim);">research@ccir.io</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
