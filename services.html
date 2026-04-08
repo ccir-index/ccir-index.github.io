@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reference Rate Applications &mdash; CCIR</title>
-  <meta name="description" content="Independent GPU compute benchmark rates for GPU-backed structured finance. Two covenant frameworks for contracted-revenue and mixed-book GPU operators, addressing collateral coverage, contract renewal risk, workload composition, and generation spread." />
+  <meta name="description" content="Market Price Monitoring covenant for GPU-backed credit facilities. Profile-agnostic surveillance anchored to CRI benchmark rates. No financial consequence, no amendment required." />
   <meta property="og:title" content="Reference Rate Applications &mdash; CCIR" />
-  <meta property="og:description" content="Illustrative covenant frameworks for GPU-backed credit facilities. Collateral coverage, revenue quality, generation spread, and borrowing base applications." />
+  <meta property="og:description" content="Market Price Monitoring covenant for GPU-backed credit facilities. The lowest-friction CRI citation." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ccir.io/services.html" />
   <meta property="og:image" content="https://ccir.io/favicon-192x192.png" />
@@ -46,10 +46,9 @@
     .wrap { max-width: 860px; margin: 0 auto; padding: 0 36px; }
     a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
 
-    /* ─── HEADER ──────────────────────────────────────────────────────────── */
+    /* ─── HEADER ─── */
     header { background: var(--bg-white); border-bottom: 1px solid var(--border); }
     .header-inner { max-width: 860px; margin: 0 auto; padding: 40px 36px 36px; }
-    .header-top { display: flex; align-items: flex-start; gap: 22px; margin-bottom: 28px; }
     .wordmark { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .26em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
     .wordmark a { color: var(--text-dim); } .wordmark a:hover { color: var(--accent); text-decoration: none; }
     h1 { font-family: var(--serif); font-size: 2.0rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.015em; line-height: 1.18; }
@@ -57,7 +56,7 @@
     .hero-stmt { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 640px; }
     .hero-stmt strong { font-weight: 500; color: var(--text-hi); }
 
-    /* ─── NAV STRIP ───────────────────────────────────────────────────────── */
+    /* ─── NAV ─── */
     .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: center; gap: 28px; }
     .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; text-decoration: none; }
@@ -65,73 +64,44 @@
     .nav-link.active { color: var(--accent-mid); }
     .nav-sep { color: #3a3530; font-size: .70rem; }
 
-    /* ─── MAIN ────────────────────────────────────────────────────────────── */
+    /* ─── MAIN ─── */
     main { padding: 56px 0 80px; }
     .sec-label { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
     .sec-rule { width: 32px; height: 1px; background: var(--accent); margin: 12px 0 28px; }
 
-    /* ─── PROBLEM SECTION ────────────────────────────────────────────────── */
-    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 48px; }
-    @media (max-width: 640px) { .problem-grid { grid-template-columns: 1fr; } }
-    .problem-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 2px solid var(--border-hi); border-radius: 2px; padding: 22px 22px 20px; box-shadow: var(--sh-sm); }
-    .problem-card.accent-top { border-top-color: var(--accent); }
-    .problem-card.amber-top  { border-top-color: var(--amber); }
-    .problem-label { font-family: var(--mono); font-size: .57rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
-    .problem-head  { font-size: .875rem; font-weight: 500; color: var(--text-hi); margin-bottom: 8px; line-height: 1.4; }
-    .problem-body  { font-size: .800rem; color: var(--text-dim); line-height: 1.72; }
-    .problem-stat  { font-family: var(--mono); font-size: 1.5rem; font-weight: 400; color: var(--accent); letter-spacing: -.02em; margin: 12px 0 4px; line-height: 1; }
-    .problem-stat-label { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); }
+    /* ─── MPM CARD ─── */
+    .mpm-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 3px solid var(--green); border-radius: 2px; padding: 32px 32px 28px; box-shadow: var(--sh-md); margin-bottom: 32px; }
+    .mpm-eyebrow { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+    .mpm-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; color: var(--text-hi); line-height: 1.25; margin-bottom: 14px; }
+    .mpm-body { font-size: .860rem; color: var(--text-dim); line-height: 1.78; margin-bottom: 20px; }
+    .mpm-body strong { font-weight: 500; color: var(--text); }
 
-    /* ─── CASE STUDY ─────────────────────────────────────────────────────── */
-    .case-study { background: var(--bg-white); border: 1px solid var(--border); border-radius: 2px; padding: 32px 32px 28px; box-shadow: var(--sh-md); margin-bottom: 48px; }
-    .cs-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 24px; flex-wrap: wrap; }
-    .cs-title-block {}
-    .cs-eyebrow { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-    .cs-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; color: var(--text-hi); line-height: 1.25; }
-    .cs-meta { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); margin-top: 6px; }
-    .cs-download { flex-shrink: 0; }
-    .dl-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--bg-white); font-family: var(--mono); font-size: .62rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 10px 18px; border-radius: 2px; text-decoration: none; transition: background .12s; }
-    .dl-btn:hover { background: #153f58; text-decoration: none; color: var(--bg-white); }
+    /* ─── THRESHOLD TABLE ─── */
+    .threshold-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+    .threshold-table th { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: var(--bg-white); background: var(--green); padding: 10px 14px; text-align: left; }
+    .threshold-table td { padding: 10px 14px; border: 1px solid var(--border); font-size: .800rem; color: var(--text); line-height: 1.6; }
+    .threshold-table tr:nth-child(even) td { background: var(--bg); }
+    .threshold-table .mono { font-family: var(--mono); font-size: .76rem; color: var(--text-hi); }
 
-    .cs-rule { height: 1px; background: var(--border); margin: 0 0 24px; }
+    /* ─── EXAMPLE BOX ─── */
+    .example-box { background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 2px; padding: 22px 24px; margin-bottom: 28px; }
+    .example-label { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .example-body { font-size: .820rem; color: var(--text-dim); line-height: 1.78; }
+    .example-body strong { font-weight: 500; color: var(--text); }
 
-    .cs-covenant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-    @media (max-width: 600px) { .cs-covenant-grid { grid-template-columns: 1fr; } }
-    .cs-cov { background: var(--bg); border: 1px solid var(--border); border-radius: 2px; padding: 16px 18px; }
-    .cs-cov-num { font-family: var(--mono); font-size: .55rem; font-weight: 500; letter-spacing: .20em; color: var(--accent-mid); margin-bottom: 6px; }
-    .cs-cov-head { font-size: .840rem; font-weight: 500; color: var(--text-hi); margin-bottom: 6px; }
-    .cs-cov-body { font-size: .775rem; color: var(--text-dim); line-height: 1.68; }
-    .cs-cov-tag { display: inline-block; font-family: var(--mono); font-size: .53rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--green); background: var(--green-lo); border: 1px solid var(--green-mid); border-radius: 2px; padding: 2px 7px; margin-top: 8px; }
-    .cs-cov-tag.amber { color: var(--amber); background: var(--amber-lo); border-color: var(--amber-mid); }
+    /* ─── DOWNLOAD ─── */
+    .dl-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: var(--bg-white); font-family: var(--mono); font-size: .62rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 10px 18px; border-radius: 2px; text-decoration: none; transition: background .12s; }
+    .dl-btn:hover { background: #145230; text-decoration: none; color: var(--bg-white); }
 
-    .cs-scenario { background: var(--bg); border: 1px solid var(--border); border-radius: 2px; overflow-x: auto; }
-    .cs-scenario table { width: 100%; border-collapse: collapse; font-size: .760rem; }
-    .cs-scenario th { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--bg-white); background: var(--accent); padding: 9px 12px; text-align: left; border: 1px solid var(--accent); white-space: nowrap; }
-    .cs-scenario td { padding: 8px 12px; border: 1px solid var(--border); color: var(--text); vertical-align: top; line-height: 1.5; }
-    .cs-scenario tr:nth-child(even) td { background: var(--bg-white); }
-    .cs-scenario td.scenario-name { font-weight: 500; color: var(--text-hi); white-space: nowrap; }
-    .cs-scenario td.pass { color: var(--green); font-family: var(--mono); font-size: .70rem; }
-    .cs-scenario td.warn { color: var(--amber); font-family: var(--mono); font-size: .70rem; }
-    .cs-scenario td.breach { color: #A03020; font-family: var(--mono); font-size: .70rem; }
-    .cs-scenario td.mono  { font-family: var(--mono); font-size: .72rem; color: var(--text-hi); }
-
-    .cs-note { font-size: .775rem; color: var(--text-dim); line-height: 1.72; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); }
-
-    /* ─── ENGAGE SECTION ─────────────────────────────────────────────────── */
-    .engage { background: var(--ink); border-radius: 2px; padding: 36px 36px 32px; margin-bottom: 48px; }
-    .engage-head { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; color: #f0ece6; line-height: 1.3; margin-bottom: 8px; }
-    .engage-sub { font-size: .875rem; font-weight: 300; color: #8a827a; line-height: 1.7; margin-bottom: 28px; max-width: 560px; }
-    .engage-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
-    @media (max-width: 560px) { .engage-grid { grid-template-columns: 1fr; } }
-    .engage-item { border-left: 2px solid #3a3028; padding-left: 16px; }
-    .engage-item-head { font-size: .840rem; font-weight: 500; color: #c8c2bb; margin-bottom: 4px; }
-    .engage-item-body { font-size: .775rem; font-weight: 300; color: #6a5e54; line-height: 1.65; }
-    .engage-cta { display: flex; align-items: center; gap: 24px; padding-top: 24px; border-top: 1px solid #2a2520; flex-wrap: wrap; }
-    .engage-email { font-family: var(--mono); font-size: .80rem; font-weight: 500; color: var(--accent-mid); }
+    /* ─── ENGAGE ─── */
+    .engage { background: var(--ink); border-radius: 2px; padding: 36px 36px 32px; margin-top: 48px; }
+    .engage-head { font-family: var(--serif); font-size: 1.25rem; font-weight: 500; color: #f0ece6; line-height: 1.3; margin-bottom: 12px; }
+    .engage-body { font-size: .860rem; font-weight: 300; color: #8a827a; line-height: 1.72; margin-bottom: 20px; max-width: 560px; }
+    .engage-email { font-family: var(--mono); font-size: .80rem; font-weight: 500; }
     .engage-email a { color: var(--accent-mid); } .engage-email a:hover { color: #f0ece6; }
-    .engage-disclaimer { font-size: .760rem; font-weight: 300; color: #4a4038; line-height: 1.6; }
+    .engage-disclaimer { font-size: .760rem; font-weight: 300; color: #4a4038; line-height: 1.6; margin-top: 16px; padding-top: 16px; border-top: 1px solid #2a2520; }
 
-    /* ─── GOVERNANCE BAR ──────────────────────────────────────────────────── */
+    /* ─── GOV BAR ─── */
     .gov-bar { background: var(--bg-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 0; }
     .gov-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; gap: 36px; flex-wrap: wrap; align-items: center; }
     .gov-item { display: flex; align-items: center; gap: 10px; }
@@ -139,7 +109,7 @@
     .gov-text { font-size: .80rem; color: var(--text-dim); line-height: 1.5; }
     .gov-text strong { font-weight: 500; color: var(--text); }
 
-    /* ─── FOOTER ──────────────────────────────────────────────────────────── */
+    /* ─── FOOTER ─── */
     footer { background: var(--bg-white); border-top: 1px solid var(--border); padding: 32px 0 36px; }
     .footer-in { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
     .fl { font-size: .80rem; color: var(--text-dim); }
@@ -147,17 +117,13 @@
     .fr { font-family: var(--mono); font-size: .62rem; color: var(--text-dim); text-align: right; line-height: 2.0; }
 
     @media (max-width: 640px) {
-      /* Nav — single scrollable line */
       .nav-inner { gap: 0; flex-wrap: nowrap; overflow-x: auto; padding: 0 16px; -webkit-overflow-scrolling: touch; }
       .nav-link { font-size: .54rem; padding: 10px 7px; letter-spacing: .06em; white-space: nowrap; }
       .nav-sep { display: none; }
-      /* Header */
       .header-inner { padding: 32px 20px 28px; }
       h1 { font-size: 1.65rem; }
-      /* Scenario table — break out of wrap padding to full viewport width */
-      .cs-scenario { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-left: -20px; margin-right: -20px; border-radius: 0; border-left: none; border-right: none; }
-      .cs-scenario table { min-width: 480px; }
-      /* Footer */
+      .wrap { padding: 0 20px; }
+      .mpm-card { padding: 24px 20px 22px; }
       .footer-in { flex-direction: column; align-items: flex-start; gap: 12px; }
       .fr { text-align: left; }
       .fl { font-size: .75rem; line-height: 2.0; }
@@ -169,27 +135,23 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="header-top">
-      <div>
-        <div class="wordmark"><a href="index.html">CCIR &middot; Compute Credit Index Research</a></div>
-        <h1>How CRI Rates Are Referenced<br>in Credit Agreements</h1>
-      </div>
+    <div>
+      <div class="wordmark"><a href="index.html">CCIR &middot; Compute Credit Index Research</a></div>
+      <h1>Reference Rate Applications</h1>
     </div>
     <div class="hero-rule"></div>
     <p class="hero-stmt">
-      Independent reference rates for GPU-backed credit &mdash; built for citation in borrowing bases, covenants, collateral monitoring, and compliance certificates. <strong>CCIR provides the benchmark. Lenders and counsel determine how it is used.</strong>
+      How CRI rates are referenced in GPU-backed credit agreements. <strong>CCIR publishes the rate. Lenders and counsel determine how it is used.</strong>
     </p>
   </div>
 </header>
 
-<!-- NAV STRIP -->
+<!-- NAV -->
 <div class="nav-strip">
   <div class="nav-inner">
     <a href="index.html" class="nav-link">Home</a>
     <span class="nav-sep">/</span>
     <a href="services.html" class="nav-link active">Reference Rate Applications</a>
-    <span class="nav-sep">/</span>
-    <a href="index.html#chip-selector" class="nav-link">Reference Rates</a>
     <span class="nav-sep">/</span>
     <a href="changelog.html" class="nav-link">Changelog</a>
     <span class="nav-sep">/</span>
@@ -200,325 +162,76 @@
 <main>
   <div class="wrap">
 
-    <!-- PROBLEM -->
-    <div class="sec-label">Why GPU Credit Agreements Need a Named Reference Rate</div>
+    <div class="sec-label">Market Price Monitoring Covenant</div>
     <div class="sec-rule"></div>
 
-    <p style="font-size:.875rem;font-weight:300;color:var(--text);line-height:1.82;max-width:640px;margin-bottom:28px;">GPU-backed lending has scaled past $20 billion in committed facilities without a named independent reference rate in credit documentation. The financial infrastructure &mdash; loan covenants, borrowing base formulas, LTV triggers, and collateral disposition standards &mdash; requires a market-standardized rate built for citation in agreements. CRI&#8209;H100 is that rate.</p>
-
-    <div class="problem-grid">
-
-      <div class="problem-card accent-top">
-        <div class="problem-label">Market Rate vs. Book Value</div>
-        <div class="problem-head">Book depreciation does not move with the rental market</div>
-        <p class="problem-body" style="margin-top:12px;">GPU rental rates have declined materially since 2024. Revenue covenants and borrowing base formulas that reference the live on-demand market need an independent, named rate to anchor those calculations &mdash; one both parties can verify independently.</p>
+    <div class="mpm-card">
+      <div class="mpm-eyebrow">Market Price Monitoring &mdash; Any GPU Facility</div>
+      <div class="mpm-title">The lowest-friction CRI citation &mdash; no financial consequence.</div>
+      <div class="mpm-body">
+        Profile-agnostic surveillance covenant. Two disclosure thresholds anchored to CRI-8G at closing. <strong>No prepayment trigger, no formula adjustment, no Event of Default.</strong> Compatible with any GPU-backed credit agreement regardless of deal structure.
+      </div>
+      <div class="mpm-body">
+        The Market Price Monitoring covenant requires the borrower to deliver a notice when CRI-8G for the pledged GPU model falls below defined thresholds relative to the rate at closing. The thresholds are set at closing and do not change. The only consequence is disclosure &mdash; what the borrower does with the information is a business decision, not a covenant event.
       </div>
 
-      <div class="problem-card accent-top">
-        <div class="problem-label">Independent Reference Rate</div>
-        <div class="problem-head">A rate defined by either party creates documentation risk</div>
-        <p class="problem-body" style="margin-top:12px;"><strong>A rate defined by the lender favors the lender. A rate defined by the borrower favors the borrower.</strong> Syndicated facilities need a rate all lenders can independently verify. Post-LIBOR, compliance functions have developed institutional resistance to reference rates that lack independent governance and published methodology. CRI-H100 is structured to meet that standard.</p>
-      </div>
+      <table class="threshold-table">
+        <thead>
+          <tr>
+            <th>Threshold</th>
+            <th>Trigger</th>
+            <th>Consequence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">Level 1</td>
+            <td>CRI-8G falls below <strong>75%</strong> of CRI-8G at closing for two consecutive Calculation Dates</td>
+            <td>Market Price Notice &mdash; borrower delivers written notice within 5 business days</td>
+          </tr>
+          <tr>
+            <td class="mono">Level 2</td>
+            <td>CRI-8G falls below <strong>50%</strong> of CRI-8G at closing for two consecutive Calculation Dates</td>
+            <td>Market Price Alert &mdash; borrower delivers enhanced notice including fleet utilization and re-pricing impact assessment</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <div class="problem-card amber-top">
-        <div class="problem-label">Contract Renewal Risk</div>
-        <div class="problem-head">Contract renewal risk is the key credit signal &mdash; and requires an independent rate to measure</div>
-        <p class="problem-body">In a contracted-revenue structure, the most important surveillance question is the spread between the borrower&rsquo;s base contracted rate and the current on-demand market. When CRI-H100 falls toward the borrower&rsquo;s base contracted rate, renewal leverage erodes &mdash; a Convergence Notice signal. When CRI-H100 falls well below contracted rates with near-term expiry concentration, the re-pricing cliff widens &mdash; a Reset Cliff signal. Both require an independent reference rate that neither party controls.</p>
-      </div>
-
-      <div class="problem-card amber-top">
-        <div class="problem-label">Workout &amp; Disposition</div>
-        <div class="problem-head">UCC &sect;9-627 requires an independent rate to defend collateral disposition</div>
-        <p class="problem-body">Under UCC &sect;9-627, a disposition is commercially reasonable only if conducted at &ldquo;the price current in any recognized market.&rdquo; Without a named independent rate, a lender cannot defend GPU collateral disposition against a borrower who argues the sale was commercially unreasonable &mdash; and under UCC &sect;9-626, a commercially unreasonable disposition may eliminate the deficiency judgment. CRI-H100, cited in the credit agreement, provides the independent market reference that survives that scrutiny.</p>
-      </div>
-
-    </div>
-
-    <!-- CASE STUDY -->
-    <div class="sec-label">Illustrative Reference Rate Applications</div>
-    <div class="sec-rule"></div>
-
-    <!-- Document selector -->
-    <div style="background:var(--bg-white);border:1px solid var(--border);border-radius:2px;padding:22px 24px 20px;margin-bottom:20px;box-shadow:var(--sh-sm);">
-      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Illustrative covenant frameworks</div>
-
-      <!-- MPM — full width, leads -->
-      <div style="border:1px solid var(--border);border-left:3px solid var(--green);border-radius:2px;padding:14px 16px;margin-bottom:12px;">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-          <div style="flex:1;min-width:260px;">
-            <div style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Market Price Monitoring &mdash; Any GPU Facility</div>
-            <div style="font-size:.800rem;font-weight:500;color:var(--text-hi);margin-bottom:6px;">The lowest-friction CRI-H100 citation &mdash; no financial consequence</div>
-            <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;">Profile-agnostic surveillance covenant. Two disclosure thresholds anchored to CRI-H100 at closing. No prepayment trigger, no formula adjustment, no Event of Default. Compatible with any GPU-backed credit agreement regardless of deal structure.</div>
-          </div>
-          <div style="flex-shrink:0;">
-            <a href="CCIR_Market_Price_Monitoring.pdf" class="dl-btn" download style="font-size:.60rem;padding:8px 14px;background:var(--green);color:var(--bg-white);border:none;">
-              <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Market Price Monitoring
-            </a>
-            <div style="font-family:var(--mono);font-size:.53rem;color:var(--text-dim);margin-top:5px;">.pdf</div>
-          </div>
+      <div class="example-box">
+        <div class="example-label">Illustrative Example</div>
+        <div class="example-body">
+          Closing CRI-8G (H100): <strong>$2.50/GPU/hr</strong><br>
+          Level 1 trigger: CRI-8G &lt; $1.875 for two consecutive dates<br>
+          Level 2 trigger: CRI-8G &lt; $1.250 for two consecutive dates<br><br>
+          If CRI-8G publishes at $1.80 on two consecutive Calculation Dates, a Level 1 Market Price Notice is triggered. The borrower delivers notice. No financial consequence follows. The lender now has a documented data point for portfolio monitoring &mdash; and the borrower has a documented record of timely disclosure.
         </div>
       </div>
 
-      <!-- Profile A + B side by side -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
-        <div style="border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:2px;padding:14px 16px;">
-          <div style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">Profile A &mdash; Contracted Revenue</div>
-          <div style="font-size:.800rem;font-weight:500;color:var(--text-hi);margin-bottom:6px;">Primary credit support: committed-term customer contracts</div>
-          <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;margin-bottom:10px;">Enterprise SLA contracts, committed-term agreements, or named customer revenue. GPU hardware as backstop collateral. Typical deal size $100M+. Three covenants: &sect;7.01 Contract Renewal Risk, &sect;7.02 Collateral Coverage, &sect;7.03 Generation Spread.</div>
-          <a href="CCIR_Illustrative_Credit_Applications_Profile_A.pdf" class="dl-btn" download style="font-size:.60rem;padding:8px 14px;">
-            <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Profile A Framework
-          </a>
-          <div style="font-family:var(--mono);font-size:.53rem;color:var(--text-dim);margin-top:5px;">.pdf</div>
-        </div>
-        <div style="border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:2px;padding:14px 16px;">
-          <div style="font-family:var(--mono);font-size:.60rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;">Profile B &mdash; Mixed-Book Operator</div>
-          <div style="font-size:.800rem;font-weight:500;color:var(--text-hi);margin-bottom:6px;">Primary credit support: GPU collateral</div>
-          <div style="font-size:.760rem;color:var(--text-dim);line-height:1.68;margin-bottom:10px;">Mixed or on-demand market revenue, borrowing base format. No hyperscaler backstop. Typical deal size $20M&ndash;$75M. Four covenants: &sect;7.01 Market Capture, &sect;7.02 Collateral Coverage, &sect;7.03 Workload Composition, &sect;7.04 Generation Spread.</div>
-          <a href="CCIR_Illustrative_Credit_Applications_Profile_B.pdf" class="dl-btn" download style="font-size:.60rem;padding:8px 14px;background:var(--surface-2);color:var(--text-hi);border:1px solid var(--border);">
-            <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Profile B Framework
-          </a>
-          <div style="font-family:var(--mono);font-size:.53rem;color:var(--text-dim);margin-top:5px;">.pdf</div>
-          <div style="margin-top:8px;"><a href="CCIR_Borrowing_Base_Certificate_Profile_B.pdf" style="font-family:var(--mono);font-size:.56rem;font-weight:500;color:var(--accent);" download>Exhibit F (Borrowing Base Certificate) &rarr;</a></div>
-        </div>
-      </div>
-
-      <div style="font-family:var(--mono);font-size:.55rem;color:var(--text-dim);margin-top:2px;line-height:2.0;">
-        <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Benchmark_Design_Rationale_v1_0_0.pdf" target="_blank" rel="noopener" style="color:var(--accent);">Benchmark Design Rationale &rarr;</a>
-        &nbsp;&middot;&nbsp;
-        <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Fallback_Language_Guidance_v1_0_0.pdf" target="_blank" rel="noopener" style="color:var(--accent);">Fallback Language Guidance &rarr;</a>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <a href="CCIR_Market_Price_Monitoring.pdf" class="dl-btn" download>
+          <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3.5 6.5l3 3 3-3M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Market Price Monitoring
+        </a>
+        <span style="font-family:var(--mono);font-size:.53rem;color:var(--text-dim);">.pdf &middot; Illustrative covenant language</span>
       </div>
     </div>
 
-    <div class="case-study">
-      <div class="cs-header">
-        <div class="cs-title-block">
-          <div class="cs-eyebrow">Illustrative Applications</div>
-          <div class="cs-title">CRI-H100 as a Reference Rate<br><span style="font-size:1.1rem;color:var(--text-dim);">Two Profiles &nbsp;&middot;&nbsp; Six Covenants &nbsp;&middot;&nbsp; 36-month term</span></div>
-          <div class="cs-meta">All parameters illustrative &nbsp;&middot;&nbsp; Thresholds, multiples, and advance rates are credit judgments set by counsel and lenders</div>
-        </div>
-      </div>
-      <div class="cs-rule"></div>
-
-      <!-- Covenant cards -->
-      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;">Profile A &mdash; Contracted Revenue Operator</div>
-      <div style="font-size:.760rem;color:var(--text-dim);margin-bottom:14px;">8,000 &times; H100 SXM5 &nbsp;&middot;&nbsp; $200M outstanding &nbsp;&middot;&nbsp; Gross contracted $3.80/hr &nbsp;&middot;&nbsp; Base contracted $2.90/hr (after Premium Schedule deductions)</div>
-      <div class="cs-covenant-grid">
-        <div class="cs-cov">
-          <div class="cs-cov-num">&sect;7.02</div>
-          <div class="cs-cov-head">Collateral Coverage / LTV</div>
-          <div class="cs-cov-body"><strong>Marks the pledged GPU fleet to CRI-H100 monthly using a cap rate formula &mdash; not book depreciation, not contracted revenue.</strong> CV = GPUs &times; CRI-H100 &times; 8,760 hrs &times; 72% utilization &divide; 28% cap rate. Cap rate steps to 35% on Generation Convergence Event. LTV maintained below 80%.</div>
-          <span class="cs-cov-tag">Financial covenant</span>
-        </div>
-        <div class="cs-cov">
-          <div class="cs-cov-num">&sect;7.03</div>
-          <div class="cs-cov-head">Generation Spread</div>
-          <div class="cs-cov-body"><strong>Monitors (CRI-B200 &minus; CRI-H100) &divide; CRI-H100 as a proxy for H100 training-tier obsolescence.</strong> When the spread falls below 25% for two consecutive dates, the &sect;7.02 Capitalization Rate steps from 28% to 35% &mdash; tightening the collateral mark without an amendment.</div>
-          <span class="cs-cov-tag amber">Surveillance &rarr; feeds &sect;7.02</span>
-        </div>
-        <div class="cs-cov" style="grid-column:1/-1;">
-          <div class="cs-cov-num">&sect;7.01</div>
-          <div class="cs-cov-head">Contract Renewal Risk</div>
-          <div class="cs-cov-body"><strong>Two-sided surveillance over a rolling 6-period forward window.</strong> Convergence Notice at CPR below 1.10&times; &mdash; Base Contracted Rate approaching on-demand market rate, renewal leverage eroding. Reset Cliff Notice when CPR exceeds 1.50&times; and Forward Renewal Exposure exceeds 30% of contracted GPU-hours &mdash; wide spread with near-term expiry concentration signals a material re-pricing cliff. Both triggers require the same disclosure: expiring contracts by customer, renewal prospects, and projected revenue under a re-pricing scenario at current CRI-H100.</div>
-          <span class="cs-cov-tag">Contract renewal risk surveillance &middot; disclosure only</span>
-        </div>
-      </div>
-
-      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin:24px 0 6px;">Profile B &mdash; Mixed-Book Operator</div>
-      <div style="font-size:.760rem;color:var(--text-dim);margin-bottom:14px;">1,500 &times; H100 SXM5 &nbsp;&middot;&nbsp; $30M outstanding &nbsp;&middot;&nbsp; 70% training / 30% inference at baseline</div>
-      <div class="cs-covenant-grid">
-        <div class="cs-cov">
-          <div class="cs-cov-num">&sect;7.01</div>
-          <div class="cs-cov-head">Market Capture Ratio</div>
-          <div class="cs-cov-body"><strong>Measures whether the borrower&rsquo;s actual revenue per GPU achieves a minimum percentage of CRI-H100.</strong> Detects underpricing, underutilization, or customer mix deterioration. A coverage ratio applied to an on-demand market operator is nearly inert; the Market Capture Ratio instead asks: is the borrower getting market rates? Rate compression is detected by &sect;7.02. Both signals are needed; neither substitutes for the other.</div>
-          <span class="cs-cov-tag">Operational efficiency &middot; 85% floor</span>
-        </div>
-        <div class="cs-cov">
-          <div class="cs-cov-num">&sect;7.02</div>
-          <div class="cs-cov-head">Collateral Coverage / LTV</div>
-          <div class="cs-cov-body"><strong>Marks the pledged GPU fleet to CRI-H100 monthly using a cap rate formula.</strong> CV = GPUs &times; CRI-H100 &times; 8,760 hrs &times; 72% utilization &divide; 28% cap rate. Cap rate steps to 35% on Generation Convergence Event. CRI-H100 is the single observable input that updates each period; all other parameters are fixed at closing and independently verifiable by any party.</div>
-          <span class="cs-cov-tag">Financial covenant &middot; independent daily rate</span>
-          <div style="margin-top:10px;"><a href="CCIR_Borrowing_Base_Certificate_Profile_B.pdf" style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.06em;color:var(--accent);" download>Exhibit F (Borrowing Base Certificate) &rarr;</a></div>
-        </div>
-        <div class="cs-cov">
-          <div class="cs-cov-num">&sect;7.03</div>
-          <div class="cs-cov-head">Workload Composition</div>
-          <div class="cs-cov-body"><strong>Requires borrower certification of training vs. inference workload mix each Calculation Date.</strong> If Training Workload Percentage falls below 50% for two consecutive periods, a Blended Utilization Rate adjusts the &sect;7.02 Collateral Value (72% training / 65% inference, weighted). Surfaces workload migration before it propagates into a &sect;7.02 deficiency &mdash; the borrower can migrate workloads while reporting identical headline utilization.</div>
-          <span class="cs-cov-tag">Surveillance &rarr; adjusts &sect;7.02</span>
-        </div>
-        <div class="cs-cov">
-          <div class="cs-cov-num">&sect;7.04</div>
-          <div class="cs-cov-head">Generation Spread</div>
-          <div class="cs-cov-body"><strong>Monitors (CRI-B200 &minus; CRI-H100) &divide; CRI-H100 as a proxy for H100 training-tier obsolescence.</strong> When the spread falls below 25% for two consecutive dates, the &sect;7.02 Capitalization Rate steps from 28% to 35% &mdash; tightening the collateral mark without an amendment. CCIR publishes both rates daily; the threshold and step-up mechanics are credit judgments set at underwriting.</div>
-          <span class="cs-cov-tag amber">CRI-B200 &amp; CRI-H100 &middot; feeds &sect;7.02</span>
-        </div>
-      </div>
-
-      <div style="font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--text-dim);padding:14px 18px;background:var(--surface-2);border:1px solid var(--border);border-radius:2px;margin-top:14px;line-height:1.8;">
-        &sect;7.02 Collateral Coverage applies to both profiles &nbsp;&middot;&nbsp; &sect;7.03 Generation Spread feeds &sect;7.02 in Profile A; &sect;7.04 Generation Spread feeds &sect;7.02 in Profile B &nbsp;&middot;&nbsp; Counsel and lenders set all thresholds and parameters &nbsp;&middot;&nbsp; CCIR publishes the rate
-      </div>
-
-
-
-      <!-- Scenario table -->
-      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin:24px 0 6px;">Profile A &mdash; Illustrative Scenario Analysis</div>
-      <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:10px;">8,000 GPUs &middot; $200M outstanding &middot; Base contracted $2.90/hr &middot; CRI-H100 $2.18 at baseline. All parameters illustrative.</div>
-      <div class="cs-scenario">
-        <table>
-          <thead>
-            <tr>
-              <th>Scenario</th>
-              <th>CRI-H100</th>
-              <th>&sect;7.02 Collateral Coverage</th>
-              <th>&sect;7.03 Gen Spread</th>
-              <th>&sect;7.01 Contract Renewal Risk</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="scenario-name">Baseline</td>
-              <td class="mono">$2.18</td>
-              <td class="pass">PASS &mdash; LTV 50.9%, BB $255M</td>
-              <td class="pass">PASS &mdash; 145.4%</td>
-              <td class="pass">PASS &mdash; CPR 1.33&times;, no trigger</td>
-            </tr>
-            <tr>
-              <td class="scenario-name">Rate compression<br><span style="font-weight:300;font-size:.72rem;">Contracts hold</span></td>
-              <td class="mono">$1.64 (&minus;25%)</td>
-              <td class="breach">BREACH &mdash; BB $191M &lt; $200M outstanding</td>
-              <td class="pass">PASS &mdash; 174%</td>
-              <td class="warn">RESET CLIFF WATCH &mdash; CPR 1.77&times;; monitor Forward Renewal Exposure vs. 30% threshold</td>
-            </tr>
-            <tr>
-              <td class="scenario-name">Generation convergence<br><span style="font-weight:300;font-size:.72rem;">B200 falls toward H100</span></td>
-              <td class="mono">$2.00</td>
-              <td class="warn">TIGHTENS &mdash; cap rate 28%&rarr;35%, BB $204M</td>
-              <td class="warn">EVENT &mdash; spread 12.5%, cap steps up</td>
-              <td class="pass">PASS &mdash; CPR 1.45&times;, between thresholds</td>
-            </tr>
-            <tr>
-              <td class="scenario-name">Contract renewal pressure<br><span style="font-weight:300;font-size:.72rem;">40% pool re-contracted</span></td>
-              <td class="mono">$1.50</td>
-              <td class="breach">BREACH &mdash; BB $175M &lt; $200M</td>
-              <td class="pass">PASS &mdash; 167%</td>
-              <td class="warn">CONVERGENCE NOTICE &mdash; CPR compressing toward 1.10&times; as contracts re-price; borrower disclosure triggered</td>
-            </tr>
-            <tr>
-              <td class="scenario-name">Combined stress<br><span style="font-weight:300;font-size:.72rem;">All three fire</span></td>
-              <td class="mono">$1.40</td>
-              <td class="breach">BREACH &mdash; BB $121M (cap 35%, adv 60%)</td>
-              <td class="warn">EVENT &mdash; cap 28%&rarr;35%</td>
-              <td class="warn">RESET CLIFF NOTICE &mdash; CPR &gt;1.50&times;, Forward Renewal Exposure elevated; re-pricing scenario disclosure required</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="cs-note" style="margin-bottom:24px;">
-        The defining Profile A asymmetry: rate compression tightens &sect;7.02 (hardware marks down) while &sect;7.01 widens the spread (locked contracts hold above a falling on-demand rate floor). Both must be monitored. The inflection is contract renewal &mdash; when the borrower re-contracts into a depressed market, the CPR compresses rapidly toward the Convergence Notice threshold. Lenders should model the combined stress scenario at origination: &sect;7.03 cap rate step-up compounds in &sect;7.02, and &sect;7.01 Reset Cliff disclosure surfaces the re-pricing exposure before it propagates into a deficiency. Each of those signals individually fires a notice; the combined stress is what happens when all three were ignored.
-      </div>
-
-      <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin:8px 0 6px;">Profile B &mdash; Illustrative Scenario Analysis</div>
-      <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:10px;">1,500 GPUs &middot; $30M outstanding &middot; 70% training at baseline &middot; CRI-H100 $2.18. All parameters illustrative.</div>
-      <div class="cs-scenario">
-        <table>
-          <thead>
-            <tr>
-              <th>Scenario</th>
-              <th>CRI-H100</th>
-              <th>&sect;7.01 Market Capture</th>
-              <th>&sect;7.02 Collateral Coverage</th>
-              <th>&sect;7.03 Workload</th>
-              <th>&sect;7.04 Gen Spread</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="scenario-name">Baseline</td>
-              <td class="mono">$2.18</td>
-              <td class="pass">PASS &mdash; 95% capture</td>
-              <td class="pass">PASS &mdash; LTV 40.7%</td>
-              <td class="pass">PASS &mdash; 70% training</td>
-              <td class="pass">PASS &mdash; 145%</td>
-            </tr>
-            <tr>
-              <td class="scenario-name">Market underperformance<br><span style="font-weight:300;font-size:.72rem;">Borrower below market rate</span></td>
-              <td class="mono">$2.18</td>
-              <td class="breach">BREACH &mdash; 81.8% capture</td>
-              <td class="pass">PASS &mdash; LTV unchanged</td>
-              <td class="pass">PASS</td>
-              <td class="pass">PASS</td>
-            </tr>
-            <tr>
-              <td class="scenario-name">Rate compression<br><span style="font-weight:300;font-size:.72rem;">No locked contracts</span></td>
-              <td class="mono">$1.64 (&minus;25%)</td>
-              <td class="warn">WATCH &mdash; efficiency still OK</td>
-              <td class="warn">WATCH &mdash; BB $35.9M, cushion $5.9M</td>
-              <td class="pass">PASS</td>
-              <td class="pass">PASS</td>
-            </tr>
-            <tr>
-              <td class="scenario-name">Workload migration breach<br><span style="font-weight:300;font-size:.72rem;">42% training, 2nd period</span></td>
-              <td class="mono">$1.80</td>
-              <td class="pass">PASS</td>
-              <td class="warn">TIGHTENS &mdash; blended util adjusts CV</td>
-              <td class="breach">BREACH &mdash; blended util in &sect;7.02</td>
-              <td class="pass">PASS</td>
-            </tr>
-            <tr>
-              <td class="scenario-name">Combined stress<br><span style="font-weight:300;font-size:.72rem;">Rate + workload + gen spread</span></td>
-              <td class="mono">$1.50</td>
-              <td class="pass">PASS &mdash; efficient in weak market</td>
-              <td class="breach">BREACH &mdash; LTV 82% (cap 35%)</td>
-              <td class="breach">BREACH &mdash; 35% training</td>
-              <td class="warn">EVENT &mdash; cap 28%&rarr;35%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="cs-note">
-        <strong>The key Profile B distinction: for a mixed-book operator, a falling CRI-H100 rate tightens both &sect;7.01 Market Capture and &sect;7.02 Collateral Coverage simultaneously &mdash; there is no locked-contract cushion.</strong> The Market Underperformance scenario is the clearest demonstration of &sect;7.01&rsquo;s purpose: CRI is flat, hardware value is flat, but the borrower is underpricing. &sect;7.01 fires; &sect;7.02 does not. Without &sect;7.01, this borrower delivers a clean borrowing base certificate while quietly losing market position. In the Combined Stress scenario, &sect;7.01 still passes (the borrower is efficiently capturing a depressed market) &mdash; the problem is hardware value and workload mix, not operational execution.
-      </div>
-    </div>
-
-    <!-- WORKOUT SECTION -->
     <div style="font-size:.800rem;color:var(--text-dim);line-height:1.82;border-left:2px solid var(--border-hi);padding-left:18px;margin-bottom:48px;">
-      The covenants above serve their primary function during the facility term. The named independent rate also matters at default: under UCC &sect;9-627, a collateral disposition is commercially reasonable only if conducted at the price current in a recognized market. A named rate, cited in the credit agreement and verifiable by any party, provides that reference without post-hoc reconstruction &mdash; and because CCIR&rsquo;s methodology is open and reproducible, an expert witness can independently replicate the rate calculation. Under UCC &sect;9-626, a commercially unreasonable disposition may eliminate the deficiency judgment right. The citation that supports covenant surveillance during the facility term is the same citation that makes the disposition defensible if it does not.
+      All thresholds and notice mechanics are illustrative. Counsel and lenders set all parameters. Additional covenant frameworks &mdash; including collateral coverage, generation spread, and borrowing base applications &mdash; are available on request.
     </div>
 
     <!-- ENGAGE -->
-    <div class="sec-label">Work With CCIR</div>
-    <div class="sec-rule"></div>
-
     <div class="engage">
-      <div class="engage-head">Referencing CRI rates in a GPU-backed facility?</div>
-      <div class="engage-sub">CCIR provides what the citation requires at each stage of the deal &mdash; from credit agreement drafting through final maturity. All threshold levels, advance rates, and structural terms are credit judgments set by counsel and lenders. CCIR publishes the rate and maintains the governance record that makes the citation defensible.</div>
-      <div class="engage-grid">
-        <div class="engage-item">
-          <div class="engage-item-head">At drafting</div>
-          <div class="engage-item-body">CRI benchmark rate definition language, methodology version references, and fallback provisions for benchmark unavailability. Counsel is responsible for all operative agreement language.</div>
-        </div>
-        <div class="engage-item">
-          <div class="engage-item-head">At closing</div>
-          <div class="engage-item-body">Published methodology documentation and IOSCO compliance statement for inclusion in due diligence packages and rating agency review. Both are reproducible by any party with access to the underlying sources.</div>
-        </div>
-        <div class="engage-item">
-          <div class="engage-item-head">During the facility term</div>
-          <div class="engage-item-body">Calculation Date packages showing CRI-H100, CRI-B200, and Generation Spread in a format designed for compliance certificate review, borrowing base certification, and Contract Renewal Risk surveillance on each Calculation Date. Historical rate data available for cap rate calibration analysis.</div>
-        </div>
-      </div>
-      <div class="engage-cta">
-        <div class="engage-email"><a href="mailto:research@ccir.io">research@ccir.io</a></div>
-        <div class="engage-disclaimer">CCIR holds no financial interest in the GPU compute market it measures. Written responses to methodology inquiries do not affect benchmark rate methodology or published rates. This page does not constitute legal or financial advice.</div>
-      </div>
+      <div class="engage-head">Referencing CRI rates in a facility?</div>
+      <div class="engage-body">CCIR provides the rate definition language, methodology documentation, and Calculation Date packages that support the citation. All threshold levels and structural terms are credit judgments set by counsel and lenders.</div>
+      <div class="engage-email"><a href="mailto:research@ccir.io">research@ccir.io</a></div>
+      <div class="engage-disclaimer">CCIR holds no financial interest in the GPU compute market it measures. This page does not constitute legal or financial advice.</div>
     </div>
 
   </div>
 </main>
 
-<!-- GOVERNANCE BAR -->
+<!-- GOV BAR -->
 <div class="gov-bar">
   <div class="gov-inner">
     <div class="gov-item">
@@ -545,18 +258,21 @@
     <div class="fl">
       &copy; 2026 Compute Credit Index Research LLC
       &nbsp;&middot;&nbsp;
-      <a href="index.html">Reference Rates</a>
-      &nbsp;&middot;&nbsp;
       <a href="https://github.com/ccir-index" target="_blank" rel="noopener">GitHub</a>
       &nbsp;&middot;&nbsp;
       <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_0_0.pdf" target="_blank" rel="noopener">Methodology</a>
       &nbsp;&middot;&nbsp;
       <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Change_Management_Policy_v1_0_0.pdf" target="_blank" rel="noopener">Change Management</a>
       &nbsp;&middot;&nbsp;
-      <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Complaints_Procedure_v1_0.pdf" target="_blank" rel="noopener">Complaints</a>
-      &nbsp;&middot;&nbsp;
       <a href="changelog.html">Changelog</a>
       &nbsp;&middot;&nbsp;
       <a href="contact.html">Contact</a>
       &nbsp;&middot;&nbsp;
-      <a href="/cdn-cgi/l/email-protection#d8aabdabbd
+      research@ccir.io
+    </div>
+    <div class="fr">No financial interest in the market we measure.</div>
+  </div>
+</footer>
+
+</body>
+</html>

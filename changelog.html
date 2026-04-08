@@ -170,8 +170,6 @@
     <span class="nav-sep">/</span>
     <a href="services.html" class="nav-link">Reference Rate Applications</a>
     <span class="nav-sep">/</span>
-    <a href="index.html#chip-selector" class="nav-link">Reference Rates</a>
-    <span class="nav-sep">/</span>
     <a href="changelog.html" class="nav-link active">Changelog</a>
     <span class="nav-sep">/</span>
     <a href="contact.html" class="nav-link">Contact</a>
@@ -221,18 +219,15 @@
           <div class="entry-badge badge-initial">Initial Publication</div>
         </div>
         <div class="entry-body">
-          <div class="entry-title">CRI v1.0.0 — Initial Publication</div>
-          <div class="entry-desc">First publication of the CRI index family under Methodology v1.0.0. Five reference rate indices and six cluster indices across two tiers. Full governance stack published alongside rate data.</div>
+          <div class="entry-title">CRI v1.0.0 &mdash; Initial Publication</div>
+          <div class="entry-desc">First publication of the CRI index family under Methodology v1.0.0. Five published CRI-8G reference rates &mdash; the benchmark rate for 8-GPU InfiniBand node on-demand compute. Full governance stack published alongside rate data.</div>
           <ul class="entry-items">
-            <li><strong>Reference rate indices:</strong> CRI-H100, CRI-A100, CRI-H200, CRI-L40S, CRI-B200</li>
-            <li><strong>Cluster indices (MM):</strong> CRI-H100-CLS-MM, CRI-A100-CLS-MM, CRI-B200-CLS-MM</li>
-            <li><strong>Cluster indices (ENT):</strong> CRI-H100-CLS-ENT, CRI-H200-CLS-ENT, CRI-B200-CLS-ENT</li>
-            <li><strong>Primary rate:</strong> seller_ask_noninterruptible — noninterruptible, on-demand access to compute capacity</li>
-            <li><strong>On-demand sources:</strong> RunPod, Lambda Labs, TensorDock, Nebius, Verda (1G-executable); Vast.ai (interruptible); Shadeform (supplementary &mdash; surveillance only); Hyperstack, Thunder, Scaleway (PCIe / cluster &mdash; Bronze only); Crusoe (L40S on-demand; H100/H200 cluster)</li>
-            <li><strong>Cluster sources (MM):</strong> RunPod Cluster, Lambda Cluster, Vultr, Voltage Park, Hyperstack, Crusoe</li>
-            <li><strong>Cluster sources (ENT):</strong> CoreWeave</li>
-            <li><strong>Computation:</strong> Flat median (percentile_approx 0.5) across all Silver-eligible observations in trailing 7-day window</li>
-            <li><strong>Pipeline:</strong> Azure Databricks, Delta Lake medallion architecture, nightly audit_pipeline + weekly audit_sources</li>
+            <li><strong>Published rates:</strong> CRI-H100, CRI-A100, CRI-H200, CRI-L40S, CRI-B200 &mdash; 8-GPU InfiniBand node on-demand rate per GPU per hour</li>
+            <li><strong>Publication threshold:</strong> 4 sources minimum per model. Below 4, rate computed but not published.</li>
+            <li><strong>Sources:</strong> RunPod Cluster, Lambda Cluster, Hyperstack, Vultr, Crusoe, Voltage Park, Genesis Cloud, Together AI</li>
+            <li><strong>Surveillance only:</strong> Vast.ai (interruptible), Shadeform (aggregator), Thunder (PCIe), Scaleway (PCIe), CoreWeave (single-source enterprise)</li>
+            <li><strong>Computation:</strong> Flat median across all eligible observations in trailing 7-day window. Daily source dedup (one observation per source per model per day).</li>
+            <li><strong>Pipeline:</strong> Azure Databricks, Delta Lake medallion architecture, config-driven engines, nightly audit</li>
           </ul>
           <div class="entry-docs">
             <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_0_0.pdf" target="_blank" rel="noopener" class="entry-doc-link">Methodology v1.0.0</a>
@@ -242,21 +237,6 @@
             <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Complaints_Procedure_v1_0.pdf" target="_blank" rel="noopener" class="entry-doc-link">Complaints Procedure v1.0</a>
             <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Benchmark_Design_Rationale_v1_0_0.pdf" target="_blank" rel="noopener" class="entry-doc-link">Design Rationale v1.0.0</a>
           </div>
-        </div>
-      </div>
-
-      <!-- Pending entries placeholder -->
-      <div class="timeline-connector"></div>
-
-      <div class="entry pending">
-        <div class="entry-meta">
-          <div class="entry-date">Pending</div>
-          <div class="entry-version">&mdash;</div>
-          <div class="entry-badge badge-patch">Patch</div>
-        </div>
-        <div class="entry-body">
-          <div class="entry-title">Future patch changes will appear here</div>
-          <div class="entry-desc">Model string corrections, collection logic fixes, and new GPU model variants added to existing indices are classified as Patch changes. Each will be logged here with a 5 business day advance notice before taking effect.</div>
         </div>
       </div>
 

@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CCIR &mdash; The Reference Standard for GPU Collateral</title>
-  <meta name="description" content="The independent GPU compute reference rate for credit agreements and structured finance. IOSCO-aligned. No financial interest in the market we measure." />
-  <meta property="og:title" content="CCIR &mdash; The Reference Standard for GPU Collateral" />
+  <title>CCIR &mdash; The Reference Standard for GPU-Backed Credit</title>
+  <meta name="description" content="The independent GPU compute reference rate for credit agreements and structured finance. Indicative market rates for GPU compute as deployed. IOSCO-aligned. Open methodology." />
+  <meta property="og:title" content="CCIR &mdash; The Reference Standard for GPU-Backed Credit" />
   <meta property="og:description" content="Independent GPU compute reference rates for borrowing bases, covenants, and collateral monitoring. Open methodology. Daily publication. Built for citation." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ccir.io/" />
   <meta property="og:image" content="https://ccir.io/favicon-192x192.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="CCIR &mdash; The Reference Standard for GPU Collateral" />
+  <meta name="twitter:title" content="CCIR &mdash; The Reference Standard for GPU-Backed Credit" />
   <meta name="twitter:description" content="Independent GPU compute reference rates for borrowing bases, covenants, and collateral monitoring. IOSCO-aligned." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,21 +48,25 @@
     .wrap { max-width: 860px; margin: 0 auto; padding: 0 36px; }
     a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
 
-    /* ─── HEADER ──────────────────────────────────────────────────────────── */
+    /* ─── HEADER ─── */
     header { background: var(--bg-white); border-bottom: 1px solid var(--border); }
     .header-inner { max-width: 860px; margin: 0 auto; padding: 48px 36px 44px; }
     .header-top { display: flex; align-items: flex-start; gap: 22px; margin-bottom: 32px; }
     .wordmark { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .26em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 8px; }
+    h1 { font-family: var(--serif); font-size: 2.0rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.015em; line-height: 1.18; }
+    .hero-rule { width: 44px; height: 2px; background: var(--accent); margin: 26px 0 22px; }
+    .hero-stmt { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 640px; }
+    .hero-stmt strong { font-weight: 500; color: var(--text-hi); }
+
+    /* ─── NAV ─── */
     .nav-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 14px 0; }
     .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: center; gap: 28px; }
     .nav-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; text-decoration: none; }
     .nav-link:hover { color: #f0ece6; text-decoration: none; }
     .nav-link.active { color: var(--accent-mid); }
     .nav-sep { color: #3a3530; font-size: .70rem; }
-    h1 { font-family: var(--serif); font-size: 2.0rem; font-weight: 500; color: var(--text-hi); letter-spacing: -.015em; line-height: 1.18; }
-    .hero-rule { width: 44px; height: 2px; background: var(--accent); margin: 26px 0 22px; }
-    .hero-stmt { font-size: .96rem; font-weight: 300; color: var(--text); line-height: 1.82; max-width: 640px; }
-    .hero-stmt strong { font-weight: 500; color: var(--text-hi); }
+
+    /* ─── TICKER ─── */
     .ticker-wrap { background: var(--bg); padding: 28px 0; }
     .ticker-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; position: relative; height: 42px; display: flex; align-items: center; }
     .ticker-fixed-label { display: flex; align-items: center; gap: 8px; padding: 0 18px 0 20px; border-right: 1px solid var(--border); flex-shrink: 0; height: 100%; }
@@ -79,159 +83,79 @@
     .t-unit { font-family: var(--mono); font-size: .58rem; color: var(--text-dim); margin-left: 5px; letter-spacing: .04em; }
     .t-sep { color: var(--border-hi); font-family: var(--mono); font-size: .75rem; padding-right: 40px; }
     .ticker-date { font-family: var(--mono); font-size: .58rem; color: var(--text-dim); letter-spacing: .06em; padding: 0 18px; border-left: 1px solid var(--border); flex-shrink: 0; height: 100%; display: flex; align-items: center; white-space: nowrap; }
-    .hero-rate-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 0 18px; border-left: 1px solid var(--border); flex-shrink: 0; height: 100%; display: flex; align-items: center; white-space: nowrap; }
-    .hero-rate-link:hover { text-decoration: underline; }
 
-    /* ─── INDEPENDENCE STRIP ──────────────────────────────────────────────── */
+    /* ─── RATE TABLE ─── */
+    .rate-section { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 40px 0; }
+    .rate-table { max-width: 860px; margin: 0 auto; padding: 0 36px; }
+    .rate-table-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
+    .rate-table-title { font-family: var(--serif); font-size: 1.30rem; font-weight: 500; color: var(--text-hi); }
+    .rate-table-date { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); letter-spacing: .08em; }
+    .rate-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 2px; overflow: hidden; box-shadow: var(--sh-sm); }
+    .rate-grid-head { background: var(--ink); font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #a09890; padding: 12px 16px; text-align: center; }
+    .rate-grid-head:first-child { text-align: left; }
+    .rate-grid-cell { background: var(--bg-white); padding: 14px 16px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+    .rate-grid-cell.model { justify-content: flex-start; font-family: var(--mono); font-size: .72rem; font-weight: 500; color: var(--text-hi); letter-spacing: .04em; }
+    .rate-grid-cell.rate-val { font-family: var(--mono); font-size: .88rem; font-weight: 500; color: var(--text-hi); justify-content: center; }
+    .rate-grid-cell.rate-val.empty { color: var(--text-dim); font-size: .72rem; font-weight: 400; }
+    .rate-grid-cell.conf { font-family: var(--mono); font-size: .58rem; letter-spacing: .06em; justify-content: center; }
+    .rate-grid-cell.sources { font-family: var(--mono); font-size: .68rem; color: var(--text-dim); justify-content: center; }
+    .conf-high { color: var(--green); } .conf-medium { color: var(--amber); } .conf-low { color: var(--text-dim); }
+    .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-right: 6px; }
+    .dot-high { background: var(--green); } .dot-medium { background: var(--amber); } .dot-low { background: var(--border-hi); }
+    .rate-unpub { font-family: var(--mono); font-size: .56rem; color: var(--text-dim); }
+    .rate-footer { margin-top: 14px; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+    .rate-footer-text { font-size: .78rem; color: var(--text-dim); }
+    .rate-footer-link { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+    @media (max-width: 640px) {
+      .rate-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+      .rate-grid-cell { padding: 10px 10px; }
+      .rate-grid-cell.rate-val { font-size: .78rem; }
+    }
+
+    /* ─── INDEPENDENCE STRIP ─── */
     .independence-strip { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 22px 0; }
     .independence-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
     .ind-label { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: #6a5e54; flex-shrink: 0; }
     .ind-stmt { font-size: .875rem; font-weight: 300; color: #c8c2bb; line-height: 1.7; }
     .ind-stmt strong { font-weight: 500; color: #f0ece6; }
 
-    /* ─── USE CASE PILLARS ────────────────────────────────────────────────── */
-    .pillars { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 36px 0; }
-    .pillar-grid { max-width: 860px; margin: 0 auto; padding: 0 36px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
-    .pillar { padding: 0 28px 0 0; border-right: 1px solid var(--border); margin-right: 28px; }
+    /* ─── PILLARS ─── */
+    .pillars { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 40px 0; }
+    .pillar-grid { max-width: 860px; margin: 0 auto; padding: 0 36px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; }
+    .pillar { padding: 0 22px 0 0; border-right: 1px solid var(--border); margin-right: 22px; }
     .pillar:last-child { border-right: none; margin-right: 0; padding-right: 0; }
-    .pillar-icon { font-family: var(--mono); font-size: .59rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-    .pillar-head { font-family: var(--serif); font-size: 1.10rem; font-weight: 500; color: var(--text-hi); line-height: 1.3; margin-bottom: 8px; }
-    .pillar-body { font-size: .820rem; color: var(--text-dim); line-height: 1.72; }
-    @media (max-width: 640px) {
-      .pillar-grid { grid-template-columns: 1fr; }
-      .pillar { border-right: none; border-bottom: 1px solid var(--border); margin: 0 0 24px; padding: 0 0 24px; }
-      .pillar:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
-      /* Nav */
-      .nav-inner { gap: 0; flex-wrap: wrap; padding: 0 20px; row-gap: 0; }
-      .nav-link { font-size: .54rem; padding: 10px 7px; letter-spacing: .06em; white-space: nowrap; }
-      .nav-sep { display: none; }
-
-      /* Header */
-      .header-inner { padding: 32px 20px 28px; }
-      h1 { font-size: 1.65rem; }
-
-      /* Ticker */
-      .ticker-wrap { padding: 16px 0; }
-      .ticker-date { display: none; }
-      .hero-rate-link { display: none; }
-      .ticker-fixed-label { padding: 0 12px 0 14px; }
-
-      /* Revenue stack — legend below chart */
-      .stack-visual { padding: 20px 16px 18px; }
-      .stack-bar-label { width: 62px; font-size: .52rem; }
-      .stack-bar-value { width: 58px; font-size: .75rem; }
-      .stack-spread-spacer { width: 62px; }
-      .stack-value-pad { width: 58px; }
-      .stack-legend { flex-direction: column; gap: 10px; }
-      .legend-item { max-width: 100%; }
-
-      /* Footer */
-      .footer-in { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .fr { text-align: left; }
-      .fl { font-size: .75rem; line-height: 2.0; }
+    .pillar-icon { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .pillar-head { font-family: var(--serif); font-size: 1.02rem; font-weight: 500; color: var(--text-hi); line-height: 1.3; margin-bottom: 8px; }
+    .pillar-body { font-size: .790rem; color: var(--text-dim); line-height: 1.72; }
+    @media (max-width: 720px) {
+      .pillar-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .pillar { border-right: none; margin-right: 0; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+      .pillar:nth-child(2) { border-right: none; }
+      .pillar:last-child { border-bottom: none; padding-bottom: 0; }
     }
+    @media (max-width: 480px) { .pillar-grid { grid-template-columns: 1fr; } }
 
-    /* ─── MAIN ────────────────────────────────────────────────────────────── */
-    main { padding: 48px 0 80px; }
-    .sec-label { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-    .sec-rule { width: 32px; height: 1px; background: var(--accent); margin: 12px 0 24px; }
+    /* ─── EXPLAINER CARDS ─── */
+    .explainer { padding: 52px 0 56px; }
+    .explainer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+    @media (max-width: 640px) { .explainer-grid { grid-template-columns: 1fr; } }
+    .explainer-title { font-family: var(--serif); font-size: 1.40rem; font-weight: 500; color: var(--text-hi); line-height: 1.25; margin-bottom: 8px; }
+    .explainer-sub { font-size: .86rem; color: var(--text-dim); line-height: 1.72; max-width: 640px; }
+    .ex-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 2px; box-shadow: var(--sh-sm); overflow: hidden; }
+    .ex-card-top { padding: 26px 24px 22px; }
+    .ex-card-label { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .ex-card-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; color: var(--text-hi); line-height: 1.3; margin-bottom: 12px; }
+    .ex-card-body { font-size: .82rem; color: var(--text-dim); line-height: 1.72; }
+    .ex-card-body strong { font-weight: 500; color: var(--text); }
+    .ex-card-bottom { padding: 14px 24px; border-top: 1px solid var(--border); background: var(--bg); }
+    .ex-card-meta { font-family: var(--mono); font-size: .56rem; color: var(--text-dim); line-height: 1.9; }
+    .analogy-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 3px solid var(--green); border-radius: 2px; box-shadow: var(--sh-sm); overflow: hidden; }
+    .analogy-card .ex-card-label { color: var(--green); }
 
-    /* ─── CHIP SELECTOR ───────────────────────────────────────────────────── */
-    .chip-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 32px; }
-    .chip-btn { font-family: var(--mono); font-size: .62rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: var(--text-dim); background: var(--bg-white); border: 1px solid var(--border); border-radius: 2px; padding: 7px 16px; cursor: pointer; transition: color .12s, border-color .12s, background .12s; line-height: 1; }
-    .chip-btn:hover { color: var(--accent); border-color: var(--accent-mid); background: var(--accent-lo); }
-    .chip-btn.active { color: var(--bg-white); background: var(--accent); border-color: var(--accent); }
-    .chip-btn .chip-sub { display: block; font-size: .53rem; letter-spacing: .06em; opacity: .7; margin-top: 3px; font-weight: 400; }
-
-    /* ─── REVENUE STACK ───────────────────────────────────────────────────── */
-    .stack-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; flex-wrap: wrap; gap: 8px; }
-    .stack-title { font-family: var(--serif); font-size: 1.22rem; font-weight: 500; color: var(--text-hi); }
-    .stack-subtitle { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); letter-spacing: .08em; }
-
-    .stack-visual { background: var(--bg-white); border: 1px solid var(--border); border-radius: 2px; padding: 28px 28px 24px; box-shadow: var(--sh-sm); margin-bottom: 14px; }
-
-    .stack-bar-wrap { display: flex; align-items: center; gap: 14px; }
-    .stack-bar-label { font-family: var(--mono); font-size: .57rem; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: var(--text-dim); width: 82px; flex-shrink: 0; text-align: right; }
-    .stack-bar-track { flex: 1; height: 30px; background: var(--surface-2); border-radius: 1px; overflow: hidden; }
-    .stack-bar-fill { height: 100%; border-radius: 1px; transition: width .7s cubic-bezier(.4,0,.2,1); }
-    .stack-bar-fill.spot { background: var(--accent); }
-    .stack-bar-fill.mm   { background: var(--border-hi); }
-    .stack-bar-fill.ent  { background: var(--amber); }
-    .stack-bar-value { font-family: var(--mono); font-size: .82rem; font-weight: 500; color: var(--text-hi); width: 74px; flex-shrink: 0; }
-
-    .stack-bar-wrap { position: relative; }
-    .stack-tooltip { display: none; position: absolute; top: -36px; left: 50%; transform: translateX(-50%); background: var(--ink); color: #c8c2bb; font-family: var(--mono); font-size: .56rem; letter-spacing: .04em; padding: 6px 12px; border-radius: 2px; white-space: nowrap; z-index: 10; pointer-events: none; box-shadow: var(--sh-md); }
-    .stack-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 4px solid transparent; border-top-color: var(--ink); }
-    .stack-bar-wrap:hover .stack-tooltip { display: block; }
-
-    .stack-spread-row { display: flex; align-items: stretch; gap: 14px; margin: 2px 0 2px; }
-    .stack-spread-spacer { width: 82px; flex-shrink: 0; }
-    .stack-spread-content { flex: 1; display: flex; align-items: center; gap: 10px; padding: 5px 0; }
-    .spread-vline { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; margin-left: 10px; }
-    .spread-text { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); line-height: 1.5; padding-left: 10px; }
-    .spread-text .sv { font-weight: 500; }
-    .spread-text.mm-c  .sv { color: var(--green); }
-    .spread-text.ent-c .sv { color: var(--amber); }
-    .stack-value-pad { width: 74px; flex-shrink: 0; }
-
-    .stack-legend { display: flex; gap: 18px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); flex-wrap: wrap; }
-    .legend-item { display: flex; align-items: flex-start; gap: 8px; font-size: .775rem; color: var(--text-dim); line-height: 1.55; max-width: 260px; }
-    .legend-dot { width: 8px; height: 8px; border-radius: 1px; flex-shrink: 0; margin-top: 4px; }
-    .legend-dot.spot { background: var(--accent); }
-    .legend-dot.mm   { background: var(--border-hi); }
-    .legend-dot.ent  { background: var(--amber); }
-
-    /* ─── DETAIL PANELS ───────────────────────────────────────────────────── */
-    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media (max-width: 700px) { .detail-grid { grid-template-columns: 1fr; } }
-
-    .dpanel { background: var(--bg-white); border: 1px solid var(--border); border-top: 2px solid var(--border-hi); border-radius: 2px; padding: 22px 22px 20px; box-shadow: var(--sh-sm); }
-    .dpanel.mm-panel  { border-top-color: var(--accent); }
-    .dpanel.ent-panel { border-top-color: var(--amber); }
-    .dpanel.lgd-panel { border-top-color: var(--green); background: var(--green-lo); }
-
-    .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; background: var(--accent); }
-    .dot.live { animation: pulse 2.5s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-    .dot.ent { background: var(--amber); }
-    .dot.lgd { background: var(--green); }
-
-    .dpanel-ticker { font-family: var(--mono); font-size: .62rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .dpanel.ent-panel .dpanel-ticker { color: var(--amber); }
-    .dpanel.lgd-panel .dpanel-ticker { color: var(--green); }
-
-    .dpanel-val { font-family: var(--mono); font-size: 2.1rem; font-weight: 400; letter-spacing: -.03em; line-height: 1; margin-bottom: 8px; color: var(--text-hi); }
-    .dpanel.mm-panel  .dpanel-val { color: var(--accent); }
-    .dpanel.ent-panel .dpanel-val { color: var(--amber); }
-    .dpanel.lgd-panel .dpanel-val { color: var(--green); }
-
-    .dpanel-chg { font-family: var(--mono); font-size: .70rem; font-weight: 500; margin-bottom: 10px; min-height: 1em; }
-    .chg-up { color: var(--green); } .chg-down { color: #A03020; } .chg-flat { color: var(--text-dim); }
-    .dpanel-desc { font-size: .800rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 14px; }
-    .dpanel-meta { font-family: var(--mono); font-size: .60rem; color: var(--text-dim); line-height: 1.75; border-top: 1px solid var(--border); padding-top: 11px; }
-    .dpanel-mver { display: block; font-size: .58rem; letter-spacing: .05em; margin-bottom: 2px; }
-
-    .primary-badge { font-family: var(--mono); font-size: .54rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--green); background: var(--green-lo); border: 1px solid var(--green-mid); border-radius: 2px; padding: 2px 7px; }
-
-    .lgd-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
-    .lgd-item-label { font-family: var(--mono); font-size: .56rem; letter-spacing: .10em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
-    .lgd-item-val { font-family: var(--mono); font-size: 1.6rem; font-weight: 400; letter-spacing: -.02em; line-height: 1; color: var(--green); }
-    .lgd-item-val.ent-v { color: var(--amber); }
-
-    /* ─── SPOT SINGLE (non-H100) ──────────────────────────────────────────── */
-    .spot-single { background: var(--bg-white); border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 2px; padding: 28px 28px 24px; box-shadow: var(--sh-sm); max-width: 420px; }
-    .spot-ticker { font-family: var(--mono); font-size: .62rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-    .spot-val { font-family: var(--mono); font-size: 2.7rem; font-weight: 400; color: var(--text-hi); letter-spacing: -.03em; line-height: 1; margin-bottom: 10px; }
-    .spot-chg { font-family: var(--mono); font-size: .72rem; font-weight: 500; margin-bottom: 12px; min-height: 1em; }
-    .spot-desc { font-size: .82rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 14px; }
-    .spot-meta { font-family: var(--mono); font-size: .62rem; color: var(--text-dim); line-height: 1.75; border-top: 1px solid var(--border); padding-top: 12px; }
-
-    /* ─── GENERATION SPREAD SECTION ──────────────────────────────────────── */
+    /* ─── GENERATION SPREAD ─── */
     .gen-spread-section { padding: 48px 0 52px; border-top: 1px solid var(--border); }
     .gen-spread-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; }
-    .gen-spread-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 10px; }
-    .gen-spread-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 500; color: var(--text-hi); }
+    .gen-spread-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 500; color: var(--text-hi); margin-bottom: 8px; }
     .gen-spread-sub { font-size: .80rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 28px; max-width: 580px; }
     .gen-spread-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 600px) { .gen-spread-grid { grid-template-columns: 1fr; } }
@@ -250,24 +174,7 @@
     .gen-card.secondary .gen-card-covenant { color: var(--text-dim); background: var(--surface-2); border-color: var(--border); }
     .gen-card-meta { font-family: var(--mono); font-size: .58rem; color: var(--text-dim); border-top: 1px solid var(--border); padding-top: 10px; margin-top: 12px; line-height: 1.7; }
 
-    /* ─── GOVERNANCE BAR ──────────────────────────────────────────────────── */
-    .gov-bar { background: var(--bg-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 0; margin-top: 60px; }
-    .gov-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; gap: 36px; flex-wrap: wrap; align-items: center; }
-    .gov-item { display: flex; align-items: center; gap: 10px; }
-    .gov-icon { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); background: var(--accent-lo); border: 1px solid var(--accent-mid); border-radius: 2px; padding: 3px 8px; flex-shrink: 0; }
-    .gov-text { font-size: .80rem; color: var(--text-dim); line-height: 1.5; }
-    .gov-text strong { font-weight: 500; color: var(--text); }
-
-    /* ─── FOOTER ──────────────────────────────────────────────────────────── */
-    footer { background: var(--bg-white); border-top: 1px solid var(--border); padding: 32px 0 36px; }
-    .footer-in { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .fl { font-size: .80rem; color: var(--text-dim); }
-    .fl a { color: var(--text-dim); } .fl a:hover { color: var(--accent); }
-    .fr { font-family: var(--mono); font-size: .62rem; color: var(--text-dim); text-align: right; line-height: 2.0; }
-
-    .loading-state { padding: 40px 0; font-family: var(--mono); font-size: .72rem; color: var(--text-dim); opacity: .5; }
-
-    /* ─── WHY CCIR / MARKET GAP ──────────────────────────────────────────── */
+    /* ─── GAP SECTION ─── */
     .gap-section { background: var(--ink); border-bottom: 1px solid #2a2520; padding: 52px 0; }
     .gap-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; }
     .gap-label { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: #6a5e54; margin-bottom: 12px; }
@@ -278,29 +185,37 @@
     .gap-card-num { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .22em; color: #6a5e54; margin-bottom: 8px; }
     .gap-card-head { font-size: .875rem; font-weight: 500; color: #f0ece6; line-height: 1.4; margin-bottom: 8px; }
     .gap-card-body { font-size: .800rem; font-weight: 300; color: #8a827a; line-height: 1.72; }
-    .gap-cta { display: flex; align-items: baseline; gap: 20px; padding-top: 28px; border-top: 1px solid #2a2520; flex-wrap: wrap; }
-    .gap-cta-link { font-family: var(--mono); font-size: .70rem; font-weight: 500; letter-spacing: .08em; color: var(--accent-mid); text-decoration: none; white-space: nowrap; }
-    .gap-cta-link:hover { color: #f0ece6; text-decoration: none; }
-    .gap-cta-sub { font-size: .800rem; font-weight: 300; color: #6a5e54; line-height: 1.6; }
 
-    /* ─── APPLICATION CARDS ──────────────────────────────────────────────── */
-    .cov-primary-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-    .cov-secondary-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
-    @media (max-width: 680px) { .cov-primary-row, .cov-secondary-row { grid-template-columns: 1fr; } }
-    .cov-sublabel { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); margin: 20px 0 12px; }
-    .app-card { background: var(--bg-white); border: 1px solid var(--border); border-top: 2px solid var(--border-hi); border-radius: 2px; padding: 22px 22px 18px; box-shadow: var(--sh-sm); display: flex; flex-direction: column; }
-    .app-card.hero { border-top: 3px solid var(--accent); }
-    .app-card.primary { border-top-color: var(--accent); }
-    .app-num { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .18em; color: var(--accent-mid); margin-bottom: 8px; }
-    .app-card.hero .app-num { color: var(--accent); }
-    .app-head { font-size: .925rem; font-weight: 500; color: var(--text-hi); margin-bottom: 8px; line-height: 1.3; }
-    .app-card.hero .app-head { font-size: 1.0rem; }
-    .app-body { font-size: .790rem; color: var(--text-dim); line-height: 1.68; flex: 1; margin-bottom: 14px; }
-    .app-rate { font-family: var(--mono); font-size: .57rem; font-weight: 500; letter-spacing: .06em; color: var(--accent); background: var(--accent-lo); border: 1px solid var(--accent-mid); border-radius: 2px; padding: 3px 8px; display: inline-block; margin-top: auto; }
-    .cov-disposition { border-left: 2px solid var(--border-hi); padding: 12px 0 12px 16px; margin-bottom: 32px; display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .cov-disposition-text { font-size: .800rem; color: var(--text-dim); line-height: 1.65; max-width: 560px; }
-    .cov-disposition-link { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); white-space: nowrap; text-decoration: none; }
-    .cov-disposition-link:hover { text-decoration: underline; }
+    /* ─── GOV BAR ─── */
+    .gov-bar { background: var(--bg-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 0; }
+    .gov-inner { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; gap: 36px; flex-wrap: wrap; align-items: center; }
+    .gov-item { display: flex; align-items: center; gap: 10px; }
+    .gov-icon { font-family: var(--mono); font-size: .56rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); background: var(--accent-lo); border: 1px solid var(--accent-mid); border-radius: 2px; padding: 3px 8px; flex-shrink: 0; }
+    .gov-text { font-size: .80rem; color: var(--text-dim); line-height: 1.5; }
+    .gov-text strong { font-weight: 500; color: var(--text); }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--bg-white); border-top: 1px solid var(--border); padding: 32px 0 36px; }
+    .footer-in { max-width: 860px; margin: 0 auto; padding: 0 36px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .fl { font-size: .80rem; color: var(--text-dim); }
+    .fl a { color: var(--text-dim); } .fl a:hover { color: var(--accent); }
+    .fr { font-family: var(--mono); font-size: .62rem; color: var(--text-dim); text-align: right; line-height: 2.0; }
+
+    .sec-label { font-family: var(--mono); font-size: .60rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .sec-rule { width: 32px; height: 1px; background: var(--accent); margin: 12px 0 24px; }
+
+    @media (max-width: 640px) {
+      .header-inner { padding: 32px 20px 28px; }
+      h1 { font-size: 1.65rem; }
+      .nav-inner { gap: 0; flex-wrap: wrap; padding: 0 20px; }
+      .nav-link { font-size: .54rem; padding: 10px 7px; letter-spacing: .06em; }
+      .nav-sep { display: none; }
+      .ticker-wrap { padding: 16px 0; }
+      .ticker-date { display: none; }
+      .footer-in { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .fr { text-align: left; }
+      .fl { font-size: .75rem; line-height: 2.0; }
+    }
   </style>
 </head>
 <body>
@@ -326,157 +241,158 @@
     <span class="nav-sep">/</span>
     <a href="services.html" class="nav-link">Reference Rate Applications</a>
     <span class="nav-sep">/</span>
-    <a href="index.html#chip-selector" class="nav-link">Reference Rates</a>
-    <span class="nav-sep">/</span>
     <a href="changelog.html" class="nav-link">Changelog</a>
     <span class="nav-sep">/</span>
     <a href="contact.html" class="nav-link">Contact</a>
   </div>
 </div>
+
+<!-- TICKER -->
 <div class="ticker-wrap">
 <div class="ticker-strip">
   <div class="ticker-fixed-label">
     <div class="ticker-live-dot"></div>
-    <span class="ticker-fixed-text">CCIR Rates</span>
+    <span class="ticker-fixed-text">CRI Rates</span>
   </div>
   <div class="ticker-scroll-wrap">
     <div class="ticker-track" id="ticker-track">
-      <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-      <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
       <span class="t-item"><span class="t-sym">CRI-H100</span><span class="t-val" id="t-h100">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
       <span class="t-item"><span class="t-sym">CRI-A100</span><span class="t-val" id="t-a100">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-      <span class="t-item"><span class="t-sym">CRI-L40S</span><span class="t-val" id="t-l40s">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-      <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-      <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <!-- duplicate for seamless scroll -->
       <span class="t-item"><span class="t-sym">CRI-H100</span><span class="t-val" id="t-h100-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
       <span class="t-item"><span class="t-sym">CRI-A100</span><span class="t-val" id="t-a100-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
-      <span class="t-item"><span class="t-sym">CRI-L40S</span><span class="t-val" id="t-l40s-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-H200</span><span class="t-val" id="t-h200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
+      <span class="t-item"><span class="t-sym">CRI-B200</span><span class="t-val" id="t-b200-2">&mdash;</span><span class="t-unit">/GPU&middot;hr</span></span><span class="t-sep">|</span>
     </div>
   </div>
   <span class="ticker-date" id="ticker-date">loading&hellip;</span>
-  <a href="#chip-selector" class="hero-rate-link">See all rates &darr;</a>
 </div>
 </div>
 
+<!-- RATE TABLE -->
+<div class="rate-section">
+  <div class="rate-table">
+    <div class="rate-table-header">
+      <div class="rate-table-title">Published Rates</div>
+      <div class="rate-table-date" id="rate-date">Loading...</div>
+    </div>
+    <div class="rate-grid" id="rate-grid">
+      <div class="rate-grid-head">Rate</div>
+      <div class="rate-grid-head">$/GPU/hr</div>
+      <div class="rate-grid-head">Sources</div>
+      <div class="rate-grid-head">Confidence</div>
+    </div>
+    <div class="rate-footer">
+      <div class="rate-footer-text">On-demand rates for 8-GPU InfiniBand nodes. Flat median, 7-day trailing window. <a href="https://github.com/ccir-index/ccir-methodology" target="_blank" rel="noopener">Methodology</a></div>
+      <a href="https://github.com/ccir-index/ccir-data" target="_blank" rel="noopener" class="rate-footer-link">Download CSV data</a>
+    </div>
+  </div>
+</div>
 
+<!-- INDEPENDENCE STRIP -->
+<div class="independence-strip">
+  <div class="independence-inner">
+    <div class="ind-label">Independence</div>
+    <div class="ind-stmt"><strong>No marketplace. No trading desk. No swap book.</strong> CCIR has no financial interest in the market it measures &mdash; the structural independence that post-LIBOR governance requires for credit document citation.</div>
+  </div>
+</div>
 
-<!-- WHY CCIR WORKS -->
+<!-- PILLARS -->
 <div class="pillars">
   <div class="pillar-grid">
     <div class="pillar">
-      <div class="pillar-icon">Independent Publisher</div>
-      <div class="pillar-head">CCIR Has No Financial Interest in the Market It Measures</div>
-      <p class="pillar-body">No marketplace position. No trading operations. No financial stake in GPU compute pricing. The independence that makes a reference rate citable by both parties in a credit agreement.</p>
+      <div class="pillar-icon">Indicative</div>
+      <div class="pillar-head">Observable Market Rates, Not Executed Prices</div>
+      <p class="pillar-body">CRI rates reflect posted on-demand asks from named sources &mdash; what the market offers, not what traded. The same distinction AVITAS draws between appraised values and transaction prices.</p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">Named, Observable Rate</div>
-      <div class="pillar-head">A Consistent Reference Rate Both Parties Can Cite</div>
-      <p class="pillar-body">CRI-H100 and the full CCIR benchmark rate family give credit agreements a named, independently verifiable market anchor. Published daily. Open methodology. Any counterparty can reproduce the calculation. <a href="services.html">See illustrative applications &rarr;</a></p>
+      <div class="pillar-icon">Open Methodology</div>
+      <div class="pillar-head">Published, Reproducible, Auditable</div>
+      <p class="pillar-body">Full methodology, source list, and computation logic published openly. Any counterparty can reproduce any published rate. <a href="https://github.com/ccir-index/ccir-methodology" target="_blank" rel="noopener">Read the methodology</a></p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">Counsel-Controlled Thresholds</div>
-      <div class="pillar-head">CCIR Provides the Benchmark. Lenders and Counsel Determine How It Is Used.</div>
-      <p class="pillar-body">CCIR provides rate definition language, methodology documentation, and Calculation Date packages. All threshold levels, advance rates, and structural terms are credit judgments set by counsel and lenders &mdash; not CCIR. <a href="mailto:research@ccir.io">Engage CCIR &rarr;</a></p>
+      <div class="pillar-icon">Audit Trail</div>
+      <div class="pillar-head">SHA-256 Hashed at Collection</div>
+      <p class="pillar-body">Every published rate traceable to the specific API response that generated it. Append-only Bronze layer. Delta Lake time travel. Hash-chained pipeline runs.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">IOSCO Aligned</div>
+      <div class="pillar-head">The Governance Standard Rating Agencies Require</div>
+      <p class="pillar-body">Voluntary alignment with all 19 IOSCO Principles for Financial Benchmarks. 17 compliant, 2 targeted. <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Governance_v1_0_0.pdf" target="_blank" rel="noopener">Governance statement</a></p>
     </div>
   </div>
 </div>
 
-<!-- RATES -->
-<main id="rates">
+<!-- EXPLAINER CARDS -->
+<div class="explainer">
   <div class="wrap">
-    <div class="sec-label">How CCIR Is Used in Facilities</div>
+    <div class="sec-label">What CRI Is</div>
     <div class="sec-rule"></div>
-
-    <!-- Primary cards -->
-    <div class="cov-primary-row">
-      <div class="app-card hero">
-        <div class="app-num">01</div>
-        <div class="app-head">Market Monitoring Covenants</div>
-        <div class="app-body">The lowest-friction path to citation. Add a market monitoring covenant referencing CRI-H100 to any facility — existing or new. If the rate crosses a threshold set by counsel and lenders, the trigger fires.</div>
-        <span class="app-rate">Rate: CRI-H100</span>
+    <div class="explainer-title">The benchmark rate for GPU compute in the configuration lenders underwrite.</div>
+    <p class="explainer-sub">Lenders finance 8-GPU InfiniBand clusters. CRI publishes the daily benchmark rate for that configuration &mdash; one rate per chip, built for credit practitioners.</p>
+    <div class="explainer-grid">
+      <div class="ex-card">
+        <div class="ex-card-top">
+          <div class="ex-card-label">The Rate</div>
+          <div class="ex-card-name">What the Collateral Earns</div>
+          <div class="ex-card-body">If you seized this collateral tomorrow and racked it identically to how the borrower runs it, what does the market pay? CRI is that number. <strong>The on-demand benchmark rate for an 8-GPU InfiniBand node</strong> &mdash; the unit GPU collateral is deployed in. One rate answers every covenant question: DSCR, collateral coverage, and borrowing base all derive from the same published reference.</div>
+        </div>
+        <div class="ex-card-bottom">
+          <div class="ex-card-meta">
+            8 named sources for H100 &middot; Flat median &middot; 7-day window<br>
+            All sources are 8-GPU HGX nodes with InfiniBand interconnect<br>
+            Named sources published daily in each CSV
+          </div>
+        </div>
       </div>
-      <div class="app-card primary">
-        <div class="app-num">02</div>
-        <div class="app-head">Borrowing Base</div>
-        <div class="app-body">Marks GPU collateral to the current on-demand market rather than book depreciation. CRI-H100 anchors the monthly borrowing base calculation; mixed-generation collateral pools reference the applicable CRI rate per tranche. Utilization factors and advance rates are set by counsel and lenders at closing.</div>
-        <span class="app-rate">Rate: CRI-H100</span>
+      <div class="analogy-card">
+        <div class="ex-card-top">
+          <div class="ex-card-label">The Analogy</div>
+          <div class="ex-card-name">AVITAS for GPU Compute</div>
+          <div class="ex-card-body">In aircraft finance, AVITAS publishes indicative base values &mdash; what the market would pay for an aircraft in a standard configuration, independent of any specific lease. EETCs contractually require AVITAS citations. Rating agencies mandate them. <strong>CRI occupies the same lane for GPU-backed credit:</strong> an independent indicative rate that gets written into Section 6 of the credit agreement, not a trading price that settles a derivative.</div>
+        </div>
+        <div class="ex-card-bottom">
+          <div class="ex-card-meta">
+            Indicative &ne; executable &middot; Appraisal input &ne; settlement rate<br>
+            CCIR publishes the rate &mdash; lenders and counsel determine the valuation
+          </div>
+        </div>
       </div>
-      <div class="app-card primary">
-        <div class="app-num">03</div>
-        <div class="app-head">Revenue Coverage</div>
-        <div class="app-body">Detects revenue quality deterioration before it shows in coverage ratios. Contracted revenue converging toward the CRI-H100 rate signals workload migration — without requiring the borrower to report it.</div>
-        <span class="app-rate">Rate: CRI-H100</span>
-      </div>
-    </div>
-
-    <!-- Secondary cards -->
-    <div class="cov-sublabel">Additional applications</div>
-    <div class="cov-secondary-row">
-      <div class="app-card">
-        <div class="app-num">04</div>
-        <div class="app-head">Generation Spread Analysis</div>
-        <div class="app-body">Observable proxy for H100 obsolescence risk. When B200 rates fall toward H100 levels, the spread compresses and the training premium justifying H100 collateral valuations erodes. Published daily alongside reference rates.</div>
-        <span class="app-rate">Rates: CRI-H100, CRI-B200</span>
-      </div>
-      <div class="app-card">
-        <div class="app-num">05</div>
-        <div class="app-head">Compliance Certificates</div>
-        <div class="app-body">CCIR provides Calculation Date rate packages showing CRI rates and Generation Spread in a format designed for agent review, borrowing base certification, and compliance certificate delivery.</div>
-        <span class="app-rate">Rates: CRI-H100, CRI-B200</span>
-      </div>
-    </div>
-
-    <!-- Disposition micro -->
-    <div class="cov-disposition">
-      <div class="cov-disposition-text">At disposition, lenders must demonstrate collateral was sold at a commercially reasonable market price. A named, independent rate cited in the agreement provides that reference without post-hoc reconstruction.</div>
-      <a href="services.html" class="cov-disposition-link">Workout &amp; Disposition &rarr;</a>
-    </div>
-
-    <div id="chip-selector" class="chip-nav">
-      <button class="chip-btn" data-chip="b200"     onclick="selectChip('b200')">CRI-B200<span class="chip-sub">NVIDIA B200 SXM</span></button>
-      <button class="chip-btn" data-chip="h200"     onclick="selectChip('h200')">CRI-H200<span class="chip-sub">NVIDIA H200 SXM</span></button>
-      <button class="chip-btn active" data-chip="h100" onclick="selectChip('h100')">CRI-H100<span class="chip-sub">NVIDIA H100 SXM</span></button>
-      <button class="chip-btn" data-chip="a100"     onclick="selectChip('a100')">CRI-A100<span class="chip-sub">NVIDIA A100 SXM</span></button>
-      <button class="chip-btn" data-chip="l40s"     onclick="selectChip('l40s')">CRI-L40S<span class="chip-sub">NVIDIA L40S</span></button>
-    </div>
-
-    <div id="rate-area">
-      <div class="loading-state">Loading&hellip;</div>
     </div>
   </div>
-</main>
+</div>
 
 <!-- GENERATION SPREAD -->
 <div class="gen-spread-section">
   <div class="gen-spread-inner">
     <div class="sec-label">Generation Spread</div>
     <div class="sec-rule"></div>
-    <div class="gen-spread-header">
-      <div class="gen-spread-title">Generation Spread — Live Signal</div>
-    </div>
-    <p class="gen-spread-sub">A wide spread reflects B200 access rates above H100 in the on-demand market. Spread compression &mdash; B200 rates falling toward H100 levels &mdash; reduces the incentive to choose H100 over next-generation hardware. The H100/A100 spread shows the same dynamic on a longer horizon: where H100 is headed as prior-generation capacity absorbs into the inference market.</p>
+    <div class="gen-spread-title">Generation Spread &mdash; Live Signal</div>
+    <p class="gen-spread-sub">A wide spread reflects next-gen access rates above current-gen in the on-demand market. Spread compression reduces the incentive to choose current-gen hardware. The H100/A100 spread shows the same dynamic on a longer horizon: where H100 is headed as prior-generation capacity absorbs into the inference market.</p>
     <div class="gen-spread-grid" id="gen-spread-grid">
       <div class="gen-card" id="gen-b200-card">
-        <div class="gen-card-label">CRI-B200 vs CRI-H100 &nbsp;·&nbsp; §7.04 Trigger</div>
+        <div class="gen-card-label">CRI-B200 vs CRI-H100</div>
         <div class="gen-card-spread" id="gen-b200-spread">&mdash;</div>
         <div class="gen-card-rates" id="gen-b200-rates">Loading&hellip;</div>
         <div class="gen-card-desc" id="gen-b200-desc"></div>
-        <div class="gen-card-covenant" id="gen-b200-covenant">Generation Spread &nbsp;·&nbsp; Live</div>
+        <div class="gen-card-covenant" id="gen-b200-covenant">Generation Spread &middot; Live</div>
         <div class="gen-card-meta" id="gen-b200-meta"></div>
       </div>
       <div class="gen-card secondary" id="gen-a100-card">
-        <div class="gen-card-label">CRI-H100 vs CRI-A100 &nbsp;·&nbsp; Commoditization Trajectory</div>
+        <div class="gen-card-label">CRI-H100 vs CRI-A100 &middot; Commoditization Trajectory</div>
         <div class="gen-card-spread" id="gen-a100-spread">&mdash;</div>
         <div class="gen-card-rates" id="gen-a100-rates">Loading&hellip;</div>
         <div class="gen-card-desc" id="gen-a100-desc"></div>
-        <div class="gen-card-covenant" id="gen-a100-covenant">Commoditization Signal &nbsp;·&nbsp; 18–24 mo horizon</div>
+        <div class="gen-card-covenant" id="gen-a100-covenant">Commoditization Signal &middot; 18&ndash;24 mo horizon</div>
         <div class="gen-card-meta" id="gen-a100-meta"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- WHY CCIR / MARKET GAP -->
+<!-- GAP SECTION -->
 <div class="gap-section">
   <div class="gap-inner">
     <div class="gap-label">Where Current Documentation Falls Short</div>
@@ -500,20 +416,18 @@
       <div class="gap-card">
         <div class="gap-card-num">04</div>
         <div class="gap-card-head">No defensible market price at disposition</div>
-        <p class="gap-card-body">At disposition, lenders must demonstrate that collateral was sold at a commercially reasonable market price. Without a named, independent reference rate cited in the agreement, that price must be reconstructed after the fact &mdash; introducing litigation risk and weakening recovery claims.</p>
+        <p class="gap-card-body">At disposition, lenders must demonstrate that collateral was sold at a commercially reasonable market price. Without a named, independent reference rate cited in the agreement, that price must be reconstructed after the fact &mdash; introducing litigation risk.</p>
       </div>
     </div>
     <p style="font-size:.875rem;font-weight:300;color:#8a827a;line-height:1.75;margin-bottom:32px;max-width:640px;">All four gaps stem from the absence of a consistent, observable market reference rate usable across underwriting, monitoring, and disposition.</p>
-    <div class="gap-cta">
-      <div>
-        <div style="font-family:var(--serif);font-size:1.15rem;font-weight:500;color:#f0ece6;margin-bottom:10px;line-height:1.35;">Illustrative applications of CRI rates in revenue coverage tests, market monitoring covenants, and borrowing base formulas &mdash; with scenario analysis available for download.</div>
-        <a href="services.html" style="display:inline-block;font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;background:var(--accent);color:#fff;padding:11px 24px;border-radius:2px;text-decoration:none;">See Reference Rate Applications &rarr;</a>
-      </div>
+    <div>
+      <div style="font-family:var(--serif);font-size:1.15rem;font-weight:500;color:#f0ece6;margin-bottom:14px;line-height:1.35;">Illustrative covenant language, scenario analysis, and borrowing base certificates available for download.</div>
+      <a href="services.html" style="display:inline-block;font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;background:var(--accent);color:#fff;padding:11px 24px;border-radius:2px;text-decoration:none;">Reference Rate Applications</a>
     </div>
   </div>
 </div>
 
-<!-- GOVERNANCE BAR -->
+<!-- GOV BAR -->
 <div class="gov-bar">
   <div class="gov-inner">
     <div class="gov-item">
@@ -537,7 +451,7 @@
 
 <div style="background:var(--bg-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0;">
   <div style="max-width:860px;margin:0 auto;padding:0 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-    <span style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--text-hi);letter-spacing:-.01em;">CCIR provides the benchmark. Lenders and counsel determine how it is used.</span>
+    <span style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--text-hi);letter-spacing:-.01em;">CCIR publishes the rate. Lenders and counsel determine the valuation.</span>
     <a href="contact.html" style="font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.10em;text-transform:uppercase;color:var(--accent);text-decoration:none;white-space:nowrap;">Engage CCIR &rarr;</a>
   </div>
 </div>
@@ -561,7 +475,7 @@
       &nbsp;&middot;&nbsp;
       <a href="contact.html">Contact</a>
       &nbsp;&middot;&nbsp;
-      <a href="mailto:research@ccir.io">research@ccir.io</a>
+      research@ccir.io
     </div>
     <div class="fr">No financial interest in the market we measure.</div>
   </div>
@@ -569,439 +483,189 @@
 
 <script>
 const RAW = 'https://raw.githubusercontent.com/ccir-index/ccir-data/main';
-
-const CHIPS = {
-  b200: {
-    ticker:'CRI-B200', gpuModel:'B200_SXM', label:'B200 SXM', primary:false,
-    csv:`${RAW}/cri-b200/CRI-B200-history.csv`,
-    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-b200/CRI-B200-history.csv',
-    desc:'Blackwell generation — frontier training and inference. B200/H100 spread tracks transition timing and cascade velocity into prior-generation collateral.',
-    clsMM:`${RAW}/cri-b200-cls-mm/CRI-B200-CLS-MM-history.csv`,
-    clsENT:`${RAW}/cri-b200-cls-ent/CRI-B200-CLS-ENT-history.csv`,
-  },
-  h200: {
-    ticker:'CRI-H200', gpuModel:'H200_SXM', label:'H200 SXM', primary:false,
-    csv:`${RAW}/cri-h200/CRI-H200-history.csv`,
-    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h200/CRI-H200-history.csv',
-    desc:'HBM3e generation — large-model training and memory-bound inference. 141 GB HBM3e. H200/H100 spread tracks migration velocity out of the current training tier.',
-    clsENT:`${RAW}/cri-h200-cls-ent/CRI-H200-CLS-ENT-history.csv`,
-  },
-  h100: {
-    ticker:'CRI-H100', gpuModel:'H100_SXM', label:'H100 SXM', primary:true,
-    csv:`${RAW}/cri-h100/CRI-H100-history.csv`,
-    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-h100/CRI-H100-history.csv',
-    desc:'Noninterruptible, on-demand access to compute capacity. Multi-source daily median.',
-    clsMM:`${RAW}/cri-h100-cls-mm/CRI-H100-CLS-MM-history.csv`,
-    clsENT:`${RAW}/cri-h100-cls-ent/CRI-H100-CLS-ENT-history.csv`,
-  },
-  a100: {
-    ticker:'CRI-A100', gpuModel:'A100_SXM', label:'A100 SXM', primary:false,
-    csv:`${RAW}/cri-a100/CRI-A100-history.csv`,
-    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-a100/CRI-A100-history.csv',
-    crossChip:'l40s',
-    descFn(ownVal, crossVal) {
-      if (crossVal === null) return 'Inference and batch workloads. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.';
-      const diff = ownVal - crossVal;
-      const pct  = Math.abs(diff / crossVal * 100).toFixed(1);
-      if (diff > crossVal * 0.05) {
-        return `Inference and batch workloads. A100 on-demand rate ${pct}% above CRI-L40S — prior-gen training silicon holding above purpose-built inference hardware. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.`;
-      } else if (diff < -(crossVal * 0.05)) {
-        return `Inference and batch workloads. A100 on-demand rate ${pct}% below CRI-L40S — inference demand pricing Ada Lovelace above prior-gen training silicon. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.`;
-      } else {
-        return `Inference and batch workloads. A100 and CRI-L40S at near parity (${pct}% spread) — pricing convergence between prior-gen training silicon and purpose-built inference hardware. H100/A100 spread measures the commoditization trajectory for current-gen training hardware.`;
-      }
-    },
-    clsMM:`${RAW}/cri-a100-cls-mm/CRI-A100-CLS-MM-history.csv`,
-  },
-  l40s: {
-    ticker:'CRI-L40S', gpuModel:'L40S', label:'L40S', primary:false,
-    csv:`${RAW}/cri-l40s/CRI-L40S-history.csv`,
-    github:'https://github.com/ccir-index/ccir-data/blob/main/cri-l40s/CRI-L40S-history.csv',
-    crossChip:'a100',
-    descFn(ownVal, crossVal) {
-      if (crossVal === null) return 'Inference-optimized — high-throughput serving at lower cost. Ada Lovelace.';
-      const diff = ownVal - crossVal;
-      const pct  = Math.abs(diff / crossVal * 100).toFixed(1);
-      if (diff > crossVal * 0.05) {
-        return `Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. On-demand rate ${pct}% above CRI-A100 — inference demand pricing purpose-built inference silicon above prior-gen training hardware.`;
-      } else if (diff < -(crossVal * 0.05)) {
-        return `Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. On-demand rate ${pct}% below CRI-A100 — inference silicon supply has expanded, compressing the premium against prior-gen training hardware.`;
-      } else {
-        return `Inference-optimized — high-throughput serving at lower cost. Ada Lovelace. On-demand rate near parity with CRI-A100 (${pct}% spread) — pricing convergence between purpose-built inference silicon and prior-gen training hardware.`;
-      }
-    },
-  },
-};
-
-// CLUSTER_HEADER col indices:
-// 0=as_of_date 1=methodology_version 2=gpu_model 3=cls_tier 4=cls_rate
-// 5=source_count 6=sources 7=bundle_note 8=interruptible_rate 9=t2i_spread
-// 10=cls_vs_secure_pct 11=cls_obs 12=cls_days 13=interruptible_source_count
-// 14=interruptible_obs 15=interruptible_confidence 16=confidence_flag 17=computed_at
+const MODELS = [
+  { key: 'a100', display: 'CRI-A100', file: 'CRI-A100-history.csv', dir: 'cri-a100', tickerId: 't-a100' },
+  { key: 'h100', display: 'CRI-H100', file: 'CRI-H100-history.csv', dir: 'cri-h100', tickerId: 't-h100' },
+  { key: 'h200', display: 'CRI-H200', file: 'CRI-H200-history.csv', dir: 'cri-h200', tickerId: 't-h200' },
+  { key: 'b200', display: 'CRI-B200', file: 'CRI-B200-history.csv', dir: 'cri-b200', tickerId: 't-b200' },
+];
 
 const cache = {};
 async function fetchCsv(url) {
   if (cache[url]) return cache[url];
   const r = await fetch(url);
-  if (!r.ok) throw new Error(`HTTP ${r.status}: ${url}`);
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
   const t = await r.text();
-  const lines = t.trim().split('\n').filter(l => l.trim());
-  cache[url] = lines;
-  return lines;
+  cache[url] = t.trim().split('\n').filter(l => l.trim());
+  return cache[url];
 }
 
 function fmtDate(iso) {
   const d = new Date(iso + 'T12:00:00');
-  d.setDate(d.getDate() + 1);
-  return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-function fmtChg(cur, prev) {
-  if (prev === null || isNaN(prev)) return '';
-  const diff = cur - prev;
-  const pct  = (diff / prev * 100);
-  const sign = diff >= 0 ? '+' : '';
-  const cls  = diff > 0.0001 ? 'chg-up' : diff < -0.0001 ? 'chg-down' : 'chg-flat';
-  const arrow = diff > 0.0001 ? '▲' : diff < -0.0001 ? '▼' : '—';
-  return `<span class="${cls}">${arrow} ${sign}$${Math.abs(diff).toFixed(4)} (${sign}${pct.toFixed(1)}%) vs prior day</span>`;
+function confDot(conf) {
+  if (!conf) return '';
+  const cls = conf === 'high' ? 'high' : conf === 'medium' ? 'medium' : 'low';
+  return `<span class="dot dot-${cls}"></span><span class="conf-${cls}">${conf}</span>`;
 }
 
-function latestRow(lines, modelFilter, ptypeFilter) {
-  const data = lines.slice(1);
-  let rows = modelFilter ? data.filter(l => l.split(',')[2].trim() === modelFilter) : data;
-  if (ptypeFilter) rows = rows.filter(l => l.split(',')[3].trim() === ptypeFilter);
-  return rows.length ? rows[rows.length - 1].split(',') : null;
-}
+// CSV format: as_of_date,rate_8g,rate_1g,confidence_8g,confidence_1g,source_count_8g,source_count_1g,methodology_version,computed_at
+// 8G-only display: rate_8g=col[1], confidence_8g=col[3], source_count_8g=col[5]
 
-function prevVal(lines, modelFilter, lastDate, valIdx, ptypeFilter) {
-  const data = lines.slice(1);
-  let rows = modelFilter ? data.filter(l => l.split(',')[2].trim() === modelFilter) : data;
-  if (ptypeFilter) rows = rows.filter(l => l.split(',')[3].trim() === ptypeFilter);
-  const prior = rows.filter(l => l.split(',')[0].trim() !== lastDate);
-  return prior.length ? parseFloat(prior[prior.length - 1].split(',')[valIdx]) : null;
-}
-
-const D = (v, fmt) => (v !== null && !isNaN(v)) ? fmt(v) : '&mdash;';
-
-async function renderStack(chipKey, spotLines) {
-  const chip = CHIPS[chipKey];
-
-  // ── Spot (non-interruptible) ─────────────────────────────────────────────
-  const sp       = latestRow(spotLines, null, 'seller_ask_noninterruptible');
-  const spotDate = sp[0].trim();
-  const spotVal  = parseFloat(sp[4]);
-  const spotMver = sp[1].trim();
-  const spotConf = sp[12].trim();
-  const spotObs  = parseInt(sp[10]).toLocaleString();
-  const spotDtd  = fmtDate(spotDate);
-  const spotPrev = prevVal(spotLines, null, spotDate, 4, 'seller_ask_noninterruptible');
-
-  // ── MM (optional) ────────────────────────────────────────────────────────
-  let mmVal=null, mmt2i=null, mmDtd='', mmMver='', mmConf='', mmObs='', mmSrc='', mmPrev=null;
-  if (chip.clsMM) {
+async function renderRateTable() {
+  const grid = document.getElementById('rate-grid');
+  let dateStr = '';
+  for (const m of MODELS) {
+    const url = `${RAW}/${m.dir}/${m.file}`;
+    let rate = null, conf = '', sources = '';
     try {
-      const mmL = await fetchCsv(chip.clsMM);
-      const mm  = latestRow(mmL, chip.gpuModel);
-      if (mm) {
-        const mmDate=mm[0].trim(); mmVal=parseFloat(mm[4]); mmt2i=parseFloat(mm[9]);
-        mmMver=mm[1].trim(); mmConf=mm[16].trim(); mmObs=parseInt(mm[11]).toLocaleString();
-        mmSrc=(mm[6]||'').trim()
-          .replace('LAMBDA_CLUSTER','Lambda').replace('RUNPOD_CLUSTER','RunPod')
-          .replace('VOLTAGEPARK','Voltage Park').replace('HYPERSTACK','Hyperstack')
-          .replace('CRUSOE','Crusoe').replace('VULTR','Vultr')
-          .replace(/\|/g,' \u00b7 ');
-        mmDtd=fmtDate(mmDate); mmPrev=prevVal(mmL, chip.gpuModel, mmDate, 4);
-      }
-    } catch(e){}
+      const lines = await fetchCsv(url);
+      const last = lines[lines.length - 1].split(',');
+      if (!dateStr) dateStr = last[0].trim();
+      rate = last[1].trim() ? parseFloat(last[1]) : null;
+      conf = last[3].trim() || '';
+      const srcRaw = last[5] ? last[5].trim() : '';
+      sources = /^\d+$/.test(srcRaw) ? srcRaw : '';
+    } catch (e) {}
+
+    const modelCell = document.createElement('div');
+    modelCell.className = 'rate-grid-cell model';
+    modelCell.textContent = m.display;
+    grid.appendChild(modelCell);
+
+    const rateCell = document.createElement('div');
+    rateCell.className = 'rate-grid-cell rate-val' + (rate === null ? ' empty' : '');
+    rateCell.innerHTML = rate !== null ? '$' + rate.toFixed(4) : '<span class="rate-unpub">&mdash;</span>';
+    grid.appendChild(rateCell);
+
+    const srcCell = document.createElement('div');
+    srcCell.className = 'rate-grid-cell sources';
+    srcCell.textContent = rate !== null && sources ? sources : '\u2014';
+    grid.appendChild(srcCell);
+
+    const confCell = document.createElement('div');
+    confCell.className = 'rate-grid-cell conf';
+    confCell.innerHTML = conf ? confDot(conf) : '&mdash;';
+    grid.appendChild(confCell);
   }
-
-  // ── ENT (optional) ───────────────────────────────────────────────────────
-  let entVal=null, entt2i=null, entDtd='', entMver='', entConf='', entObs='';
-  if (chip.clsENT) {
-    try {
-      const entL = await fetchCsv(chip.clsENT);
-      const ent  = latestRow(entL, chip.gpuModel);
-      if (ent) {
-        const entDate=ent[0].trim(); entVal=parseFloat(ent[4]); entt2i=parseFloat(ent[9]);
-        entMver=ent[1].trim(); entConf=ent[16].trim(); entObs=parseInt(ent[11]).toLocaleString();
-        entDtd=fmtDate(entDate);
-      }
-    } catch(e){}
+  if (dateStr) {
+    document.getElementById('rate-date').textContent = 'As of ' + fmtDate(dateStr) + '  \u00b7  Methodology v1.0.0';
   }
-
-  const hasCluster = mmVal !== null || entVal !== null;
-  const maxV  = entVal || mmVal || spotVal || 1;
-  const sPct  = (spotVal/maxV*100).toFixed(1);
-  const mmPct = mmVal  ? (mmVal /maxV*100).toFixed(1) : '0';
-  const entPct= entVal ? (entVal/maxV*100).toFixed(1) : '0';
-
-  // ── ENT bar (only if data) ───────────────────────────────────────────────
-  const entBar = entVal ? `
-    <div class="stack-bar-wrap" style="margin-bottom:4px;">
-      <div class="stack-tooltip">CoreWeave on-demand · bundled node · ${chip.ticker}-CLS-ENT</div>
-      <div class="stack-bar-label">Enterprise</div>
-      <div class="stack-bar-track"><div class="stack-bar-fill ent" style="width:${entPct}%"></div></div>
-      <div class="stack-bar-value">${D(entVal,v=>'$'+v.toFixed(4))}</div>
-    </div>` : '';
-
-  // ── MM bar (only if data) ────────────────────────────────────────────────
-  const mmBar = mmVal ? `
-    <div class="stack-bar-wrap" style="margin-bottom:4px;">
-      <div class="stack-tooltip">${mmSrc||'Multi-source cluster'} · 8-GPU cluster · ${chip.ticker}-CLS-MM</div>
-      <div class="stack-bar-label">Mid-Market</div>
-      <div class="stack-bar-track"><div class="stack-bar-fill mm" style="width:${mmPct}%"></div></div>
-      <div class="stack-bar-value">${D(mmVal,v=>'$'+v.toFixed(4))}</div>
-    </div>` : '';
-
-  // ── Legend (dynamic based on available tiers) ────────────────────────────
-  const entLegend = entVal ? `<div class="legend-item"><div class="legend-dot ent"></div><span>${chip.ticker}-CLS-ENT — Enterprise cluster rate. Bundled pricing — compute, memory, networking, and provider SLA included in the per-GPU rate.</span></div>` : '';
-  const mmLegend  = mmVal  ? `<div class="legend-item"><div class="legend-dot mm"></div><span>${chip.ticker}-CLS-MM — Mid-market cluster rate. Unbundled multi-GPU pricing from independent cloud providers.</span></div>` : '';
-
-  // ── Cluster detail panel (only if cluster data exists) ──────────────────
-  const clsMMLink  = chip.clsMM  ? `&nbsp;&middot;&nbsp;<a href="${chip.clsMM.replace('raw.githubusercontent.com','github.com').replace('/main/','/blob/main/')}" target="_blank" rel="noopener">MM →</a>` : '';
-  const clsENTLink = chip.clsENT ? `&nbsp;&middot;&nbsp;<a href="${chip.clsENT.replace('raw.githubusercontent.com','github.com').replace('/main/','/blob/main/')}" target="_blank" rel="noopener">ENT →</a>` : '';
-
-  const clusterPanel = hasCluster ? `
-    <div class="dpanel mm-panel">
-      <div class="dpanel-ticker"><span class="dot live"></span>Cluster Rates</div>
-      <div style="margin-bottom:4px;">
-        ${mmVal ? `<div class="lgd-item-label">Mid-Market &nbsp;&middot;&nbsp; ${chip.ticker}-CLS-MM</div>
-        <div class="dpanel-val">${D(mmVal,v=>'$'+v.toFixed(4))}</div>` : ''}
-        ${entVal ? `<div class="lgd-item-label">Enterprise &nbsp;&middot;&nbsp; ${chip.ticker}-CLS-ENT</div>
-        <div class="dpanel-val" style="color:var(--amber);">${D(entVal,v=>'$'+v.toFixed(4))}</div>` : ''}
-      </div>
-      <div class="dpanel-desc">Cluster rate — per GPU / hr.${mmVal?' MM: unbundled multi-GPU pricing from independent cloud providers.':''}${entVal?' ENT: bundled pricing — compute, memory, networking, and provider SLA included.':''}</div>
-      <div class="dpanel-meta">
-        <span class="dpanel-mver">Methodology ${mmMver||spotMver||'&mdash;'}</span>
-        ${mmDtd||entDtd}
-        ${clsMMLink}${clsENTLink}
-      </div>
-    </div>` : '';
-
-  document.getElementById('rate-area').innerHTML = `
-    <div style="margin-bottom:14px;">
-      <div class="stack-header">
-        <div class="stack-title">${chip.label} &mdash; GPU Rental Revenue Stack</div>
-        <div class="stack-subtitle">$/GPU/hr &nbsp;&middot;&nbsp; on-demand &nbsp;&middot;&nbsp; ${spotDtd}</div>
-      </div>
-      <div class="stack-visual">
-        ${entBar}
-        ${mmBar}
-        <div class="stack-bar-wrap">
-          <div class="stack-tooltip">Multi-source daily median · noninterruptible · ${chip.ticker}</div>
-          <div class="stack-bar-label">On-Demand</div>
-          <div class="stack-bar-track"><div class="stack-bar-fill spot" style="width:${sPct}%"></div></div>
-          <div class="stack-bar-value">$${spotVal.toFixed(4)}</div>
-        </div>
-        <div class="stack-legend">
-          <div class="legend-item"><div class="legend-dot spot"></div><span>${chip.ticker} — On-demand market rate for guaranteed, noninterruptible compute access. No term commitment, no provider SLA bundle. Multi-source daily median.</span></div>
-          ${mmLegend}
-          ${entLegend}
-        </div>
-      </div>
-    </div>
-
-    <div class="detail-grid">
-      <div class="dpanel mm-panel">
-        <div class="dpanel-ticker"><span class="dot live"></span>${chip.ticker}${chip.primary?' <span class="primary-badge">Primary Reference</span>':''}</div>
-        <div class="dpanel-val">$${spotVal.toFixed(4)}</div>
-        <div class="dpanel-desc">On-demand market rate for guaranteed, noninterruptible compute access. No term commitment, no provider SLA bundle. Multi-source daily median.</div>
-        <div class="dpanel-meta">
-          <span class="dpanel-mver">Methodology ${spotMver}</span>
-          ${spotDtd} &middot; ${spotConf} confidence
-          &nbsp;&middot;&nbsp;<a href="${chip.github}" target="_blank" rel="noopener">Full series →</a>
-        </div>
-      </div>
-      ${clusterPanel}
-    </div>`;
-}
-
-async function renderSpot(chipKey) {
-  const chip  = CHIPS[chipKey];
-  const lines = await fetchCsv(chip.csv);
-  const sp    = latestRow(lines, null, 'seller_ask_noninterruptible');
-  const spotDate = sp[0].trim();
-  const spotVal  = parseFloat(sp[4]);
-  const spotMver = sp[1].trim();
-  const spotConf = sp[12].trim();
-  const spotObs  = parseInt(sp[10]).toLocaleString();
-  const spotDtd  = fmtDate(spotDate);
-
-  // Resolve description -- static string or live cross-chip comparison
-  let desc = chip.desc || '';
-  if (chip.descFn) {
-    let crossVal = null;
-    try {
-      const crossLines = await fetchCsv(CHIPS[chip.crossChip].csv);
-      const crossRow   = latestRow(crossLines, null, 'seller_ask_noninterruptible');
-      if (crossRow) crossVal = parseFloat(crossRow[4]);
-    } catch(e) {}
-    desc = chip.descFn(spotVal, crossVal);
-  }
-
-  document.getElementById('rate-area').innerHTML = `
-    <div class="spot-single">
-      <div class="spot-ticker"><span class="dot live"></span>${chip.ticker}</div>
-      <div class="spot-val">$${spotVal.toFixed(4)}</div>
-      <div class="spot-desc">${desc}</div>
-      <div class="spot-meta">
-        <span style="display:block;font-size:.58rem;margin-bottom:2px;">Methodology ${spotMver}</span>
-        ${spotDtd} &middot; ${spotConf} confidence
-        &nbsp;&middot;&nbsp;<a href="${chip.github}" target="_blank" rel="noopener">Full series →</a>
-      </div>
-    </div>`;
-}
-
-async function loadChip(chipKey) {
-  document.getElementById('rate-area').innerHTML = '<div class="loading-state">Loading&hellip;</div>';
-  const chip = CHIPS[chipKey];
-  try {
-    if (chip.clsMM || chip.clsENT) {
-      const spotLines = await fetchCsv(chip.csv);
-      await renderStack(chipKey, spotLines);
-    } else {
-      await renderSpot(chipKey);
-    }
-  } catch(e) {
-    document.getElementById('rate-area').innerHTML = `<div class="spot-single"><div class="spot-val">&mdash;</div><div class="spot-meta">Data unavailable &mdash; <a href="${chip.github}" target="_blank" rel="noopener">see GitHub</a></div></div>`;
-  }
-}
-
-let activeChip = 'h100';
-function selectChip(chipKey) {
-  if (activeChip === chipKey) return;
-  activeChip = chipKey;
-  document.querySelectorAll('.chip-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.chip === chipKey);
-  });
-  loadChip(chipKey);
 }
 
 async function renderGenSpread() {
   try {
-    const h100Lines = await fetchCsv(CHIPS['h100'].csv);
-    const b200Lines = await fetchCsv(CHIPS['b200'].csv);
-    const a100Lines = await fetchCsv(CHIPS['a100'].csv);
+    const h100Lines = await fetchCsv(`${RAW}/cri-h100/CRI-H100-history.csv`);
+    const b200Lines = await fetchCsv(`${RAW}/cri-b200/CRI-B200-history.csv`);
+    const a100Lines = await fetchCsv(`${RAW}/cri-a100/CRI-A100-history.csv`);
 
-    const h100 = latestRow(h100Lines, null, 'seller_ask_noninterruptible');
-    const b200 = latestRow(b200Lines, null, 'seller_ask_noninterruptible');
-    const a100 = latestRow(a100Lines, null, 'seller_ask_noninterruptible');
+    const h100Last = h100Lines[h100Lines.length - 1].split(',');
+    const b200Last = b200Lines[b200Lines.length - 1].split(',');
+    const a100Last = a100Lines[a100Lines.length - 1].split(',');
 
-    if (!h100 || !b200 || !a100) return;
+    const h100Val = parseFloat(h100Last[1]);
+    const b200Val = parseFloat(b200Last[1]);
+    const a100Val = parseFloat(a100Last[1]);
+    const h100Date = h100Last[0].trim();
+    const a100Date = a100Last[0].trim();
 
-    const h100Val = parseFloat(h100[4]);
-    const b200Val = parseFloat(b200[4]);
-    const a100Val = parseFloat(a100[4]);
-    const h100Date = h100[0].trim();
-    const a100Date = a100[0].trim();
+    // B200 / H100 spread
+    if (!isNaN(h100Val) && !isNaN(b200Val)) {
+      const b200Raw = (b200Val - h100Val) / h100Val;
+      const b200Pct = Math.abs(b200Raw * 100).toFixed(1);
+      const b200El = document.getElementById('gen-b200-spread');
+      const b200Desc = document.getElementById('gen-b200-desc');
+      const b200Cov = document.getElementById('gen-b200-covenant');
 
-    // ── B200 / H100 spread ───────────────────────────────────────────────────
-    // Formula: (B200 - H100) / B200
-    // Positive = B200 commands premium over H100 (training tier intact)
-    // Near zero = converging toward §7.04 threshold
-    // Negative = H100 above B200 (unexpected inversion)
-    const b200Raw  = (b200Val - h100Val) / h100Val;
-    const b200Pct  = Math.abs(b200Raw * 100).toFixed(1);
-    const b200El   = document.getElementById('gen-b200-spread');
-    const b200Desc = document.getElementById('gen-b200-desc');
-    const b200Cov  = document.getElementById('gen-b200-covenant');
-
-    if (b200Raw > 0.25) {
-      // Premium intact
-      b200El.textContent = `+${b200Pct}%`;
-      b200El.className = 'gen-card-spread';
-      b200Desc.textContent = `B200 next-gen premium holding — H100 training-tier rates not yet displaced by B200 supply. Generation Spread wide.`;
-      b200Cov.textContent = 'Generation Spread · Intact';
-    } else if (b200Raw >= 0) {
-      // Converging — approaching threshold
-      b200El.textContent = `+${b200Pct}%`;
-      b200El.className = 'gen-card-spread converging';
-      b200Desc.textContent = `The B200/H100 spread stands at ${b200Pct}% — B200 supply expanding; training-tier premium narrowing. Lenders may wish to monitor for spread threshold triggers in their agreements.`;
-      b200Cov.textContent = 'Generation Spread · Compressing';
-      b200Cov.style.color = 'var(--amber)';
-      b200Cov.style.background = 'var(--amber-lo)';
-      b200Cov.style.borderColor = 'var(--amber-mid)';
-    } else {
-      // Inverted — H100 above B200
-      b200El.textContent = `${b200Pct}% discount`;
-      b200El.className = 'gen-card-spread warning';
-      b200Desc.textContent = `The B200/H100 spread stands at ${b200Pct}% inverted — B200 supply has displaced H100 rates; training-tier premium effectively gone. Credit agreements citing the Generation Spread as a surveillance trigger should review their applicable thresholds.`;
-      b200Cov.textContent = 'Generation Spread · Converged';
-      b200Cov.style.color = '#A03020';
-      b200Cov.style.background = '#FDF0EE';
-      b200Cov.style.borderColor = '#E8B8B0';
+      if (b200Raw > 0.25) {
+        b200El.textContent = '+' + b200Pct + '%';
+        b200El.className = 'gen-card-spread';
+        b200Desc.textContent = 'B200 next-gen premium holding \u2014 H100 training-tier rates not yet displaced by B200 supply. Generation Spread wide.';
+        b200Cov.textContent = 'Generation Spread \u00b7 Intact';
+      } else if (b200Raw >= 0) {
+        b200El.textContent = '+' + b200Pct + '%';
+        b200El.className = 'gen-card-spread converging';
+        b200Desc.textContent = 'B200/H100 spread at ' + b200Pct + '% \u2014 training-tier premium narrowing. Monitor for covenant threshold triggers.';
+        b200Cov.textContent = 'Generation Spread \u00b7 Compressing';
+        b200Cov.style.color = 'var(--amber)';
+        b200Cov.style.background = 'var(--amber-lo)';
+        b200Cov.style.borderColor = 'var(--amber-mid)';
+      } else {
+        b200El.textContent = b200Pct + '% inverted';
+        b200El.className = 'gen-card-spread warning';
+        b200Desc.textContent = 'B200/H100 spread inverted at ' + b200Pct + '% \u2014 B200 supply has displaced H100 training premium.';
+        b200Cov.textContent = 'Generation Spread \u00b7 Converged';
+        b200Cov.style.color = '#A03020';
+        b200Cov.style.background = '#FDF0EE';
+        b200Cov.style.borderColor = '#E8B8B0';
+      }
+      document.getElementById('gen-b200-rates').innerHTML =
+        'CRI-B200 &nbsp;<span>$' + b200Val.toFixed(4) + '</span> &nbsp;&middot;&nbsp; ' +
+        'CRI-H100 &nbsp;<span>$' + h100Val.toFixed(4) + '</span>';
+      document.getElementById('gen-b200-meta').innerHTML =
+        'As of ' + fmtDate(h100Date) + ' &nbsp;&middot;&nbsp; 8-GPU IB node on-demand rates';
     }
 
-    document.getElementById('gen-b200-rates').innerHTML =
-      `CRI-B200 &nbsp;<span>$${b200Val.toFixed(4)}</span> &nbsp;&middot;&nbsp; ` +
-      `CRI-H100 &nbsp;<span>$${h100Val.toFixed(4)}</span>`;
+    // H100 / A100 spread
+    if (!isNaN(h100Val) && !isNaN(a100Val)) {
+      const a100Raw = (h100Val - a100Val) / h100Val;
+      const a100Pct = Math.abs(a100Raw * 100).toFixed(1);
+      const a100El = document.getElementById('gen-a100-spread');
+      const a100Desc = document.getElementById('gen-a100-desc');
+      const a100Cov = document.getElementById('gen-a100-covenant');
 
-    document.getElementById('gen-b200-meta').innerHTML =
-      `As of ${fmtDate(h100Date)} &nbsp;&middot;&nbsp; noninterruptible on-demand rates`;
-
-    // ── H100 / A100 spread ───────────────────────────────────────────────────
-    // Formula: (H100 - A100) / H100
-    // Positive = H100 commands premium (normal, prior-gen below current-gen)
-    // Negative = A100 above H100 (inversion — inference demand thesis)
-    const a100Raw  = (h100Val - a100Val) / h100Val;
-    const a100Pct  = Math.abs(a100Raw * 100).toFixed(1);
-    const a100El   = document.getElementById('gen-a100-spread');
-    const a100Desc = document.getElementById('gen-a100-desc');
-    const a100Cov  = document.getElementById('gen-a100-covenant');
-
-    if (a100Raw > 0) {
-      // Normal — H100 above A100
-      a100El.textContent = `+${a100Pct}%`;
-      a100El.className = 'gen-card-spread';
-      a100Desc.textContent = `The H100/A100 spread stands at ${a100Pct}% — prior training generation below current-gen. Compression signals H100 commoditizing toward inference-tier rates.`;
-      a100Cov.textContent = 'Commoditization Signal · 18–24 mo horizon';
-    } else {
-      // Inverted — A100 above H100
-      a100El.textContent = `${a100Pct}% discount`;
-      a100El.className = 'gen-card-spread converging';
-      a100Desc.textContent = `The H100/A100 spread stands at ${a100Pct}% inverted — inference demand is lifting A100 rates above prior-gen training silicon. H100 commoditizing faster than the prior generation.`;
-      a100Cov.textContent = 'Inference-Tier Inversion · Active signal';
-      a100Cov.style.color = 'var(--amber)';
-      a100Cov.style.background = 'var(--amber-lo)';
-      a100Cov.style.borderColor = 'var(--amber-mid)';
+      if (a100Raw > 0) {
+        a100El.textContent = '+' + a100Pct + '%';
+        a100El.className = 'gen-card-spread';
+        a100Desc.textContent = 'H100/A100 spread at ' + a100Pct + '% \u2014 prior training generation below current-gen. Compression signals H100 commoditizing toward inference-tier rates.';
+        a100Cov.textContent = 'Commoditization Signal \u00b7 18\u201324 mo horizon';
+      } else {
+        a100El.textContent = a100Pct + '% inverted';
+        a100El.className = 'gen-card-spread converging';
+        a100Desc.textContent = 'H100/A100 spread inverted at ' + a100Pct + '% \u2014 inference demand lifting A100 rates above prior-gen training silicon. H100 commoditizing faster than the prior generation.';
+        a100Cov.textContent = 'Inference-Tier Inversion \u00b7 Active signal';
+        a100Cov.style.color = 'var(--amber)';
+        a100Cov.style.background = 'var(--amber-lo)';
+        a100Cov.style.borderColor = 'var(--amber-mid)';
+      }
+      document.getElementById('gen-a100-rates').innerHTML =
+        'CRI-H100 &nbsp;<span>$' + h100Val.toFixed(4) + '</span> &nbsp;&middot;&nbsp; ' +
+        'CRI-A100 &nbsp;<span>$' + a100Val.toFixed(4) + '</span>';
+      document.getElementById('gen-a100-meta').innerHTML =
+        'As of ' + fmtDate(a100Date) + ' &nbsp;&middot;&nbsp; 8-GPU IB node on-demand rates';
     }
-
-    document.getElementById('gen-a100-rates').innerHTML =
-      `CRI-H100 &nbsp;<span>$${h100Val.toFixed(4)}</span> &nbsp;&middot;&nbsp; ` +
-      `CRI-A100 &nbsp;<span>$${a100Val.toFixed(4)}</span>`;
-
-    document.getElementById('gen-a100-meta').innerHTML =
-      `As of ${fmtDate(a100Date)} &nbsp;&middot;&nbsp; noninterruptible on-demand rates`;
-
-  } catch(e) {
-    document.getElementById('gen-b200-spread').textContent = '—';
-    document.getElementById('gen-a100-spread').textContent = '—';
+  } catch (e) {
+    document.getElementById('gen-b200-spread').textContent = '\u2014';
+    document.getElementById('gen-a100-spread').textContent = '\u2014';
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadChip('h100');
-  renderGenSpread();
-  (async () => {
-    const ids = ['b200','h200','h100','a100','l40s'];
-    let asOfDate = '';
-    await Promise.allSettled(ids.map(async id => {
-      try {
-        const lines = await fetchCsv(CHIPS[id].csv);
-        const sp = latestRow(lines, null, 'seller_ask_noninterruptible');
-        if (sp) {
-          const val = '$' + parseFloat(sp[4]).toFixed(2);
-          document.getElementById('t-' + id).textContent = val;
-          document.getElementById('t-' + id + '-2').textContent = val;
-          if (!asOfDate) asOfDate = sp[0].trim();
-        }
-      } catch(e) {}
-    }));
-    if (asOfDate) {
-      document.getElementById('ticker-date').textContent = 'As of ' + fmtDate(asOfDate);
-    }
-  })();
-});
+async function renderTicker() {
+  let dateStr = '';
+  for (const m of MODELS) {
+    try {
+      const lines = await fetchCsv(`${RAW}/${m.dir}/${m.file}`);
+      const last = lines[lines.length - 1].split(',');
+      if (!dateStr) dateStr = last[0].trim();
+      const rate = last[1].trim() ? '$' + parseFloat(last[1]).toFixed(2) : null;
+      if (rate) {
+        const el = document.getElementById(m.tickerId);
+        if (el) el.textContent = rate;
+        const el2 = document.getElementById(m.tickerId + '-2');
+        if (el2) el2.textContent = rate;
+      }
+    } catch (e) {}
+  }
+  if (dateStr) {
+    document.getElementById('ticker-date').textContent = fmtDate(dateStr);
+  }
+}
+
+renderRateTable();
+renderGenSpread();
+renderTicker();
 </script>
 </body>
 </html>
