@@ -617,3 +617,18 @@ async function renderTicker() {
         if (el) el.textContent = rate;
         const el2 = document.getElementById(m.tickerId + '-2');
         if (el2) el2.textContent = rate;
+      }
+    } catch (e) {}
+  }
+  if (dateStr) {
+    const el = document.getElementById('ticker-date');
+    if (el) el.textContent = fmtDate(dateStr);
+  }
+}
+
+renderRateTable();
+renderGenSpread();
+renderTicker();
+</script>
+</body>
+</html>
