@@ -348,10 +348,9 @@
   <div style="max-width:860px;margin:0 auto;padding:0 36px;">
     <div class="sec-label">Why Seller-Posted Rates</div>
     <div class="sec-rule"></div>
-    <div style="font-family:var(--serif);font-size:1.20rem;font-weight:500;color:var(--text-hi);line-height:1.35;margin-bottom:16px;max-width:620px;">Executed GPU compute prices are private, stale, and non-transferable. Asking rates are the only continuously available market signal.</div>
-    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;margin-bottom:14px;">GPU compute transactions are bilateral, NDA-protected, and bundled with storage, networking, and support &mdash; making reported prices non-decomposable to the GPU-hour unit a covenant requires. Closed-sale data, where it exists at all, arrives with multi-week lag and cannot be independently verified.</p>
-    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;margin-bottom:14px;">Seller-posted on-demand rates are <strong style="font-weight:500;color:var(--text);">continuous, public, and decomposable</strong>. They represent the price at which capacity is offered to the market in the configuration lenders underwrite &mdash; the same signal commercial real estate appraisers use when listing prices, adjusted for market time and concession factors, form the basis of comparable-sales analysis.</p>
-    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;">CRI rates are indicative market rates, not executable prices. The distinction matters &mdash; and is precisely what makes them suitable as an independent reference for collateral valuation rather than a settlement rate for derivatives.</p>
+    <div style="font-family:var(--serif);font-size:1.20rem;font-weight:500;color:var(--text-hi);line-height:1.35;margin-bottom:16px;max-width:620px;">Executed GPU compute prices are private and bilateral. Asking rates are the only continuously observable market signal.</div>
+    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;margin-bottom:14px;">GPU compute transactions are negotiated bilaterally and protected by confidentiality provisions &mdash; no counterparty publishes what they actually paid. Seller-posted on-demand rates are <strong style="font-weight:500;color:var(--text);">continuous, public, and decomposable</strong>. They represent the price at which capacity is offered to the market in the configuration lenders underwrite &mdash; the same signal commercial real estate appraisers use when listing prices form the basis of comparable-sales analysis.</p>
+    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;">CRI rates are indicative, not executable &mdash; which is precisely what makes them suitable as an independent collateral reference rather than a settlement rate for derivatives.</p>
   </div>
 </div>
 
@@ -361,7 +360,7 @@
     <div class="sec-label">What the Unit Measures</div>
     <div class="sec-rule"></div>
     <div style="font-family:var(--serif);font-size:1.20rem;font-weight:500;color:var(--text-hi);line-height:1.35;margin-bottom:16px;max-width:620px;">The node is the collateral unit because that&rsquo;s what the SPV&rsquo;s agreements govern.</div>
-    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;margin-bottom:14px;">A per-GPU rate would measure something no counterparty has independent legal rights to re-deploy. CRI-8G measures the configuration that actually clears in the market when collateral is redirected.</p>
+    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;margin-bottom:14px;">GPU-backed credit facilities are structured around nodes, not individual GPUs. In a workout, the lender or servicer could redirect deployed capacity to the open rental market without re-racking &mdash; the 8-GPU node is the unit that actually changes hands. CRI-8G measures the listing price for that unit: $/node/hr, undivided, as posted by providers operating the same configuration the SPV governs.</p>
   </div>
 </div>
 
