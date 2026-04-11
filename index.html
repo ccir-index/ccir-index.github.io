@@ -297,7 +297,7 @@
     <div class="pillar">
       <div class="pillar-icon">CRI-8G</div>
       <div class="pillar-head">The Production Benchmark</div>
-      <p class="pillar-body">GPU collateral is underwritten, deployed, and liquidated as 8-GPU InfiniBand nodes. The SPV&rsquo;s contractual structure &mdash; colocation agreements, power and networking infrastructure rights, service contracts &mdash; enables re-deployment of that capacity to the open rental market. CRI-8G is the seller-posted on-demand rate for the configuration the SPV holds and has contractual rights to re-deploy &mdash; the direct market anchor for collateral valuation in a workout.</p>
+      <p class="pillar-body">GPU collateral is underwritten, deployed, and liquidated as 8-GPU InfiniBand nodes. The SPV&rsquo;s contractual structure enables re-deployment of that capacity to the open rental market. CRI-8G is the direct market anchor for collateral valuation in a workout.</p>
     </div>
     <div class="pillar">
       <div class="pillar-icon">Named Rate</div>
@@ -323,7 +323,7 @@
     <div class="sec-label">Generation Spread</div>
     <div class="sec-rule"></div>
     <div class="gen-spread-title">Generation Spread &mdash; Live Signal</div>
-    <p class="gen-spread-sub">A wide spread reflects next-gen access rates above current-gen in the on-demand market. Spread compression reduces the incentive to choose current-gen hardware. The H100/A100 spread shows the same dynamic on a longer horizon: where H100 is headed as prior-generation capacity absorbs into the inference market.</p>
+    <p class="gen-spread-sub">The H100/A100 spread shows where H100 is headed as prior-generation capacity absorbs into the inference market. The B200/H100 spread tracks the same dynamic for the current generation transition.</p>
     <div class="gen-spread-grid" id="gen-spread-grid">
       <div class="gen-card" id="gen-b200-card">
         <div class="gen-card-label">CRI-B200 vs CRI-H100</div>
@@ -351,8 +351,7 @@
     <div class="sec-label">Why Seller-Posted Rates</div>
     <div class="sec-rule"></div>
     <div style="font-family:var(--serif);font-size:1.20rem;font-weight:500;color:var(--text-hi);line-height:1.35;margin-bottom:16px;max-width:620px;">Executed GPU compute prices are private and bilateral. Asking rates are the only continuously observable market signal.</div>
-    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;margin-bottom:14px;">GPU compute transactions are negotiated bilaterally and protected by confidentiality provisions &mdash; no counterparty publishes what they actually paid. Seller-posted on-demand rates are <strong style="font-weight:500;color:var(--text);">continuous, public, and decomposable</strong>. They represent the price at which capacity is offered to the market in the configuration lenders underwrite &mdash; comparable to how appraisers rely on listing data when closed-sale comps are unavailable or unverifiable.</p>
-    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;">CRI rates are derived from publicly observable asking rates &mdash; not from executed prices, which are private and unverifiable.</p>
+    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;">GPU compute transactions are negotiated bilaterally and protected by confidentiality provisions &mdash; no counterparty publishes what they actually paid. Seller-posted on-demand rates are <strong style="font-weight:500;color:var(--text);">continuous, public, and decomposable</strong>. They represent the price at which capacity is offered to the market in the configuration lenders underwrite &mdash; comparable to how appraisers rely on listing data when closed-sale comps are unavailable or unverifiable.</p>
   </div>
 </div>
 
@@ -362,7 +361,7 @@
     <div class="sec-label">What the Unit Measures</div>
     <div class="sec-rule"></div>
     <div style="font-family:var(--serif);font-size:1.20rem;font-weight:500;color:var(--text-hi);line-height:1.35;margin-bottom:16px;max-width:620px;">Priced per GPU, valued as deployed.</div>
-    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;margin-bottom:14px;">CRI-8G reports a per-GPU hourly rate within the 8-GPU node configuration the market deploys and lenders underwrite. The CRI rate indices are built around how these assets are underwritten and deployed in the market.</p>
+    <p style="font-size:.860rem;color:var(--text-dim);line-height:1.78;max-width:640px;">CRI-8G reports a per-GPU hourly rate within the 8-GPU node configuration the market deploys and lenders underwrite.</p>
   </div>
 </div>
 
@@ -375,7 +374,7 @@
     <div style="background:rgba(255,255,255,.06);border:1px solid #3a3028;border-top:3px solid var(--accent);border-radius:2px;padding:28px 28px 24px;margin-bottom:28px;">
       <div style="font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-mid);margin-bottom:10px;">Structural Independence</div>
       <div style="font-family:var(--serif);font-size:1.35rem;font-weight:500;color:#f0ece6;line-height:1.3;margin-bottom:14px;">Independent of GPU marketplaces. Independent of swap counterparties. No financial interest in the market it measures.</div>
-      <p style="font-size:.860rem;font-weight:300;color:#c8c2bb;line-height:1.78;margin-bottom:16px;">A reference rate is only defensible when the publisher has no position in the market it prices. CRI is structurally separated from every side of the transaction &mdash; no brokerage revenue, no marketplace fees, no counterparty exposure. The independence that makes the citation hold when a breach is in dispute.</p>
+      <p style="font-size:.860rem;font-weight:300;color:#c8c2bb;line-height:1.78;margin-bottom:16px;">A reference rate is only defensible when the publisher has no position in the market it prices. CRI is structurally separated from every side of the transaction &mdash; no brokerage revenue, no marketplace fees, no counterparty exposure.</p>
       <p style="font-size:.820rem;font-weight:300;color:#9a9490;line-height:1.78;margin-bottom:16px;">In aircraft finance, this role is filled by ISTAT-certified appraisers like AVITAS &mdash; independent of any airline, lessor, or trading desk, their indicative base values are contractually embedded in EETC indentures because the rate source has no stake in the outcome.</p>
       <div style="font-family:var(--mono);font-size:.54rem;color:#6a5e54;line-height:1.8;border-top:1px solid #2a2520;padding-top:10px;margin-top:4px;">Indicative &ne; executable &middot; Appraisal input &ne; settlement rate &middot; CCIR publishes the rate &mdash; lenders and counsel determine the application</div>
     </div>
