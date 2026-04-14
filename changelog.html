@@ -205,6 +205,33 @@
     <div class="timeline">
       <div class="timeline-year">2026</div>
 
+      <!-- v1.1.0 DigitalOcean Source Addition (Minor Change) -->
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">Apr 14, 2026</div>
+          <div class="entry-version">v1.1.0</div>
+          <div class="entry-badge badge-minor">Minor</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-title">DigitalOcean Source Addition &mdash; CRI-8G &amp; CRI-1G</div>
+          <div class="entry-desc">CCIR is adding DigitalOcean as a data source to the CRI-8G Benchmark Series and CRI-1G surveillance indices, effective May 14, 2026. DigitalOcean GPU Droplets (VM/cloud, HGX SXM confirmed, bundled pricing) will contribute to CRI-8G-H100 and CRI-8G-H200. DigitalOcean&rsquo;s L40S on-demand rate will be added to CRI-1G-L40S surveillance. This is a Minor change under the CCIR Benchmark Change Management and Versioning Policy. The 30-day comment period runs April 14 &ndash; May 13, 2026.</div>
+          <ul class="entry-items">
+            <li><strong>Rationale:</strong> DigitalOcean GPU Droplets meet all CRI-8G eligibility requirements: VM/cloud deployment, HGX SXM + NVLink confirmed, bundled GPU+CPU+RAM pricing, noninterruptible on-demand only, and consistent rate card pricing. Adding DigitalOcean increases source coverage for H100 (6 &rarr; 7 sources) and H200 (4 &rarr; 5 sources), improving index robustness and reducing concentration in both models.</li>
+            <li><strong>Anticipated impact:</strong> DigitalOcean&rsquo;s current posted rates are $3.39/GPU/hr (H100) and $3.44/GPU/hr (H200). These rates sit above the current CRI-8G-H100 median and near the top of the current CRI-8G-H200 range. Adding one above-median source to a 7-source pool is unlikely to produce a material shift in the published median, but the direction of any movement would be modestly upward.</li>
+            <li><strong>Shadow period:</strong> Beginning April 14, 2026, DigitalOcean data flows through the full Silver eligibility pipeline. Published CSV files carry three additional columns during the notice period: <code>rate_shadow</code> (proforma median including DigitalOcean), <code>source_count_shadow</code>, and <code>confidence_flag_shadow</code>. These columns allow users to observe the proforma effect of the pending addition throughout the notice period. <code>rate</code> remains unchanged until May 14.</li>
+            <li><strong>Effective date:</strong> May 14, 2026. On that date, DigitalOcean transitions from shadow to active status. <code>rate</code> will include DigitalOcean observations beginning with the May 14 publication. Shadow columns will be suppressed after the 7-day trailing window has fully cleared pre-effective-date observations (approximately May 21, 2026).</li>
+            <li><strong>Methodology version:</strong> v1.1.0 is effective as of April 14, 2026 and governs all pipeline runs from that date forward. v1.0.0 governed all prior publications; those values are unaffected.</li>
+            <li><strong>Comments:</strong> Comments on this proposed change may be submitted to <a href="mailto:research@ccir.io">research@ccir.io</a> through May 13, 2026. Please include &ldquo;v1.1.0 Comment&rdquo; in the subject line. CCIR will publish a written response to all material comments received before the change takes effect.</li>
+          </ul>
+          <div class="entry-docs">
+            <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_1_0.pdf" target="_blank" rel="noopener" class="entry-doc-link">Methodology v1.1.0</a>
+            <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Governance_v1_1_0.pdf" target="_blank" rel="noopener" class="entry-doc-link">Governance v1.1.0</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-connector"></div>
+
       <!-- v1.0.0 Initial Publication -->
       <div class="entry">
         <div class="entry-meta">
@@ -250,7 +277,7 @@
       &nbsp;&middot;&nbsp;
       <a href="services.html">Reference Rate Applications</a>
       &nbsp;&middot;&nbsp;
-      <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_0_0.pdf" target="_blank" rel="noopener">Methodology</a>
+      <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_1_0.pdf" target="_blank" rel="noopener">Methodology</a>
       &nbsp;&middot;&nbsp;
       <a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Change_Management_Policy_v1_0_0.pdf" target="_blank" rel="noopener">Change Management</a>
       &nbsp;&middot;&nbsp;

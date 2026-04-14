@@ -541,7 +541,7 @@ function confDot(conf) {
 
 async function renderRateTable() {
   const grid = document.getElementById('rate-grid');
-  let dateStr = '';
+  let dateStr = '', methVer = '';
   for (const m of MODELS) {
     const url = `${RAW}/${m.dir}/${m.file}`;
     let rate = null, conf = '', sources = '';
@@ -549,6 +549,7 @@ async function renderRateTable() {
       const lines = await fetchCsv(url);
       const last = lines[lines.length - 1].split(',');
       if (!dateStr) dateStr = last[0].trim();
+      if (!methVer && last[7]) methVer = last[7].trim();
       rate = last[1].trim() ? parseFloat(last[1]) : null;
       conf = last[3].trim() || '';
       const srcRaw = last[5] ? last[5].trim() : '';
@@ -576,7 +577,7 @@ async function renderRateTable() {
     grid.appendChild(confCell);
   }
   if (dateStr) {
-    document.getElementById('rate-date').textContent = 'As of ' + fmtDate(dateStr) + '  \u00b7  Methodology v1.0.0';
+    document.getElementById('rate-date').textContent = 'As of ' + fmtDate(dateStr) + '  \u00b7  Methodology ' + (methVer || 'v1.0.0');
   }
 }
 
