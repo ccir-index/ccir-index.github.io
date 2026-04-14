@@ -158,13 +158,10 @@
     .gen-card.secondary .gen-card-label { color: var(--text-dim); }
     .gen-card-spread { font-family: var(--mono); font-size: 2.4rem; font-weight: 400; letter-spacing: -.03em; line-height: 1; color: var(--accent); margin-bottom: 6px; }
     .gen-card.secondary .gen-card-spread { color: var(--text-hi); }
-    .gen-card-spread.converging { color: var(--amber); }
-    .gen-card-spread.warning { color: #A03020; }
     .gen-card-rates { font-family: var(--mono); font-size: .68rem; color: var(--text-dim); margin-bottom: 12px; line-height: 1.8; }
     .gen-card-rates span { color: var(--text-hi); font-weight: 500; }
     .gen-card-desc { font-size: .780rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 12px; }
-    .gen-card-covenant { display: inline-block; font-family: var(--mono); font-size: .54rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); background: var(--accent-lo); border: 1px solid var(--accent-mid); border-radius: 2px; padding: 2px 8px; }
-    .gen-card.secondary .gen-card-covenant { color: var(--text-dim); background: var(--surface-2); border-color: var(--border); }
+    .gen-card-desc { font-size: .78rem; color: var(--text-dim); line-height: 1.55; }
     .gen-card-meta { font-family: var(--mono); font-size: .58rem; color: var(--text-dim); border-top: 1px solid var(--border); padding-top: 10px; margin-top: 12px; line-height: 1.7; }
 
     /* ─── GAP SECTION ─── */
@@ -375,23 +372,21 @@
   <div class="gen-spread-inner">
     <div class="sec-label">Generation Spread</div>
     <div class="sec-rule"></div>
-    <div class="gen-spread-title">Generation Spread &mdash; Live Signal</div>
-    <p class="gen-spread-sub">The H100/A100 spread shows where H100 is headed as prior-generation capacity absorbs into the inference market. The B200/H100 spread tracks the same dynamic for the current generation transition.</p>
+    <div class="gen-spread-title">Generation Spread</div>
+    <p class="gen-spread-sub">Rate differential between GPU generations, computed from published CRI-8G values.</p>
     <div class="gen-spread-grid" id="gen-spread-grid">
       <div class="gen-card" id="gen-b200-card">
         <div class="gen-card-label">CRI-B200 vs CRI-H100</div>
         <div class="gen-card-spread" id="gen-b200-spread">&mdash;</div>
         <div class="gen-card-rates" id="gen-b200-rates">Loading&hellip;</div>
         <div class="gen-card-desc" id="gen-b200-desc"></div>
-        <div class="gen-card-covenant" id="gen-b200-covenant">Generation Spread &middot; Live</div>
         <div class="gen-card-meta" id="gen-b200-meta"></div>
       </div>
       <div class="gen-card secondary" id="gen-a100-card">
-        <div class="gen-card-label">CRI-H100 vs CRI-A100 &middot; Commoditization Trajectory</div>
+        <div class="gen-card-label">CRI-H100 vs CRI-A100</div>
         <div class="gen-card-spread" id="gen-a100-spread">&mdash;</div>
         <div class="gen-card-rates" id="gen-a100-rates">Loading&hellip;</div>
         <div class="gen-card-desc" id="gen-a100-desc"></div>
-        <div class="gen-card-covenant" id="gen-a100-covenant">Commoditization Signal &middot; 18&ndash;24 mo horizon</div>
         <div class="gen-card-meta" id="gen-a100-meta"></div>
       </div>
     </div>
@@ -468,8 +463,8 @@
       <span class="gov-text"><strong>Published nightly</strong> to ccir-index/ccir-data</span>
     </div>
     <div class="gov-item">
-      <span class="gov-icon">v1.0.0</span>
-      <span class="gov-text"><a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_0_0.pdf" target="_blank" rel="noopener">Open methodology</a> &mdash; reproducible pipeline</span>
+      <span class="gov-icon">v1.1.0</span>
+      <span class="gov-text"><a href="https://github.com/ccir-index/ccir-methodology/blob/main/CCIR_Methodology_v1_1_0.pdf" target="_blank" rel="noopener">Open methodology</a> &mdash; reproducible pipeline</span>
     </div>
   </div>
 </div>
@@ -577,7 +572,7 @@ async function renderRateTable() {
     grid.appendChild(confCell);
   }
   if (dateStr) {
-    document.getElementById('rate-date').textContent = 'As of ' + fmtDate(dateStr) + '  \u00b7  Methodology ' + (methVer || 'v1.0.0');
+    document.getElementById('rate-date').textContent = 'As of ' + fmtDate(dateStr) + '  \u00b7  Methodology ' + (methVer || 'v1.1.0');
   }
 }
 
@@ -603,30 +598,13 @@ async function renderGenSpread() {
       const b200Pct = Math.abs(b200Raw * 100).toFixed(1);
       const b200El = document.getElementById('gen-b200-spread');
       const b200Desc = document.getElementById('gen-b200-desc');
-      const b200Cov = document.getElementById('gen-b200-covenant');
 
-      if (b200Raw > 0.25) {
+      if (b200Raw >= 0) {
         b200El.textContent = '+' + b200Pct + '%';
-        b200El.className = 'gen-card-spread';
-        b200Desc.textContent = 'B200 next-gen premium holding \u2014 H100 training-tier rates not yet displaced by B200 supply. Generation Spread wide.';
-        b200Cov.textContent = 'Generation Spread \u00b7 Intact';
-      } else if (b200Raw >= 0) {
-        b200El.textContent = '+' + b200Pct + '%';
-        b200El.className = 'gen-card-spread converging';
-        b200Desc.textContent = 'B200/H100 spread at ' + b200Pct + '% \u2014 training-tier premium narrowing. Monitor for covenant threshold triggers.';
-        b200Cov.textContent = 'Generation Spread \u00b7 Compressing';
-        b200Cov.style.color = 'var(--amber)';
-        b200Cov.style.background = 'var(--amber-lo)';
-        b200Cov.style.borderColor = 'var(--amber-mid)';
       } else {
         b200El.textContent = b200Pct + '% inverted';
-        b200El.className = 'gen-card-spread warning';
-        b200Desc.textContent = 'B200/H100 spread inverted at ' + b200Pct + '% \u2014 B200 supply has displaced H100 training premium.';
-        b200Cov.textContent = 'Generation Spread \u00b7 Converged';
-        b200Cov.style.color = '#A03020';
-        b200Cov.style.background = '#FDF0EE';
-        b200Cov.style.borderColor = '#E8B8B0';
       }
+      b200Desc.textContent = 'On-demand rate differential between B200 and H100 8-GPU IB nodes.';
       document.getElementById('gen-b200-rates').innerHTML =
         'CRI-B200 &nbsp;<span>$' + b200Val.toFixed(4) + '</span> &nbsp;&middot;&nbsp; ' +
         'CRI-H100 &nbsp;<span>$' + h100Val.toFixed(4) + '</span>';
@@ -640,22 +618,13 @@ async function renderGenSpread() {
       const a100Pct = Math.abs(a100Raw * 100).toFixed(1);
       const a100El = document.getElementById('gen-a100-spread');
       const a100Desc = document.getElementById('gen-a100-desc');
-      const a100Cov = document.getElementById('gen-a100-covenant');
 
-      if (a100Raw > 0) {
+      if (a100Raw >= 0) {
         a100El.textContent = '+' + a100Pct + '%';
-        a100El.className = 'gen-card-spread';
-        a100Desc.textContent = 'H100/A100 spread at ' + a100Pct + '% \u2014 prior training generation below current-gen. Compression signals H100 commoditizing toward inference-tier rates.';
-        a100Cov.textContent = 'Commoditization Signal \u00b7 18\u201324 mo horizon';
       } else {
         a100El.textContent = a100Pct + '% inverted';
-        a100El.className = 'gen-card-spread converging';
-        a100Desc.textContent = 'H100/A100 spread inverted at ' + a100Pct + '% \u2014 inference demand lifting A100 rates above prior-gen training silicon. H100 commoditizing faster than the prior generation.';
-        a100Cov.textContent = 'Inference-Tier Inversion \u00b7 Active signal';
-        a100Cov.style.color = 'var(--amber)';
-        a100Cov.style.background = 'var(--amber-lo)';
-        a100Cov.style.borderColor = 'var(--amber-mid)';
       }
+      a100Desc.textContent = 'On-demand rate differential between H100 and A100 8-GPU IB nodes.';
       document.getElementById('gen-a100-rates').innerHTML =
         'CRI-H100 &nbsp;<span>$' + h100Val.toFixed(4) + '</span> &nbsp;&middot;&nbsp; ' +
         'CRI-A100 &nbsp;<span>$' + a100Val.toFixed(4) + '</span>';
