@@ -531,8 +531,8 @@ function confDot(conf) {
   return `<span class="dot dot-${cls}"></span><span class="conf-${cls}">${conf}</span>`;
 }
 
-// CSV format: as_of_date,rate_8g,rate_1g,confidence_8g,confidence_1g,source_count_8g,source_count_1g,methodology_version,computed_at
-// 8G-only display: rate_8g=col[1], confidence_8g=col[3], source_count_8g=col[5]
+// CSV format (14-col): as_of_date,rate_8g,rate_1g,confidence_8g,confidence_1g,source_count_8g,source_count_1g,sources_8g,sources_1g,rate_8g_shadow,source_count_8g_shadow,sources_8g_shadow,methodology_version,computed_at
+// 8G-only display: rate_8g=col[1], confidence_8g=col[3], source_count_8g=col[5], methodology_version=col[12]
 
 async function renderRateTable() {
   const grid = document.getElementById('rate-grid');
@@ -544,7 +544,7 @@ async function renderRateTable() {
       const lines = await fetchCsv(url);
       const last = lines[lines.length - 1].split(',');
       if (!dateStr) dateStr = last[0].trim();
-      if (!methVer && last[7]) methVer = last[7].trim();
+      if (!methVer && last[12]) methVer = last[12].trim();
       rate = last[1].trim() ? parseFloat(last[1]) : null;
       conf = last[3].trim() || '';
       const srcRaw = last[5] ? last[5].trim() : '';
